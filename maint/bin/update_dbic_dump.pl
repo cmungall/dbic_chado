@@ -10,28 +10,86 @@ use English;
 use Carp;
 use FindBin;
 
+use Path::Class;
+
 use Getopt::Long;
 use Pod::Usage;
 
-#use Data::Dumper;
+use DBI;
+use DBIx::Class::Schema::Loader qw/ make_schema_at /;
+
+use Config::Any;
+use Graph::Directed;
+
+use Data::Dumper;
 
 
 ## parse and validate command-line options
+my $chado_schema_checkout;
+my $dsn;
 GetOptions(
+           'c|chado-checkout=s' => \$chado_schema_checkout,
+           'd|dsn=s'            => \$dsn,
           )
     or pod2usage(1);
 
+#$dsn || pod2usage( -msg => 'must provide a --dsn for a suitable test database');
+
 ## check out a new chado schema copy
+$chado_schema_checkout ||= check_out_fresh_chado();
+-d $chado_schema_checkout or die "no such dir '$chado_schema_checkout'\n";
 
+# parse the modules definition into a dependency Graph.  dies on error
+my $chado_modules = parse_chado_module_metadata( $chado_schema_checkout );
 
-# parse the modules definition
+# connect to our db
+my $dbh = DBI->connect( $dsn );
+
 # drop all tables from the target database
-# traverse modules in dependency order
+$dbh->do('DROP SCHEMA public CASCADE');
+
+# traverse modules in breadth-first dependency order
+
+
 #   list the current set of tables and views
 #   load the module into the database
 #   find what tables and views are new
 #   do a make_schema_at, restricted to the new set of tables and views,
 #       dumping to Chado::Schema::ModuleName::ViewOrTableName
+
+
+
+
+
+
+############# SUBROUTINES ############
+
+# check out schema/chado into a tempdir, return the name of the dir
+sub check_out_fresh_chado {
+    # takes no params
+    die 'need to implement '.(caller(0))[3];
+}
+
+
+# given chado module metadata dir, parses the module metadata file and
+# returns a Graph of it, with nodes being schema modules and direction
+# edges being the dependencies between them
+sub parse_chado_module_metadata {
+    my $md_filename = 'chado-module-metadata.xml';
+    my $metadata_file = file( shift || die, $md_filename );
+    -r $metadata_file or die "could not read $md_filename";
+
+    #parse the module metadata file
+    my $p = Config::Any->load_files({files => [$metadata_file]});
+    #die Dumper $p;
+
+    ## load it into a Graph::Directed object
+    my $graph = Graph::Directed->new;
+    # TODO: make the vertices and edges
+
+    return $graph;
+}
+
 
 
 __END__
@@ -56,7 +114,9 @@ This script basically:
 
   Options:
 
-    none yet
+    --dsn=<dsn>
+
+    --chado-schema-checkout=<dir>
 
 =head1 MAINTAINER
 
