@@ -1,4 +1,4 @@
-package Chado::Schema::General;
+package Chado::Schema;
 
 use strict;
 use warnings;
