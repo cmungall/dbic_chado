@@ -9,6 +9,7 @@ use warnings;
 use English;
 use Carp;
 use FindBin;
+use File::Copy;
 
 use Path::Class;
 
@@ -142,6 +143,9 @@ foreach my $module ( @source_files_load_order ) {
                    },
                    [$dsn,undef,undef],
                   );
+
+    unlink file( $dump_directory, 'Chado','Schema', "$mod_moniker.pm" )
+         or die "failed to unlink unnecessary $mod_moniker schema obj";
 }
 
 # given a dbh and a module source file record, load it into the given
