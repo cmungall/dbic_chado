@@ -12,15 +12,34 @@ __PACKAGE__->add_columns(
   {
     data_type => "integer",
     default_value => "nextval('control_control_id_seq'::regclass)",
+    is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
   "type_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "assay_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "tableinfo_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "row_id",
   { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
   "name",
@@ -41,16 +60,15 @@ __PACKAGE__->add_columns(
   { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
 );
 __PACKAGE__->set_primary_key("control_id");
-__PACKAGE__->add_unique_constraint("control_pkey", ["control_id"]);
 __PACKAGE__->belongs_to(
-  "assay_id",
+  "assay",
   "Chado::Schema::Mage::Assay",
   { assay_id => "assay_id" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04005 @ 2009-06-20 19:31:25
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:eHYSXkDhrptp9+k8F0sczw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:20
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tXW3mKXk6sSMv1B9tM0s+w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

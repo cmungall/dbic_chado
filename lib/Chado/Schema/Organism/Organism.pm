@@ -12,6 +12,7 @@ __PACKAGE__->add_columns(
   {
     data_type => "integer",
     default_value => "nextval('organism_organism_id_seq'::regclass)",
+    is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
@@ -52,7 +53,6 @@ __PACKAGE__->add_columns(
   },
 );
 __PACKAGE__->set_primary_key("organism_id");
-__PACKAGE__->add_unique_constraint("organism_pkey", ["organism_id"]);
 __PACKAGE__->add_unique_constraint("organism_c1", ["genus", "species"]);
 __PACKAGE__->has_many(
   "organism_dbxrefs",
@@ -66,8 +66,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04005 @ 2009-06-20 19:31:17
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:SZob632DoYXcusXYjJf0qw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:11
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:447+AG0J57kuCa1fxDrE8Q
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

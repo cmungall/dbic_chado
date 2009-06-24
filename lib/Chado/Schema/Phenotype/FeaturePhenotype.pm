@@ -12,26 +12,38 @@ __PACKAGE__->add_columns(
   {
     data_type => "integer",
     default_value => "nextval('feature_phenotype_feature_phenotype_id_seq'::regclass)",
+    is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
   "feature_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "phenotype_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
 );
 __PACKAGE__->set_primary_key("feature_phenotype_id");
-__PACKAGE__->add_unique_constraint("feature_phenotype_pkey", ["feature_phenotype_id"]);
 __PACKAGE__->add_unique_constraint("feature_phenotype_c1", ["feature_id", "phenotype_id"]);
 __PACKAGE__->belongs_to(
-  "phenotype_id",
+  "phenotype",
   "Chado::Schema::Phenotype::Phenotype",
   { phenotype_id => "phenotype_id" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04005 @ 2009-06-20 19:31:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Kz9kHV9En9vLhcVCD+cWzA
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:13
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dfMmearaB5uafcZh1KQTuQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -12,29 +12,41 @@ __PACKAGE__->add_columns(
   {
     data_type => "integer",
     default_value => "nextval('stock_relationship_pub_stock_relationship_pub_id_seq'::regclass)",
+    is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
   "stock_relationship_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "pub_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
 );
 __PACKAGE__->set_primary_key("stock_relationship_pub_id");
-__PACKAGE__->add_unique_constraint("stock_relationship_pub_pkey", ["stock_relationship_pub_id"]);
 __PACKAGE__->add_unique_constraint(
   "stock_relationship_pub_c1",
   ["stock_relationship_id", "pub_id"],
 );
 __PACKAGE__->belongs_to(
-  "stock_relationship_id",
+  "stock_relationship",
   "Chado::Schema::Stock::StockRelationship",
   { "stock_relationship_id" => "stock_relationship_id" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04005 @ 2009-06-20 19:31:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dfiFo4cyB2cGeF+0ZZm7og
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:16
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:hF5DNJTQCn//PJxTbGm2pA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

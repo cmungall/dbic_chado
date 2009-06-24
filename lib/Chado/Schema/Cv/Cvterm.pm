@@ -12,11 +12,18 @@ __PACKAGE__->add_columns(
   {
     data_type => "integer",
     default_value => "nextval('cvterm_cvterm_id_seq'::regclass)",
+    is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
   "cv_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "name",
   {
     data_type => "character varying",
@@ -32,7 +39,13 @@ __PACKAGE__->add_columns(
     size => undef,
   },
   "dbxref_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "is_obsolete",
   { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
   "is_relationshiptype",
@@ -40,9 +53,8 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("cvterm_id");
 __PACKAGE__->add_unique_constraint("cvterm_c2", ["dbxref_id"]);
-__PACKAGE__->add_unique_constraint("cvterm_pkey", ["cvterm_id"]);
 __PACKAGE__->add_unique_constraint("cvterm_c1", ["name", "cv_id", "is_obsolete"]);
-__PACKAGE__->belongs_to("cv_id", "Chado::Schema::Cv::Cv", { cv_id => "cv_id" });
+__PACKAGE__->belongs_to("cv", "Chado::Schema::Cv::Cv", { cv_id => "cv_id" });
 __PACKAGE__->has_many(
   "cvterm_dbxrefs",
   "Chado::Schema::Cv::CvtermDbxref",
@@ -105,8 +117,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04005 @ 2009-06-20 19:31:17
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:LN0EUv+zlXlyXstiS/OGag
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5XsFgOncWziLgeTiRGxgqg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

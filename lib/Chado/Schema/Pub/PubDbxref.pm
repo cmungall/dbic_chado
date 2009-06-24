@@ -12,13 +12,26 @@ __PACKAGE__->add_columns(
   {
     data_type => "integer",
     default_value => "nextval('pub_dbxref_pub_dbxref_id_seq'::regclass)",
+    is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
   "pub_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "dbxref_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "is_current",
   {
     data_type => "boolean",
@@ -29,12 +42,11 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("pub_dbxref_id");
 __PACKAGE__->add_unique_constraint("pub_dbxref_c1", ["pub_id", "dbxref_id"]);
-__PACKAGE__->add_unique_constraint("pub_dbxref_pkey", ["pub_dbxref_id"]);
-__PACKAGE__->belongs_to("pub_id", "Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
+__PACKAGE__->belongs_to("pub", "Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
 
 
-# Created by DBIx::Class::Schema::Loader v0.04005 @ 2009-06-20 19:31:17
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FVWI8mtw/1qMB5/e49sb8A
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:11
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VnLeRKA2EqWsKspgbNpC2A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

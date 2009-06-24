@@ -12,28 +12,40 @@ __PACKAGE__->add_columns(
   {
     data_type => "integer",
     default_value => "nextval('cvterm_dbxref_cvterm_dbxref_id_seq'::regclass)",
+    is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
   "cvterm_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "dbxref_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "is_for_definition",
   { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
 );
 __PACKAGE__->set_primary_key("cvterm_dbxref_id");
-__PACKAGE__->add_unique_constraint("cvterm_dbxref_pkey", ["cvterm_dbxref_id"]);
 __PACKAGE__->add_unique_constraint("cvterm_dbxref_c1", ["cvterm_id", "dbxref_id"]);
 __PACKAGE__->belongs_to(
-  "cvterm_id",
+  "cvterm",
   "Chado::Schema::Cv::Cvterm",
   { cvterm_id => "cvterm_id" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04005 @ 2009-06-20 19:31:17
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:EilMmWeQPaVEQX6of+SRrw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:V67CJz26BfHHX32CHo4aAg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

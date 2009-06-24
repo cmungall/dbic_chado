@@ -12,6 +12,7 @@ __PACKAGE__->add_columns(
   {
     data_type => "integer",
     default_value => "nextval('analysis_analysis_id_seq'::regclass)",
+    is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
@@ -81,7 +82,6 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("analysis_id");
 __PACKAGE__->add_unique_constraint("analysis_c1", ["program", "programversion", "sourcename"]);
-__PACKAGE__->add_unique_constraint("analysis_pkey", ["analysis_id"]);
 __PACKAGE__->has_many(
   "analysisfeatures",
   "Chado::Schema::Companalysis::Analysisfeature",
@@ -94,8 +94,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04005 @ 2009-06-20 19:31:20
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ykCsf9cAhpBbqKj3NBWU0Q
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:14
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WpVZEs0LBIhsrk6ciQsE8w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -12,13 +12,26 @@ __PACKAGE__->add_columns(
   {
     data_type => "integer",
     default_value => "nextval('studyfactor_studyfactor_id_seq'::regclass)",
+    is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
   "studydesign_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "type_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 1,
+    size => 4,
+  },
   "name",
   {
     data_type => "text",
@@ -35,9 +48,8 @@ __PACKAGE__->add_columns(
   },
 );
 __PACKAGE__->set_primary_key("studyfactor_id");
-__PACKAGE__->add_unique_constraint("studyfactor_pkey", ["studyfactor_id"]);
 __PACKAGE__->belongs_to(
-  "studydesign_id",
+  "studydesign",
   "Chado::Schema::Mage::Studydesign",
   { studydesign_id => "studydesign_id" },
 );
@@ -48,8 +60,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04005 @ 2009-06-20 19:31:25
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JO1t8UEhEXr5qUShl4jmFA
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:20
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:l3ozvab+pyLGzZdnnBajnQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

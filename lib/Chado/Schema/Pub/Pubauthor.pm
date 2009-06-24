@@ -12,11 +12,18 @@ __PACKAGE__->add_columns(
   {
     data_type => "integer",
     default_value => "nextval('pubauthor_pubauthor_id_seq'::regclass)",
+    is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
   "pub_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "rank",
   { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
   "editor",
@@ -50,12 +57,11 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("pubauthor_id");
 __PACKAGE__->add_unique_constraint("pubauthor_c1", ["pub_id", "rank"]);
-__PACKAGE__->add_unique_constraint("pubauthor_pkey", ["pubauthor_id"]);
-__PACKAGE__->belongs_to("pub_id", "Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
+__PACKAGE__->belongs_to("pub", "Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
 
 
-# Created by DBIx::Class::Schema::Loader v0.04005 @ 2009-06-20 19:31:17
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:v8cXuNF3h/38t+fY0EiMGg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:11
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oTiECiNrTaJ+S8GhpfTZ0g
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

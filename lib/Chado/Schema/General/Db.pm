@@ -12,6 +12,7 @@ __PACKAGE__->add_columns(
   {
     data_type => "integer",
     default_value => "nextval('db_db_id_seq'::regclass)",
+    is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
@@ -46,7 +47,6 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("db_id");
 __PACKAGE__->add_unique_constraint("db_c1", ["name"]);
-__PACKAGE__->add_unique_constraint("db_pkey", ["db_id"]);
 __PACKAGE__->has_many(
   "dbxrefs",
   "Chado::Schema::General::Dbxref",
@@ -54,8 +54,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04005 @ 2009-06-20 19:31:16
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8NlqqPCe9zpve8mV1xUlCQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0S9xW4kJcvFwtH0RKw8B6Q
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

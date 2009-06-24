@@ -12,15 +12,34 @@ __PACKAGE__->add_columns(
   {
     data_type => "integer",
     default_value => "nextval('acquisition_acquisition_id_seq'::regclass)",
+    is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
   "assay_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "protocol_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 1,
+    size => 4,
+  },
   "channel_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 1,
+    size => 4,
+  },
   "acquisitiondate",
   {
     data_type => "timestamp without time zone",
@@ -44,22 +63,23 @@ __PACKAGE__->add_columns(
   },
 );
 __PACKAGE__->set_primary_key("acquisition_id");
-__PACKAGE__->add_unique_constraint("acquisition_pkey", ["acquisition_id"]);
 __PACKAGE__->add_unique_constraint("acquisition_c1", ["name"]);
 __PACKAGE__->belongs_to(
-  "protocol_id",
+  "protocol",
   "Chado::Schema::Mage::Protocol",
   { protocol_id => "protocol_id" },
+  { join_type => "LEFT" },
 );
 __PACKAGE__->belongs_to(
-  "assay_id",
+  "assay",
   "Chado::Schema::Mage::Assay",
   { assay_id => "assay_id" },
 );
 __PACKAGE__->belongs_to(
-  "channel_id",
+  "channel",
   "Chado::Schema::Mage::Channel",
   { channel_id => "channel_id" },
+  { join_type => "LEFT" },
 );
 __PACKAGE__->has_many(
   "acquisitionprops",
@@ -83,8 +103,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04005 @ 2009-06-20 19:31:25
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:lT+93zMIjKxyrMlcWo7fwA
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:20
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:RR0cHrUV9X1AU97LX0bTDA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

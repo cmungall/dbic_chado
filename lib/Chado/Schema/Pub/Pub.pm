@@ -12,6 +12,7 @@ __PACKAGE__->add_columns(
   {
     data_type => "integer",
     default_value => "nextval('pub_pub_id_seq'::regclass)",
+    is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
@@ -79,7 +80,13 @@ __PACKAGE__->add_columns(
     size => undef,
   },
   "type_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "is_obsolete",
   {
     data_type => "boolean",
@@ -104,7 +111,6 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("pub_id");
 __PACKAGE__->add_unique_constraint("pub_c1", ["uniquename"]);
-__PACKAGE__->add_unique_constraint("pub_pkey", ["pub_id"]);
 __PACKAGE__->has_many(
   "pubauthors",
   "Chado::Schema::Pub::Pubauthor",
@@ -132,8 +138,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04005 @ 2009-06-20 19:31:17
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:hfkzej7Lrpq0gqhEm565JQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:11
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:97HcABQ2lOISSsopONmq7w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -12,45 +12,69 @@ __PACKAGE__->add_columns(
   {
     data_type => "integer",
     default_value => "nextval('phylonode_relationship_phylonode_relationship_id_seq'::regclass)",
+    is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
   "subject_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "object_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "type_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "rank",
   { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
   "phylotree_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
 );
 __PACKAGE__->set_primary_key("phylonode_relationship_id");
-__PACKAGE__->add_unique_constraint("phylonode_relationship_pkey", ["phylonode_relationship_id"]);
 __PACKAGE__->add_unique_constraint(
   "phylonode_relationship_subject_id_key",
   ["subject_id", "object_id", "type_id"],
 );
 __PACKAGE__->belongs_to(
-  "phylotree_id",
+  "phylotree",
   "Chado::Schema::Phylogeny::Phylotree",
   { phylotree_id => "phylotree_id" },
 );
 __PACKAGE__->belongs_to(
-  "object_id",
+  "object",
   "Chado::Schema::Phylogeny::Phylonode",
   { phylonode_id => "object_id" },
 );
 __PACKAGE__->belongs_to(
-  "subject_id",
+  "subject",
   "Chado::Schema::Phylogeny::Phylonode",
   { phylonode_id => "subject_id" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04005 @ 2009-06-20 19:31:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Vr7OzZ7lmlgdYWtUVk4OBw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:17
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jIwCtgseoykLTTozc+pKWg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -12,6 +12,7 @@ __PACKAGE__->add_columns(
   {
     data_type => "integer",
     default_value => "nextval('synonym_synonym_id_seq'::regclass)",
+    is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
@@ -23,7 +24,13 @@ __PACKAGE__->add_columns(
     size => 255,
   },
   "type_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "synonym_sgml",
   {
     data_type => "character varying",
@@ -34,7 +41,6 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("synonym_id");
 __PACKAGE__->add_unique_constraint("synonym_c1", ["name", "type_id"]);
-__PACKAGE__->add_unique_constraint("synonym_pkey", ["synonym_id"]);
 __PACKAGE__->has_many(
   "feature_synonyms",
   "Chado::Schema::Sequence::FeatureSynonym",
@@ -42,8 +48,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04005 @ 2009-06-20 19:31:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:hTH0pInB+RUyB0ZtLzFNTA
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:13
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VS4zhypok2QpWDH4xGk8kg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

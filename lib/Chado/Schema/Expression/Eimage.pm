@@ -12,6 +12,7 @@ __PACKAGE__->add_columns(
   {
     data_type => "integer",
     default_value => "nextval('eimage_eimage_id_seq'::regclass)",
+    is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
@@ -38,7 +39,6 @@ __PACKAGE__->add_columns(
   },
 );
 __PACKAGE__->set_primary_key("eimage_id");
-__PACKAGE__->add_unique_constraint("eimage_pkey", ["eimage_id"]);
 __PACKAGE__->has_many(
   "expression_images",
   "Chado::Schema::Expression::ExpressionImage",
@@ -46,8 +46,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04005 @ 2009-06-20 19:31:21
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:R/YvM705X7RHA4pJ/2btPg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:15
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:DeHKFzz8yk4tJbaA27LR7g
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

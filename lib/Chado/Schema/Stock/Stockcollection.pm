@@ -12,13 +12,26 @@ __PACKAGE__->add_columns(
   {
     data_type => "integer",
     default_value => "nextval('stockcollection_stockcollection_id_seq'::regclass)",
+    is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
   "type_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 0,
+    size => 4,
+  },
   "contact_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  {
+    data_type => "integer",
+    default_value => undef,
+    is_foreign_key => 1,
+    is_nullable => 1,
+    size => 4,
+  },
   "name",
   {
     data_type => "character varying",
@@ -36,7 +49,6 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("stockcollection_id");
 __PACKAGE__->add_unique_constraint("stockcollection_c1", ["uniquename", "type_id"]);
-__PACKAGE__->add_unique_constraint("stockcollection_pkey", ["stockcollection_id"]);
 __PACKAGE__->has_many(
   "stockcollectionprops",
   "Chado::Schema::Stock::Stockcollectionprop",
@@ -49,8 +61,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04005 @ 2009-06-20 19:31:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:s3sGV/XbZYqZ6mNeftgjfA
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:16
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8UdpLmXjl0vMnLARaLioEA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
