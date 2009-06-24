@@ -140,6 +140,7 @@ foreach my $module ( @source_files_load_order ) {
                    'Chado::Schema::'.$mod_moniker,
                    { dump_directory => $dump_directory,
                      constraint => $constraint,
+                     moniker_map => sub {join '', map ucfirst, split /[\W_]+/, shift }, #< do not try to inflect to singular
                    },
                    [$dsn,undef,undef],
                   );
