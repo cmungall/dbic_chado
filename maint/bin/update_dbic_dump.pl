@@ -10,6 +10,8 @@ use English;
 use Carp;
 use FindBin;
 use File::Copy;
+use File::Temp qw/tempdir/;
+use File::Spec::Functions qw/tmpdir/;
 
 use Path::Class;
 
@@ -42,16 +44,18 @@ my $dump_directory = dir( $FindBin::Bin )->parent->parent->subdir('lib')->string
 ## parse and validate command-line options
 my $chado_schema_checkout;
 my $dsn;
+my $chado_checkout_rev;
 GetOptions(
            'c|chado-checkout=s' => \$chado_schema_checkout,
            'd|dsn=s'            => \$dsn,
+           'r|revision'         => \$chado_checkout_rev,
           )
     or pod2usage(1);
 
 $dsn || pod2usage( -msg => 'must provide a --dsn for a suitable test database');
 
 ## check out a new chado schema copy
-$chado_schema_checkout ||= check_out_fresh_chado();
+$chado_schema_checkout ||= check_out_fresh_chado( $chado_checkout_rev || 'HEAD' );
 -d $chado_schema_checkout or die "no such dir '$chado_schema_checkout'\n";
 
 # parse the modules definition into a dependency Graph.  dies on error
@@ -188,8 +192,12 @@ sub objects_diff {
 
 # check out schema/chado into a tempdir, return the name of the dir
 sub check_out_fresh_chado {
-    # takes no params
-    die 'need to implement '.(caller(0))[3];
+    my $chado_version = shift;
+    my $tempdir = tempdir(dir(tmpdir(),'update-dbic-dump-XXXXXX')->stringify, CLEANUP => 1);
+    system "cd $tempdir && cvs -d:pserver:anonymous\@gmod.cvs.sourceforge.net:/cvsroot/gmod login && cvs -z9 -d:pserver:anonymous\@gmod.cvs.sourceforge.net:/cvsroot/gmod export -r $chado_version schema/chado/modules && cvs -z9 -d:pserver:anonymous\@gmod.cvs.sourceforge.net:/cvsroot/gmod export -r $chado_version schema/chado/chado-module-metadata.xml";
+    $CHILD_ERROR and die "cvs checkout failed";
+
+    return dir( $tempdir, 'schema', 'chado' )->stringify;
 }
 
 
@@ -258,20 +266,31 @@ the current set of chado tables
 
 This script basically:
 
-  - check out a clean chado schema copy
+  - checks out a clean chado schema copy (unless you pass -d)
   - drop all tables from the target database
-  - make and install it with all modules
+  - load modules and use make_schema_at() from
+    DBIx::Class::Schema::Loader to refresh the dumped modules with any
+    schema changes
   - do a make_schema_at on it to refresh modules
 
 =head1 SYNOPSIS
 
-  update_dbic_dump.pl [options] chado_version
+  update_dbic_dump.pl [options]
 
   Options:
 
-    --dsn=<dsn>
+    -r <rev>
+    --revision=<rev>
+       chado CVS revision to use
 
+    -d <dsn>
+    --dsn=<dsn>
+       DBI dsn of temporary empty database to use for loading and
+       dumping.  WILL DELETE THIS ENTIRE DATABASE.
+
+    -c <dir>
     --chado-checkout=<dir>
+       path to existing chado checkout to use
 
 =head1 MAINTAINER
 
