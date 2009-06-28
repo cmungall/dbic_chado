@@ -2,8 +2,11 @@
 use strict;
 use warnings;
 use English;
+use FindBin;
 
 use Test::More tests => 2;
+use lib "$FindBin::RealBin/lib";
+use DbicChadoTest;
 
 BEGIN {
   use_ok(  'Chado::Schema'  )
@@ -11,12 +14,7 @@ BEGIN {
 }
 
 SKIP: {
-
-    my $test_dsn = $ENV{DBIC_CHADO_TEST_DSN}
-        or skip 'no DBIC_CHADO_TEST_DSN environment variable provided', 1;
-
-    my $s = Chado::Schema->connect( $test_dsn );
+    my $s = DbicChadoTest->schema_connect_or_skip(1);
     isa_ok( $s, 'Chado::Schema' );
-
 
 }
