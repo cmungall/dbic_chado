@@ -21,7 +21,6 @@ use Pod::Usage;
 use DBI;
 use DBIx::Class::Schema::Loader qw/ make_schema_at /;
 
-use XML::Twig;
 use Graph::Directed;
 
 use Data::Dumper;
@@ -198,60 +197,6 @@ sub check_out_fresh_chado {
     $CHILD_ERROR and die "cvs checkout failed";
 
     return dir( $tempdir, 'schema', 'chado' )->stringify;
-}
-
-
-# given chado module metadata dir, parses the module metadata file and
-# returns a Graph of it, with nodes being schema modules and
-# directional edges being the dependencies between them
-# (directionality is: module1 --DEPENDS-ON--> module2 )
-sub parse_chado_module_metadata {
-    #my $md_filename = 'foo.xml';
-    my $md_filename = 'chado-module-metadata.xml';
-    my $metadata_file = file( shift || die, $md_filename );
-    -r $metadata_file or die "could not read $md_filename";
-
-    ## load it into a Graph::Directed object
-    my $graph = Graph::Directed->new();
-
-    #parse the module metadata file
-    my %module_twigs;
-    my $p = XML::Twig->new();
-    $p->parsefile( $metadata_file->stringify );
-
-    #extract the modules subdir
-    my ($modules_dir) = $p->descendants(q"source[@type='dir']");
-    $modules_dir &&= $modules_dir->att('path');
-
-    my %comp_to_modname;
-    foreach my $module ($p->descendants('module')) {
-        my $mod_id = $module->att('id')
-            or die "<module> element with no id\n";
-        $comp_to_modname{$mod_id} = $mod_id;
-        $comp_to_modname{$_} = $mod_id
-            foreach map $_->att('id'), $module->descendants('component');
-    }
-    foreach my $module ($p->descendants('module')) {
-        my $mod_id = $module->att('id')
-            or die "<module> element with no id\n";
-        $module_twigs{$mod_id} = $module;
-        $graph->add_vertex($mod_id);
-
-        # extract all the dependency "to" ids and add graph edges for them
-        foreach my $dep_id ( map {$_->att('to') or die "no 'to' in dependency"}
-                             $module->descendants('dependency')
-                           ) {
-            my $dep_mod_id = $comp_to_modname{$dep_id};
-            unless( $dep_mod_id ) {
-                warn "WARNING: component/module '$dep_id' does not exist!  ignoring dependency.\n";
-                next;
-            }
-            next if $dep_mod_id eq $mod_id; #< modules need not depend on themselves
-            $graph->add_edge($dep_mod_id,$mod_id);
-        }
-    }
-
-    return { graph => $graph, twigs => \%module_twigs, modules_dir => $modules_dir };
 }
 
 
