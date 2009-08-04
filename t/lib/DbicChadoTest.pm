@@ -23,14 +23,3 @@ sub schema_connect_or_skip {
 
 1;
 
-
-
-
-
-
-
-
-
-
-
-
