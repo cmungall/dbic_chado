@@ -267,11 +267,10 @@ the current set of chado tables
 This script basically:
 
   - checks out a clean chado schema copy (unless you pass -d)
-  - drop all tables from the target database
-  - load modules and use make_schema_at() from
-    DBIx::Class::Schema::Loader to refresh the dumped modules with any
-    schema changes
-  - do a make_schema_at on it to refresh modules
+  - drops all tables from the target database
+  - parses the chado module metadata
+  - uses DBIx::Class::Schema::Loader::make_schema_at() to update the
+    dumped modules in lib/ with any schema changes
 
 =head1 SYNOPSIS
 
@@ -281,20 +280,25 @@ This script basically:
 
     -r <rev>
     --revision=<rev>
-       chado CVS revision to use
+       chado CVS revision to use.  Default HEAD.
 
     -d <dsn>
     --dsn=<dsn>
-       DBI dsn of temporary empty database to use for loading and
-       dumping.  WILL DELETE THIS ENTIRE DATABASE.
+       DBI dsn of an empty database to use as temp storage for loading
+       and dumping.  WILL DELETE THIS ENTIRE DATABASE.  Note that the
+       user name and password used to connect to the database also
+       goes here.
+       Example:
+        -d 'dbi:Pg:dbname=cxgn;host=localhost;user=somebody;password=something'
 
     -c <dir>
     --chado-checkout=<dir>
-       path to existing chado checkout to use
+       optional path to existing chado checkout to use.  if passed,
+       will not check out a new copy from CVS.
 
 =head1 MAINTAINER
 
-Robert Buels
+Robert Buels, E<lt>rmb32@cornell.eduE<gt>
 
 =head1 AUTHOR
 
