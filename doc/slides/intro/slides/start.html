@@ -1,0 +1,351 @@
+<!-- BEGIN s5 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>dbic_chado</title>
+<meta name="generator" content="Spork-S5" />
+<meta name="version" content="Spork-S5 0.04" />
+<meta name="author" content="Robert Buels" />
+<link rel="stylesheet" href="ui/slides.css" type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/opera.css" type="text/css" media="projection" id="operaFix" />
+<link rel="stylesheet" href="ui/print.css" type="text/css" media="print" id="slidePrint" />
+  <link rel="stylesheet" type="text/css" href="" />
+<script src="ui/slides.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="layout">
+  <div id="currentSlide"></div>
+  <div id="header"></div>
+  <div id="footer">
+    <h2>Robert Buels</h2>
+    <h2>rmb32@cornell.edu</h2>
+    <div id="controls"></div>
+  </div>
+</div>
+
+<div class="slide">
+    <h1>A DBIx::Class layer for Chado</h1>
+    <h2>Oxford, UK</h2>
+    <h3>August 6-7, 2009</h3>
+</div>
+
+
+<!-- BEGIN slide -->
+<div class="slide">
+
+<h1>What is DBIx::Class?</h1>
+<ul>
+<li>Object-relational mapping framework for Perl</li>
+<li>is now the de-facto standard</li>
+<li>very powerful features for:</li>
+</ul>
+<small>continued...</small>
+
+</div>
+<!-- END slide -->
+
+
+<!-- BEGIN slide -->
+<div class="slide">
+
+<h1>What is DBIx::Class?</h1>
+<ul>
+<li>Object-relational mapping framework for Perl</li>
+<li>is now the de-facto standard</li>
+<li>very powerful features for:</li>
+
+<ul>
+<li>query building &#40;the magic of chainable ResultSets&#41;</li>
+</ul></ul>
+<small>continued...</small>
+
+</div>
+<!-- END slide -->
+
+
+<!-- BEGIN slide -->
+<div class="slide">
+
+<h1>What is DBIx::Class?</h1>
+<ul>
+<li>Object-relational mapping framework for Perl</li>
+<li>is now the de-facto standard</li>
+<li>very powerful features for:</li>
+
+<ul>
+<li>query building &#40;the magic of chainable ResultSets&#41;</li>
+<li>cross-database deployment &#40;using <tt>SQL::Translator</tt> in the backend&#41;</li>
+</ul></ul>
+<small>continued...</small>
+
+</div>
+<!-- END slide -->
+
+
+<!-- BEGIN slide -->
+<div class="slide">
+
+<h1>What is DBIx::Class?</h1>
+<ul>
+<li>Object-relational mapping framework for Perl</li>
+<li>is now the de-facto standard</li>
+<li>very powerful features for:</li>
+
+<ul>
+<li>query building &#40;the magic of chainable ResultSets&#41;</li>
+<li>cross-database deployment &#40;using <tt>SQL::Translator</tt> in the backend&#41;</li>
+<li>testing with Fixtures</li>
+</ul></ul>
+
+<p>
+see <a href="http://search.cpan.org/dist/DBIx-Class/lib/DBIx/Class/Manual.pod">http://search.cpan.org/dist/DBIx-Class/lib/DBIx/Class/Manual.pod</a>
+
+</p>
+
+</div>
+<!-- END slide -->
+
+
+<!-- BEGIN slide -->
+<div class="slide">
+
+<h1>Chado needs middleware</h1>
+<h2>A layer of software between the application (e.g. website) and the relational database.</h2>
+
+</div>
+<!-- END slide -->
+
+
+<!-- BEGIN slide -->
+<div class="slide">
+
+<h1>Chado needs middleware</h1>
+<h2>Chado's design makes for:</h2>
+<ul>
+<li>complex queries</li>
+<li>steep learning curve</li>
+<li>hard to get good performance</li>
+</ul>
+
+
+</div>
+<!-- END slide -->
+
+
+<!-- BEGIN slide -->
+<div class="slide">
+
+<h1>Chado needs middleware</h1>
+<h2>Middleware can help by:</h2>
+<ul>
+<li>complex queries</li>
+</ul>
+<small>continued...</small>
+
+</div>
+<!-- END slide -->
+
+
+<!-- BEGIN slide -->
+<div class="slide">
+
+<h1>Chado needs middleware</h1>
+<h2>Middleware can help by:</h2>
+<ul>
+<li>complex queries</li>
+
+<ul>
+<li>storing and/or automating them</li>
+</ul></ul>
+<small>continued...</small>
+
+</div>
+<!-- END slide -->
+
+
+<!-- BEGIN slide -->
+<div class="slide">
+
+<h1>Chado needs middleware</h1>
+<h2>Middleware can help by:</h2>
+<ul>
+<li>complex queries</li>
+
+<ul>
+<li>storing and/or automating them</li>
+</ul>
+<li>steep learning curve</li>
+</ul>
+<small>continued...</small>
+
+</div>
+<!-- END slide -->
+
+
+<!-- BEGIN slide -->
+<div class="slide">
+
+<h1>Chado needs middleware</h1>
+<h2>Middleware can help by:</h2>
+<ul>
+<li>complex queries</li>
+
+<ul>
+<li>storing and/or automating them</li>
+</ul>
+<li>steep learning curve</li>
+
+<ul>
+<li>codifying best practices</li>
+<li>unified, high-level documentation</li>
+<li>can help with database administration</li>
+</ul></ul>
+<small>continued...</small>
+
+</div>
+<!-- END slide -->
+
+
+<!-- BEGIN slide -->
+<div class="slide">
+
+<h1>Chado needs middleware</h1>
+<h2>Middleware can help by:</h2>
+<ul>
+<li>complex queries</li>
+
+<ul>
+<li>storing and/or automating them</li>
+</ul>
+<li>steep learning curve</li>
+
+<ul>
+<li>codifying best practices</li>
+<li>unified, high-level documentation</li>
+<li>can help with database administration</li>
+</ul>
+<li>hard to get good performance</li>
+</ul>
+<small>continued...</small>
+
+</div>
+<!-- END slide -->
+
+
+<!-- BEGIN slide -->
+<div class="slide">
+
+<h1>Chado needs middleware</h1>
+<h2>Middleware can help by:</h2>
+<ul>
+<li>complex queries</li>
+
+<ul>
+<li>storing and/or automating them</li>
+</ul>
+<li>steep learning curve</li>
+
+<ul>
+<li>codifying best practices</li>
+<li>unified, high-level documentation</li>
+<li>can help with database administration</li>
+</ul>
+<li>hard to get good performance</li>
+
+<ul>
+<li>some performance optimizations can be put in middleware</li>
+<li>can assist in creating indexes and materialed views</li>
+</ul></ul>
+
+
+</div>
+<!-- END slide -->
+
+
+<!-- BEGIN slide -->
+<div class="slide">
+
+<h1>Current State</h1>
+<h2>Currently composed of:</h2>
+<ul>
+<li>maintenance script to generate/synchronize DBIx::Class modules for every chado table</li>
+<li>the modules that are thus generated</li>
+</ul>
+
+<p>
+<a href="http://github.com/rbuels/dbic_chado/tree/master">http://github.com/rbuels/dbic_chado/tree/master</a>
+
+</p>
+
+</div>
+<!-- END slide -->
+
+
+<!-- BEGIN slide -->
+<div class="slide">
+
+<h1>Further Work: fix relationships</h1>
+<h2>Still need to add in some DBIx::Class relationships:</h2>
+<ul>
+<li>many_to_many</li>
+<li>has_many and belongs_to for relationships across Chado module boundaries, e.g. <tt>feature.type_id</tt> -&gt; <tt>cvterm.cvterm_id</tt></li>
+</ul>
+
+
+</div>
+<!-- END slide -->
+
+
+<!-- BEGIN slide -->
+<div class="slide">
+
+<h1>Further Work: add more useful things</h1>
+<h2>More useful things are needed:</h2>
+<ul>
+<li>automate common querying and loading patterns</li>
+<li>compatibility with BioPerl objects</li>
+<li>the things that Modware does, and more</li>
+</ul>
+
+
+</div>
+<!-- END slide -->
+
+
+<!-- BEGIN slide -->
+<div class="slide">
+
+<h1>Rob proposes</h1>
+<ul>
+<li>other people should start building features onto and into it</li>
+
+<ul>
+<li>and do some of the things on the previous slides</li>
+</ul>
+<li>make a new version of <tt>Modware</tt> based on it</li>
+<li>do you think somebody could get funding to work on it full time?</li>
+</ul>
+
+
+</div>
+<!-- END slide -->
+
+
+<!-- BEGIN slide -->
+<div class="slide">
+
+<h2>That's All</h2>
+<ul>
+<li>The END</li>
+</ul>
+
+</div>
+<!-- END slide -->
+
+
+</body>
+</html>
+<!-- END s5 -->

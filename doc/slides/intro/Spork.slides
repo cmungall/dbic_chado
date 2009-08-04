@@ -1,0 +1,81 @@
+----
+presentation_topic: dbic_chado
+presentation_title: A DBIx::Class layer for Chado
+presentation_place: Oxford, UK
+presentation_date: August 6-7, 2009
+----
+= What is DBIx::Class?
+
+* Object-relational mapping framework for Perl
+* is now the de-facto standard
+* very powerful features for:
++** query building (the magic of chainable ResultSets)
++** cross-database deployment (using |SQL::Translator| in the backend)
++** testing with Fixtures
+
+see http://search.cpan.org/dist/DBIx-Class/lib/DBIx/Class/Manual.pod
+
+----
+= Chado needs middleware
+
+== A layer of software between the application (e.g. website) and the relational database.
+
+----
+= Chado needs middleware
+
+== Chado's design makes for:
+* complex queries
+* steep learning curve
+* hard to get good performance
+
+----
+= Chado needs middleware
+
+== Middleware can help by:
+* complex queries
++** storing and/or automating them
++* steep learning curve
++** codifying best practices
+** unified, high-level documentation
+** can help with database administration
++* hard to get good performance
++** some performance optimizations can be put in middleware
+** can assist in creating indexes and materialed views
+
+----
+= Current State
+
+== Currently composed of:
+* maintenance script to generate/synchronize DBIx::Class modules for every chado table
+* the modules that are thus generated
+
+http://github.com/rbuels/dbic_chado/tree/master
+
+----
+= Further Work: fix relationships
+
+== Still need to add in some DBIx::Class relationships:
+
+* many_to_many
+* has_many and belongs_to for relationships across Chado module boundaries, e.g. |feature.type_id| -> |cvterm.cvterm_id|
+
+----
+= Further Work: add more useful things
+
+== More useful things are needed:
+* automate common querying and loading patterns
+* compatibility with BioPerl objects
+* the things that Modware does, and more
+
+----
+= Rob proposes
+
+* other people should start building features onto and into it
+** and do some of the things on the previous slides
+* make a new version of |Modware| based on it
+* do you think somebody could get funding to work on it full time?
+
+----
+== That's All
+
+* The END
