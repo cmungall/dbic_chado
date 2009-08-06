@@ -69,6 +69,13 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:11
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:447+AG0J57kuCa1fxDrE8Q
 
+__PACKAGE__->has_many(
+  'features',
+  'Chado::Schema::Sequence::Feature',
+  { 'foreign.organism_id' => 'self.organism_id' },
+);
+
+
 
 # You can replace this text with custom content, and it will be preserved on regeneration
 1;

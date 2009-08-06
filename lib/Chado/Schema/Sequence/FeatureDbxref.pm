@@ -45,13 +45,18 @@ __PACKAGE__->add_unique_constraint("feature_dbxref_c1", ["feature_id", "dbxref_i
 __PACKAGE__->belongs_to(
   "feature",
   "Chado::Schema::Sequence::Feature",
-  { feature_id => "feature_id" },
+  { 'feature_id' => "feature_id" },
 );
 
 
 # Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:13
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZB8xFRuMvLLTY+SSQImSUg
 
+__PACKAGE__->belongs_to(
+  'dbxref',
+  'Chado::Schema::General::Dbxref',
+  { 'foreign.dbxref_id' => 'self.dbxref_id' }
+);
 
 # You can replace this text with custom content, and it will be preserved on regeneration
 1;

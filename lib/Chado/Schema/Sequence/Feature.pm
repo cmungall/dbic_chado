@@ -151,6 +151,72 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:13
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:TbpVZcv2Og6aSFOiZtre0g
 
+__PACKAGE__->belongs_to(
+  'organism',
+  'Chado::Schema::Organism::Organism',
+  { 'foreign.organism_id' => 'self.organism_id' },
+);
+
+__PACKAGE__->belongs_to
+    ( 'primary_dbxref',
+      'Chado::Schema::General::Dbxref',
+      { 'foreign.dbxref_id' => 'self.dbxref_id' },
+    );
+
+__PACKAGE__->many_to_many
+    (
+     'secondary_dbxrefs',
+     'feature_dbxrefs' => 'dbxref',
+    );
+
+
+=head2 create_featureprops
+
+  Usage: $set->create_featureprops('cv_name', { baz => 2, foo => 'bar' });
+  Desc : convenience method to create feature properties using cvterms
+          from the ontology with the given name
+  Args : CV name, hashref of { propname => value, ...}
+  Ret  : hashref of { propname => new featureprop object }
+
+=cut
+
+sub create_featureprops {
+    my ($self, $cv_name, $props) = @_;
+
+    foreach (values %$props) {
+        $_ = { value => $_ } unless ref;
+    }
+
+    my %propterms;
+    my $feature_prop_cv = $self->result_source->schema
+                               ->resultset('Cv::Cv')
+                               ->find_or_create({ name => $cv_name},{key => 'cv_c1'});
+
+    # find/create cvterms for each of our featureprops
+    foreach my $propname (keys %$props) {
+        $propterms{$propname} = $feature_prop_cv->find_or_create_related('cvterms',
+                                                                         { name => $propname,
+                                                                           is_obsolete => 0,
+                                                                         },
+                                                                         { key => 'cvterm_c1' },
+                                                                        );
+    }
+    my %props;
+    while( my ($propname,$propval) = each %$props ) {
+
+        my $data = ref $propval
+            ? {%$propval}
+            : { value => $propval };
+
+        $data->{type_id} = $propterms{$propname}->cvterm_id;
+
+        $props{$propname} = $self->create_related('featureprops',
+                                                  $data
+                                                 );
+    }
+
+    return \%props;
+}
 
 # You can replace this text with custom content, and it will be preserved on regeneration
 1;

@@ -45,6 +45,10 @@ __PACKAGE__->belongs_to(
 # Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:17
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rR5lY3jOxoEwarCBO+AXLg
 
+__PACKAGE__->belongs_to(
+			organism => 'Chado::Schema::Phylogeny::Phylonode',
+			{ organism_id => 'organism_id' },
+		       );
 
 # You can replace this text with custom content, and it will be preserved on regeneration
 1;

@@ -120,6 +120,12 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-06-23 22:52:10
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5XsFgOncWziLgeTiRGxgqg
 
+__PACKAGE__->has_many(
+  "featureprops",
+  "Chado::Schema::Sequence::Featureprop",
+  { "foreign.type_id" => "self.cvterm_id" },
+);
+
 
 # You can replace this text with custom content, and it will be preserved on regeneration
 1;
