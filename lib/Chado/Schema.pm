@@ -45,11 +45,11 @@ point is the L<DBIx::Class::Manual>.
 
 =head1 CONTRIBUTORS
 
-Robert Buels, E<lt>rmb32@cornell.eduE<gt>
+Robert Buels, <rmb32@cornell.edu>
 
 =head1 AUTHOR
 
-Robert Buels, E<lt>rmb32@cornell.eduE<gt>
+Robert Buels, <rmb32@cornell.edu>
 
 =head1 COPYRIGHT & LICENSE
 
