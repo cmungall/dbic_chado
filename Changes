@@ -1,0 +1,5 @@
+dbic-chado (0.01_01) UNRELEASED; urgency=low
+
+  * Initial release.
+
+ -- Robert Buels <rmb32@cornell.edu>  Sat, 15 Aug 2009 16:04:24 -0700
