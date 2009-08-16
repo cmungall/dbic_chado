@@ -137,11 +137,11 @@ foreach my $module ( @source_files_load_order ) {
     my $constraint = qr/$new_re/;
 
     # do a make_schema_at, restricted to the new set of tables and views,
-    #     dumping to Chado::Schema::ModuleName::ViewOrTableName
+    #     dumping to Bio::Chado::Schema::ModuleName::ViewOrTableName
 
     my $mod_moniker = join '', map ucfirst, split /[\W_]+/, lc $module->[0];
     make_schema_at(
-                   'Chado::Schema::'.$mod_moniker,
+                   'Bio::Chado::Schema::'.$mod_moniker,
                    { dump_directory => $dump_directory,
                      constraint => $constraint,
                      moniker_map => sub {join '', map ucfirst, split /[\W_]+/, shift }, #< do not try to inflect to singular
@@ -149,7 +149,7 @@ foreach my $module ( @source_files_load_order ) {
                    [$dsn,undef,undef],
                   );
 
-    unlink file( $dump_directory, 'Chado','Schema', "$mod_moniker.pm" )
+    unlink file( $dump_directory, 'Bio', 'Chado','Schema', "$mod_moniker.pm" )
          or die "failed to unlink unnecessary $mod_moniker schema obj";
 }
 

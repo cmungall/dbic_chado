@@ -4,6 +4,8 @@ use warnings;
 
 use Test::More;
 
+use Bio::Chado::Schema;
+
 sub schema_connect {
     my ($class,%args) = @_;
     my $test_dsn = $ENV{DBIC_CHADO_TEST_DSN};
@@ -13,7 +15,7 @@ sub schema_connect {
         return;
     }
 
-    return Chado::Schema->connect( $test_dsn );
+    return Bio::Chado::Schema->connect( $test_dsn );
 }
 
 sub schema_connect_or_skip {

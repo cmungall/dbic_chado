@@ -5,7 +5,7 @@ use FindBin;
 
 use Test::More tests => 2;
 
-use Chado::Schema;
+use Bio::Chado::Schema;
 use lib "$FindBin::RealBin/lib";
 
 use DbicChadoTest;
