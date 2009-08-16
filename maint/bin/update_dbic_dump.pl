@@ -266,7 +266,7 @@ the current set of chado tables
 
 This script basically:
 
-  - checks out a clean chado schema copy (unless you pass -d)
+  - checks out a clean chado schema copy (unless you pass --chado-checkout=)
   - drops all tables from the target database
   - parses the chado module metadata
   - uses DBIx::Class::Schema::Loader::make_schema_at() to update the
