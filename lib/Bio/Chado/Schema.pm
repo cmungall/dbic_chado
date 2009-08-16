@@ -20,13 +20,13 @@ __END__
 
 =head1 NAME
 
-Chado::Schema - standard DBIx::Class layer for the Chado database schema
+Bio::Chado::Schema - standard DBIx::Class layer for the Chado database schema
 
 =head1 SYNOPSIS
 
-  use Chado::Schema;
+  use Bio::Chado::Schema;
 
-  my $chado = Chado::Schema->connect($dsn,$user,$password);
+  my $chado = Bio::Chado::Schema->connect($dsn,$user,$password);
 
   print "number of rows in feature table: ",
         $chado->resultset('Sequence::Feature')->count,
@@ -40,7 +40,7 @@ GMOD Chado database schema.  This layer is implemented with
 L<DBIx::Class>, generated with the help of the very fine
 L<DBIx::Class::Schema::Loader> module.
 
-To learn how to use this L<DBIx::Class> ORM layer, a good starting
+To learn how to use this DBIx::Class ORM layer, a good starting
 point is the L<DBIx::Class::Manual>.
 
 =head1 CONTRIBUTORS
