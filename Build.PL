@@ -1,8 +1,8 @@
 use Module::Build;
 my $build = Module::Build->new
     (
-     module_name => 'Chado::Schema',
-     dist_version => '0.01_02',
+     module_name => 'Bio::Chado::Schema',
+     dist_version => '0.01_03',
      dist_name    => 'dbic-chado',
      dist_abstract => 'standard DBIx::Class layer for the Chado schema',
      license  => 'perl',
