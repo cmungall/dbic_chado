@@ -17,7 +17,7 @@ my $build = Module::Build->new
                    },
      requires => {
                   'perl'          => '5.8.0',
-                  'DBIx::Class'   => '0.07',
+                  'DBIx::Class'   => '0.08100',
                  },
     );
 $build->create_build_script;
