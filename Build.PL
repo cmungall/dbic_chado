@@ -3,7 +3,7 @@ my $build = Module::Build->new
     (
      module_name => 'Bio::Chado::Schema',
      dist_version => '0.01_03',
-     dist_name    => 'dbic-chado',
+     dist_name    => 'Bio-Chado-Schema',
      dist_abstract => 'standard DBIx::Class layer for the Chado schema',
      license  => 'perl',
      create_makefile_pl => 'passthrough',
