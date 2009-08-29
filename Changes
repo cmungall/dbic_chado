@@ -1,4 +1,4 @@
-Bio-Schema-Chado (0.02)
+Bio-Schema-Chado (0.021)
 
   * update to schema dumping script now finds many more inter-module
     relationships
