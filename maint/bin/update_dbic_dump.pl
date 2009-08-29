@@ -117,6 +117,7 @@ eval{ local $dbh->{Warn} = 0;  $dbh->do('DROP SCHEMA public CASCADE') };
 $dbh->do('CREATE SCHEMA public');
 $dbh->do('SET search_path=public');
 
+my %db_object_module_membership; #< hash of table/view name => module name
 foreach my $module ( @source_files_load_order ) {
 
     my @before = list_db_objects( $dbh );
@@ -133,25 +134,40 @@ foreach my $module ( @source_files_load_order ) {
     warn "$module->[0]: new db objects:\n",
         map "  $_\n",@new;
 
-    my $new_re = join '|',@new;
-    my $constraint = qr/$new_re/;
-
-    # do a make_schema_at, restricted to the new set of tables and views,
-    #     dumping to Bio::Chado::Schema::ModuleName::ViewOrTableName
-
+    # record their names in the hash of name => module name
     my $mod_moniker = join '', map ucfirst, split /[\W_]+/, lc $module->[0];
-    make_schema_at(
-                   'Bio::Chado::Schema::'.$mod_moniker,
-                   { dump_directory => $dump_directory,
-                     constraint => $constraint,
-                     moniker_map => sub {join '', map ucfirst, split /[\W_]+/, shift }, #< do not try to inflect to singular
-                   },
-                   [$dsn,undef,undef],
-                  );
 
-    unlink file( $dump_directory, 'Bio', 'Chado','Schema', "$mod_moniker.pm" )
-         or die "failed to unlink unnecessary $mod_moniker schema obj";
+    foreach my $new_obj (@new) {
+
+        $db_object_module_membership{$new_obj}
+            and die "sanity check failed, found '$new_obj' as a new object for a second time??!";
+
+        $db_object_module_membership{$new_obj} = $mod_moniker
+    }
 }
+
+# do a make_schema_at, restricted to the new set of tables and views,
+#     dumping to Bio::Chado::Schema::ModuleName::ViewOrTableName
+
+make_schema_at(
+               'Bio::Chado::Schema',
+               { dump_directory => $dump_directory,
+                 moniker_map => sub {
+                     my $table = shift;
+                     my $table_moniker = join '', map ucfirst, split /[\W_]+/, $table;
+
+                     my $module_moniker = $db_object_module_membership{$table}
+                         or die "could not find module membership for '$table'";
+
+                     $module_moniker.'::'.$table_moniker;
+                 }, #< do not try to inflect to singular
+               },
+               [$dsn,undef,undef],
+              );
+
+#unlink file( $dump_directory, 'Bio', 'Chado','Schema', "$mod_moniker.pm" )
+#    or die "failed to unlink unnecessary $mod_moniker schema obj";
+
 
 # given a dbh and a module source file record, load it into the given
 # dbh
