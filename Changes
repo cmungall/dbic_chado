@@ -1,3 +1,13 @@
+Bio-Schema-Chado (0.02)
+
+  * update to schema dumping script now finds many more inter-module
+    relationships
+
+  * added the new inter-module relationships found by the dumping
+    script
+
+ -- Robert Buels <rmb32@cornell.edu>  Sat, 29 Aug 2009 09:28:27 -0700
+
 dbic-chado (0.01_03)
 
   * changed namespace to Bio::Chado instead of Chado
