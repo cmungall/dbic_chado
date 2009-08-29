@@ -49,10 +49,15 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
 );
+__PACKAGE__->belongs_to(
+  "dbxref",
+  "Bio::Chado::Schema::General::Dbxref",
+  { dbxref_id => "dbxref_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:26
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:MiQDFI1Xd0riAkYY3HSN0g
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dD0aC7YVugDM8Cm2ARtsYQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

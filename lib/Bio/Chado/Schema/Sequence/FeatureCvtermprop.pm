@@ -48,14 +48,19 @@ __PACKAGE__->add_unique_constraint(
   ["feature_cvterm_id", "type_id", "rank"],
 );
 __PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
+__PACKAGE__->belongs_to(
   "feature_cvterm",
   "Bio::Chado::Schema::Sequence::FeatureCvterm",
   { feature_cvterm_id => "feature_cvterm_id" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vUirF+Q3a02FJHTp3a10gg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:h9FW3VKh1SZUCP/xdWrAoQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

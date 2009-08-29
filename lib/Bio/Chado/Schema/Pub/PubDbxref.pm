@@ -43,10 +43,15 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("pub_dbxref_id");
 __PACKAGE__->add_unique_constraint("pub_dbxref_c1", ["pub_id", "dbxref_id"]);
 __PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
+__PACKAGE__->belongs_to(
+  "dbxref",
+  "Bio::Chado::Schema::General::Dbxref",
+  { dbxref_id => "dbxref_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:26
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:3D6N7qMzpyAi8wn2eGUiRg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:cYjSZN5E6YhwOVL7iMQOvg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

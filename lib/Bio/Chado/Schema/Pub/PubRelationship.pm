@@ -44,6 +44,11 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("pub_relationship_id");
 __PACKAGE__->add_unique_constraint("pub_relationship_c1", ["subject_id", "object_id", "type_id"]);
 __PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
+__PACKAGE__->belongs_to(
   "object",
   "Bio::Chado::Schema::Pub::Pub",
   { pub_id => "object_id" },
@@ -55,8 +60,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:26
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:56n2jpZV3lx/k1AWzI0shg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:fREag4LW+j/kBw/5SfqrOA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

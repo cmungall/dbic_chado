@@ -60,6 +60,12 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Sequence::Feature",
   { feature_id => "feature_id" },
 );
+__PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
+__PACKAGE__->belongs_to(
+  "cvterm",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "cvterm_id" },
+);
 __PACKAGE__->has_many(
   "feature_cvterm_dbxrefs",
   "Bio::Chado::Schema::Sequence::FeatureCvtermDbxref",
@@ -77,8 +83,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:68704aTAvpANiHLD8Luf3Q
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:OqnzufvrBgIzYi9xuVxwwQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

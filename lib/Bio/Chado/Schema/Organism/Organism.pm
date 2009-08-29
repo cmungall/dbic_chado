@@ -55,6 +55,21 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("organism_id");
 __PACKAGE__->add_unique_constraint("organism_c1", ["genus", "species"]);
 __PACKAGE__->has_many(
+  "biomaterials",
+  "Bio::Chado::Schema::Mage::Biomaterial",
+  { "foreign.taxon_id" => "self.organism_id" },
+);
+__PACKAGE__->has_many(
+  "features",
+  "Bio::Chado::Schema::Sequence::Feature",
+  { "foreign.organism_id" => "self.organism_id" },
+);
+__PACKAGE__->has_many(
+  "libraries",
+  "Bio::Chado::Schema::Library::Library",
+  { "foreign.organism_id" => "self.organism_id" },
+);
+__PACKAGE__->has_many(
   "organism_dbxrefs",
   "Bio::Chado::Schema::Organism::OrganismDbxref",
   { "foreign.organism_id" => "self.organism_id" },
@@ -64,10 +79,25 @@ __PACKAGE__->has_many(
   "Bio::Chado::Schema::Organism::Organismprop",
   { "foreign.organism_id" => "self.organism_id" },
 );
+__PACKAGE__->has_many(
+  "phenotype_comparisons",
+  "Bio::Chado::Schema::Genetic::PhenotypeComparison",
+  { "foreign.organism_id" => "self.organism_id" },
+);
+__PACKAGE__->has_many(
+  "phylonode_organisms",
+  "Bio::Chado::Schema::Phylogeny::PhylonodeOrganism",
+  { "foreign.organism_id" => "self.organism_id" },
+);
+__PACKAGE__->has_many(
+  "stocks",
+  "Bio::Chado::Schema::Stock::Stock",
+  { "foreign.organism_id" => "self.organism_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:26
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:uL+utxoPNMCSPEufSO+WKw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Q3/xeWMW3JGsULN9WPS4pQ
 
 __PACKAGE__->has_many(
   'features',

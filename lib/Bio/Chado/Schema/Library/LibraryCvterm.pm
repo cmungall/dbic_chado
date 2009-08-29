@@ -43,6 +43,12 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("library_cvterm_id");
 __PACKAGE__->add_unique_constraint("library_cvterm_c1", ["library_id", "cvterm_id", "pub_id"]);
+__PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
+__PACKAGE__->belongs_to(
+  "cvterm",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "cvterm_id" },
+);
 __PACKAGE__->belongs_to(
   "library",
   "Bio::Chado::Schema::Library::Library",
@@ -50,8 +56,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:38
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Ejai/dSjEG39y0OYAYzCVw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:OMsWx6iJRelDcIX9BqX26g
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

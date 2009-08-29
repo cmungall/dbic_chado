@@ -49,6 +49,11 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Stock::Stock",
   { stock_id => "stock_id" },
 );
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
 __PACKAGE__->has_many(
   "stockprop_pubs",
   "Bio::Chado::Schema::Stock::StockpropPub",
@@ -56,8 +61,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:32
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:CFs3hj4DWR3kHuc8f6oEGQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FDrOTDcLb44eLdJiwWbykA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

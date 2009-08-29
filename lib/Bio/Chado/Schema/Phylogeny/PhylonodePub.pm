@@ -40,10 +40,11 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Phylogeny::Phylonode",
   { phylonode_id => "phylonode_id" },
 );
+__PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:33
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VwzrJxA1x9kFShA9Vluj+Q
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:d9J+Nca9AAsUjnMTTNmLow
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

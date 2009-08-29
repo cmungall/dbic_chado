@@ -57,6 +57,23 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("study_id");
 __PACKAGE__->add_unique_constraint("study_c1", ["name"]);
+__PACKAGE__->belongs_to(
+  "pub",
+  "Bio::Chado::Schema::Pub::Pub",
+  { pub_id => "pub_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "contact",
+  "Bio::Chado::Schema::Contact::Contact",
+  { contact_id => "contact_id" },
+);
+__PACKAGE__->belongs_to(
+  "dbxref",
+  "Bio::Chado::Schema::General::Dbxref",
+  { dbxref_id => "dbxref_id" },
+  { join_type => "LEFT" },
+);
 __PACKAGE__->has_many(
   "study_assays",
   "Bio::Chado::Schema::Mage::StudyAssay",
@@ -74,8 +91,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:BLXpo1tURR+iYx4Q3aTuxg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+GiyikLfUyT7lqdWpHzK4Q
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

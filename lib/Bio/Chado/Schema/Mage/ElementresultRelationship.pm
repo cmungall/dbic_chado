@@ -56,6 +56,11 @@ __PACKAGE__->add_unique_constraint(
   ["subject_id", "object_id", "type_id", "rank"],
 );
 __PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
+__PACKAGE__->belongs_to(
   "subject",
   "Bio::Chado::Schema::Mage::Elementresult",
   { elementresult_id => "subject_id" },
@@ -67,8 +72,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5gthZbkQMJ8lfXmPOdzYZA
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:yctYaQZVqniWLuIS73TJMA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -48,14 +48,19 @@ __PACKAGE__->add_unique_constraint(
   ["quantification_id", "type_id", "rank"],
 );
 __PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
+__PACKAGE__->belongs_to(
   "quantification",
   "Bio::Chado::Schema::Mage::Quantification",
   { quantification_id => "quantification_id" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:N8QxmQxHlenCm3sTtt09HQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tFS9dLbMFGV4nT5BG6HPRA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -38,6 +38,7 @@ __PACKAGE__->add_unique_constraint(
   "feature_relationship_pub_c1",
   ["feature_relationship_id", "pub_id"],
 );
+__PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
 __PACKAGE__->belongs_to(
   "feature_relationship",
   "Bio::Chado::Schema::Sequence::FeatureRelationship",
@@ -45,8 +46,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6ErXNvN8OW7fgx4DZF8R1Q
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:PCodm2nt+e0b+iH6UZp6jQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

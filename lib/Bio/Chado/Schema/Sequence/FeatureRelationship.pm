@@ -65,6 +65,11 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Sequence::Feature",
   { feature_id => "object_id" },
 );
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
 __PACKAGE__->has_many(
   "feature_relationshipprops",
   "Bio::Chado::Schema::Sequence::FeatureRelationshipprop",
@@ -81,8 +86,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5FG7YqC4ty1wLeQiBCf1aw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:R9f/B9D+ubCN9PyilVLaIQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

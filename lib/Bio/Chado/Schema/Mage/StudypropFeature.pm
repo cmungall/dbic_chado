@@ -51,10 +51,21 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Mage::Studyprop",
   { studyprop_id => "studyprop_id" },
 );
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "feature",
+  "Bio::Chado::Schema::Sequence::Feature",
+  { feature_id => "feature_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:voQFoKmTPcbtRndVcrQ1PA
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xRnK52MZeFwugae+i+ePJA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

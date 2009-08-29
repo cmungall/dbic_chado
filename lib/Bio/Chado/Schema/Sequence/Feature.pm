@@ -102,6 +102,32 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("feature_id");
 __PACKAGE__->add_unique_constraint("feature_c1", ["organism_id", "uniquename", "type_id"]);
 __PACKAGE__->has_many(
+  "analysisfeatures",
+  "Bio::Chado::Schema::Companalysis::Analysisfeature",
+  { "foreign.feature_id" => "self.feature_id" },
+);
+__PACKAGE__->has_many(
+  "elements",
+  "Bio::Chado::Schema::Mage::Element",
+  { "foreign.feature_id" => "self.feature_id" },
+);
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
+__PACKAGE__->belongs_to(
+  "dbxref",
+  "Bio::Chado::Schema::General::Dbxref",
+  { dbxref_id => "dbxref_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "organism",
+  "Bio::Chado::Schema::Organism::Organism",
+  { organism_id => "organism_id" },
+);
+__PACKAGE__->has_many(
   "feature_cvterms",
   "Bio::Chado::Schema::Sequence::FeatureCvterm",
   { "foreign.feature_id" => "self.feature_id" },
@@ -110,6 +136,21 @@ __PACKAGE__->has_many(
   "feature_dbxrefs",
   "Bio::Chado::Schema::Sequence::FeatureDbxref",
   { "foreign.feature_id" => "self.feature_id" },
+);
+__PACKAGE__->has_many(
+  "feature_expressions",
+  "Bio::Chado::Schema::Expression::FeatureExpression",
+  { "foreign.feature_id" => "self.feature_id" },
+);
+__PACKAGE__->has_many(
+  "feature_genotype_feature_ids",
+  "Bio::Chado::Schema::Genetic::FeatureGenotype",
+  { "foreign.feature_id" => "self.feature_id" },
+);
+__PACKAGE__->has_many(
+  "feature_genotype_chromosome_ids",
+  "Bio::Chado::Schema::Genetic::FeatureGenotype",
+  { "foreign.chromosome_id" => "self.feature_id" },
 );
 __PACKAGE__->has_many(
   "featureloc_feature_ids",
@@ -122,6 +163,21 @@ __PACKAGE__->has_many(
   { "foreign.srcfeature_id" => "self.feature_id" },
 );
 __PACKAGE__->has_many(
+  "feature_phenotypes",
+  "Bio::Chado::Schema::Phenotype::FeaturePhenotype",
+  { "foreign.feature_id" => "self.feature_id" },
+);
+__PACKAGE__->has_many(
+  "featurepos_feature_ids",
+  "Bio::Chado::Schema::Map::Featurepos",
+  { "foreign.feature_id" => "self.feature_id" },
+);
+__PACKAGE__->has_many(
+  "featurepos_map_feature_ids",
+  "Bio::Chado::Schema::Map::Featurepos",
+  { "foreign.map_feature_id" => "self.feature_id" },
+);
+__PACKAGE__->has_many(
   "featureprops",
   "Bio::Chado::Schema::Sequence::Featureprop",
   { "foreign.feature_id" => "self.feature_id" },
@@ -129,6 +185,31 @@ __PACKAGE__->has_many(
 __PACKAGE__->has_many(
   "feature_pubs",
   "Bio::Chado::Schema::Sequence::FeaturePub",
+  { "foreign.feature_id" => "self.feature_id" },
+);
+__PACKAGE__->has_many(
+  "featurerange_leftendf_ids",
+  "Bio::Chado::Schema::Map::Featurerange",
+  { "foreign.leftendf_id" => "self.feature_id" },
+);
+__PACKAGE__->has_many(
+  "featurerange_rightstartf_ids",
+  "Bio::Chado::Schema::Map::Featurerange",
+  { "foreign.rightstartf_id" => "self.feature_id" },
+);
+__PACKAGE__->has_many(
+  "featurerange_rightendf_ids",
+  "Bio::Chado::Schema::Map::Featurerange",
+  { "foreign.rightendf_id" => "self.feature_id" },
+);
+__PACKAGE__->has_many(
+  "featurerange_leftstartf_ids",
+  "Bio::Chado::Schema::Map::Featurerange",
+  { "foreign.leftstartf_id" => "self.feature_id" },
+);
+__PACKAGE__->has_many(
+  "featurerange_feature_ids",
+  "Bio::Chado::Schema::Map::Featurerange",
   { "foreign.feature_id" => "self.feature_id" },
 );
 __PACKAGE__->has_many(
@@ -146,10 +227,25 @@ __PACKAGE__->has_many(
   "Bio::Chado::Schema::Sequence::FeatureSynonym",
   { "foreign.feature_id" => "self.feature_id" },
 );
+__PACKAGE__->has_many(
+  "library_features",
+  "Bio::Chado::Schema::Library::LibraryFeature",
+  { "foreign.feature_id" => "self.feature_id" },
+);
+__PACKAGE__->has_many(
+  "phylonodes",
+  "Bio::Chado::Schema::Phylogeny::Phylonode",
+  { "foreign.feature_id" => "self.feature_id" },
+);
+__PACKAGE__->has_many(
+  "studyprop_features",
+  "Bio::Chado::Schema::Mage::StudypropFeature",
+  { "foreign.feature_id" => "self.feature_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:runLnaP3VfDIhcZ815BqOg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vUlrYA81srV51UtYIO1ukw
 
 __PACKAGE__->belongs_to(
   'organism',

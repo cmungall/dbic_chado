@@ -60,8 +60,8 @@ __PACKAGE__->add_unique_constraint("pubauthor_c1", ["pub_id", "rank"]);
 __PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:26
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:njFt1OxncDE0t0Hzwshh5w
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Hc/OI1rY9conhIXpeP2L+w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

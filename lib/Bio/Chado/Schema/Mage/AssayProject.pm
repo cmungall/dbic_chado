@@ -36,14 +36,19 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("assay_project_id");
 __PACKAGE__->add_unique_constraint("assay_project_c1", ["assay_id", "project_id"]);
 __PACKAGE__->belongs_to(
+  "project",
+  "Bio::Chado::Schema::General::Project",
+  { project_id => "project_id" },
+);
+__PACKAGE__->belongs_to(
   "assay",
   "Bio::Chado::Schema::Mage::Assay",
   { assay_id => "assay_id" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:fvj5k0cFqH44DgK+75rFeQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qtZmEzhQGF9sLJxTXTx2Xg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

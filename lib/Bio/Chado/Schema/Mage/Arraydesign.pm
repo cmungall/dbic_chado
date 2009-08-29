@@ -109,6 +109,28 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("arraydesign_id");
 __PACKAGE__->add_unique_constraint("arraydesign_c1", ["name"]);
 __PACKAGE__->belongs_to(
+  "manufacturer",
+  "Bio::Chado::Schema::Contact::Contact",
+  { contact_id => "manufacturer_id" },
+);
+__PACKAGE__->belongs_to(
+  "platformtype",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "platformtype_id" },
+);
+__PACKAGE__->belongs_to(
+  "dbxref",
+  "Bio::Chado::Schema::General::Dbxref",
+  { dbxref_id => "dbxref_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "substratetype",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "substratetype_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
   "protocol",
   "Bio::Chado::Schema::Mage::Protocol",
   { protocol_id => "protocol_id" },
@@ -131,8 +153,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:n7lcQW1S03CeMjZCcJEdAg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zaAU5ofKv9umM7uO9zMISA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

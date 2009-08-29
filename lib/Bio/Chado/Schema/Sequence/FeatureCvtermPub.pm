@@ -35,6 +35,7 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("feature_cvterm_pub_id");
 __PACKAGE__->add_unique_constraint("feature_cvterm_pub_c1", ["feature_cvterm_id", "pub_id"]);
+__PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
 __PACKAGE__->belongs_to(
   "feature_cvterm",
   "Bio::Chado::Schema::Sequence::FeatureCvterm",
@@ -42,8 +43,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:j9H3bLia1x4Pc2zoMofDPA
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/mAMmCzDR1gVEQXcfeM7Nw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

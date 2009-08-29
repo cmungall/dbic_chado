@@ -33,10 +33,15 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("project_id");
 __PACKAGE__->add_unique_constraint("project_c1", ["name"]);
+__PACKAGE__->has_many(
+  "assay_projects",
+  "Bio::Chado::Schema::Mage::AssayProject",
+  { "foreign.project_id" => "self.project_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:25
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:g2MsrAW3/Kjpt07Wl+JQZQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jyoK7BA9Bwg2O6mde9egoA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -40,10 +40,15 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Phylogeny::Phylonode",
   { phylonode_id => "phylonode_id" },
 );
+__PACKAGE__->belongs_to(
+  "organism",
+  "Bio::Chado::Schema::Organism::Organism",
+  { organism_id => "organism_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:33
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1djqZqD/ujRqDmwCoTkf5g
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Zr4NiVS/TpuB5EDEdSKg+A
 
 __PACKAGE__->belongs_to(
 			organism => 'Chado::Schema::Phylogeny::Phylonode',

@@ -93,6 +93,23 @@ __PACKAGE__->has_many(
   "Bio::Chado::Schema::Mage::Assay",
   { "foreign.protocol_id" => "self.protocol_id" },
 );
+__PACKAGE__->belongs_to(
+  "dbxref",
+  "Bio::Chado::Schema::General::Dbxref",
+  { dbxref_id => "dbxref_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "pub",
+  "Bio::Chado::Schema::Pub::Pub",
+  { pub_id => "pub_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
 __PACKAGE__->has_many(
   "protocolparams",
   "Bio::Chado::Schema::Mage::Protocolparam",
@@ -110,8 +127,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:GVOUIm0TzHXQox3VrMsJOw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oP2tvatqUYWhs+hzlHz4Yw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

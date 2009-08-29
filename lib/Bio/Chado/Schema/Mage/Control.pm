@@ -61,14 +61,24 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("control_id");
 __PACKAGE__->belongs_to(
+  "tableinfo",
+  "Bio::Chado::Schema::General::Tableinfo",
+  { tableinfo_id => "tableinfo_id" },
+);
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
+__PACKAGE__->belongs_to(
   "assay",
   "Bio::Chado::Schema::Mage::Assay",
   { assay_id => "assay_id" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0bTOsOnTZBr9VmX24eNtrQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:sfNEwxftBte+0ke19h+s4g
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

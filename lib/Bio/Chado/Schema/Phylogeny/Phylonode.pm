@@ -71,6 +71,18 @@ __PACKAGE__->set_primary_key("phylonode_id");
 __PACKAGE__->add_unique_constraint("phylonode_phylotree_id_key1", ["phylotree_id", "right_idx"]);
 __PACKAGE__->add_unique_constraint("phylonode_phylotree_id_key", ["phylotree_id", "left_idx"]);
 __PACKAGE__->belongs_to(
+  "feature",
+  "Bio::Chado::Schema::Sequence::Feature",
+  { feature_id => "feature_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
   "parent_phylonode",
   "Bio::Chado::Schema::Phylogeny::Phylonode",
   { phylonode_id => "parent_phylonode_id" },
@@ -118,8 +130,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:33
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:RryKXDtI6Va3cYx8dotNRQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:gw8sWvHMi0Q26KdIoMYvnA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

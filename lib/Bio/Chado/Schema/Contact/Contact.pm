@@ -42,6 +42,27 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("contact_id");
 __PACKAGE__->add_unique_constraint("contact_c1", ["name"]);
 __PACKAGE__->has_many(
+  "arraydesigns",
+  "Bio::Chado::Schema::Mage::Arraydesign",
+  { "foreign.manufacturer_id" => "self.contact_id" },
+);
+__PACKAGE__->has_many(
+  "assays",
+  "Bio::Chado::Schema::Mage::Assay",
+  { "foreign.operator_id" => "self.contact_id" },
+);
+__PACKAGE__->has_many(
+  "biomaterials",
+  "Bio::Chado::Schema::Mage::Biomaterial",
+  { "foreign.biosourceprovider_id" => "self.contact_id" },
+);
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->has_many(
   "contact_relationship_object_ids",
   "Bio::Chado::Schema::Contact::ContactRelationship",
   { "foreign.object_id" => "self.contact_id" },
@@ -51,10 +72,25 @@ __PACKAGE__->has_many(
   "Bio::Chado::Schema::Contact::ContactRelationship",
   { "foreign.subject_id" => "self.contact_id" },
 );
+__PACKAGE__->has_many(
+  "quantifications",
+  "Bio::Chado::Schema::Mage::Quantification",
+  { "foreign.operator_id" => "self.contact_id" },
+);
+__PACKAGE__->has_many(
+  "stockcollections",
+  "Bio::Chado::Schema::Stock::Stockcollection",
+  { "foreign.contact_id" => "self.contact_id" },
+);
+__PACKAGE__->has_many(
+  "studies",
+  "Bio::Chado::Schema::Mage::Study",
+  { "foreign.contact_id" => "self.contact_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:29
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8SaVE7IaHw+VHqepY3BcwA
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:yUa/j3sddjVHGDob3TJ2YA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

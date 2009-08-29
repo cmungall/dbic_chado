@@ -46,10 +46,20 @@ __PACKAGE__->has_many(
   "Bio::Chado::Schema::Sequence::FeatureSynonym",
   { "foreign.synonym_id" => "self.synonym_id" },
 );
+__PACKAGE__->has_many(
+  "library_synonyms",
+  "Bio::Chado::Schema::Library::LibrarySynonym",
+  { "foreign.synonym_id" => "self.synonym_id" },
+);
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wjnN/CS+ui4gPKangSa8Jw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+Q95qLPrSh8mmBlaK3VPXQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

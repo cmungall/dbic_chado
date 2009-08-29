@@ -35,6 +35,7 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("expression_pub_id");
 __PACKAGE__->add_unique_constraint("expression_pub_c1", ["expression_id", "pub_id"]);
+__PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
 __PACKAGE__->belongs_to(
   "expression",
   "Bio::Chado::Schema::Expression::Expression",
@@ -42,8 +43,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:31
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:kd5TQgDPVuw9fl19w+jFbg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:iZfIZOsb3KWpkxITwxJ1ig
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

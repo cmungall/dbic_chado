@@ -49,6 +49,11 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Sequence::Feature",
   { feature_id => "feature_id" },
 );
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
 __PACKAGE__->has_many(
   "featureprop_pubs",
   "Bio::Chado::Schema::Sequence::FeaturepropPub",
@@ -56,8 +61,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:s7i2LaKfplHl6FFnhqu5Mg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wDdmYV7VTZjkhn7nC3GEVg
 
 __PACKAGE__->belongs_to
     (

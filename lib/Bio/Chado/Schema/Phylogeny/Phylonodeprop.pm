@@ -52,10 +52,15 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Phylogeny::Phylonode",
   { phylonode_id => "phylonode_id" },
 );
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:33
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:XPwi3AB4Pznm4NpyZYhcmg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4jpIQ5OIlf8o3/MFjd3XsA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

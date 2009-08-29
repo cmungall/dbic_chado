@@ -56,14 +56,20 @@ __PACKAGE__->belongs_to(
   { biomaterial_id => "biomaterial_id" },
 );
 __PACKAGE__->belongs_to(
+  "unittype",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "unittype_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
   "treatment",
   "Bio::Chado::Schema::Mage::Treatment",
   { treatment_id => "treatment_id" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:PrBeTiAjpgPsRH6aKIYpEw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Vh0QkS7yxm7QUYbcmZHfjA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

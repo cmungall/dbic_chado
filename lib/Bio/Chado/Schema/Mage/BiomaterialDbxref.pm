@@ -40,10 +40,15 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Mage::Biomaterial",
   { biomaterial_id => "biomaterial_id" },
 );
+__PACKAGE__->belongs_to(
+  "dbxref",
+  "Bio::Chado::Schema::General::Dbxref",
+  { dbxref_id => "dbxref_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Iz6l4VQXVH/5oB1lIXEvRw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VJV8mjbVT4XfIFp12/BAeQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

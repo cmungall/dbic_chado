@@ -62,6 +62,24 @@ __PACKAGE__->has_many(
   "Bio::Chado::Schema::Mage::AssayBiomaterial",
   { "foreign.biomaterial_id" => "self.biomaterial_id" },
 );
+__PACKAGE__->belongs_to(
+  "taxon",
+  "Bio::Chado::Schema::Organism::Organism",
+  { organism_id => "taxon_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "dbxref",
+  "Bio::Chado::Schema::General::Dbxref",
+  { dbxref_id => "dbxref_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "biosourceprovider",
+  "Bio::Chado::Schema::Contact::Contact",
+  { contact_id => "biosourceprovider_id" },
+  { join_type => "LEFT" },
+);
 __PACKAGE__->has_many(
   "biomaterial_dbxrefs",
   "Bio::Chado::Schema::Mage::BiomaterialDbxref",
@@ -94,8 +112,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8w4BPjxGrZWTtPln7WZFTQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:HJhVvAlx/3VWhfzevxlW8Q
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -112,6 +112,121 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("pub_id");
 __PACKAGE__->add_unique_constraint("pub_c1", ["uniquename"]);
 __PACKAGE__->has_many(
+  "expression_pubs",
+  "Bio::Chado::Schema::Expression::ExpressionPub",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "feature_cvterms",
+  "Bio::Chado::Schema::Sequence::FeatureCvterm",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "feature_cvterm_pubs",
+  "Bio::Chado::Schema::Sequence::FeatureCvtermPub",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "feature_expressions",
+  "Bio::Chado::Schema::Expression::FeatureExpression",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "featureloc_pubs",
+  "Bio::Chado::Schema::Sequence::FeaturelocPub",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "featuremap_pubs",
+  "Bio::Chado::Schema::Map::FeaturemapPub",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "featureprop_pubs",
+  "Bio::Chado::Schema::Sequence::FeaturepropPub",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "feature_pubs",
+  "Bio::Chado::Schema::Sequence::FeaturePub",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "feature_relationshipprop_pubs",
+  "Bio::Chado::Schema::Sequence::FeatureRelationshippropPub",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "feature_relationship_pubs",
+  "Bio::Chado::Schema::Sequence::FeatureRelationshipPub",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "feature_synonyms",
+  "Bio::Chado::Schema::Sequence::FeatureSynonym",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "library_cvterms",
+  "Bio::Chado::Schema::Library::LibraryCvterm",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "libraryprop_pubs",
+  "Bio::Chado::Schema::Library::LibrarypropPub",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "library_pubs",
+  "Bio::Chado::Schema::Library::LibraryPub",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "library_synonyms",
+  "Bio::Chado::Schema::Library::LibrarySynonym",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "phendescs",
+  "Bio::Chado::Schema::Genetic::Phendesc",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "phenotype_comparisons",
+  "Bio::Chado::Schema::Genetic::PhenotypeComparison",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "phenotype_comparison_cvterms",
+  "Bio::Chado::Schema::Genetic::PhenotypeComparisonCvterm",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "phenstatements",
+  "Bio::Chado::Schema::Genetic::Phenstatement",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "phylonode_pubs",
+  "Bio::Chado::Schema::Phylogeny::PhylonodePub",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "phylotree_pubs",
+  "Bio::Chado::Schema::Phylogeny::PhylotreePub",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "protocols",
+  "Bio::Chado::Schema::Mage::Protocol",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
+__PACKAGE__->has_many(
   "pubauthors",
   "Bio::Chado::Schema::Pub::Pubauthor",
   { "foreign.pub_id" => "self.pub_id" },
@@ -136,10 +251,35 @@ __PACKAGE__->has_many(
   "Bio::Chado::Schema::Pub::PubRelationship",
   { "foreign.subject_id" => "self.pub_id" },
 );
+__PACKAGE__->has_many(
+  "stock_cvterms",
+  "Bio::Chado::Schema::Stock::StockCvterm",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "stockprop_pubs",
+  "Bio::Chado::Schema::Stock::StockpropPub",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "stock_pubs",
+  "Bio::Chado::Schema::Stock::StockPub",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "stock_relationship_pubs",
+  "Bio::Chado::Schema::Stock::StockRelationshipPub",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "studies",
+  "Bio::Chado::Schema::Mage::Study",
+  { "foreign.pub_id" => "self.pub_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:26
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:M2moelPU/8oWOFKEIGU3FQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oue4M+IIqcvz4B3MuzPPeA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

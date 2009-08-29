@@ -61,6 +61,11 @@ __PACKAGE__->belongs_to(
   { stock_id => "subject_id" },
 );
 __PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
+__PACKAGE__->belongs_to(
   "object",
   "Bio::Chado::Schema::Stock::Stock",
   { stock_id => "object_id" },
@@ -72,8 +77,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:32
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:y4ayAmV9eu6Q4LWztZtZ9Q
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/m+7S4uXNAIf5lOdZhsYBQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

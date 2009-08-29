@@ -47,10 +47,15 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Library::Library",
   { library_id => "library_id" },
 );
+__PACKAGE__->belongs_to(
+  "dbxref",
+  "Bio::Chado::Schema::General::Dbxref",
+  { dbxref_id => "dbxref_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:38
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:HStkStnMABJ7eBmzfK6TkQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZGFsQgb1E7r/MrIR5RmlrQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

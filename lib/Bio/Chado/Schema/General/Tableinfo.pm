@@ -43,10 +43,20 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("tableinfo_id");
 __PACKAGE__->add_unique_constraint("tableinfo_c1", ["name"]);
+__PACKAGE__->has_many(
+  "controls",
+  "Bio::Chado::Schema::Mage::Control",
+  { "foreign.tableinfo_id" => "self.tableinfo_id" },
+);
+__PACKAGE__->has_many(
+  "magedocumentations",
+  "Bio::Chado::Schema::Mage::Magedocumentation",
+  { "foreign.tableinfo_id" => "self.tableinfo_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:25
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:v1C8bfj5931RnjiqPfJ90g
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dIXfrilzdbb/UiKpSe7ChQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

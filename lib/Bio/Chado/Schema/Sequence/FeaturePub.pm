@@ -35,6 +35,7 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("feature_pub_id");
 __PACKAGE__->add_unique_constraint("feature_pub_c1", ["feature_id", "pub_id"]);
+__PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
 __PACKAGE__->belongs_to(
   "feature",
   "Bio::Chado::Schema::Sequence::Feature",
@@ -47,8 +48,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:3IoG6OjujdUV+f/MtSxZ7Q
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:bI2YYjGlGgbzDMqyfmnwDg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

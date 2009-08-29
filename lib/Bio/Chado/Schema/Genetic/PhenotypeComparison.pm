@@ -104,15 +104,32 @@ __PACKAGE__->belongs_to(
   { genotype_id => "genotype1_id" },
 );
 __PACKAGE__->belongs_to(
+  "phenotype1",
+  "Bio::Chado::Schema::Phenotype::Phenotype",
+  { phenotype_id => "phenotype1_id" },
+);
+__PACKAGE__->belongs_to(
   "environment1",
   "Bio::Chado::Schema::Genetic::Environment",
   { environment_id => "environment1_id" },
+);
+__PACKAGE__->belongs_to(
+  "phenotype2",
+  "Bio::Chado::Schema::Phenotype::Phenotype",
+  { phenotype_id => "phenotype2_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "organism",
+  "Bio::Chado::Schema::Organism::Organism",
+  { organism_id => "organism_id" },
 );
 __PACKAGE__->belongs_to(
   "genotype2",
   "Bio::Chado::Schema::Genetic::Genotype",
   { genotype_id => "genotype2_id" },
 );
+__PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
 __PACKAGE__->has_many(
   "phenotype_comparison_cvterms",
   "Bio::Chado::Schema::Genetic::PhenotypeComparisonCvterm",
@@ -122,8 +139,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:29
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Qx56Vhf6CT9+xtML3xEKAQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:89yKg/yIBLF4z4xRdYlWiA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

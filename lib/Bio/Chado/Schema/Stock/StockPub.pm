@@ -35,6 +35,7 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("stock_pub_id");
 __PACKAGE__->add_unique_constraint("stock_pub_c1", ["stock_id", "pub_id"]);
+__PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
 __PACKAGE__->belongs_to(
   "stock",
   "Bio::Chado::Schema::Stock::Stock",
@@ -42,8 +43,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:32
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Uom3zlIJSxTnJI7sFYWoCw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:SeOQxorUKPp6FVOPScTNqA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -49,6 +49,16 @@ __PACKAGE__->add_unique_constraint(
   ["expression_id", "cvterm_id", "cvterm_type_id"],
 );
 __PACKAGE__->belongs_to(
+  "cvterm",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "cvterm_id" },
+);
+__PACKAGE__->belongs_to(
+  "cvterm_type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "cvterm_type_id" },
+);
+__PACKAGE__->belongs_to(
   "expression",
   "Bio::Chado::Schema::Expression::Expression",
   { expression_id => "expression_id" },
@@ -60,8 +70,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:31
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:irnNgVV0xr/T4Ral0v80hg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5unWVo2T4LSlWG5vjEJgPQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -47,6 +47,11 @@ __PACKAGE__->add_unique_constraint(
   ["subject_id", "object_id", "type_id"],
 );
 __PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
+__PACKAGE__->belongs_to(
   "object",
   "Bio::Chado::Schema::Contact::Contact",
   { contact_id => "object_id" },
@@ -58,8 +63,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:29
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5j7w3CRq46I2CYCrcZQAag
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zopiUpkFnfoSq7yueGXA0Q
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

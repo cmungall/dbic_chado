@@ -46,6 +46,12 @@ __PACKAGE__->add_unique_constraint(
   "feature_expression_c1",
   ["expression_id", "feature_id", "pub_id"],
 );
+__PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
+__PACKAGE__->belongs_to(
+  "feature",
+  "Bio::Chado::Schema::Sequence::Feature",
+  { feature_id => "feature_id" },
+);
 __PACKAGE__->belongs_to(
   "expression",
   "Bio::Chado::Schema::Expression::Expression",
@@ -58,8 +64,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:31
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6kTR/PlUFZPyYJX4yzA6UQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dHEfU8TeVoAh8tNPysT49Q
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -43,14 +43,19 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("analysisprop_id");
 __PACKAGE__->add_unique_constraint("analysisprop_c1", ["analysis_id", "type_id", "value"]);
 __PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
+__PACKAGE__->belongs_to(
   "analysis",
   "Bio::Chado::Schema::Companalysis::Analysis",
   { analysis_id => "analysis_id" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:30
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:MRtezFyPT2+KpFvXCjcIUw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:K9Ir8u4D1toBgQoznF8Uow
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

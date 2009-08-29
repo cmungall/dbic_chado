@@ -49,6 +49,17 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("stockcollection_id");
 __PACKAGE__->add_unique_constraint("stockcollection_c1", ["uniquename", "type_id"]);
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
+__PACKAGE__->belongs_to(
+  "contact",
+  "Bio::Chado::Schema::Contact::Contact",
+  { contact_id => "contact_id" },
+  { join_type => "LEFT" },
+);
 __PACKAGE__->has_many(
   "stockcollectionprops",
   "Bio::Chado::Schema::Stock::Stockcollectionprop",
@@ -61,8 +72,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:32
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:gj+d9SqaEsfHEB3Ugfu+bw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rbpWB1J+JUUPBHE/L80yeQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

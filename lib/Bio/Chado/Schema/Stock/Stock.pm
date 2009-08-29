@@ -71,6 +71,22 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("stock_id");
 __PACKAGE__->add_unique_constraint("stock_c1", ["organism_id", "uniquename", "type_id"]);
+__PACKAGE__->belongs_to(
+  "dbxref",
+  "Bio::Chado::Schema::General::Dbxref",
+  { dbxref_id => "dbxref_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
+__PACKAGE__->belongs_to(
+  "organism",
+  "Bio::Chado::Schema::Organism::Organism",
+  { organism_id => "organism_id" },
+);
 __PACKAGE__->has_many(
   "stockcollection_stocks",
   "Bio::Chado::Schema::Stock::StockcollectionStock",
@@ -113,8 +129,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:32
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:9nTxrm4KX3OEoWsKUXOp+Q
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:RmbyJHAOyAgKGeA4sLN06g
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

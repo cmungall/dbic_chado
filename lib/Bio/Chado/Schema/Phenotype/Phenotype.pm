@@ -70,15 +70,54 @@ __PACKAGE__->has_many(
   "Bio::Chado::Schema::Phenotype::FeaturePhenotype",
   { "foreign.phenotype_id" => "self.phenotype_id" },
 );
+__PACKAGE__->belongs_to(
+  "assay",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "assay_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "attr",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "attr_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "observable",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "observable_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "cvalue",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "cvalue_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->has_many(
+  "phenotype_comparison_phenotype1_ids",
+  "Bio::Chado::Schema::Genetic::PhenotypeComparison",
+  { "foreign.phenotype1_id" => "self.phenotype_id" },
+);
+__PACKAGE__->has_many(
+  "phenotype_comparison_phenotype2_ids",
+  "Bio::Chado::Schema::Genetic::PhenotypeComparison",
+  { "foreign.phenotype2_id" => "self.phenotype_id" },
+);
 __PACKAGE__->has_many(
   "phenotype_cvterms",
   "Bio::Chado::Schema::Phenotype::PhenotypeCvterm",
   { "foreign.phenotype_id" => "self.phenotype_id" },
 );
+__PACKAGE__->has_many(
+  "phenstatements",
+  "Bio::Chado::Schema::Genetic::Phenstatement",
+  { "foreign.phenotype_id" => "self.phenotype_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:fT7TT0WvuxIC9BURmNGYMA
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1ru27u5NbeVOzWSkFhBazA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

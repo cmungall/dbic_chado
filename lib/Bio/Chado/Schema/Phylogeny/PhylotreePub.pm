@@ -35,6 +35,7 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("phylotree_pub_id");
 __PACKAGE__->add_unique_constraint("phylotree_pub_phylotree_id_key", ["phylotree_id", "pub_id"]);
+__PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
 __PACKAGE__->belongs_to(
   "phylotree",
   "Bio::Chado::Schema::Phylogeny::Phylotree",
@@ -42,8 +43,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:33
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:3wTWmu6DYxELIIg7cCWXPg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:N37oode+utWG09+uX09UqQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

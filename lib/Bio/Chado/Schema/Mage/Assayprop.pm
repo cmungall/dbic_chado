@@ -45,14 +45,19 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("assayprop_id");
 __PACKAGE__->add_unique_constraint("assayprop_c1", ["assay_id", "type_id", "rank"]);
 __PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
+__PACKAGE__->belongs_to(
   "assay",
   "Bio::Chado::Schema::Mage::Assay",
   { assay_id => "assay_id" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0870+uZumITMGcq2Skz0fQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:aUGee4qbjNGDpF5oOEzEGw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

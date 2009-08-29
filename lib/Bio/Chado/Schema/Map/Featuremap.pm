@@ -41,6 +41,12 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("featuremap_id");
 __PACKAGE__->add_unique_constraint("featuremap_c1", ["name"]);
+__PACKAGE__->belongs_to(
+  "unittype",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "unittype_id" },
+  { join_type => "LEFT" },
+);
 __PACKAGE__->has_many(
   "featuremap_pubs",
   "Bio::Chado::Schema::Map::FeaturemapPub",
@@ -58,8 +64,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:DEL9SLtg5Y3dGoBM87AhGg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:39wKI7Tnpzf7HNXRkR5ghg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

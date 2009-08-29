@@ -43,10 +43,15 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Phylogeny::Phylonode",
   { phylonode_id => "phylonode_id" },
 );
+__PACKAGE__->belongs_to(
+  "dbxref",
+  "Bio::Chado::Schema::General::Dbxref",
+  { dbxref_id => "dbxref_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:33
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:2nVW/tiKR3q2FydzB7CdLw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:LTf996XeYveTxotJuc8Ggw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

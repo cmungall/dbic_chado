@@ -59,14 +59,26 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("protocolparam_id");
 __PACKAGE__->belongs_to(
+  "unittype",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "unittype_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
   "protocol",
   "Bio::Chado::Schema::Mage::Protocol",
   { protocol_id => "protocol_id" },
 );
+__PACKAGE__->belongs_to(
+  "datatype",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "datatype_id" },
+  { join_type => "LEFT" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:lACBo5gIm/s1VzlqRcx58A
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jO/Flt3QfI66kQRTeKg6Yw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

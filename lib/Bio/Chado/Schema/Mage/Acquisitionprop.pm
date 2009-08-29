@@ -49,10 +49,15 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Mage::Acquisition",
   { acquisition_id => "acquisition_id" },
 );
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:QoJEtyvz8tqF4D+00hfg+A
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:fqBZOYsHsDtK/9XlsFjc7g
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

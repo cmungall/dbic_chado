@@ -56,10 +56,15 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Mage::Quantification",
   { quantification_id => "object_id" },
 );
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:W/9xUNj9QLFsAZrqsMXiZQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vP/LBOgzm+SK4S3StjssJQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

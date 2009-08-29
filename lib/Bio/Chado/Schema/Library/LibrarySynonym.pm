@@ -57,15 +57,21 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("library_synonym_id");
 __PACKAGE__->add_unique_constraint("library_synonym_c1", ["synonym_id", "library_id", "pub_id"]);
+__PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
 __PACKAGE__->belongs_to(
   "library",
   "Bio::Chado::Schema::Library::Library",
   { library_id => "library_id" },
 );
+__PACKAGE__->belongs_to(
+  "synonym",
+  "Bio::Chado::Schema::Sequence::Synonym",
+  { synonym_id => "synonym_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:38
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:29MYN7X+jWONH0hvLw4CXw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:46p3UTylhTLLDPVmGHnd4Q
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

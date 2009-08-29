@@ -78,10 +78,37 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Map::Featuremap",
   { featuremap_id => "featuremap_id" },
 );
+__PACKAGE__->belongs_to(
+  "leftendf",
+  "Bio::Chado::Schema::Sequence::Feature",
+  { feature_id => "leftendf_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "rightstartf",
+  "Bio::Chado::Schema::Sequence::Feature",
+  { feature_id => "rightstartf_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "rightendf",
+  "Bio::Chado::Schema::Sequence::Feature",
+  { feature_id => "rightendf_id" },
+);
+__PACKAGE__->belongs_to(
+  "leftstartf",
+  "Bio::Chado::Schema::Sequence::Feature",
+  { feature_id => "leftstartf_id" },
+);
+__PACKAGE__->belongs_to(
+  "feature",
+  "Bio::Chado::Schema::Sequence::Feature",
+  { feature_id => "feature_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:uiV0YGPPlIT/vn3ntVFbaA
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:RBZlyf8/z4erTEK29HPVGw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

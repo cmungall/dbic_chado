@@ -66,6 +66,23 @@ __PACKAGE__->has_many(
   "Bio::Chado::Schema::Phylogeny::PhylonodeRelationship",
   { "foreign.phylotree_id" => "self.phylotree_id" },
 );
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "analysis",
+  "Bio::Chado::Schema::Companalysis::Analysis",
+  { analysis_id => "analysis_id" },
+  { join_type => "LEFT" },
+);
+__PACKAGE__->belongs_to(
+  "dbxref",
+  "Bio::Chado::Schema::General::Dbxref",
+  { dbxref_id => "dbxref_id" },
+);
 __PACKAGE__->has_many(
   "phylotree_pubs",
   "Bio::Chado::Schema::Phylogeny::PhylotreePub",
@@ -73,8 +90,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:33
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4aeZRUelvhVEJKLju3FNTw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:e1wRhmrLUQ3HPzgTR3bKyQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

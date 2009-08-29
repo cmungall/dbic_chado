@@ -38,6 +38,7 @@ __PACKAGE__->add_unique_constraint(
   "stock_relationship_pub_c1",
   ["stock_relationship_id", "pub_id"],
 );
+__PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
 __PACKAGE__->belongs_to(
   "stock_relationship",
   "Bio::Chado::Schema::Stock::StockRelationship",
@@ -45,8 +46,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:32
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ncCzW9iWcO9g7EtvUyFPzQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vf/EFFgss27OfMijhbR8BQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

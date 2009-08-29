@@ -49,6 +49,11 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Mage::Study",
   { study_id => "study_id" },
 );
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
 __PACKAGE__->has_many(
   "studyprop_features",
   "Bio::Chado::Schema::Mage::StudypropFeature",
@@ -56,8 +61,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:nS17sQQjPUixs2tMlDanpQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:PxsELXupul/H4M/UoSnJ6Q
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

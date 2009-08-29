@@ -56,10 +56,15 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Mage::Biomaterial",
   { biomaterial_id => "object_id" },
 );
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Yu56/UXI2fRiKr0eg5ajIg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:X13pPv26j8F/piGoPilnjA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

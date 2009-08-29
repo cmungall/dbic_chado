@@ -36,14 +36,19 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("environment_cvterm_id");
 __PACKAGE__->add_unique_constraint("environment_cvterm_c1", ["environment_id", "cvterm_id"]);
 __PACKAGE__->belongs_to(
+  "cvterm",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "cvterm_id" },
+);
+__PACKAGE__->belongs_to(
   "environment",
   "Bio::Chado::Schema::Genetic::Environment",
   { environment_id => "environment_id" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:29
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qNjQarW0jt3LhrGVwtZzoQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8wQw0BkJ86E9kr7Gu6hhqQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

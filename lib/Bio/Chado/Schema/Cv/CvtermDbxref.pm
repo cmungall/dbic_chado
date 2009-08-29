@@ -38,14 +38,19 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("cvterm_dbxref_id");
 __PACKAGE__->add_unique_constraint("cvterm_dbxref_c1", ["cvterm_id", "dbxref_id"]);
 __PACKAGE__->belongs_to(
+  "dbxref",
+  "Bio::Chado::Schema::General::Dbxref",
+  { dbxref_id => "dbxref_id" },
+);
+__PACKAGE__->belongs_to(
   "cvterm",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "cvterm_id" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:26
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rhqYcBulesfH2wthsvrjuQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:2OMtpq+OPpQJEPYcStU0fQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

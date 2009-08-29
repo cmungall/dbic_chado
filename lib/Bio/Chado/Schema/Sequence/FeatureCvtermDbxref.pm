@@ -43,10 +43,15 @@ __PACKAGE__->belongs_to(
   "Bio::Chado::Schema::Sequence::FeatureCvterm",
   { feature_cvterm_id => "feature_cvterm_id" },
 );
+__PACKAGE__->belongs_to(
+  "dbxref",
+  "Bio::Chado::Schema::General::Dbxref",
+  { dbxref_id => "dbxref_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:yk9ZEsdvhrgiWP0ULWQGtg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:MNJrbTD7trMkD7lbZf/IKQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

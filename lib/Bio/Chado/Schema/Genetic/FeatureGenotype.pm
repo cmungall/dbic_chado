@@ -66,14 +66,30 @@ __PACKAGE__->add_unique_constraint(
   ],
 );
 __PACKAGE__->belongs_to(
+  "cvterm",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "cvterm_id" },
+);
+__PACKAGE__->belongs_to(
   "genotype",
   "Bio::Chado::Schema::Genetic::Genotype",
   { genotype_id => "genotype_id" },
 );
+__PACKAGE__->belongs_to(
+  "feature",
+  "Bio::Chado::Schema::Sequence::Feature",
+  { feature_id => "feature_id" },
+);
+__PACKAGE__->belongs_to(
+  "chromosome",
+  "Bio::Chado::Schema::Sequence::Feature",
+  { feature_id => "chromosome_id" },
+  { join_type => "LEFT" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:29
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JuoGRdkO0vUhSwo7G5cNdQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:O0BM9ZCm/qiP3Hm82wt90g
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

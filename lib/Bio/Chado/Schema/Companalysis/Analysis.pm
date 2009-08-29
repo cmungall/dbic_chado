@@ -92,10 +92,20 @@ __PACKAGE__->has_many(
   "Bio::Chado::Schema::Companalysis::Analysisprop",
   { "foreign.analysis_id" => "self.analysis_id" },
 );
+__PACKAGE__->has_many(
+  "phylotrees",
+  "Bio::Chado::Schema::Phylogeny::Phylotree",
+  { "foreign.analysis_id" => "self.analysis_id" },
+);
+__PACKAGE__->has_many(
+  "quantifications",
+  "Bio::Chado::Schema::Mage::Quantification",
+  { "foreign.analysis_id" => "self.analysis_id" },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:30
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:G1xfXWy2HQpabCxnFkzcxg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oLqgBaBq3nIdiJhakzMAjA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

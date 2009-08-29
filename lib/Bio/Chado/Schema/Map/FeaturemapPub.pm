@@ -34,6 +34,7 @@ __PACKAGE__->add_columns(
   },
 );
 __PACKAGE__->set_primary_key("featuremap_pub_id");
+__PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
 __PACKAGE__->belongs_to(
   "featuremap",
   "Bio::Chado::Schema::Map::Featuremap",
@@ -41,8 +42,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-16 09:31:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:spMOY4TPwIEihwcpuvrwNA
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8TmiMPpoAtuCZGQ+tLhjZg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
