@@ -57,11 +57,6 @@ __PACKAGE__->belongs_to(
 # Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pJyjoL1QKhhhReRyUG+w1w
 
-__PACKAGE__->belongs_to(
-  'dbxref',
-  'Chado::Schema::General::Dbxref',
-  { 'foreign.dbxref_id' => 'self.dbxref_id' }
-);
 
 # You can replace this text with custom content, and it will be preserved on regeneration
 1;

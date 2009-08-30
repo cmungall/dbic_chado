@@ -64,10 +64,18 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wDdmYV7VTZjkhn7nC3GEVg
 
+=head1 ADDITIONAL RELATIONSHIPS
+
+=head2 cvterm
+
+Alias for type ( type_id foreign key into cvterm table)
+
+=cut
+
 __PACKAGE__->belongs_to
     (
      'cvterm',
-     'Chado::Schema::Cv::Cvterm',
+     'Bio::Chado::Schema::Cv::Cvterm',
      { 'foreign.cvterm_id' => 'self.type_id' },
     );
 

@@ -247,17 +247,28 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vUlrYA81srV51UtYIO1ukw
 
-__PACKAGE__->belongs_to(
-  'organism',
-  'Chado::Schema::Organism::Organism',
-  { 'foreign.organism_id' => 'self.organism_id' },
-);
+=head1 ADDITIONAL RELATIONSHIPS
+
+=head2 primary_dbxref
+
+Alias for dbxref
+
+=cut
 
 __PACKAGE__->belongs_to
     ( 'primary_dbxref',
-      'Chado::Schema::General::Dbxref',
+      'Bio::Chado::Schema::General::Dbxref',
       { 'foreign.dbxref_id' => 'self.dbxref_id' },
     );
+
+=head1 MANY-TO-MANY RELATIONSHIPS
+
+=head2 secondary_dbxrefs
+
+Relation to Bio::Chado::Schema::General::Dbxref (i.e. dbxref table)
+via feature_dbxrefs
+
+=cut
 
 __PACKAGE__->many_to_many
     (
@@ -265,6 +276,7 @@ __PACKAGE__->many_to_many
      'feature_dbxrefs' => 'dbxref',
     );
 
+=head1 ADDITIONAL METHODS
 
 =head2 create_featureprops
 
