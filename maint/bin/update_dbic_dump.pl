@@ -102,7 +102,7 @@ my @source_files_load_order =
 
 
 # warn about any missing source files
-if( my @missing_sources = grep !-f, map @$_, @source_files_load_order ) {
+if( my @missing_sources = map { my @f = @$_; shift @f; grep !-f, @f } @source_files_load_order ) {
     warn "missing source files:\n", map "   $_\n", @missing_sources;
 }
 
