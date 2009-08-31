@@ -166,9 +166,6 @@ make_schema_at(
                [$dsn,undef,undef],
               );
 
-#unlink file( $dump_directory, 'Bio', 'Chado','Schema', "$mod_moniker.pm" )
-#    or die "failed to unlink unnecessary $mod_moniker schema obj";
-
 
 # given a dbh and a module source file record, load it into the given
 # dbh
