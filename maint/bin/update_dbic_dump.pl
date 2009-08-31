@@ -34,7 +34,6 @@ my @sql_blacklist =
      qr!sequence/gencode/gencode.sql!,
      qr!sequence/bridges/so-bridge.sql!,
      qr!sequence/views/implicit-feature-views.sql!,
-     qr!cell_line/!,
     );
 
 my $dump_directory = dir( $FindBin::Bin )->parent->parent->subdir('lib')->stringify;
