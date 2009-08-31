@@ -1,3 +1,17 @@
+Bio-Schema-Chado (0.04000)
+
+  * added new modules and relationships for the newly released
+    cell_line module in Chado
+
+ -- Robert Buels <rmb32@cornell.edu>  Mon, 31 Aug 2009 08:43:19 -0700
+
+Bio-Schema-Chado (0.03100)
+
+  * added $VERSION to Bio::Chado::Schema to support CPAN indexer,
+    bumped version by several numbers to force CPAN reindexing
+
+ -- Robert Buels <rmb32@cornell.edu>  Mon, 31 Aug 2009 08:43:19 -0700
+
 Bio-Schema-Chado (0.022)
 
   * update to schema dumping script now finds many more inter-module
