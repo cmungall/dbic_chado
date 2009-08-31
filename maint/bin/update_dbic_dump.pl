@@ -106,8 +106,15 @@ if( my @missing_sources = map { my @f = @$_; shift @f; grep !-f, @f } @source_fi
     warn "missing source files:\n", map "   $_\n", @missing_sources;
 }
 
-warn "loading module sources:\n",
-    Dumper \@source_files_load_order;
+warn "loading module sources:\n";
+foreach my $src (@source_files_load_order) {
+    my ($modname,@files) = @$src;
+    warn "  $modname:\n";
+    foreach my $f (@files) {
+        $f =~ s/$chado_schema_checkout//;
+        warn "     $f\n";
+    }
+}
 
 # # connect to our db
 my $dbh = DBI->connect( $dsn, undef, undef, {RaiseError => 1} );
