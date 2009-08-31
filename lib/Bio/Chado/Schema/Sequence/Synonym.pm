@@ -42,6 +42,11 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("synonym_id");
 __PACKAGE__->add_unique_constraint("synonym_c1", ["name", "type_id"]);
 __PACKAGE__->has_many(
+  "cell_line_synonyms",
+  "Bio::Chado::Schema::CellLine::CellLineSynonym",
+  { "foreign.synonym_id" => "self.synonym_id" },
+);
+__PACKAGE__->has_many(
   "feature_synonyms",
   "Bio::Chado::Schema::Sequence::FeatureSynonym",
   { "foreign.synonym_id" => "self.synonym_id" },
@@ -58,8 +63,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+Q95qLPrSh8mmBlaK3VPXQ
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:HGaoVBqODK4g0glPKU0ebw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

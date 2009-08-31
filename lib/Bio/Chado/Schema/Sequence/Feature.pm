@@ -107,6 +107,11 @@ __PACKAGE__->has_many(
   { "foreign.feature_id" => "self.feature_id" },
 );
 __PACKAGE__->has_many(
+  "cell_line_features",
+  "Bio::Chado::Schema::CellLine::CellLineFeature",
+  { "foreign.feature_id" => "self.feature_id" },
+);
+__PACKAGE__->has_many(
   "elements",
   "Bio::Chado::Schema::Mage::Element",
   { "foreign.feature_id" => "self.feature_id" },
@@ -244,8 +249,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vUlrYA81srV51UtYIO1ukw
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:AhZ1E/MCI4Ike01bhmqL/A
 
 =head1 ADDITIONAL RELATIONSHIPS
 

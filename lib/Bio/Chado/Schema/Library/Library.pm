@@ -65,6 +65,11 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("library_id");
 __PACKAGE__->add_unique_constraint("library_c1", ["organism_id", "uniquename", "type_id"]);
+__PACKAGE__->has_many(
+  "cell_line_libraries",
+  "Bio::Chado::Schema::CellLine::CellLineLibrary",
+  { "foreign.library_id" => "self.library_id" },
+);
 __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
@@ -107,8 +112,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:2UQzt8Tb84febonPqZDw6A
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Vd7GffuJpEpNQ19xK+TAiQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

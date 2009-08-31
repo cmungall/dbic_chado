@@ -105,6 +105,26 @@ __PACKAGE__->has_many(
   { "foreign.unittype_id" => "self.cvterm_id" },
 );
 __PACKAGE__->has_many(
+  "cell_line_cvterms",
+  "Bio::Chado::Schema::CellLine::CellLineCvterm",
+  { "foreign.cvterm_id" => "self.cvterm_id" },
+);
+__PACKAGE__->has_many(
+  "cell_line_cvtermprops",
+  "Bio::Chado::Schema::CellLine::CellLineCvtermprop",
+  { "foreign.type_id" => "self.cvterm_id" },
+);
+__PACKAGE__->has_many(
+  "cell_lineprops",
+  "Bio::Chado::Schema::CellLine::CellLineprop",
+  { "foreign.type_id" => "self.cvterm_id" },
+);
+__PACKAGE__->has_many(
+  "cell_line_relationships",
+  "Bio::Chado::Schema::CellLine::CellLineRelationship",
+  { "foreign.type_id" => "self.cvterm_id" },
+);
+__PACKAGE__->has_many(
   "contacts",
   "Bio::Chado::Schema::Contact::Contact",
   { "foreign.type_id" => "self.cvterm_id" },
@@ -457,8 +477,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1YBZ9YL/qEXqbWhh6HaW/Q
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:fC9n/ZcO3hYpoWFiJdCgvA
 
 __PACKAGE__->has_many(
   "featureprops",

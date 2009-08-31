@@ -112,6 +112,36 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("pub_id");
 __PACKAGE__->add_unique_constraint("pub_c1", ["uniquename"]);
 __PACKAGE__->has_many(
+  "cell_line_cvterms",
+  "Bio::Chado::Schema::CellLine::CellLineCvterm",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "cell_line_features",
+  "Bio::Chado::Schema::CellLine::CellLineFeature",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "cell_line_libraries",
+  "Bio::Chado::Schema::CellLine::CellLineLibrary",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "cell_lineprop_pubs",
+  "Bio::Chado::Schema::CellLine::CellLinepropPub",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "cell_line_pubs",
+  "Bio::Chado::Schema::CellLine::CellLinePub",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
+  "cell_line_synonyms",
+  "Bio::Chado::Schema::CellLine::CellLineSynonym",
+  { "foreign.pub_id" => "self.pub_id" },
+);
+__PACKAGE__->has_many(
   "expression_pubs",
   "Bio::Chado::Schema::Expression::ExpressionPub",
   { "foreign.pub_id" => "self.pub_id" },
@@ -278,8 +308,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oue4M+IIqcvz4B3MuzPPeA
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:AURomhLcMFXffNohJLSLlQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

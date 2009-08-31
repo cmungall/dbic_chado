@@ -68,6 +68,11 @@ __PACKAGE__->has_many(
   "Bio::Chado::Schema::Mage::BiomaterialDbxref",
   { "foreign.dbxref_id" => "self.dbxref_id" },
 );
+__PACKAGE__->has_many(
+  "cell_line_dbxrefs",
+  "Bio::Chado::Schema::CellLine::CellLineDbxref",
+  { "foreign.dbxref_id" => "self.dbxref_id" },
+);
 __PACKAGE__->might_have(
   "cvterm",
   "Bio::Chado::Schema::Cv::Cvterm",
@@ -151,8 +156,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-29 09:17:46
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rR3tWj4uo3BpimMYuw/xwg
+# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tNdwAyrG6nfrC6C2aoAfPw
 
 # add an explicit sequence name to the dbxref
 __PACKAGE__->add_columns(
