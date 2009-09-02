@@ -252,6 +252,8 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:AhZ1E/MCI4Ike01bhmqL/A
 
+use Carp;
+
 =head1 ADDITIONAL RELATIONSHIPS
 
 =head2 primary_dbxref
