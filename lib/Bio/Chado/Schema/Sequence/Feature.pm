@@ -415,5 +415,98 @@ sub create_featureprops {
     return \%props;
 }
 
-# You can replace this text with custom content, and it will be preserved on regeneration
+=head2 search_featureprops
+
+  Status  : public
+  Usage   : $feat->search_featureprops( 'description' )
+            # OR
+            $feat->search_featureprops({ name => 'description'})
+  Returns : DBIx::Class::ResultSet like other search() methods
+  Args    : single string to match cvterm name,
+            or hashref of search criteria.  This is passed
+            to $chado->resultset('Cv::Cvterm')
+                     ->search({ your criteria })
+
+  Convenience method to search featureprops for a feature that
+  match to Cvterms having the given criterion hash
+
+=cut
+
+sub search_featureprops {
+    my ( $self, $cvt_criteria ) = @_;
+
+    $cvt_criteria = { name => $cvt_criteria }
+        unless ref $cvt_criteria;
+
+     $self->result_source->schema
+          ->resultset('Cv::Cvterm')
+          ->search( $cvt_criteria )
+          ->search_related('featureprops',
+                           { feature_id => $self->feature_id },
+                          );
+}
+
+
+######### Bio::SeqI support ###########
+use base qw/ Bio::PrimarySeq /;
+
+sub seq {
+    shift()->residues;
+}
+
+sub accession_number {
+    my $self= shift;
+
+    my $pd = $self->primary_dbxref
+        || $self->secondary_dbxrefs->first
+      or return;
+
+    my $acc = $pd->accession;
+    my $v = $pd->version;
+    $v = $v ? ".$v" : '';
+
+    return $acc.$v;
+}
+
+sub length {
+    my $self = shift;
+    my $l = $self->seqlen;
+    return $l if defined $l;
+    return CORE::length( $self->get_column('residues')->length );
+}
+
+sub desc {
+    my $self = shift;
+    my $desc_fp =
+        $self->search_featureprops( 'description')
+             ->first;
+    return unless $desc_fp;
+    return $desc_fp->value;
+}
+
+
+sub can_call_new { 0 }
+
+sub namespace {
+    shift()->type->cv->name;
+}
+
+sub alphabet {
+    shift()->throw_not_implemented()
+}
+
+
+# METHOD ALIASES
+{
+    no warnings 'once';
+
+    *accession   = \&accession_number;
+
+    *description = \&desc;
+
+    *display_id  = \&name;
+    *id          = \&name;
+    *primary_id  = \&name;
+}
+
 1;
