@@ -283,37 +283,119 @@ __PACKAGE__->many_to_many
 
 =head1 ADDITIONAL METHODS
 
+use Carp;
+
 =head2 create_featureprops
 
   Usage: $set->create_featureprops('cv_name', { baz => 2, foo => 'bar' });
   Desc : convenience method to create feature properties using cvterms
           from the ontology with the given name
-  Args : CV name, hashref of { propname => value, ...}
+  Args : hashref of { propname => value, ...},
+         options hashref as:
+          {
+            autocreate => 0,
+               (optional) boolean, if passed, automatically create cv,
+               cvterm, and dbxref rows if one cannot be found for the
+               given featureprop name.  Default false.
+
+            cv_name => cv.name to use for the given featureprops.
+                       Defaults to 'feature_property',
+
+            db_name => db.name to use for autocreated dbxrefs,
+                       default 'null',
+
+            dbxref_accession_prefix => optional, default
+                                       'autocreated:',
+            definitions => optional hashref of:
+                { cvterm_name => definition,
+                }
+             to load into the cvterm table when autocreating cvterms
+          }
   Ret  : hashref of { propname => new featureprop object }
 
 =cut
 
 sub create_featureprops {
-    my ($self, $cv_name, $props) = @_;
+    my ($self, $props, $opts) = @_;
 
+    # normalize the props to hashrefs
     foreach (values %$props) {
-        $_ = { value => $_ } unless ref;
+        $_ = { value => $_ } unless ref eq 'HASH';
     }
 
+    # process opts
+    $opts ||= {};
+    $opts->{cv_name} = 'feature_property'
+        unless defined $opts->{cv_name};
+    $opts->{db_name} = 'null'
+        unless defined $opts->{db_name};
+    $opts->{dbxref_accession_prefix} = 'autocreated:'
+        unless defined $opts->{dbxref_accession_prefix};
+
+    my $schema = $self->result_source->schema;
+
+    my $feature_prop_cv = do {
+        my $cvrs = $schema->resultset('Cv::Cv');
+        my $find_or_create = $opts->{autocreate} ? 'find_or_create' : 'find';
+        $cvrs->$find_or_create({ name => $opts->{cv_name}},
+                               { key => 'cv_c1' })
+            or croak "cv '$opts->{cv_name}' not found and autocreate option not passed, cannot continue";
+    };
+
+    my $feature_prop_db; #< set as needed below
+
+    # find/create cvterms and dbxrefs for each of our featureprops,
+    # and remember them in %propterms
     my %propterms;
-    my $feature_prop_cv = $self->result_source->schema
-                               ->resultset('Cv::Cv')
-                               ->find_or_create({ name => $cv_name},{key => 'cv_c1'});
-
-    # find/create cvterms for each of our featureprops
     foreach my $propname (keys %$props) {
-        $propterms{$propname} = $feature_prop_cv->find_or_create_related('cvterms',
-                                                                         { name => $propname,
-                                                                           is_obsolete => 0,
-                                                                         },
-                                                                         { key => 'cvterm_c1' },
-                                                                        );
+        my $existing_cvterm = $propterms{$propname} =
+            $feature_prop_cv->find_related('cvterms',
+                                           { name => $propname,
+                                             is_obsolete => 0,
+                                           },
+                                           { key => 'cvterm_c1' },
+                                          );
+
+        # if there is no existing cvterm for this featureprop, and we
+        # have the autocreate flag set true, then create a cvterm,
+        # dbxref, and db for it if necessary
+        unless( $existing_cvterm ) {
+            $opts->{autocreate}
+               or croak "cvterm not found for feature property '$propname', and autocreate option not passed, cannot continue";
+
+            # look up the db object if we don't already have it, now
+            # that we know we need it
+            $feature_prop_db ||=
+                $self->result_source->schema
+                     ->resultset('General::Db')
+                     ->find_or_create( { name => $opts->{db_name} },
+                                       { key => 'db_c1' }
+                                     );
+
+            # find or create the dbxref for this cvterm we are about
+            # to create
+            my $dbx_acc = $opts->{dbxref_accession_prefix}.$propname;
+            my $dbxref =
+                $feature_prop_db->find_or_create_related('dbxrefs',{ accession => $dbx_acc })
+             || $feature_prop_db->create_related('dbxrefs',{ accession => $dbx_acc,
+                                                             version => 1,
+                                                           });
+
+            # look up any definition we might have been given for this
+            # propname, so we can insert it if given
+            my $def = $opts->{definitions}->{$propname};
+
+            $propterms{$propname} =
+                $feature_prop_cv->create_related('cvterms',
+                                                 { name => $propname,
+                                                   is_obsolete => 0,
+                                                   dbxref_id => $dbxref->dbxref_id,
+                                                   $def ? (definition => $def) : (),
+                                                 }
+                                                );
+        }
     }
+
     my %props;
     while( my ($propname,$propval) = each %$props ) {
 
