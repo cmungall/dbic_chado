@@ -378,10 +378,14 @@ sub create_featureprops {
             # to create
             my $dbx_acc = $opts->{dbxref_accession_prefix}.$propname;
             my $dbxref =
-                $feature_prop_db->find_or_create_related('dbxrefs',{ accession => $dbx_acc })
-             || $feature_prop_db->create_related('dbxrefs',{ accession => $dbx_acc,
-                                                             version => 1,
-                                                           });
+                $feature_prop_db->search( 'dbxrefs',
+                                          { accession => $dbx_acc },
+                                          { order_by => { -desc => ['version'] } }
+                                        )
+                                ->first
+             || $feature_prop_db->create_related( 'dbxrefs', { accession => $dbx_acc,
+                                                               version => 1,
+                                                             });
 
             # look up any definition we might have been given for this
             # propname, so we can insert it if given
