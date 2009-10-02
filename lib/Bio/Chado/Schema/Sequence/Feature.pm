@@ -411,11 +411,26 @@ sub create_featureprops {
 
         $data->{type_id} = $propterms{$propname}->cvterm_id;
 
-        $props{$propname} = $self->create_related('featureprops',
-                                                  $data
-                                                 );
-    }
+	my $rank=0;
+	#find existing props for this type
+	my $max_rank= $self->search_related('featureprops',
+					    { type_id =>$data->{type_id},
+					    })->rank()->max();
+	$rank= $max_rank+1 if $max_rank;
 
+	#check if it exists
+	my ($featureprop)= $self->search_related('featureprops',
+						  {type_id => $data->{type_id},
+						   value   => $data->{value},
+						  });
+	
+        if (!$featureprop) {
+	    
+	    $props{$propname} = $self->create_related('featureprops',
+						      $data
+		);
+	}
+    }
     return \%props;
 }
 

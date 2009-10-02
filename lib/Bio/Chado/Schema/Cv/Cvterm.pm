@@ -486,6 +486,246 @@ __PACKAGE__->has_many(
   { "foreign.type_id" => "self.cvterm_id" },
 );
 
+use Carp;
 
-# You can replace this text with custom content, and it will be preserved on regeneration
+
+=head2 add_synonym
+
+ Usage:        $self->add_synonym($synonym , { type => 'exact' , autocreate => 1} );
+ Desc:         adds the synonym $new_synonym to this cvterm
+               If the synonym $new_synonym already exists, 
+               nothing is added.
+ Args:         a synonym name  and
+    options hashref as:
+          {
+            synonym_type => [e.g. exact, narrow, broad, related],
+            autocreate => 0,
+               (optional) boolean, if passed, automatically create cv,
+               cvterm, and dbxref rows if one cannot be found for the
+               given featureprop name.  Default false.
+
+            cv_name => cv.name to use for the given synonym type.
+                       Defaults to 'synonym_type',
+
+            db_name => db.name to use for autocreated dbxrefs,
+                       default 'null',
+
+            definitions => optional hashref of:
+                { cvterm_name => definition,
+                }
+             to load into the cvterm table when autocreating cvterms
+          }
+ Ret:          a Cvtermsynonym object
+ Example:
+
+=cut
+
+sub add_synonym {
+    my ($self, $synonym, $opts) = @_;
+    my $schema = $self->result_source->schema;
+    $opts ||= {};
+    $opts->{cv_name} = 'synonym_type'
+        unless defined $opts->{cv_name};
+    $opts->{db_name} = 'null'
+        unless defined $opts->{db_name};
+    $opts->{dbxref_accession_prefix} = 'autocreated:'
+        unless defined $opts->{dbxref_accession_prefix};
+    my $data;
+    $data->{synonym} = $synonym;
+    
+    if (defined $opts->{synonym_type} ) { 
+	my $synonym_type= $opts->{synonym_type} ; 
+	my $synonym_db; #< set as needed below
+	my $synonym_cv = do {
+	    my $cvrs = $schema->resultset('Cv::Cv');
+	    my $find_or_create = $opts->{autocreate} ? 'find_or_create' : 'find';
+	    $cvrs->$find_or_create({ name => $opts->{cv_name}},
+				   { key => 'cv_c1' })
+		or croak "cv '$opts->{cv_name}' not found and autocreate option not passed, cannot continue";
+	};
+	
+	# find/create cvterm and dbxref for the synonym,
+	
+	my $existing_cvterm =  
+            $synonym_cv->find_related('cvterms',
+				      { name => $synonym_type,
+					is_obsolete => 0,
+				      },
+				      { key => 'cvterm_c1' },
+	    );
+	
+        # if there is no existing cvterm for this synonym type, and we
+        # have the autocreate flag set true, then create a cvterm,
+        # dbxref, and db for it if necessary
+        unless( $existing_cvterm ) {
+            $opts->{autocreate}
+	    or croak "cvterm not found for cvterm synonym type  '$synonym_type', and autocreate option not passed, cannot continue";
+	    
+            # look up the db object if we don't already have it, now
+            # that we know we need it
+            $synonym_db ||=
+                $self->result_source->schema
+		->resultset('General::Db')
+		->find_or_create( { name => $opts->{db_name} },
+				  { key => 'db_c1' }
+		);
+	    
+            # find or create the dbxref for this cvterm we are about
+            # to create
+            my $dbx_acc = $synonym_type;
+            my $dbxref =
+                $synonym_db->find_or_create_related('dbxrefs',{ accession => $dbx_acc })
+		|| $synonym_db->create_related('dbxrefs',{ accession => $dbx_acc,
+							   version => 1,
+					       });
+	    
+            # look up any definition we might have been given for this
+            # propname, so we can insert it if given
+            my $def = $opts->{definition};
+	    
+            
+	    my $synonym_type_cvterm= $synonym_cv->create_related('cvterms',
+								 { name => $synonym_type,
+								   is_obsolete => 0,
+								   dbxref_id => $dbxref->dbxref_id,
+								   $def ? (definition => $def) : (),
+								 }
+		);
+	    $data->{type_id} = $synonym_type_cvterm->cv_id();
+        }
+    }
+    my ($cvtermsynonym)= $self->search_related('featureprops',
+					       {type_id => $data->{type_id},
+						value   => { 'ilike' , "$synonym" }
+					       });
+    
+    $cvtermsynonym= $self->create_related('cvtermsynonyms' , $data) if !$cvtermsynonym;
+    
+    return $cvtermsynonym;
+}
+
+
+=head2 delete_synonym
+
+ Usage: $self->delete_synonym($synonym)
+ Desc:  delete synonym $synonym from cvterm object
+  Ret:  nothing
+ Args: $synonym
+ Side Effects: Will delete all cvtermsynonyms with synonym=$synonym. Case insensitive 
+ Example:
+
+=cut
+
+sub delete_synonym {
+    my $self=shift;
+    my $synonym=shift;
+    
+    my $schema = $self->result_source->schema;
+    
+    $self->result_source->
+	schema->
+	resultset("Cv::Cvtermsynonym")
+	->search( { cvterm_id => $self->get_column('cvterm_id'),
+		    synonym   => { 'ilike' , "$synonym" }
+		  })
+	->delete();
+}
+
+
+
+=head2 get_secondary_dbxrefs
+
+ Usage: $self->get_secondary_dbxrefs()
+ Desc:  find all secondary accessions associated with the cvterm
+         These are stored in cvterm_dbxref table as dbxref_ids
+ Ret:    a list of accessions (e.g. GO:0000123)
+ Args:   none
+ Side Effects: none
+ Example:
+
+=cut
+
+sub get_secondary_dbxrefs {
+    my $self=shift;
+    my $schema = $self->result_source->schema;
+    my @list;
+    my @s =  $self->search_related('cvterm_dbxrefs' , { is_for_definition => 0} );
+    foreach (@s) {
+	my ($db_name, $accession)  = $schema->resultset("General::Dbxref")->search(
+	    { dbxref_id => $_->get_column('dbxref_id') },
+	    { join      => { 'db' => 'db_id' },
+	      +select   => [ 'db.name', 'dbxref.accession' ],
+	    } );
+	push @list, $db_name . ":" .  $accession;
+    }
+    return @list;
+}
+    
+
+=head2 add_secondary_dbxref
+
+ Usage: $self->add_secondary_dbxref(accession, 1)
+ Desc:  add an alternative id to cvterm. Stores in cvterm_dbxref
+ Ret:   a CvtermDbxref object
+ Args:  an alternative id (i.e. "GO:0001234"). A second arg will store a is_for_definition=1 (default = 0)
+ Side Effects: stores a new dbxref if accession is not found in dbxref table
+ Example:
+
+=cut
+
+sub add_secondary_dbxref {
+    my ($self, $accession, $def)=@_;
+    $def = 0 unless $def == 1;
+    my $schema = $self->result_source->schema;
+    my ($db_name, $acc) = split (/:/, $accession);
+    if (!$db_name || $accession) { croak "Did not pass a legal accession! ($accession)" ; }
+    my $db = $schema->resultset("General::Db")->find_or_create( 
+	{ name => $db_name },
+	{ key => 'db_c1' }
+	);
+    my $dbxref = $db->find_or_create_related('dbxrefs', { accession => $acc } , { key => 'dbxref_c1' }, );
+    
+    my $cvterm_dbxref = $schema->resultset("Cv::CvtermDbxref")->search(
+	{ dbxref_id => $dbxref->get_column('dbxref_id'),
+	  cvterm_id => $self->get_column('cvterm_id') }
+	)->first();
+    if ($cvterm_dbxref) {
+	$cvterm_dbxref->update( { is_for_definition => $def } ) if $def;
+    }else {
+	$cvterm_dbxref = $schema->resultset("Cv::CvtermDbxref")->create(
+	    { dbxref_id => $dbxref->get_column('dbxref_id'),
+	      cvterm_id => $self->get_column('cvterm_id'),
+	      is_for_definition => $def,
+	    } );
+    }
+    return $cvterm_dbxref;
+}
+
+
+=head2 delete_secondary_dbxref
+    
+ Usage: $self->delete_secondary_dbxref($accession)
+ Desc:  delete a cvterm_dbxref from the database 
+ Ret:   nothing
+ Args:  full accession (db_name:dbxref_accession e.g. PO:0001234)
+ Side Effects:
+ Example:
+
+=cut
+    
+sub delete_secondary_dbxref {
+    my $self=shift;
+    my $accession=shift;
+    my $schema = $self->result_source->schema;
+    my ($db_name, $acc) = split (/:/, $accession);
+    if (!$db_name || $accession) { croak "Did not pass a legal accession! ($accession)" ; }
+    
+    my ($cvterm_dbxref) = $schema->resultset("General::Db")->search(
+	{ name => $db_name } )->
+	search_related('dbxrefs' , { accession => $acc } )->
+	search_related('cvterm_dbxrefs', { cvterm_id => $self->get_column('cvterm_id') } );
+    if ($cvterm_dbxref) { $cvterm_dbxref->delete() ; } 
+    
+}
+
 1;
