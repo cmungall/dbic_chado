@@ -289,7 +289,7 @@ use Carp;
 
 =head2 create_featureprops
 
-  Usage: $set->create_featureprops('cv_name', { baz => 2, foo => 'bar' });
+  Usage: $set->create_featureprops({ baz => 2, foo => 'bar' });
   Desc : convenience method to create feature properties using cvterms
           from the ontology with the given name
   Args : hashref of { propname => value, ...},
@@ -312,6 +312,11 @@ use Carp;
                 { cvterm_name => definition,
                 }
              to load into the cvterm table when autocreating cvterms
+
+             allow_duplicate_values => default false.
+                If true, allow duplicate instances of the same cvterm
+                and value in the properties of the feature.  Duplicate
+                values will have different ranks.
           }
   Ret  : hashref of { propname => new featureprop object }
 
@@ -320,118 +325,17 @@ use Carp;
 sub create_featureprops {
     my ($self, $props, $opts) = @_;
 
-    # normalize the props to hashrefs
-    foreach (values %$props) {
-        $_ = { value => $_ } unless ref eq 'HASH';
-    }
-
     # process opts
-    $opts ||= {};
     $opts->{cv_name} = 'feature_property'
         unless defined $opts->{cv_name};
-    $opts->{db_name} = 'null'
-        unless defined $opts->{db_name};
-    $opts->{dbxref_accession_prefix} = 'autocreated:'
-        unless defined $opts->{dbxref_accession_prefix};
 
-    my $schema = $self->result_source->schema;
+    return Bio::Chado::Schema::Util->create_props
+        ( properties => $props,
+          options    => $opts,
+          row        => $self,
+          prop_relation_name => 'featureprops',
+        );
 
-    my $feature_prop_cv = do {
-        my $cvrs = $schema->resultset('Cv::Cv');
-        my $find_or_create = $opts->{autocreate} ? 'find_or_create' : 'find';
-        $cvrs->$find_or_create({ name => $opts->{cv_name}},
-                               { key => 'cv_c1' })
-            or croak "cv '$opts->{cv_name}' not found and autocreate option not passed, cannot continue";
-    };
-
-    my $feature_prop_db; #< set as needed below
-
-    # find/create cvterms and dbxrefs for each of our featureprops,
-    # and remember them in %propterms
-    my %propterms;
-    foreach my $propname (keys %$props) {
-        my $existing_cvterm = $propterms{$propname} =
-            $feature_prop_cv->find_related('cvterms',
-                                           { name => $propname,
-                                             is_obsolete => 0,
-                                           },
-                                           { key => 'cvterm_c1' },
-                                          );
-
-        # if there is no existing cvterm for this featureprop, and we
-        # have the autocreate flag set true, then create a cvterm,
-        # dbxref, and db for it if necessary
-        unless( $existing_cvterm ) {
-            $opts->{autocreate}
-               or croak "cvterm not found for feature property '$propname', and autocreate option not passed, cannot continue";
-
-            # look up the db object if we don't already have it, now
-            # that we know we need it
-            $feature_prop_db ||=
-                $self->result_source->schema
-                     ->resultset('General::Db')
-                     ->find_or_create( { name => $opts->{db_name} },
-                                       { key => 'db_c1' }
-                                     );
-
-            # find or create the dbxref for this cvterm we are about
-            # to create
-            my $dbx_acc = $opts->{dbxref_accession_prefix}.$propname;
-            my $dbxref =
-                $feature_prop_db->search( 'dbxrefs',
-                                          { accession => $dbx_acc },
-                                          { order_by => { -desc => ['version'] } }
-                                        )
-                                ->first
-             || $feature_prop_db->create_related( 'dbxrefs', { accession => $dbx_acc,
-                                                               version => 1,
-                                                             });
-
-            # look up any definition we might have been given for this
-            # propname, so we can insert it if given
-            my $def = $opts->{definitions}->{$propname};
-
-            $propterms{$propname} =
-                $feature_prop_cv->create_related('cvterms',
-                                                 { name => $propname,
-                                                   is_obsolete => 0,
-                                                   dbxref_id => $dbxref->dbxref_id,
-                                                   $def ? (definition => $def) : (),
-                                                 }
-                                                );
-        }
-    }
-
-    my %props;
-    while( my ($propname,$propval) = each %$props ) {
-
-        my $data = ref $propval
-            ? {%$propval}
-            : { value => $propval };
-
-        $data->{type_id} = $propterms{$propname}->cvterm_id;
-
-	my $rank=0;
-	#find existing props for this type
-	my $max_rank= $self->search_related('featureprops',
-					    { type_id =>$data->{type_id},
-					    })->rank()->max();
-	$rank= $max_rank+1 if $max_rank;
-
-	#check if it exists
-	my ($featureprop)= $self->search_related('featureprops',
-						  {type_id => $data->{type_id},
-						   value   => $data->{value},
-						  });
-	
-        if (!$featureprop) {
-	    
-	    $props{$propname} = $self->create_related('featureprops',
-						      $data
-		);
-	}
-    }
-    return \%props;
 }
 
 =head2 search_featureprops

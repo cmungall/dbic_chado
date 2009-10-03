@@ -5,6 +5,9 @@ use warnings;
 
 use base 'DBIx::Class::Schema';
 
+use Bio::Chado::Schema::Util; #< load Util class for use by Schema
+                              #resultsources
+
 __PACKAGE__->load_classes;
 
 
