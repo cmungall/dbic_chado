@@ -16,7 +16,8 @@ my $build = Module::Build->new
                    },
      requires => {
                   'perl'          => '5.8.0',
-                  'Carp'          => '0',
+                  'Carp'          => '1.08',
+                  'Carp::Clan'    => '6.00',
                   'DBIx::Class'   => '0.08111',
                  },
     );
