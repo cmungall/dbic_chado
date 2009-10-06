@@ -19,6 +19,7 @@ my $build = Module::Build->new
                   'Carp'          => '1.08',
                   'Carp::Clan'    => '6.00',
                   'DBIx::Class'   => '0.08111',
+                  'Module::Find'  => 0,
                  },
     );
 $build->create_build_script;

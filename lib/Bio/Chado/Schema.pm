@@ -5,10 +5,26 @@ use warnings;
 
 use base 'DBIx::Class::Schema';
 
-use Bio::Chado::Schema::Util; #< load Util class for use by Schema
-                              #resultsources
+require Bio::Chado::Schema::Util; #< load Util class for use by Schema
+                                  #resultsources
+require Module::Find;
 
-__PACKAGE__->load_classes;
+my @components =
+
+    # skip loading modules that are not DBIC components currently just
+    # skips Bio::Chado::Schema::Util
+    grep $_ ne 'Util',
+
+    # trim off this package name to leave just the part under this
+    # namespace
+    map { substr $_, length __PACKAGE__.'::' } 
+
+
+    # find all the modules under the namespace of this package
+    # (i.e. Bio::Chado::Schema::*)
+    Module::Find::findallmod(__PACKAGE__);
+
+__PACKAGE__->load_classes(@components);
 
 
 # Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
