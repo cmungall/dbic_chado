@@ -270,10 +270,22 @@ __PACKAGE__->belongs_to
 
 =head1 MANY-TO-MANY RELATIONSHIPS
 
+=head2 dbxrefs_mm
+
+Relation to L<Bio::Chado::Schema::General::Dbxref: (i.e. dbxref table)
+via the C<feature_dbxrefs> table.
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'dbxrefs_mm',
+     'feature_dbxrefs' => 'dbxref',
+    );
+
 =head2 secondary_dbxrefs
 
-Relation to Bio::Chado::Schema::General::Dbxref (i.e. dbxref table)
-via feature_dbxrefs
+Alias for dbxrefs_mm
 
 =cut
 

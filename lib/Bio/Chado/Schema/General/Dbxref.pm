@@ -159,5 +159,126 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tNdwAyrG6nfrC6C2aoAfPw
 
+
+=head1 MANY-TO-MANY RELATIONSHIPS
+
+=head2 biomaterials_mm
+
+Relation to L<Bio::Chado::Schema::Mage::Biomaterial> (i.e. C<biomaterial> table)
+via the C<organism_dbxrefs> table.
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'biomaterials_mm',
+     'biomaterial_dbxrefs' => 'biomaterial',
+    );
+
+=head2 cell_lines_mm
+
+Relation to L<Bio::Chado::Schema::CellLine::CellLine> (i.e. C<cell_line> table)
+via the C<cell_line_dbxrefs> table.
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'cell_lines_mm',
+     'cell_line_dbxrefs' => 'cell_line',
+    );
+
+=head2 cvterms_mm
+
+Relation to L<Bio::Chado::Schema::Cv::Cvterm> (i.e. C<cvterm> table)
+via the C<cvterm_dbxrefs> table.
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'cvterms_mm',
+     'cvterm_dbxrefs' => 'cvterm',
+    );
+
+=head2 features_mm
+
+Relation to L<Bio::Chado::Schema::Sequence::Feature> (i.e. C<feature> table)
+via the C<feature_dbxrefs> table.
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'features_mm',
+     'feature_dbxrefs' => 'feature',
+    );
+
+=head2 libraries_mm
+
+Relation to L<Bio::Chado::Schema::Library::LibraryDbxref> (i.e. C<library> table)
+via the C<library_dbxrefs> table.
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'libraries_mm',
+     'library_dbxrefs' => 'library',
+    );
+
+=head2 organisms_mm
+
+Relation to L<Bio::Chado::Schema::Organism::Organism> (i.e. C<organism> table)
+via the C<organism_dbxrefs> table.
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'organisms_mm',
+     'organism_dbxrefs' => 'organism',
+    );
+
+=head2 phylonodes_mm
+
+Relation to L<Bio::Chado::Schema::Phylogeny::Phylonode> (i.e. C<phylonode> table)
+via the C<phylonode_dbxrefs> table.
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'phylonodes_mm',
+     'phylonode_dbxrefs' => 'phylonode',
+    );
+
+=head2 pubs_mm
+
+Relation to L<Bio::Chado::Schema::Pub::Pub> (i.e. C<pub> table)
+via the C<pub_dbxrefs> table.
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'pubs_mm',
+     'pub_dbxrefs' => 'pub',
+    );
+
+=head2 stocks_mm
+
+Relation to L<Bio::Chado::Schema::Stock::Stock> (i.e. C<stock> table)
+via the C<stock_dbxrefs> table.
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'stocks_mm',
+     'stock_dbxrefs' => 'stock',
+    );
+
+
 # You can replace this text with custom content, and it will be preserved on regeneration
 1;
