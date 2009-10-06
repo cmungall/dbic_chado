@@ -295,9 +295,8 @@ __PACKAGE__->many_to_many
      'feature_dbxrefs' => 'dbxref',
     );
 
-=head1 ADDITIONAL METHODS
 
-use Carp;
+=head1 ADDITIONAL METHODS
 
 =head2 create_featureprops
 
