@@ -147,7 +147,7 @@ sub create_properties {
             # to create
             my $dbx_acc = $opts->{dbxref_accession_prefix}.$propname;
             my $dbxref =
-                $prop_db->search( 'dbxrefs',
+                $prop_db->search_related( 'dbxrefs',
                                           { accession => $dbx_acc },
                                           { order_by => { -desc => ['version'] } }
                                         )
@@ -195,10 +195,10 @@ sub create_properties {
             # find highest rank for props of this type
             my $max_rank= $self->search_related( $prop_relation_name,
                                                  { type_id =>$data->{type_id} }
-                                               )->rank->max;
+                                               )->get_column('rank')->max;
             $data->{rank} = defined $max_rank ? $max_rank + 1 : 0;
 
-	    $props{$propname} = $self->create_related( $args{prop_relation_name},
+	    $props{$propname} = $self->create_related( $prop_relation_name,
 						       $data
                                                      );
 	}
@@ -206,6 +206,9 @@ sub create_properties {
     return \%props;
 }
 
+###
+1;#
+###
 
 =head1 AUTHOR
 
