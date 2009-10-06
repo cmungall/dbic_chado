@@ -149,7 +149,7 @@ sub create_organismprops {
     $opts->{cv_name} = 'organism_property'
         unless defined $opts->{cv_name};
 
-    return Bio::Chado::Schema::Util->create_props
+    return Bio::Chado::Schema::Util->create_properties
         ( properties => $props,
           options    => $opts,
           row        => $self,

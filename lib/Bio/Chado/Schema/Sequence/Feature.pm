@@ -335,18 +335,16 @@ __PACKAGE__->many_to_many
 
 sub create_featureprops {
     my ($self, $props, $opts) = @_;
-
+    
     # process opts
     $opts->{cv_name} = 'feature_property'
         unless defined $opts->{cv_name};
-
-    return Bio::Chado::Schema::Util->create_props
+    return Bio::Chado::Schema::Util->create_properties
         ( properties => $props,
           options    => $opts,
           row        => $self,
           prop_relation_name => 'featureprops',
         );
-
 }
 
 =head2 search_featureprops
