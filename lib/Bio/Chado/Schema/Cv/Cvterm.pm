@@ -480,14 +480,7 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:fC9n/ZcO3hYpoWFiJdCgvA
 
-__PACKAGE__->has_many(
-  "featureprops",
-  "Chado::Schema::Sequence::Featureprop",
-  { "foreign.type_id" => "self.cvterm_id" },
-);
-
 use Carp;
-
 
 =head2 add_synonym
 
