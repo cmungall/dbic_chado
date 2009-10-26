@@ -11,7 +11,7 @@ my $build = Module::Build->new
      create_license => 1,
      meta_merge => {
                     resources => {
-                                  repository => 'http://github.com/rbuels/dbic_chado',
+                                  repository => 'http://github.com/rbuels/Bio-Chado-Schema',
                                  },
                    },
      requires => {
