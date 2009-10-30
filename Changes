@@ -1,3 +1,9 @@
+Bio-Schema-Chado (0.04100)
+
+  * added missing dependency on BioPerl
+
+ -- Robert Buels <rmb32@cornell.edu>  Fri, 30 Oct 2009 09:15:47 -0700
+
 Bio-Schema-Chado (0.04000)
 
   * added new modules and relationships for the newly released
