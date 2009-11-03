@@ -2,9 +2,9 @@ Bio-Schema-Chado (0.04200)
 
   * removed Util.pm, replaced with Util.pod for documentation, moved
     the actual Util methods into a separate package inside Schema.pm.
-    Thanks to Aure.
+    Thanks to Aure Bombarely.
 
- -- Robert Buels <rmb32@cornell.edu>  <DATESTAMP>
+ -- Robert Buels <rmb32@cornell.edu>  Tue, 03 Nov 2009 12:07:52 -0800
 
 Bio-Schema-Chado (0.04100)
 
