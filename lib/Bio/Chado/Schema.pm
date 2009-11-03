@@ -54,9 +54,9 @@ point is the L<DBIx::Class::Manual>.
 
 =head1 CONTRIBUTORS
 
-Robert Buels, <rmb32@cornell.edu>
+Aureliano Bombarely, <ab782@cornell.edu>
 
-Naama Menda, <naama.menda@gmail.com>
+Naama Menda, <nm249@cornell.edu>
 
 =head1 AUTHOR
 
