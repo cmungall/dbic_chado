@@ -1,3 +1,11 @@
+Bio-Schema-Chado (0.04200)
+
+  * removed Util.pm, replaced with Util.pod for documentation, moved
+    the actual Util methods into a separate package inside Schema.pm.
+    Thanks to Aure.
+
+ -- Robert Buels <rmb32@cornell.edu>  <DATESTAMP>
+
 Bio-Schema-Chado (0.04100)
 
   * added missing dependency on BioPerl
