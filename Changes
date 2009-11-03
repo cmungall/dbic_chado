@@ -1,3 +1,10 @@
+Bio-Schema-Chado (0.04300)
+
+  * Corrected a rather dirty CPAN upload, Util.pod file was in the
+    wrong place.
+
+ -- Robert Buels <rmb32@cornell.edu>  Tue, 03 Nov 2009 12:21:12 -0800
+
 Bio-Schema-Chado (0.04200)
 
   * removed Util.pm, replaced with Util.pod for documentation, moved
