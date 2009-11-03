@@ -21,7 +21,7 @@ __PACKAGE__->load_classes();
 # Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:IHy0lr/uwG8dgRR2sDOVoQ
 
-our $VERSION = '0.04200';
+our $VERSION = '0.04300';
 $VERSION = eval $VERSION;
 
 
