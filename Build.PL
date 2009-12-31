@@ -14,17 +14,22 @@ my $build = Module::Build->new
                                   repository => 'http://github.com/rbuels/Bio-Chado-Schema',
                                  },
                    },
-     requires => {
-                  'perl'          => '5.8.0',
+     build_requires =>
+     {
+      'Test::Exception' => '0.27',
+     },
+     requires =>
+     {
+      'perl'          => '5.8.0',
 
-                  # right now, we have to depend on whole bioperl, like this
-                  'Bio::Root::Version'   => '1.005002',
-                  # keep SPECIFIC bioperl dependencies here, for when bioperl
-                  # is in smaller, versioned chunks
-                  # 'Bio::PrimarySeq' => '1.5.2',
-                  'Carp'          => '1.08',
-                  'Carp::Clan'    => '6.00',
-                  'DBIx::Class'   => '0.08111',
-                 },
+      # right now, we have to depend on whole bioperl, like this
+      'Bio::Root::Version'   => '1.005002',
+      # keep SPECIFIC bioperl dependencies here, for when bioperl
+      # is in smaller, versioned chunks
+      # 'Bio::PrimarySeq' => '1.5.2',
+      'Carp'          => '1.08',
+      'Carp::Clan'    => '6.00',
+      'DBIx::Class'   => '0.08111',
+     },
     );
 $build->create_build_script;
