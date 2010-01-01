@@ -1,4 +1,4 @@
-package Bio::Chado::Schema::Composite::FLoc;
+package Bio::Chado::Schema::Sequence::IntronCombinedView;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
@@ -11,43 +11,40 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Composite::FLoc
+Bio::Chado::Schema::Sequence::IntronCombinedView
 
 =cut
 
-__PACKAGE__->table("f_loc");
+__PACKAGE__->table("intron_combined_view");
 
 =head1 ACCESSORS
 
-=head2 feature_id
+=head2 exon1_id
 
-=head2 name
+=head2 exon2_id
 
-=head2 dbxref_id
+=head2 fmin
 
-=head2 nbeg
-
-=head2 nend
+=head2 fmax
 
 =head2 strand
+
+=head2 srcfeature_id
+
+=head2 intron_rank
+
+=head2 transcript_id
 
 =cut
 
 __PACKAGE__->add_columns(
-  "feature_id",
+  "exon1_id",
   { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
-  "name",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 255,
-  },
-  "dbxref_id",
+  "exon2_id",
   { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
-  "nbeg",
+  "fmin",
   { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
-  "nend",
+  "fmax",
   { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
   "strand",
   {
@@ -56,11 +53,17 @@ __PACKAGE__->add_columns(
     is_nullable => 1,
     size => 2,
   },
+  "srcfeature_id",
+  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  "intron_rank",
+  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  "transcript_id",
+  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
 );
 
 
 # Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:CZLL/FVRefWk55w/L7kVDQ
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:sxJwVszLkksFHLa2q5fddA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

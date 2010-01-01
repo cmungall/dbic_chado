@@ -1,31 +1,21 @@
-##################################################
-##                                              ##
-## IMPORTANT NOTE about this file:              ##
-##                                              ##
-## This file containts two different packages   ##
-##   + Bio::Chado::Schema                       ##
-##   + Bio::Chado::Schema::Util                 ##
-##                                              ##
-##################################################
-
-
 package Bio::Chado::Schema;
+
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
 
 use strict;
 use warnings;
 
 use base 'DBIx::Class::Schema';
 
-__PACKAGE__->load_classes();
+__PACKAGE__->load_classes;
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:IHy0lr/uwG8dgRR2sDOVoQ
+
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:GfcGc0XJeU/0mXXXgJb7FQ
 
 our $VERSION = '0.04300';
 $VERSION = eval $VERSION;
-
-
-# You can replace this text with custom content, and it will be preserved on regeneration
 
 =head1 NAME
 

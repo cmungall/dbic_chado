@@ -1,12 +1,38 @@
 package Bio::Chado::Schema::Mage::AcquisitionRelationship;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Mage::AcquisitionRelationship - Multiple monochrome images may be merged to form a multi-color image. Red-green images of 2-channel hybridizations are an example of this.
+
+=cut
+
 __PACKAGE__->table("acquisition_relationship");
+
+=head1 ACCESSORS
+
+=head2 acquisition_relationship_id
+
+=head2 subject_id
+
+=head2 type_id
+
+=head2 object_id
+
+=head2 value
+
+=head2 rank
+
+=cut
+
 __PACKAGE__->add_columns(
   "acquisition_relationship_id",
   {
@@ -55,25 +81,57 @@ __PACKAGE__->add_unique_constraint(
   "acquisition_relationship_c1",
   ["subject_id", "object_id", "type_id", "rank"],
 );
+
+=head1 RELATIONS
+
+=head2 subject
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Mage::Acquisition>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "subject",
   "Bio::Chado::Schema::Mage::Acquisition",
   { acquisition_id => "subject_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 type
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Cv::Cvterm>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 object
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Mage::Acquisition>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "object",
   "Bio::Chado::Schema::Mage::Acquisition",
   { acquisition_id => "object_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:MLE0BvYSzmS+ksiQYqiu0A
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1z7yrjvmzLdT4GOsYAL+pA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

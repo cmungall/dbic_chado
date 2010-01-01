@@ -1,12 +1,32 @@
 package Bio::Chado::Schema::Sequence::FeaturepropPub;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Sequence::FeaturepropPub - Provenance. Any featureprop assignment can optionally be supported by a publication.
+
+=cut
+
 __PACKAGE__->table("featureprop_pub");
+
+=head1 ACCESSORS
+
+=head2 featureprop_pub_id
+
+=head2 featureprop_id
+
+=head2 pub_id
+
+=cut
+
 __PACKAGE__->add_columns(
   "featureprop_pub_id",
   {
@@ -35,16 +55,42 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("featureprop_pub_id");
 __PACKAGE__->add_unique_constraint("featureprop_pub_c1", ["featureprop_id", "pub_id"]);
+
+=head1 RELATIONS
+
+=head2 featureprop
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Sequence::Featureprop>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "featureprop",
   "Bio::Chado::Schema::Sequence::Featureprop",
   { featureprop_id => "featureprop_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
-__PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
+
+=head2 pub
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Pub::Pub>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "pub",
+  "Bio::Chado::Schema::Pub::Pub",
+  { pub_id => "pub_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:nQHsjgLZm4lh28jPko5nAw
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1aLQwQ6pvdSvcAcSjZmH9A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -1,12 +1,42 @@
 package Bio::Chado::Schema::Mage::Control;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Mage::Control
+
+=cut
+
 __PACKAGE__->table("control");
+
+=head1 ACCESSORS
+
+=head2 control_id
+
+=head2 type_id
+
+=head2 assay_id
+
+=head2 tableinfo_id
+
+=head2 row_id
+
+=head2 name
+
+=head2 value
+
+=head2 rank
+
+=cut
+
 __PACKAGE__->add_columns(
   "control_id",
   {
@@ -60,25 +90,57 @@ __PACKAGE__->add_columns(
   { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
 );
 __PACKAGE__->set_primary_key("control_id");
+
+=head1 RELATIONS
+
+=head2 tableinfo
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::General::Tableinfo>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "tableinfo",
   "Bio::Chado::Schema::General::Tableinfo",
   { tableinfo_id => "tableinfo_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 type
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Cv::Cvterm>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 assay
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Mage::Assay>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "assay",
   "Bio::Chado::Schema::Mage::Assay",
   { assay_id => "assay_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qba7F4C24bWk/4rKGFodkw
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7RyJmB/N5BIULHKElbFGaA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

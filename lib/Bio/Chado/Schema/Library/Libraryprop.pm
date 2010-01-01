@@ -1,12 +1,36 @@
 package Bio::Chado::Schema::Library::Libraryprop;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Library::Libraryprop
+
+=cut
+
 __PACKAGE__->table("libraryprop");
+
+=head1 ACCESSORS
+
+=head2 libraryprop_id
+
+=head2 library_id
+
+=head2 type_id
+
+=head2 value
+
+=head2 rank
+
+=cut
+
 __PACKAGE__->add_columns(
   "libraryprop_id",
   {
@@ -44,25 +68,57 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("libraryprop_id");
 __PACKAGE__->add_unique_constraint("libraryprop_c1", ["library_id", "type_id", "rank"]);
+
+=head1 RELATIONS
+
+=head2 type
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Cv::Cvterm>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 library
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Library::Library>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "library",
   "Bio::Chado::Schema::Library::Library",
   { library_id => "library_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 libraryprop_pubs
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Library::LibrarypropPub>
+
+=cut
+
 __PACKAGE__->has_many(
   "libraryprop_pubs",
   "Bio::Chado::Schema::Library::LibrarypropPub",
   { "foreign.libraryprop_id" => "self.libraryprop_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:I8spCvV0efQeH2MplnnN3Q
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4HfXWYy2rNp6P/SozbZ9+A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

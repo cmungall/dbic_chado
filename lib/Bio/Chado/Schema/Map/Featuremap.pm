@@ -1,12 +1,34 @@
 package Bio::Chado::Schema::Map::Featuremap;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Map::Featuremap
+
+=cut
+
 __PACKAGE__->table("featuremap");
+
+=head1 ACCESSORS
+
+=head2 featuremap_id
+
+=head2 name
+
+=head2 description
+
+=head2 unittype_id
+
+=cut
+
 __PACKAGE__->add_columns(
   "featuremap_id",
   {
@@ -41,31 +63,72 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("featuremap_id");
 __PACKAGE__->add_unique_constraint("featuremap_c1", ["name"]);
+
+=head1 RELATIONS
+
+=head2 unittype
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Cv::Cvterm>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "unittype",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "unittype_id" },
-  { join_type => "LEFT" },
+  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
 );
+
+=head2 featuremap_pubs
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Map::FeaturemapPub>
+
+=cut
+
 __PACKAGE__->has_many(
   "featuremap_pubs",
   "Bio::Chado::Schema::Map::FeaturemapPub",
   { "foreign.featuremap_id" => "self.featuremap_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 featurepo
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Map::Featurepos>
+
+=cut
+
 __PACKAGE__->has_many(
   "featurepo",
   "Bio::Chado::Schema::Map::Featurepos",
   { "foreign.featuremap_id" => "self.featuremap_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 featureranges
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Map::Featurerange>
+
+=cut
+
 __PACKAGE__->has_many(
   "featureranges",
   "Bio::Chado::Schema::Map::Featurerange",
   { "foreign.featuremap_id" => "self.featuremap_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:RgRKyrJrzuRh22huusSSHg
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:m6a+F419VFIAx3WiJcmqxA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

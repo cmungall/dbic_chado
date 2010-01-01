@@ -1,12 +1,32 @@
 package Bio::Chado::Schema::Mage::AssayProject;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Mage::AssayProject - Link assays to projects.
+
+=cut
+
 __PACKAGE__->table("assay_project");
+
+=head1 ACCESSORS
+
+=head2 assay_project_id
+
+=head2 assay_id
+
+=head2 project_id
+
+=cut
+
 __PACKAGE__->add_columns(
   "assay_project_id",
   {
@@ -35,20 +55,42 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("assay_project_id");
 __PACKAGE__->add_unique_constraint("assay_project_c1", ["assay_id", "project_id"]);
+
+=head1 RELATIONS
+
+=head2 project
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::General::Project>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "project",
   "Bio::Chado::Schema::General::Project",
   { project_id => "project_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 assay
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Mage::Assay>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "assay",
   "Bio::Chado::Schema::Mage::Assay",
   { assay_id => "assay_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YuBfH7HEsmrLww3JjEjJ8w
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Z+7V0peHKfV5ReynO5mjFw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -1,12 +1,32 @@
 package Bio::Chado::Schema::Expression::ExpressionPub;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Expression::ExpressionPub
+
+=cut
+
 __PACKAGE__->table("expression_pub");
+
+=head1 ACCESSORS
+
+=head2 expression_pub_id
+
+=head2 expression_id
+
+=head2 pub_id
+
+=cut
+
 __PACKAGE__->add_columns(
   "expression_pub_id",
   {
@@ -35,16 +55,42 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("expression_pub_id");
 __PACKAGE__->add_unique_constraint("expression_pub_c1", ["expression_id", "pub_id"]);
-__PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
+
+=head1 RELATIONS
+
+=head2 pub
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Pub::Pub>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "pub",
+  "Bio::Chado::Schema::Pub::Pub",
+  { pub_id => "pub_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 expression
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Expression::Expression>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "expression",
   "Bio::Chado::Schema::Expression::Expression",
   { expression_id => "expression_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Ksu0fTWH9d01OilmhMZ0Zg
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:P8ivNloafiiHyMzh4iEEAg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

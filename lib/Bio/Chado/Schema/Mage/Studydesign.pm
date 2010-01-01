@@ -1,12 +1,32 @@
 package Bio::Chado::Schema::Mage::Studydesign;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Mage::Studydesign
+
+=cut
+
 __PACKAGE__->table("studydesign");
+
+=head1 ACCESSORS
+
+=head2 studydesign_id
+
+=head2 study_id
+
+=head2 description
+
+=cut
+
 __PACKAGE__->add_columns(
   "studydesign_id",
   {
@@ -33,25 +53,57 @@ __PACKAGE__->add_columns(
   },
 );
 __PACKAGE__->set_primary_key("studydesign_id");
+
+=head1 RELATIONS
+
+=head2 study
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Mage::Study>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "study",
   "Bio::Chado::Schema::Mage::Study",
   { study_id => "study_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 studydesignprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Studydesignprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "studydesignprops",
   "Bio::Chado::Schema::Mage::Studydesignprop",
   { "foreign.studydesign_id" => "self.studydesign_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 studyfactors
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Studyfactor>
+
+=cut
+
 __PACKAGE__->has_many(
   "studyfactors",
   "Bio::Chado::Schema::Mage::Studyfactor",
   { "foreign.studydesign_id" => "self.studydesign_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/DbUXPaWcgzb83C20aCokg
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/LfYbl+tE9o0f9D5bbYV9A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

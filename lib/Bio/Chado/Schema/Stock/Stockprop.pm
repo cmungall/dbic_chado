@@ -1,12 +1,40 @@
 package Bio::Chado::Schema::Stock::Stockprop;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Stock::Stockprop - A stock can have any number of
+slot-value property tags attached to it. This is an alternative to
+hardcoding a list of columns in the relational schema, and is
+completely extensible. There is a unique constraint, stockprop_c1, for
+the combination of stock_id, rank, and type_id. Multivalued property-value pairs must be differentiated by rank.
+
+=cut
+
 __PACKAGE__->table("stockprop");
+
+=head1 ACCESSORS
+
+=head2 stockprop_id
+
+=head2 stock_id
+
+=head2 type_id
+
+=head2 value
+
+=head2 rank
+
+=cut
+
 __PACKAGE__->add_columns(
   "stockprop_id",
   {
@@ -44,25 +72,57 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("stockprop_id");
 __PACKAGE__->add_unique_constraint("stockprop_c1", ["stock_id", "type_id", "rank"]);
+
+=head1 RELATIONS
+
+=head2 stock
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Stock::Stock>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "stock",
   "Bio::Chado::Schema::Stock::Stock",
   { stock_id => "stock_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 type
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Cv::Cvterm>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 stockprop_pubs
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Stock::StockpropPub>
+
+=cut
+
 __PACKAGE__->has_many(
   "stockprop_pubs",
   "Bio::Chado::Schema::Stock::StockpropPub",
   { "foreign.stockprop_id" => "self.stockprop_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ReE58KMxUUJbssemzPdi3g
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FDcaDwa90HDqZyp3kBLvBw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

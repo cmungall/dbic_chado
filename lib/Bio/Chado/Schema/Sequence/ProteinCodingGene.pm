@@ -1,4 +1,4 @@
-package Bio::Chado::Schema::Composite::FType;
+package Bio::Chado::Schema::Sequence::ProteinCodingGene;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
@@ -11,21 +11,23 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Composite::FType
+Bio::Chado::Schema::Sequence::ProteinCodingGene
 
 =cut
 
-__PACKAGE__->table("f_type");
+__PACKAGE__->table("protein_coding_gene");
 
 =head1 ACCESSORS
 
 =head2 feature_id
 
-=head2 name
-
 =head2 dbxref_id
 
-=head2 type
+=head2 organism_id
+
+=head2 name
+
+=head2 uniquename
 
 =head2 residues
 
@@ -34,6 +36,10 @@ __PACKAGE__->table("f_type");
 =head2 md5checksum
 
 =head2 type_id
+
+=head2 is_analysis
+
+=head2 is_obsolete
 
 =head2 timeaccessioned
 
@@ -44,6 +50,10 @@ __PACKAGE__->table("f_type");
 __PACKAGE__->add_columns(
   "feature_id",
   { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  "dbxref_id",
+  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  "organism_id",
+  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
   "name",
   {
     data_type => "character varying",
@@ -51,14 +61,12 @@ __PACKAGE__->add_columns(
     is_nullable => 1,
     size => 255,
   },
-  "dbxref_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
-  "type",
+  "uniquename",
   {
-    data_type => "character varying",
+    data_type => "text",
     default_value => undef,
     is_nullable => 1,
-    size => 1024,
+    size => undef,
   },
   "residues",
   {
@@ -78,6 +86,10 @@ __PACKAGE__->add_columns(
   },
   "type_id",
   { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  "is_analysis",
+  { data_type => "boolean", default_value => undef, is_nullable => 1, size => 1 },
+  "is_obsolete",
+  { data_type => "boolean", default_value => undef, is_nullable => 1, size => 1 },
   "timeaccessioned",
   {
     data_type => "timestamp without time zone",
@@ -96,7 +108,7 @@ __PACKAGE__->add_columns(
 
 
 # Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:amqjUxnXaEulSH8BrJsWdw
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:BtWmZLz20GY6xW3kbeuDEQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

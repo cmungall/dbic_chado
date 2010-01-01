@@ -1,12 +1,48 @@
 package Bio::Chado::Schema::Mage::Assay;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Mage::Assay - An assay consists of a physical instance of
+an array, combined with the conditions used to create the array
+(protocols, technician information). The assay can be thought of as a hybridization.
+
+=cut
+
 __PACKAGE__->table("assay");
+
+=head1 ACCESSORS
+
+=head2 assay_id
+
+=head2 arraydesign_id
+
+=head2 protocol_id
+
+=head2 assaydate
+
+=head2 arrayidentifier
+
+=head2 arraybatchidentifier
+
+=head2 operator_id
+
+=head2 dbxref_id
+
+=head2 name
+
+=head2 description
+
+=cut
+
 __PACKAGE__->add_columns(
   "assay_id",
   {
@@ -86,67 +122,177 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("assay_id");
 __PACKAGE__->add_unique_constraint("assay_c1", ["name"]);
+
+=head1 RELATIONS
+
+=head2 acquisitions
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Acquisition>
+
+=cut
+
 __PACKAGE__->has_many(
   "acquisitions",
   "Bio::Chado::Schema::Mage::Acquisition",
   { "foreign.assay_id" => "self.assay_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 dbxref
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::General::Dbxref>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "dbxref",
   "Bio::Chado::Schema::General::Dbxref",
   { dbxref_id => "dbxref_id" },
-  { join_type => "LEFT" },
+  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
 );
+
+=head2 operator
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Contact::Contact>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "operator",
   "Bio::Chado::Schema::Contact::Contact",
   { contact_id => "operator_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 protocol
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Mage::Protocol>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "protocol",
   "Bio::Chado::Schema::Mage::Protocol",
   { protocol_id => "protocol_id" },
-  { join_type => "LEFT" },
+  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
 );
+
+=head2 arraydesign
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Mage::Arraydesign>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "arraydesign",
   "Bio::Chado::Schema::Mage::Arraydesign",
   { arraydesign_id => "arraydesign_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 assay_biomaterials
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::AssayBiomaterial>
+
+=cut
+
 __PACKAGE__->has_many(
   "assay_biomaterials",
   "Bio::Chado::Schema::Mage::AssayBiomaterial",
   { "foreign.assay_id" => "self.assay_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 assay_projects
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::AssayProject>
+
+=cut
+
 __PACKAGE__->has_many(
   "assay_projects",
   "Bio::Chado::Schema::Mage::AssayProject",
   { "foreign.assay_id" => "self.assay_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 assayprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Assayprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "assayprops",
   "Bio::Chado::Schema::Mage::Assayprop",
   { "foreign.assay_id" => "self.assay_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 controls
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Control>
+
+=cut
+
 __PACKAGE__->has_many(
   "controls",
   "Bio::Chado::Schema::Mage::Control",
   { "foreign.assay_id" => "self.assay_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 study_assays
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::StudyAssay>
+
+=cut
+
 __PACKAGE__->has_many(
   "study_assays",
   "Bio::Chado::Schema::Mage::StudyAssay",
   { "foreign.assay_id" => "self.assay_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 studyfactorvalues
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Studyfactorvalue>
+
+=cut
+
 __PACKAGE__->has_many(
   "studyfactorvalues",
   "Bio::Chado::Schema::Mage::Studyfactorvalue",
   { "foreign.assay_id" => "self.assay_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VXaGSpK+HqyIaz4lUchp4w
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:r45oFCJ6biXNSHi4HDMsbg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

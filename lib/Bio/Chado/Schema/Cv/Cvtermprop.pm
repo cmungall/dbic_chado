@@ -1,12 +1,46 @@
 package Bio::Chado::Schema::Cv::Cvtermprop;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Cv::Cvtermprop - Additional extensible properties can be attached to a cvterm using this table. Corresponds to -AnnotationProperty- in W3C OWL format.
+
+=cut
+
 __PACKAGE__->table("cvtermprop");
+
+=head1 ACCESSORS
+
+=head2 cvtermprop_id
+
+=head2 cvterm_id
+
+=head2 type_id
+
+The name of the property or slot is a cvterm. The meaning of the property is defined in that cvterm.
+
+=head2 value
+
+The value of the property, represented as text. Numeric values are converted to their text representation.
+
+=head2 rank
+
+Property-Value ordering. Any
+cvterm can have multiple values for any particular property type -
+these are ordered in a list using rank, counting from zero. For
+properties that are single-valued rather than multi-valued, the
+default 0 value should be used.
+
+=cut
+
 __PACKAGE__->add_columns(
   "cvtermprop_id",
   {
@@ -47,20 +81,42 @@ __PACKAGE__->add_unique_constraint(
   "cvtermprop_cvterm_id_key",
   ["cvterm_id", "type_id", "value", "rank"],
 );
+
+=head1 RELATIONS
+
+=head2 type
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Cv::Cvterm>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 cvterm
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Cv::Cvterm>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "cvterm",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:QWHRhyJV24vNY/Ky84OIIg
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WK0x1uj0UbVhJOWY9AIppA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

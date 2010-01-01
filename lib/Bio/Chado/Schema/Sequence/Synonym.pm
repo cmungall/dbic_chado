@@ -1,12 +1,40 @@
 package Bio::Chado::Schema::Sequence::Synonym;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Sequence::Synonym - A synonym for a feature. One feature can have multiple synonyms, and the same synonym can apply to multiple features.
+
+=cut
+
 __PACKAGE__->table("synonym");
+
+=head1 ACCESSORS
+
+=head2 synonym_id
+
+=head2 name
+
+The synonym itself. Should be human-readable machine-searchable ascii text.
+
+=head2 type_id
+
+Types would be symbol and fullname for now.
+
+=head2 synonym_sgml
+
+The fully specified synonym, with any non-ascii characters encoded in SGML.
+
+=cut
+
 __PACKAGE__->add_columns(
   "synonym_id",
   {
@@ -41,30 +69,72 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("synonym_id");
 __PACKAGE__->add_unique_constraint("synonym_c1", ["name", "type_id"]);
+
+=head1 RELATIONS
+
+=head2 cell_line_synonyms
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::CellLine::CellLineSynonym>
+
+=cut
+
 __PACKAGE__->has_many(
   "cell_line_synonyms",
   "Bio::Chado::Schema::CellLine::CellLineSynonym",
   { "foreign.synonym_id" => "self.synonym_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 feature_synonyms
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Sequence::FeatureSynonym>
+
+=cut
+
 __PACKAGE__->has_many(
   "feature_synonyms",
   "Bio::Chado::Schema::Sequence::FeatureSynonym",
   { "foreign.synonym_id" => "self.synonym_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 library_synonyms
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Library::LibrarySynonym>
+
+=cut
+
 __PACKAGE__->has_many(
   "library_synonyms",
   "Bio::Chado::Schema::Library::LibrarySynonym",
   { "foreign.synonym_id" => "self.synonym_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 type
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Cv::Cvterm>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:HGaoVBqODK4g0glPKU0ebw
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:9LERxxq/JFT9riBw00COqA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

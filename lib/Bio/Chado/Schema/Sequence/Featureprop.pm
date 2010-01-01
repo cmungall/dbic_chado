@@ -1,12 +1,50 @@
 package Bio::Chado::Schema::Sequence::Featureprop;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Sequence::Featureprop - A feature can have any number of slot-value property tags attached to it. This is an alternative to hardcoding a list of columns in the relational schema, and is completely extensible.
+
+=cut
+
 __PACKAGE__->table("featureprop");
+
+=head1 ACCESSORS
+
+=head2 featureprop_id
+
+=head2 feature_id
+
+=head2 type_id
+
+The name of the
+property/slot is a cvterm. The meaning of the property is defined in
+that cvterm. Certain property types will only apply to certain feature
+types (e.g. the anticodon property will only apply to tRNA features) ;
+the types here come from the sequence feature property ontology.
+
+=head2 value
+
+The value of the property, represented as text. Numeric values are converted to their text representation. This is less efficient than using native database types, but is easier to query.
+
+=head2 rank
+
+Property-Value ordering. Any
+feature can have multiple values for any particular property type -
+these are ordered in a list using rank, counting from zero. For
+properties that are single-valued rather than multi-valued, the
+default 0 value should be used
+
+=cut
+
 __PACKAGE__->add_columns(
   "featureprop_id",
   {
@@ -44,25 +82,57 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("featureprop_id");
 __PACKAGE__->add_unique_constraint("featureprop_c1", ["feature_id", "type_id", "rank"]);
+
+=head1 RELATIONS
+
+=head2 feature
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Sequence::Feature>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "feature",
   "Bio::Chado::Schema::Sequence::Feature",
   { feature_id => "feature_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 type
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Cv::Cvterm>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 featureprop_pubs
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Sequence::FeaturepropPub>
+
+=cut
+
 __PACKAGE__->has_many(
   "featureprop_pubs",
   "Bio::Chado::Schema::Sequence::FeaturepropPub",
   { "foreign.featureprop_id" => "self.featureprop_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Vt8jH48uCCB3GXidD+LZYQ
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Tw3WtZTOf6gk9u92hrKshQ
 
 =head1 ADDITIONAL RELATIONSHIPS
 

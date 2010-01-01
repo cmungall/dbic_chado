@@ -1,12 +1,30 @@
 package Bio::Chado::Schema::General::DbDbxrefCount;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::General::DbDbxrefCount - per-db dbxref counts
+
+=cut
+
 __PACKAGE__->table("db_dbxref_count");
+
+=head1 ACCESSORS
+
+=head2 name
+
+=head2 num_dbxrefs
+
+=cut
+
 __PACKAGE__->add_columns(
   "name",
   {
@@ -20,8 +38,8 @@ __PACKAGE__->add_columns(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:M/PIf3tVD7W19kT6xQ9zIg
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dimsMO4ImbK+kGWX3KuYRA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

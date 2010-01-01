@@ -1,12 +1,41 @@
 package Bio::Chado::Schema::Cv::CommonDescendantCvterm;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Cv::CommonDescendantCvterm - The common descendant of
+any two terms is the intersection of both terms descendants. Two terms
+can have multiple common descendants. Use total_pathdistance to get
+the least common ancestor
+
+=cut
+
 __PACKAGE__->table("common_descendant_cvterm");
+
+=head1 ACCESSORS
+
+=head2 cvterm1_id
+
+=head2 cvterm2_id
+
+=head2 ancestor_cvterm_id
+
+=head2 pathdistance1
+
+=head2 pathdistance2
+
+=head2 total_pathdistance
+
+=cut
+
 __PACKAGE__->add_columns(
   "cvterm1_id",
   { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
@@ -23,8 +52,8 @@ __PACKAGE__->add_columns(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8p31vQYPFC3V+PByIhlOIw
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:363nkzrrUBQX7yt/Ko1Z8w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -1,12 +1,36 @@
 package Bio::Chado::Schema::Mage::Quantificationprop;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Mage::Quantificationprop - Extra quantification properties that are not accounted for in quantification.
+
+=cut
+
 __PACKAGE__->table("quantificationprop");
+
+=head1 ACCESSORS
+
+=head2 quantificationprop_id
+
+=head2 quantification_id
+
+=head2 type_id
+
+=head2 value
+
+=head2 rank
+
+=cut
+
 __PACKAGE__->add_columns(
   "quantificationprop_id",
   {
@@ -47,20 +71,42 @@ __PACKAGE__->add_unique_constraint(
   "quantificationprop_c1",
   ["quantification_id", "type_id", "rank"],
 );
+
+=head1 RELATIONS
+
+=head2 type
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Cv::Cvterm>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 quantification
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Mage::Quantification>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "quantification",
   "Bio::Chado::Schema::Mage::Quantification",
   { quantification_id => "quantification_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dDSo0XeFKprbRSZhEJR01A
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ja5uwZY+TOj/1edXIDnuUw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

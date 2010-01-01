@@ -1,12 +1,38 @@
 package Bio::Chado::Schema::Expression::Eimage;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Expression::Eimage
+
+=cut
+
 __PACKAGE__->table("eimage");
+
+=head1 ACCESSORS
+
+=head2 eimage_id
+
+=head2 eimage_data
+
+We expect images in eimage_data (e.g. JPEGs) to be uuencoded.
+
+=head2 eimage_type
+
+Describes the type of data in eimage_data.
+
+=head2 image_uri
+
+=cut
+
 __PACKAGE__->add_columns(
   "eimage_id",
   {
@@ -39,15 +65,27 @@ __PACKAGE__->add_columns(
   },
 );
 __PACKAGE__->set_primary_key("eimage_id");
+
+=head1 RELATIONS
+
+=head2 expression_images
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Expression::ExpressionImage>
+
+=cut
+
 __PACKAGE__->has_many(
   "expression_images",
   "Bio::Chado::Schema::Expression::ExpressionImage",
   { "foreign.eimage_id" => "self.eimage_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/tGpQMyUVCHZ22prCfgrHg
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:X4B1BAS+dqMCL2ETPpQHAg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

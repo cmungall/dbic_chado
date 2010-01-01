@@ -1,12 +1,30 @@
 package Bio::Chado::Schema::Sequence::TypeFeatureCount;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Sequence::TypeFeatureCount - per-feature-type feature counts
+
+=cut
+
 __PACKAGE__->table("type_feature_count");
+
+=head1 ACCESSORS
+
+=head2 type
+
+=head2 num_features
+
+=cut
+
 __PACKAGE__->add_columns(
   "type",
   {
@@ -20,8 +38,8 @@ __PACKAGE__->add_columns(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JlzVR7jwbWKY2TdY5rKbqw
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:bEpnhFk/zhbxzH8EV/sthw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

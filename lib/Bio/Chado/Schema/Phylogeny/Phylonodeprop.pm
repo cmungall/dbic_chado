@@ -1,12 +1,38 @@
 package Bio::Chado::Schema::Phylogeny::Phylonodeprop;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Phylogeny::Phylonodeprop
+
+=cut
+
 __PACKAGE__->table("phylonodeprop");
+
+=head1 ACCESSORS
+
+=head2 phylonodeprop_id
+
+=head2 phylonode_id
+
+=head2 type_id
+
+type_id could designate phylonode hierarchy relationships, for example: species taxonomy (kingdom, order, family, genus, species), "ortholog/paralog", "fold/superfold", etc.
+
+=head2 value
+
+=head2 rank
+
+=cut
+
 __PACKAGE__->add_columns(
   "phylonodeprop_id",
   {
@@ -47,20 +73,42 @@ __PACKAGE__->add_unique_constraint(
   "phylonodeprop_phylonode_id_key",
   ["phylonode_id", "type_id", "value", "rank"],
 );
+
+=head1 RELATIONS
+
+=head2 phylonode
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Phylogeny::Phylonode>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "phylonode",
   "Bio::Chado::Schema::Phylogeny::Phylonode",
   { phylonode_id => "phylonode_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 type
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Cv::Cvterm>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VCn+FcZxfaRsrlVLMUI4Wg
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ar9/yg9szfib8YZL3fnFdw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

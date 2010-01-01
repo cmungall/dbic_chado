@@ -1,4 +1,4 @@
-package Bio::Chado::Schema::Mage::Biomaterialprop;
+package Bio::Chado::Schema::Companalysis::Analysisfeatureprop;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
@@ -11,17 +11,17 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Mage::Biomaterialprop - Extra biomaterial properties that are not accounted for in biomaterial.
+Bio::Chado::Schema::Companalysis::Analysisfeatureprop
 
 =cut
 
-__PACKAGE__->table("biomaterialprop");
+__PACKAGE__->table("analysisfeatureprop");
 
 =head1 ACCESSORS
 
-=head2 biomaterialprop_id
+=head2 analysisfeatureprop_id
 
-=head2 biomaterial_id
+=head2 analysisfeature_id
 
 =head2 type_id
 
@@ -32,15 +32,15 @@ __PACKAGE__->table("biomaterialprop");
 =cut
 
 __PACKAGE__->add_columns(
-  "biomaterialprop_id",
+  "analysisfeatureprop_id",
   {
     data_type => "integer",
-    default_value => "nextval('biomaterialprop_biomaterialprop_id_seq'::regclass)",
+    default_value => "nextval('analysisfeatureprop_analysisfeatureprop_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable => 0,
     size => 4,
   },
-  "biomaterial_id",
+  "analysisfeature_id",
   {
     data_type => "integer",
     default_value => undef,
@@ -64,27 +64,15 @@ __PACKAGE__->add_columns(
     size => undef,
   },
   "rank",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
 );
-__PACKAGE__->set_primary_key("biomaterialprop_id");
-__PACKAGE__->add_unique_constraint("biomaterialprop_c1", ["biomaterial_id", "type_id", "rank"]);
+__PACKAGE__->set_primary_key("analysisfeatureprop_id");
+__PACKAGE__->add_unique_constraint(
+  "analysisfeature_id_type_id_rank",
+  ["analysisfeature_id", "type_id", "rank"],
+);
 
 =head1 RELATIONS
-
-=head2 biomaterial
-
-Type: belongs_to
-
-Related object: L<Bio::Chado::Schema::Mage::Biomaterial>
-
-=cut
-
-__PACKAGE__->belongs_to(
-  "biomaterial",
-  "Bio::Chado::Schema::Mage::Biomaterial",
-  { biomaterial_id => "biomaterial_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
 
 =head2 type
 
@@ -101,9 +89,24 @@ __PACKAGE__->belongs_to(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 analysisfeature
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Companalysis::Analysisfeature>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "analysisfeature",
+  "Bio::Chado::Schema::Companalysis::Analysisfeature",
+  { analysisfeature_id => "analysisfeature_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 
 # Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jTVEO5+04NiJVD0NGmksFQ
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rXuQp1PfD0teMWNW06Mblg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

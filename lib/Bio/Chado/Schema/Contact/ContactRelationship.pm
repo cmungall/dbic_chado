@@ -1,12 +1,40 @@
 package Bio::Chado::Schema::Contact::ContactRelationship;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Contact::ContactRelationship - Model relationships between contacts
+
+=cut
+
 __PACKAGE__->table("contact_relationship");
+
+=head1 ACCESSORS
+
+=head2 contact_relationship_id
+
+=head2 type_id
+
+Relationship type between subject and object. This is a cvterm, typically from the OBO relationship ontology, although other relationship types are allowed.
+
+=head2 subject_id
+
+The subject of the subj-predicate-obj sentence. In a DAG, this corresponds to the child node.
+
+=head2 object_id
+
+The object of the subj-predicate-obj sentence. In a DAG, this corresponds to the parent node.
+
+=cut
+
 __PACKAGE__->add_columns(
   "contact_relationship_id",
   {
@@ -46,25 +74,57 @@ __PACKAGE__->add_unique_constraint(
   "contact_relationship_c1",
   ["subject_id", "object_id", "type_id"],
 );
+
+=head1 RELATIONS
+
+=head2 type
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Cv::Cvterm>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 object
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Contact::Contact>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "object",
   "Bio::Chado::Schema::Contact::Contact",
   { contact_id => "object_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 subject
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Contact::Contact>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "subject",
   "Bio::Chado::Schema::Contact::Contact",
   { contact_id => "subject_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:MgrSW7hG0QNdtbJ54/UA/Q
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/RNbsmfcVkzFbEplHZcy3Q
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

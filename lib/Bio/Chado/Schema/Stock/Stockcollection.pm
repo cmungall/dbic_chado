@@ -1,12 +1,44 @@
 package Bio::Chado::Schema::Stock::Stockcollection;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Stock::Stockcollection - The lab or stock center distributing the stocks in their collection.
+
+=cut
+
 __PACKAGE__->table("stockcollection");
+
+=head1 ACCESSORS
+
+=head2 stockcollection_id
+
+=head2 type_id
+
+type_id is the collection type cv.
+
+=head2 contact_id
+
+contact_id links to the contact information for the collection.
+
+=head2 name
+
+name is the collection.
+
+=head2 uniquename
+
+uniqename is the value of the collection cv.
+
+=cut
+
 __PACKAGE__->add_columns(
   "stockcollection_id",
   {
@@ -49,31 +81,72 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("stockcollection_id");
 __PACKAGE__->add_unique_constraint("stockcollection_c1", ["uniquename", "type_id"]);
+
+=head1 RELATIONS
+
+=head2 type
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Cv::Cvterm>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 contact
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Contact::Contact>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "contact",
   "Bio::Chado::Schema::Contact::Contact",
   { contact_id => "contact_id" },
-  { join_type => "LEFT" },
+  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
 );
+
+=head2 stockcollectionprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Stock::Stockcollectionprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "stockcollectionprops",
   "Bio::Chado::Schema::Stock::Stockcollectionprop",
   { "foreign.stockcollection_id" => "self.stockcollection_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 stockcollection_stocks
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Stock::StockcollectionStock>
+
+=cut
+
 __PACKAGE__->has_many(
   "stockcollection_stocks",
   "Bio::Chado::Schema::Stock::StockcollectionStock",
   { "foreign.stockcollection_id" => "self.stockcollection_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4Yg3B8CKYNuUW3xsoeVenQ
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tbd+EFBQsTZVMc3c3Wp5mQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -1,12 +1,36 @@
 package Bio::Chado::Schema::Companalysis::Analysisprop;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Companalysis::Analysisprop
+
+=cut
+
 __PACKAGE__->table("analysisprop");
+
+=head1 ACCESSORS
+
+=head2 analysisprop_id
+
+=head2 analysis_id
+
+=head2 type_id
+
+=head2 value
+
+=head2 rank
+
+=cut
+
 __PACKAGE__->add_columns(
   "analysisprop_id",
   {
@@ -39,23 +63,47 @@ __PACKAGE__->add_columns(
     is_nullable => 1,
     size => undef,
   },
+  "rank",
+  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
 );
 __PACKAGE__->set_primary_key("analysisprop_id");
-__PACKAGE__->add_unique_constraint("analysisprop_c1", ["analysis_id", "type_id", "value"]);
+__PACKAGE__->add_unique_constraint("analysisprop_c1", ["analysis_id", "type_id", "rank"]);
+
+=head1 RELATIONS
+
+=head2 type
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Cv::Cvterm>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 analysis
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Companalysis::Analysis>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "analysis",
   "Bio::Chado::Schema::Companalysis::Analysis",
   { analysis_id => "analysis_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+/mSi6XD6TgAwDhDTneXVw
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xe/Xz+bQvH7j5krkbiYLjQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

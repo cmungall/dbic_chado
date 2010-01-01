@@ -1,12 +1,32 @@
 package Bio::Chado::Schema::Phenotype::FeaturePhenotype;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Phenotype::FeaturePhenotype
+
+=cut
+
 __PACKAGE__->table("feature_phenotype");
+
+=head1 ACCESSORS
+
+=head2 feature_phenotype_id
+
+=head2 feature_id
+
+=head2 phenotype_id
+
+=cut
+
 __PACKAGE__->add_columns(
   "feature_phenotype_id",
   {
@@ -35,20 +55,42 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("feature_phenotype_id");
 __PACKAGE__->add_unique_constraint("feature_phenotype_c1", ["feature_id", "phenotype_id"]);
+
+=head1 RELATIONS
+
+=head2 phenotype
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Phenotype::Phenotype>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "phenotype",
   "Bio::Chado::Schema::Phenotype::Phenotype",
   { phenotype_id => "phenotype_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 feature
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Sequence::Feature>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "feature",
   "Bio::Chado::Schema::Sequence::Feature",
   { feature_id => "feature_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jLpBT6SE53oqUAn2eNGEwQ
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+tT3Rrjh5uiQWfKZO1MwRg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

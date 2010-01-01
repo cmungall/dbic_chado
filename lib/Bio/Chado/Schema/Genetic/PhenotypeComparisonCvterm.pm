@@ -1,12 +1,36 @@
 package Bio::Chado::Schema::Genetic::PhenotypeComparisonCvterm;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Genetic::PhenotypeComparisonCvterm
+
+=cut
+
 __PACKAGE__->table("phenotype_comparison_cvterm");
+
+=head1 ACCESSORS
+
+=head2 phenotype_comparison_cvterm_id
+
+=head2 phenotype_comparison_id
+
+=head2 cvterm_id
+
+=head2 pub_id
+
+=head2 rank
+
+=cut
+
 __PACKAGE__->add_columns(
   "phenotype_comparison_cvterm_id",
   {
@@ -48,21 +72,57 @@ __PACKAGE__->add_unique_constraint(
   "phenotype_comparison_cvterm_c1",
   ["phenotype_comparison_id", "cvterm_id"],
 );
+
+=head1 RELATIONS
+
+=head2 phenotype_comparison
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Genetic::PhenotypeComparison>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "phenotype_comparison",
   "Bio::Chado::Schema::Genetic::PhenotypeComparison",
   { "phenotype_comparison_id" => "phenotype_comparison_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
-__PACKAGE__->belongs_to("pub", "Bio::Chado::Schema::Pub::Pub", { pub_id => "pub_id" });
+
+=head2 pub
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Pub::Pub>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "pub",
+  "Bio::Chado::Schema::Pub::Pub",
+  { pub_id => "pub_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 cvterm
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Cv::Cvterm>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "cvterm",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NuzxiiLMEKTtYg2aNdXg+w
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:uq0OZWJvgJZLvWgdAXHRUg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

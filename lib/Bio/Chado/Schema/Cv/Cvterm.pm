@@ -1,12 +1,67 @@
 package Bio::Chado::Schema::Cv::Cvterm;
 
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
+
 use strict;
 use warnings;
 
-use base 'DBIx::Class';
+use base 'DBIx::Class::Core';
 
-__PACKAGE__->load_components("Core");
+
+=head1 NAME
+
+Bio::Chado::Schema::Cv::Cvterm - A term, class, universal or type within an
+ontology or controlled vocabulary.  This table is also used for
+relations and properties. cvterms constitute nodes in the graph
+defined by the collection of cvterms and cvterm_relationships.
+
+=cut
+
 __PACKAGE__->table("cvterm");
+
+=head1 ACCESSORS
+
+=head2 cvterm_id
+
+=head2 cv_id
+
+The cv or ontology or namespace to which
+this cvterm belongs.
+
+=head2 name
+
+A concise human-readable name or
+label for the cvterm. Uniquely identifies a cvterm within a cv.
+
+=head2 definition
+
+A human-readable text
+definition.
+
+=head2 dbxref_id
+
+Primary identifier dbxref - The
+unique global OBO identifier for this cvterm.  Note that a cvterm may
+have multiple secondary dbxrefs - see also table: cvterm_dbxref.
+
+=head2 is_obsolete
+
+Boolean 0=false,1=true; see
+GO documentation for details of obsoletion. Note that two terms with
+different primary dbxrefs may exist if one is obsolete.
+
+=head2 is_relationshiptype
+
+Boolean
+0=false,1=true relations or relationship types (also known as Typedefs
+in OBO format, or as properties or slots) form a cv/ontology in
+themselves. We use this flag to indicate whether this cvterm is an
+actual term/class/universal or a relation. Relations may be drawn from
+the OBO Relations ontology, but are not exclusively drawn from there.
+
+=cut
+
 __PACKAGE__->add_columns(
   "cvterm_id",
   {
@@ -54,431 +109,1302 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("cvterm_id");
 __PACKAGE__->add_unique_constraint("cvterm_c2", ["dbxref_id"]);
 __PACKAGE__->add_unique_constraint("cvterm_c1", ["name", "cv_id", "is_obsolete"]);
+
+=head1 RELATIONS
+
+=head2 acquisitionprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Acquisitionprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "acquisitionprops",
   "Bio::Chado::Schema::Mage::Acquisitionprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 acquisition_relationships
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::AcquisitionRelationship>
+
+=cut
+
 __PACKAGE__->has_many(
   "acquisition_relationships",
   "Bio::Chado::Schema::Mage::AcquisitionRelationship",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 analysisfeatureprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Companalysis::Analysisfeatureprop>
+
+=cut
+
+__PACKAGE__->has_many(
+  "analysisfeatureprops",
+  "Bio::Chado::Schema::Companalysis::Analysisfeatureprop",
+  { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 analysisprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Companalysis::Analysisprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "analysisprops",
   "Bio::Chado::Schema::Companalysis::Analysisprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 arraydesign_platformtype_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Arraydesign>
+
+=cut
+
 __PACKAGE__->has_many(
   "arraydesign_platformtype_ids",
   "Bio::Chado::Schema::Mage::Arraydesign",
   { "foreign.platformtype_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 arraydesign_substratetype_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Arraydesign>
+
+=cut
+
 __PACKAGE__->has_many(
   "arraydesign_substratetype_ids",
   "Bio::Chado::Schema::Mage::Arraydesign",
   { "foreign.substratetype_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 arraydesignprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Arraydesignprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "arraydesignprops",
   "Bio::Chado::Schema::Mage::Arraydesignprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 assayprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Assayprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "assayprops",
   "Bio::Chado::Schema::Mage::Assayprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 biomaterialprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Biomaterialprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "biomaterialprops",
   "Bio::Chado::Schema::Mage::Biomaterialprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 biomaterial_relationships
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::BiomaterialRelationship>
+
+=cut
+
 __PACKAGE__->has_many(
   "biomaterial_relationships",
   "Bio::Chado::Schema::Mage::BiomaterialRelationship",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 biomaterial_treatments
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::BiomaterialTreatment>
+
+=cut
+
 __PACKAGE__->has_many(
   "biomaterial_treatments",
   "Bio::Chado::Schema::Mage::BiomaterialTreatment",
   { "foreign.unittype_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 cell_line_cvterms
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::CellLine::CellLineCvterm>
+
+=cut
+
 __PACKAGE__->has_many(
   "cell_line_cvterms",
   "Bio::Chado::Schema::CellLine::CellLineCvterm",
   { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 cell_line_cvtermprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::CellLine::CellLineCvtermprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "cell_line_cvtermprops",
   "Bio::Chado::Schema::CellLine::CellLineCvtermprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 cell_lineprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::CellLine::CellLineprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "cell_lineprops",
   "Bio::Chado::Schema::CellLine::CellLineprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 cell_line_relationships
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::CellLine::CellLineRelationship>
+
+=cut
+
 __PACKAGE__->has_many(
   "cell_line_relationships",
   "Bio::Chado::Schema::CellLine::CellLineRelationship",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 contacts
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Contact::Contact>
+
+=cut
+
 __PACKAGE__->has_many(
   "contacts",
   "Bio::Chado::Schema::Contact::Contact",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 contact_relationships
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Contact::ContactRelationship>
+
+=cut
+
 __PACKAGE__->has_many(
   "contact_relationships",
   "Bio::Chado::Schema::Contact::ContactRelationship",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 controls
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Control>
+
+=cut
+
 __PACKAGE__->has_many(
   "controls",
   "Bio::Chado::Schema::Mage::Control",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
-__PACKAGE__->belongs_to("cv", "Bio::Chado::Schema::Cv::Cv", { cv_id => "cv_id" });
+
+=head2 cv
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Cv::Cv>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "cv",
+  "Bio::Chado::Schema::Cv::Cv",
+  { cv_id => "cv_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 dbxref
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::General::Dbxref>
+
+=cut
+
 __PACKAGE__->belongs_to(
   "dbxref",
   "Bio::Chado::Schema::General::Dbxref",
   { dbxref_id => "dbxref_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 cvterm_dbxrefs
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Cv::CvtermDbxref>
+
+=cut
+
 __PACKAGE__->has_many(
   "cvterm_dbxrefs",
   "Bio::Chado::Schema::Cv::CvtermDbxref",
   { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 cvtermpath_type_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Cv::Cvtermpath>
+
+=cut
+
 __PACKAGE__->has_many(
   "cvtermpath_type_ids",
   "Bio::Chado::Schema::Cv::Cvtermpath",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 cvtermpath_object_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Cv::Cvtermpath>
+
+=cut
+
 __PACKAGE__->has_many(
   "cvtermpath_object_ids",
   "Bio::Chado::Schema::Cv::Cvtermpath",
   { "foreign.object_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 cvtermpath_subject_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Cv::Cvtermpath>
+
+=cut
+
 __PACKAGE__->has_many(
   "cvtermpath_subject_ids",
   "Bio::Chado::Schema::Cv::Cvtermpath",
   { "foreign.subject_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 cvtermprop_type_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Cv::Cvtermprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "cvtermprop_type_ids",
   "Bio::Chado::Schema::Cv::Cvtermprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 cvtermprop_cvterm_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Cv::Cvtermprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "cvtermprop_cvterm_ids",
   "Bio::Chado::Schema::Cv::Cvtermprop",
   { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 cvterm_relationship_type_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Cv::CvtermRelationship>
+
+=cut
+
 __PACKAGE__->has_many(
   "cvterm_relationship_type_ids",
   "Bio::Chado::Schema::Cv::CvtermRelationship",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 cvterm_relationship_object_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Cv::CvtermRelationship>
+
+=cut
+
 __PACKAGE__->has_many(
   "cvterm_relationship_object_ids",
   "Bio::Chado::Schema::Cv::CvtermRelationship",
   { "foreign.object_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 cvterm_relationship_subject_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Cv::CvtermRelationship>
+
+=cut
+
 __PACKAGE__->has_many(
   "cvterm_relationship_subject_ids",
   "Bio::Chado::Schema::Cv::CvtermRelationship",
   { "foreign.subject_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 cvtermsynonym_type_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Cv::Cvtermsynonym>
+
+=cut
+
 __PACKAGE__->has_many(
   "cvtermsynonym_type_ids",
   "Bio::Chado::Schema::Cv::Cvtermsynonym",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 cvtermsynonym_cvterm_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Cv::Cvtermsynonym>
+
+=cut
+
 __PACKAGE__->has_many(
   "cvtermsynonym_cvterm_ids",
   "Bio::Chado::Schema::Cv::Cvtermsynonym",
   { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 dbxrefprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Cv::Dbxrefprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "dbxrefprops",
   "Bio::Chado::Schema::Cv::Dbxrefprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 elements
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Element>
+
+=cut
+
 __PACKAGE__->has_many(
   "elements",
   "Bio::Chado::Schema::Mage::Element",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 element_relationships
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::ElementRelationship>
+
+=cut
+
 __PACKAGE__->has_many(
   "element_relationships",
   "Bio::Chado::Schema::Mage::ElementRelationship",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 elementresult_relationships
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::ElementresultRelationship>
+
+=cut
+
 __PACKAGE__->has_many(
   "elementresult_relationships",
   "Bio::Chado::Schema::Mage::ElementresultRelationship",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 environment_cvterms
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Genetic::EnvironmentCvterm>
+
+=cut
+
 __PACKAGE__->has_many(
   "environment_cvterms",
   "Bio::Chado::Schema::Genetic::EnvironmentCvterm",
   { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 expression_cvterm_cvterm_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Expression::ExpressionCvterm>
+
+=cut
+
 __PACKAGE__->has_many(
   "expression_cvterm_cvterm_ids",
   "Bio::Chado::Schema::Expression::ExpressionCvterm",
   { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 expression_cvterm_cvterm_type_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Expression::ExpressionCvterm>
+
+=cut
+
 __PACKAGE__->has_many(
   "expression_cvterm_cvterm_type_ids",
   "Bio::Chado::Schema::Expression::ExpressionCvterm",
   { "foreign.cvterm_type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 expression_cvtermprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Expression::ExpressionCvtermprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "expression_cvtermprops",
   "Bio::Chado::Schema::Expression::ExpressionCvtermprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 expressionprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Expression::Expressionprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "expressionprops",
   "Bio::Chado::Schema::Expression::Expressionprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 features
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Sequence::Feature>
+
+=cut
+
 __PACKAGE__->has_many(
   "features",
   "Bio::Chado::Schema::Sequence::Feature",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 feature_cvterms
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Sequence::FeatureCvterm>
+
+=cut
+
 __PACKAGE__->has_many(
   "feature_cvterms",
   "Bio::Chado::Schema::Sequence::FeatureCvterm",
   { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 feature_cvtermprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Sequence::FeatureCvtermprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "feature_cvtermprops",
   "Bio::Chado::Schema::Sequence::FeatureCvtermprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 feature_expressionprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Expression::FeatureExpressionprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "feature_expressionprops",
   "Bio::Chado::Schema::Expression::FeatureExpressionprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 feature_genotypes
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Genetic::FeatureGenotype>
+
+=cut
+
 __PACKAGE__->has_many(
   "feature_genotypes",
   "Bio::Chado::Schema::Genetic::FeatureGenotype",
   { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 featuremaps
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Map::Featuremap>
+
+=cut
+
 __PACKAGE__->has_many(
   "featuremaps",
   "Bio::Chado::Schema::Map::Featuremap",
   { "foreign.unittype_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 featureprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Sequence::Featureprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "featureprops",
   "Bio::Chado::Schema::Sequence::Featureprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 feature_pubprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Sequence::FeaturePubprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "feature_pubprops",
   "Bio::Chado::Schema::Sequence::FeaturePubprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 feature_relationships
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Sequence::FeatureRelationship>
+
+=cut
+
 __PACKAGE__->has_many(
   "feature_relationships",
   "Bio::Chado::Schema::Sequence::FeatureRelationship",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 feature_relationshipprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Sequence::FeatureRelationshipprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "feature_relationshipprops",
   "Bio::Chado::Schema::Sequence::FeatureRelationshipprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 libraries
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Library::Library>
+
+=cut
+
 __PACKAGE__->has_many(
   "libraries",
   "Bio::Chado::Schema::Library::Library",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 library_cvterms
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Library::LibraryCvterm>
+
+=cut
+
 __PACKAGE__->has_many(
   "library_cvterms",
   "Bio::Chado::Schema::Library::LibraryCvterm",
   { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 libraryprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Library::Libraryprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "libraryprops",
   "Bio::Chado::Schema::Library::Libraryprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 organismprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Organism::Organismprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "organismprops",
   "Bio::Chado::Schema::Organism::Organismprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 phendescs
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Genetic::Phendesc>
+
+=cut
+
 __PACKAGE__->has_many(
   "phendescs",
   "Bio::Chado::Schema::Genetic::Phendesc",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 phenotype_assay_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Phenotype::Phenotype>
+
+=cut
+
 __PACKAGE__->has_many(
   "phenotype_assay_ids",
   "Bio::Chado::Schema::Phenotype::Phenotype",
   { "foreign.assay_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 phenotype_attr_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Phenotype::Phenotype>
+
+=cut
+
 __PACKAGE__->has_many(
   "phenotype_attr_ids",
   "Bio::Chado::Schema::Phenotype::Phenotype",
   { "foreign.attr_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 phenotype_observable_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Phenotype::Phenotype>
+
+=cut
+
 __PACKAGE__->has_many(
   "phenotype_observable_ids",
   "Bio::Chado::Schema::Phenotype::Phenotype",
   { "foreign.observable_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 phenotype_cvalue_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Phenotype::Phenotype>
+
+=cut
+
 __PACKAGE__->has_many(
   "phenotype_cvalue_ids",
   "Bio::Chado::Schema::Phenotype::Phenotype",
   { "foreign.cvalue_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 phenotype_comparison_cvterms
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Genetic::PhenotypeComparisonCvterm>
+
+=cut
+
 __PACKAGE__->has_many(
   "phenotype_comparison_cvterms",
   "Bio::Chado::Schema::Genetic::PhenotypeComparisonCvterm",
   { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 phenotype_cvterms
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Phenotype::PhenotypeCvterm>
+
+=cut
+
 __PACKAGE__->has_many(
   "phenotype_cvterms",
   "Bio::Chado::Schema::Phenotype::PhenotypeCvterm",
   { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 phenstatements
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Genetic::Phenstatement>
+
+=cut
+
 __PACKAGE__->has_many(
   "phenstatements",
   "Bio::Chado::Schema::Genetic::Phenstatement",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 phylonodes
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Phylogeny::Phylonode>
+
+=cut
+
 __PACKAGE__->has_many(
   "phylonodes",
   "Bio::Chado::Schema::Phylogeny::Phylonode",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 phylonodeprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Phylogeny::Phylonodeprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "phylonodeprops",
   "Bio::Chado::Schema::Phylogeny::Phylonodeprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 phylonode_relationships
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Phylogeny::PhylonodeRelationship>
+
+=cut
+
 __PACKAGE__->has_many(
   "phylonode_relationships",
   "Bio::Chado::Schema::Phylogeny::PhylonodeRelationship",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 phylotrees
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Phylogeny::Phylotree>
+
+=cut
+
 __PACKAGE__->has_many(
   "phylotrees",
   "Bio::Chado::Schema::Phylogeny::Phylotree",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 protocols
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Protocol>
+
+=cut
+
 __PACKAGE__->has_many(
   "protocols",
   "Bio::Chado::Schema::Mage::Protocol",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 protocolparam_unittype_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Protocolparam>
+
+=cut
+
 __PACKAGE__->has_many(
   "protocolparam_unittype_ids",
   "Bio::Chado::Schema::Mage::Protocolparam",
   { "foreign.unittype_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 protocolparam_datatype_ids
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Protocolparam>
+
+=cut
+
 __PACKAGE__->has_many(
   "protocolparam_datatype_ids",
   "Bio::Chado::Schema::Mage::Protocolparam",
   { "foreign.datatype_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 pubs
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Pub::Pub>
+
+=cut
+
 __PACKAGE__->has_many(
   "pubs",
   "Bio::Chado::Schema::Pub::Pub",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 pubprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Pub::Pubprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "pubprops",
   "Bio::Chado::Schema::Pub::Pubprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 pub_relationships
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Pub::PubRelationship>
+
+=cut
+
 __PACKAGE__->has_many(
   "pub_relationships",
   "Bio::Chado::Schema::Pub::PubRelationship",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 quantificationprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Quantificationprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "quantificationprops",
   "Bio::Chado::Schema::Mage::Quantificationprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 quantification_relationships
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::QuantificationRelationship>
+
+=cut
+
 __PACKAGE__->has_many(
   "quantification_relationships",
   "Bio::Chado::Schema::Mage::QuantificationRelationship",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 stocks
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Stock::Stock>
+
+=cut
+
 __PACKAGE__->has_many(
   "stocks",
   "Bio::Chado::Schema::Stock::Stock",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 stockcollections
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Stock::Stockcollection>
+
+=cut
+
 __PACKAGE__->has_many(
   "stockcollections",
   "Bio::Chado::Schema::Stock::Stockcollection",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 stockcollectionprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Stock::Stockcollectionprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "stockcollectionprops",
   "Bio::Chado::Schema::Stock::Stockcollectionprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 stock_cvterms
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Stock::StockCvterm>
+
+=cut
+
 __PACKAGE__->has_many(
   "stock_cvterms",
   "Bio::Chado::Schema::Stock::StockCvterm",
   { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 stockprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Stock::Stockprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "stockprops",
   "Bio::Chado::Schema::Stock::Stockprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 stock_relationships
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Stock::StockRelationship>
+
+=cut
+
 __PACKAGE__->has_many(
   "stock_relationships",
   "Bio::Chado::Schema::Stock::StockRelationship",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 studydesignprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Studydesignprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "studydesignprops",
   "Bio::Chado::Schema::Mage::Studydesignprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 studyfactors
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Studyfactor>
+
+=cut
+
 __PACKAGE__->has_many(
   "studyfactors",
   "Bio::Chado::Schema::Mage::Studyfactor",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 studyprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Studyprop>
+
+=cut
+
 __PACKAGE__->has_many(
   "studyprops",
   "Bio::Chado::Schema::Mage::Studyprop",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 studyprop_features
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::StudypropFeature>
+
+=cut
+
 __PACKAGE__->has_many(
   "studyprop_features",
   "Bio::Chado::Schema::Mage::StudypropFeature",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 synonyms
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Sequence::Synonym>
+
+=cut
+
 __PACKAGE__->has_many(
   "synonyms",
   "Bio::Chado::Schema::Sequence::Synonym",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
+
+=head2 treatments
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Mage::Treatment>
+
+=cut
+
 __PACKAGE__->has_many(
   "treatments",
   "Bio::Chado::Schema::Mage::Treatment",
   { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_07 @ 2009-08-31 08:24:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:fC9n/ZcO3hYpoWFiJdCgvA
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xYhjVSPez717Mel/zEN+zg
 
 use Carp;
 
