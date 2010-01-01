@@ -21,13 +21,41 @@ __PACKAGE__->table("magedocumentation");
 
 =head2 magedocumentation_id
 
+  data_type: integer
+  default_value: nextval('magedocumentation_magedocumentation_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 mageml_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =head2 tableinfo_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 row_id
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 0
+  size: 4
+
 =head2 mageidentifier
+
+  data_type: text
+  default_value: undef
+  is_nullable: 0
+  size: undef
 
 =cut
 
@@ -101,8 +129,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:AgQk1Qm9T6/QXbO8SlDngQ
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WE7DsX8qJ91skPl8qcBi+A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

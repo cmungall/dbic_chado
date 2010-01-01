@@ -21,19 +21,60 @@ __PACKAGE__->table("tableinfo");
 
 =head2 tableinfo_id
 
+  data_type: integer
+  default_value: nextval('tableinfo_tableinfo_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 name
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 0
+  size: 30
 
 =head2 primary_key_column
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 30
+
 =head2 is_view
+
+  data_type: integer
+  default_value: 0
+  is_nullable: 0
+  size: 4
 
 =head2 view_on_table_id
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
+
 =head2 superclass_table_id
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
 
 =head2 is_updateable
 
+  data_type: integer
+  default_value: 1
+  is_nullable: 0
+  size: 4
+
 =head2 modification_date
+
+  data_type: date
+  default_value: now()
+  is_nullable: 0
+  size: 4
 
 =cut
 
@@ -107,8 +148,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:l94uYQndyd76k9ggtAFKVQ
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vokiLI6eAlqIBxQwly2m7w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

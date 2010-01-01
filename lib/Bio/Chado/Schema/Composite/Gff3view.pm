@@ -21,27 +21,87 @@ __PACKAGE__->table("gff3view");
 
 =head2 feature_id
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
+
 =head2 ref
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
 
 =head2 source
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
+
 =head2 type
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 1024
 
 =head2 fstart
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
+
 =head2 fend
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
 
 =head2 score
 
+  data_type: double precision
+  default_value: undef
+  is_nullable: 1
+  size: 8
+
 =head2 strand
+
+  data_type: smallint
+  default_value: undef
+  is_nullable: 1
+  size: 2
 
 =head2 phase
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
+
 =head2 seqlen
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
 
 =head2 name
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
+
 =head2 organism_id
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
 
 =cut
 
@@ -103,8 +163,8 @@ __PACKAGE__->add_columns(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:r7Bq4OCVwai9EtELHVNyMg
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:SvVqbKa9p1HH+dbVVoP2/w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

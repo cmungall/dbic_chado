@@ -21,11 +21,34 @@ __PACKAGE__->table("cell_line_dbxref");
 
 =head2 cell_line_dbxref_id
 
+  data_type: integer
+  default_value: nextval('cell_line_dbxref_cell_line_dbxref_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 cell_line_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =head2 dbxref_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 is_current
+
+  data_type: boolean
+  default_value: true
+  is_nullable: 0
+  size: 1
 
 =cut
 
@@ -98,8 +121,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:9jNfjzNGwSFQ69OdVZ/9YA
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YuzReAUaO4rPUgibSlwSjw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

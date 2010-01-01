@@ -26,9 +26,27 @@ __PACKAGE__->table("feature_relationshipprop");
 
 =head2 feature_relationshipprop_id
 
+  data_type: integer
+  default_value: nextval('feature_relationshipprop_feature_relationshipprop_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 feature_relationship_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 type_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 The name of the
 property/slot is a cvterm. The meaning of the property is defined in
@@ -37,12 +55,22 @@ feature_relationship property types.
 
 =head2 value
 
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
+
 The value of the
 property, represented as text. Numeric values are converted to their
 text representation. This is less efficient than using native database
 types, but is easier to query.
 
 =head2 rank
+
+  data_type: integer
+  default_value: 0
+  is_nullable: 0
+  size: 4
 
 Property-Value
 ordering. Any feature_relationship can have multiple values for any particular
@@ -143,8 +171,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jZ9p5i3StdKmWKivAadzbw
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:F2mRrn8IAFww7Ea3diD8XQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

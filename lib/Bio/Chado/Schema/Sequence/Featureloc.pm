@@ -39,19 +39,47 @@ __PACKAGE__->table("featureloc");
 
 =head2 featureloc_id
 
+  data_type: integer
+  default_value: nextval('featureloc_featureloc_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 feature_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 The feature that is being located. Any feature can have zero or more featurelocs.
 
 =head2 srcfeature_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
+
 The source feature which this location is relative to. Every location is relative to another feature (however, this column is nullable, because the srcfeature may not be known). All locations are -proper- that is, nothing should be located relative to itself. No cycles are allowed in the featureloc graph.
 
 =head2 fmin
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
+
 The leftmost/minimal boundary in the linear range represented by the featureloc. Sometimes (e.g. in Bioperl) this is called -start- although this is confusing because it does not necessarily represent the 5-prime coordinate. Important: This is space-based (interbase) coordinates, counting from zero. To convert this to the leftmost position in a base-oriented system (eg GFF, Bioperl), add 1 to fmin.
 
 =head2 is_fmin_partial
+
+  data_type: boolean
+  default_value: false
+  is_nullable: 0
+  size: 1
 
 This is typically
 false, but may be true if the value for column:fmin is inaccurate or
@@ -59,9 +87,19 @@ the leftmost part of the range is unknown/unbounded.
 
 =head2 fmax
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
+
 The rightmost/maximal boundary in the linear range represented by the featureloc. Sometimes (e.g. in bioperl) this is called -end- although this is confusing because it does not necessarily represent the 3-prime coordinate. Important: This is space-based (interbase) coordinates, counting from zero. No conversion is required to go from fmax to the rightmost coordinate in a base-oriented system that counts from 1 (e.g. GFF, Bioperl).
 
 =head2 is_fmax_partial
+
+  data_type: boolean
+  default_value: false
+  is_nullable: 0
+  size: 1
 
 This is typically
 false, but may be true if the value for column:fmax is inaccurate or
@@ -69,10 +107,20 @@ the rightmost part of the range is unknown/unbounded.
 
 =head2 strand
 
+  data_type: smallint
+  default_value: undef
+  is_nullable: 1
+  size: 2
+
 The orientation/directionality of the
 location. Should be 0, -1 or +1.
 
 =head2 phase
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
 
 Phase of translation with
 respect to srcfeature_id.
@@ -81,6 +129,11 @@ some features such as exons, because the phase is dependant on the
 spliceform (the same exon can appear in multiple spliceforms). This column is mostly useful for predicted exons and CDSs.
 
 =head2 residue_info
+
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
 
 Alternative residues,
 when these differ from feature.residues. For instance, a SNP feature
@@ -93,6 +146,11 @@ locations, one (rank 0) on the genome, the other (rank 1) would have
 most fields null, except for alternative residues.
 
 =head2 locgroup
+
+  data_type: integer
+  default_value: 0
+  is_nullable: 0
+  size: 4
 
 This is used to manifest redundant,
 derivable extra locations for a feature. The default locgroup=0 is
@@ -116,6 +174,11 @@ conserved region feature - two distinct locgroups (contig level and
 chromosome level) and two distinct ranks (for the two species).
 
 =head2 rank
+
+  data_type: integer
+  default_value: 0
+  is_nullable: 0
+  size: 4
 
 Used when a feature has >1
 location, otherwise the default rank 0 is used. Some features (e.g.
@@ -243,8 +306,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NfG/R+fN4YFJXvTPR2VpZw
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Vat+jCKXbn9zgMr+RGjHfA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

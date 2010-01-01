@@ -24,22 +24,50 @@ __PACKAGE__->table("cvterm");
 
 =head2 cvterm_id
 
+  data_type: integer
+  default_value: nextval('cvterm_cvterm_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 cv_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 The cv or ontology or namespace to which
 this cvterm belongs.
 
 =head2 name
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 0
+  size: 1024
+
 A concise human-readable name or
 label for the cvterm. Uniquely identifies a cvterm within a cv.
 
 =head2 definition
 
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
+
 A human-readable text
 definition.
 
 =head2 dbxref_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 Primary identifier dbxref - The
 unique global OBO identifier for this cvterm.  Note that a cvterm may
@@ -47,11 +75,21 @@ have multiple secondary dbxrefs - see also table: cvterm_dbxref.
 
 =head2 is_obsolete
 
+  data_type: integer
+  default_value: 0
+  is_nullable: 0
+  size: 4
+
 Boolean 0=false,1=true; see
 GO documentation for details of obsoletion. Note that two terms with
 different primary dbxrefs may exist if one is obsolete.
 
 =head2 is_relationshiptype
+
+  data_type: integer
+  default_value: 0
+  is_nullable: 0
+  size: 4
 
 Boolean
 0=false,1=true relations or relationship types (also known as Typedefs
@@ -1403,8 +1441,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xYhjVSPez717Mel/zEN+zg
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:SiJEcTZ53k7ehiNdp+zNcg
 
 use Carp;
 

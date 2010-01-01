@@ -21,11 +21,35 @@ __PACKAGE__->table("studyprop_feature");
 
 =head2 studyprop_feature_id
 
+  data_type: integer
+  default_value: nextval('studyprop_feature_studyprop_feature_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 studyprop_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =head2 feature_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 type_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
 
 =cut
 
@@ -117,8 +141,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:fprsfbJh3Two3qVI73Twjw
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ys51/YpJgp+yKevbt0B5eA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

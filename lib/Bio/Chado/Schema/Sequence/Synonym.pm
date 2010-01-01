@@ -21,15 +21,37 @@ __PACKAGE__->table("synonym");
 
 =head2 synonym_id
 
+  data_type: integer
+  default_value: nextval('synonym_synonym_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 name
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 0
+  size: 255
 
 The synonym itself. Should be human-readable machine-searchable ascii text.
 
 =head2 type_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 Types would be symbol and fullname for now.
 
 =head2 synonym_sgml
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 0
+  size: 255
 
 The fully specified synonym, with any non-ascii characters encoded in SGML.
 
@@ -133,8 +155,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:9LERxxq/JFT9riBw00COqA
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:RgAynDrufEy+N+tIEQPOmg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

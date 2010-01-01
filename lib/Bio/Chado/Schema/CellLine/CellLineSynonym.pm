@@ -21,15 +21,49 @@ __PACKAGE__->table("cell_line_synonym");
 
 =head2 cell_line_synonym_id
 
+  data_type: integer
+  default_value: nextval('cell_line_synonym_cell_line_synonym_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 cell_line_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =head2 synonym_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 pub_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =head2 is_current
 
+  data_type: boolean
+  default_value: false
+  is_nullable: 0
+  size: 1
+
 =head2 is_internal
+
+  data_type: boolean
+  default_value: false
+  is_nullable: 0
+  size: 1
 
 =cut
 
@@ -135,8 +169,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:GLolRkyn9RyVMsFU/EbxNw
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dYEdYmKDI8m3VFpNOkHSmw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

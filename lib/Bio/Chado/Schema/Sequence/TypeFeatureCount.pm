@@ -21,7 +21,17 @@ __PACKAGE__->table("type_feature_count");
 
 =head2 type
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 1024
+
 =head2 num_features
+
+  data_type: bigint
+  default_value: undef
+  is_nullable: 1
+  size: 8
 
 =cut
 
@@ -38,8 +48,8 @@ __PACKAGE__->add_columns(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:bEpnhFk/zhbxzH8EV/sthw
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:eXSROrjt0YDIhWnotJ42NA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

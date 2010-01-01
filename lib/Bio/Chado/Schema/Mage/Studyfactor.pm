@@ -21,13 +21,41 @@ __PACKAGE__->table("studyfactor");
 
 =head2 studyfactor_id
 
+  data_type: integer
+  default_value: nextval('studyfactor_studyfactor_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 studydesign_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =head2 type_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
+
 =head2 name
 
+  data_type: text
+  default_value: undef
+  is_nullable: 0
+  size: undef
+
 =head2 description
+
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
 
 =cut
 
@@ -121,8 +149,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jXoq/lgWMT6Mi44/bGjdzQ
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6X3Ns37QyLlTPauYmF3/5A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

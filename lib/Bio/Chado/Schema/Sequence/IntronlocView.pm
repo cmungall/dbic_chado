@@ -21,15 +21,45 @@ __PACKAGE__->table("intronloc_view");
 
 =head2 exon1_id
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
+
 =head2 exon2_id
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
 
 =head2 fmin
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
+
 =head2 fmax
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
 
 =head2 strand
 
+  data_type: smallint
+  default_value: undef
+  is_nullable: 1
+  size: 2
+
 =head2 srcfeature_id
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
 
 =cut
 
@@ -54,8 +84,8 @@ __PACKAGE__->add_columns(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:e9ICn/AEYDo89oaJqnCdEQ
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rWPUyHIHNm9ssbQWHnXKEw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

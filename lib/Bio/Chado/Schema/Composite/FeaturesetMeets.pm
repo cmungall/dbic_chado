@@ -21,7 +21,17 @@ __PACKAGE__->table("featureset_meets");
 
 =head2 subject_id
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
+
 =head2 object_id
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
 
 =cut
 
@@ -33,8 +43,8 @@ __PACKAGE__->add_columns(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7lsP3FwVeUzgtsrI2r6akA
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wQdP2rErvpg7AhYPHoxxvw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

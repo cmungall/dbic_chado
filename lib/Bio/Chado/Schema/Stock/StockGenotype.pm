@@ -22,9 +22,27 @@ __PACKAGE__->table("stock_genotype");
 
 =head2 stock_genotype_id
 
+  data_type: integer
+  default_value: nextval('stock_genotype_stock_genotype_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 stock_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 genotype_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =cut
 
@@ -90,8 +108,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Ah6gMHSej4dgvotEIEmubQ
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NN+cKmaRq5anRIN3DVaqUQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

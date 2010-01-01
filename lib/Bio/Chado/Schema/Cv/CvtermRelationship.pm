@@ -28,7 +28,19 @@ __PACKAGE__->table("cvterm_relationship");
 
 =head2 cvterm_relationship_id
 
+  data_type: integer
+  default_value: nextval('cvterm_relationship_cvterm_relationship_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 type_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 The nature of the
 relationship between subject and object. Note that relations are also
@@ -37,11 +49,23 @@ ontology, although other relationship types are allowed.
 
 =head2 subject_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 The subject of
 the subj-predicate-obj sentence. The cvterm_relationship is about the
 subject. In a graph, this typically corresponds to the child node.
 
 =head2 object_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 The object of the
 subj-predicate-obj sentence. The cvterm_relationship refers to the
@@ -137,8 +161,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wyMZiZ43zTO6ydBiZDXC7A
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:71GtYWM+Xf09rlzqZFI29g
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

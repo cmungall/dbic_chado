@@ -24,27 +24,77 @@ __PACKAGE__->table("phylonode");
 
 =head2 phylonode_id
 
+  data_type: integer
+  default_value: nextval('phylonode_phylonode_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 phylotree_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 parent_phylonode_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
 
 Root phylonode can have null parent_phylonode_id value.
 
 =head2 left_idx
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 0
+  size: 4
+
 =head2 right_idx
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 0
+  size: 4
+
 =head2 type_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
 
 Type: e.g. root, interior, leaf.
 
 =head2 feature_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
+
 Phylonodes can have optional features attached to them e.g. a protein or nucleotide sequence usually attached to a leaf of the phylotree for non-leaf nodes, the feature may be a feature that is an instance of SO:match; this feature is the alignment of all leaf features beneath it.
 
 =head2 label
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
+
 =head2 distance
+
+  data_type: double precision
+  default_value: undef
+  is_nullable: 1
+  size: 8
 
 =cut
 
@@ -280,8 +330,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:naUJFEeImPbOxgF/abiX6w
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:32s/n/FbnCW8msgqPuqtPw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

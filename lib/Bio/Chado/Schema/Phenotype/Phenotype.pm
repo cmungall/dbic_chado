@@ -23,25 +23,65 @@ __PACKAGE__->table("phenotype");
 
 =head2 phenotype_id
 
+  data_type: integer
+  default_value: nextval('phenotype_phenotype_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 uniquename
 
+  data_type: text
+  default_value: undef
+  is_nullable: 0
+  size: undef
+
 =head2 observable_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
 
 The entity: e.g. anatomy_part, biological_process.
 
 =head2 attr_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
+
 Phenotypic attribute (quality, property, attribute, character) - drawn from PATO.
 
 =head2 value
+
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
 
 Value of attribute - unconstrained free text. Used only if cvalue_id is not appropriate.
 
 =head2 cvalue_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
+
 Phenotype attribute value (state).
 
 =head2 assay_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
 
 Evidence type.
 
@@ -244,8 +284,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1XPQBK0GtmAG4rqDncVtLg
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:bECmSk/o+GQILL3diG5tMg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -22,41 +22,113 @@ __PACKAGE__->table("pub");
 
 =head2 pub_id
 
+  data_type: integer
+  default_value: nextval('pub_pub_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 title
+
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
 
 Descriptive general heading.
 
 =head2 volumetitle
 
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
+
 Title of part if one of a series.
 
 =head2 volume
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
+
 =head2 series_name
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
 
 Full name of (journal) series.
 
 =head2 issue
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
+
 =head2 pyear
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
+
 =head2 pages
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
 
 Page number range[s], e.g. 457--459, viii + 664pp, lv--lvii.
 
 =head2 miniref
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
+
 =head2 uniquename
 
+  data_type: text
+  default_value: undef
+  is_nullable: 0
+  size: undef
+
 =head2 type_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 The type of the publication (book, journal, poem, graffiti, etc). Uses pub cv.
 
 =head2 is_obsolete
 
+  data_type: boolean
+  default_value: false
+  is_nullable: 1
+  size: 1
+
 =head2 publisher
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
+
 =head2 pubplace
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
 
 =cut
 
@@ -753,8 +825,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:d8VeysJxvWJ/z8JTEc0yqA
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:j23vKwCiaJGbTypIcwuJhA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

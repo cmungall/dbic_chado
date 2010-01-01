@@ -21,11 +21,33 @@ __PACKAGE__->table("featuremap");
 
 =head2 featuremap_id
 
+  data_type: integer
+  default_value: nextval('featuremap_featuremap_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 name
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
 
 =head2 description
 
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
+
 =head2 unittype_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
 
 =cut
 
@@ -127,8 +149,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:m6a+F419VFIAx3WiJcmqxA
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:DQ+uFjNhakOL4s9g5TFneA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

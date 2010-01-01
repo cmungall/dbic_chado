@@ -21,9 +21,27 @@ __PACKAGE__->table("feature_cvterm_dbxref");
 
 =head2 feature_cvterm_dbxref_id
 
+  data_type: integer
+  default_value: nextval('feature_cvterm_dbxref_feature_cvterm_dbxref_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 feature_cvterm_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 dbxref_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =cut
 
@@ -92,8 +110,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:s43P6ROWSVU6u6orEAOQLA
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VdvnHZuPDIB/pDRd+o+FPw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

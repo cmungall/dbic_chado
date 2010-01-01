@@ -25,13 +25,38 @@ __PACKAGE__->table("stats_paths_to_root");
 
 =head2 cvterm_id
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
+
 =head2 total_paths
+
+  data_type: bigint
+  default_value: undef
+  is_nullable: 1
+  size: 8
 
 =head2 avg_distance
 
+  data_type: numeric
+  default_value: undef
+  is_nullable: 1
+  size: undef
+
 =head2 min_distance
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
+
 =head2 max_distance
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
 
 =cut
 
@@ -54,8 +79,8 @@ __PACKAGE__->add_columns(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:bbo7c5VPEbSBjOvtPdHF7g
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZIq1NPvHhvvdsV7qj6VAiQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -21,9 +21,25 @@ __PACKAGE__->table("channel");
 
 =head2 channel_id
 
+  data_type: integer
+  default_value: nextval('channel_channel_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 name
 
+  data_type: text
+  default_value: undef
+  is_nullable: 0
+  size: undef
+
 =head2 definition
+
+  data_type: text
+  default_value: undef
+  is_nullable: 0
+  size: undef
 
 =cut
 
@@ -87,8 +103,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+wScLRH1GEuCBOj3rrsd0Q
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:DbEqQRixpKenULKVhyzffQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

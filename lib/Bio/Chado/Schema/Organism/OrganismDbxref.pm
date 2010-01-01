@@ -21,9 +21,27 @@ __PACKAGE__->table("organism_dbxref");
 
 =head2 organism_dbxref_id
 
+  data_type: integer
+  default_value: nextval('organism_dbxref_organism_dbxref_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 organism_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 dbxref_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =cut
 
@@ -89,8 +107,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Hlq4x57O/7xZlvA3ZAQLFw
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Fiu8sBY1L5e0Cnlxt+jENw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

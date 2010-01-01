@@ -21,9 +21,27 @@ __PACKAGE__->table("phylotree_pub");
 
 =head2 phylotree_pub_id
 
+  data_type: integer
+  default_value: nextval('phylotree_pub_phylotree_pub_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 phylotree_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 pub_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =cut
 
@@ -89,8 +107,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:LrjO8JvIROY7tJvg18xxwQ
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Wry8/TBR1Jw0fOhQB+SNSA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

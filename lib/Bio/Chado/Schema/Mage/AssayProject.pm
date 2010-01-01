@@ -21,9 +21,27 @@ __PACKAGE__->table("assay_project");
 
 =head2 assay_project_id
 
+  data_type: integer
+  default_value: nextval('assay_project_assay_project_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 assay_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 project_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =cut
 
@@ -89,8 +107,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Z+7V0peHKfV5ReynO5mjFw
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pm0lKrCaqJmEKUeSd8OLew
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

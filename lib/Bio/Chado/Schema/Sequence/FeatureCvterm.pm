@@ -21,19 +21,53 @@ __PACKAGE__->table("feature_cvterm");
 
 =head2 feature_cvterm_id
 
+  data_type: integer
+  default_value: nextval('feature_cvterm_feature_cvterm_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 feature_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =head2 cvterm_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 pub_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 Provenance for the annotation. Each annotation should have a single primary publication (which may be of the appropriate type for computational analyses) where more details can be found. Additional provenance dbxrefs can be attached using feature_cvterm_dbxref.
 
 =head2 is_not
 
+  data_type: boolean
+  default_value: false
+  is_nullable: 0
+  size: 1
+
 If this is set to true, then this annotation is interpreted as a NEGATIVE annotation - i.e. the feature does NOT have the specified function, process, component, part, etc. See GO docs for more details.
 
 =head2 rank
+
+  data_type: integer
+  default_value: 0
+  is_nullable: 0
+  size: 4
 
 =cut
 
@@ -179,8 +213,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+R1UcxKVpF3yzcWhsV99qQ
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:j5j44GdMI0dt2NZ8K8ma+Q
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

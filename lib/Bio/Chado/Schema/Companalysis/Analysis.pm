@@ -24,7 +24,18 @@ __PACKAGE__->table("analysis");
 
 =head2 analysis_id
 
+  data_type: integer
+  default_value: nextval('analysis_analysis_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 name
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
 
 A way of grouping analyses. This
     should be a handy short identifier that can help people find an
@@ -33,29 +44,69 @@ A way of grouping analyses. This
 
 =head2 description
 
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
+
 =head2 program
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 0
+  size: 255
 
 Program name, e.g. blastx, blastp, sim4, genscan.
 
 =head2 programversion
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 0
+  size: 255
+
 Version description, e.g. TBLASTX 2.0MP-WashU [09-Nov-2000].
 
 =head2 algorithm
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
 
 Algorithm name, e.g. blast.
 
 =head2 sourcename
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
+
 Source name, e.g. cDNA, SwissProt.
 
 =head2 sourceversion
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
+
 =head2 sourceuri
+
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
 
 This is an optional, permanent URL or URI for the source of the  analysis. The idea is that someone could recreate the analysis directly by going to this URI and fetching the source data (e.g. the blast database, or the training model).
 
 =head2 timeexecuted
+
+  data_type: timestamp without time zone
+  default_value: now()
+  is_nullable: 0
+  size: 8
 
 =cut
 
@@ -198,8 +249,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4wt3AGUYjuCVduQj27vqog
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:lXb3FwdGKv9O8HopmQELyw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

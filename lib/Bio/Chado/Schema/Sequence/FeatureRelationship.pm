@@ -29,23 +29,57 @@ __PACKAGE__->table("feature_relationship");
 
 =head2 feature_relationship_id
 
+  data_type: integer
+  default_value: nextval('feature_relationship_feature_relationship_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 subject_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 The subject of the subj-predicate-obj sentence. This is typically the subfeature.
 
 =head2 object_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 The object of the subj-predicate-obj sentence. This is typically the container feature.
 
 =head2 type_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 Relationship type between subject and object. This is a cvterm, typically from the OBO relationship ontology, although other relationship types are allowed. The most common relationship type is OBO_REL:part_of. Valid relationship types are constrained by the Sequence Ontology.
 
 =head2 value
 
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
+
 Additional notes or comments.
 
 =head2 rank
+
+  data_type: integer
+  default_value: 0
+  is_nullable: 0
+  size: 4
 
 The ordering of subject features with respect to the object feature may be important (for example, exon ordering on a transcript - not always derivable if you take trans spliced genes into consideration). Rank is used to order these; starts from zero.
 
@@ -182,8 +216,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Gbbmu9h+blBQicCt+gnedg
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VECPDIghPQSd6Z80n5WSMA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

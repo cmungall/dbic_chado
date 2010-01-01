@@ -22,29 +22,73 @@ __PACKAGE__->table("stock");
 
 =head2 stock_id
 
+  data_type: integer
+  default_value: nextval('stock_stock_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 dbxref_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
 
 The dbxref_id is an optional primary stable identifier for this stock. Secondary indentifiers and external dbxrefs go in table: stock_dbxref.
 
 =head2 organism_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 The organism_id is the organism to which the stock belongs. This column is mandatory.
 
 =head2 name
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
 
 The name is a human-readable local name for a stock.
 
 =head2 uniquename
 
+  data_type: text
+  default_value: undef
+  is_nullable: 0
+  size: undef
+
 =head2 description
+
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
 
 The description is the genetic description provided in the stock list.
 
 =head2 type_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 The type_id foreign key links to a controlled vocabulary of stock types. The would include living stock, genomic DNA, preserved specimen. Secondary cvterms for stocks would go in stock_cvterm.
 
 =head2 is_obsolete
+
+  data_type: boolean
+  default_value: false
+  is_nullable: 0
+  size: 1
 
 =cut
 
@@ -281,8 +325,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NXCZqB+vAL3rxsbd29T1OA
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:g4e6qipcuf/EoVbctHgjMQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

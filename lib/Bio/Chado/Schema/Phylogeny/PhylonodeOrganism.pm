@@ -21,11 +21,29 @@ __PACKAGE__->table("phylonode_organism");
 
 =head2 phylonode_organism_id
 
+  data_type: integer
+  default_value: nextval('phylonode_organism_phylonode_organism_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 phylonode_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 One phylonode cannot refer to >1 organism.
 
 =head2 organism_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =cut
 
@@ -91,8 +109,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:AlWy//rcrtH2SQ6EXlwRgQ
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:nQz6pE636Orpg/yfMuRUNw
 
 # You can replace this text with custom content, and it will be preserved on regeneration
 1;

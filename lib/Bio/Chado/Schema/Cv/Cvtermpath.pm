@@ -22,7 +22,19 @@ __PACKAGE__->table("cvtermpath");
 
 =head2 cvtermpath_id
 
+  data_type: integer
+  default_value: nextval('cvtermpath_cvtermpath_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 type_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
 
 The relationship type that
 this is a closure over. If null, then this is a closure over ALL
@@ -32,15 +44,38 @@ AND the OBO_REL:is_a (subclass) relationship.
 
 =head2 subject_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 object_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 cv_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 Closures will mostly be within
 one cv. If the closure of a relationship traverses a cv, then this
 refers to the cv of the object_id cvterm.
 
 =head2 pathdistance
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
 
 The number of steps
 required to get from the subject cvterm to the object cvterm, counting
@@ -161,8 +196,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:OQmZm/MeK8xmOrl/bcquCQ
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6ISyFcZj1n/akEpt/Bniew
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

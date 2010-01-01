@@ -21,21 +21,70 @@ __PACKAGE__->table("protocol");
 
 =head2 protocol_id
 
+  data_type: integer
+  default_value: nextval('protocol_protocol_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 type_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =head2 pub_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
+
 =head2 dbxref_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
 
 =head2 name
 
+  data_type: text
+  default_value: undef
+  is_nullable: 0
+  size: undef
+
 =head2 uri
+
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
 
 =head2 protocoldescription
 
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
+
 =head2 hardwaredescription
 
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
+
 =head2 softwaredescription
+
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
 
 =cut
 
@@ -249,8 +298,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:alSivO7pnsmKd4gCocZKPg
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:H1VJB2sBV/d2jx0F8ZkRaQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

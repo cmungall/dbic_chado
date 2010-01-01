@@ -21,23 +21,60 @@ __PACKAGE__->table("pubauthor");
 
 =head2 pubauthor_id
 
+  data_type: integer
+  default_value: nextval('pubauthor_pubauthor_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 pub_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 rank
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 0
+  size: 4
 
 Order of author in author list for this pub - order is important.
 
 =head2 editor
 
+  data_type: boolean
+  default_value: false
+  is_nullable: 1
+  size: 1
+
 Indicates whether the author is an editor for linked publication. Note: this is a boolean field but does not follow the normal chado convention for naming booleans.
 
 =head2 surname
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 0
+  size: 100
+
 =head2 givennames
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 100
 
 First name, initials
 
 =head2 suffix
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 100
 
 Jr., Sr., etc
 
@@ -112,8 +149,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:CTm0xCSt7BBsB5osEk7pCA
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:e/lFdh4iV6jCIGKszXYHqw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

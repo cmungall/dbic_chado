@@ -21,19 +21,64 @@ __PACKAGE__->table("quantification");
 
 =head2 quantification_id
 
+  data_type: integer
+  default_value: nextval('quantification_quantification_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 acquisition_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =head2 operator_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
+
 =head2 protocol_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
 
 =head2 analysis_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 quantificationdate
+
+  data_type: timestamp without time zone
+  default_value: now()
+  is_nullable: 1
+  size: 8
 
 =head2 name
 
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
+
 =head2 uri
+
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
 
 =cut
 
@@ -226,8 +271,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:mUXn/RJSeGO6lMdJDv/ZAw
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:90kWOXdclnSxYwQ1mdTVrQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

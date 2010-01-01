@@ -21,17 +21,45 @@ __PACKAGE__->table("cvtermprop");
 
 =head2 cvtermprop_id
 
+  data_type: integer
+  default_value: nextval('cvtermprop_cvtermprop_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 cvterm_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 type_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 The name of the property or slot is a cvterm. The meaning of the property is defined in that cvterm.
 
 =head2 value
 
+  data_type: text
+  default_value: ''::text
+  is_nullable: 0
+  size: undef
+
 The value of the property, represented as text. Numeric values are converted to their text representation.
 
 =head2 rank
+
+  data_type: integer
+  default_value: 0
+  is_nullable: 0
+  size: 4
 
 Property-Value ordering. Any
 cvterm can have multiple values for any particular property type -
@@ -115,8 +143,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WK0x1uj0UbVhJOWY9AIppA
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZMAHwgVfFRULvVagxYdUmw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

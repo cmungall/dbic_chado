@@ -21,20 +21,54 @@ __PACKAGE__->table("library_synonym");
 
 =head2 library_synonym_id
 
+  data_type: integer
+  default_value: nextval('library_synonym_library_synonym_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 synonym_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =head2 library_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 pub_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 The pub_id link is for
 relating the usage of a given synonym to the publication in which it was used.
 
 =head2 is_current
 
+  data_type: boolean
+  default_value: true
+  is_nullable: 0
+  size: 1
+
 The is_current bit indicates whether the linked synonym is the current -official- symbol for the linked library.
 
 =head2 is_internal
+
+  data_type: boolean
+  default_value: false
+  is_nullable: 0
+  size: 1
 
 Typically a synonym
 exists so that somebody querying the database with an obsolete name
@@ -142,8 +176,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+Ph5IPWq/cDfad+yyKOAnA
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ctr2MIouTkSWpNoKxP2Y9w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

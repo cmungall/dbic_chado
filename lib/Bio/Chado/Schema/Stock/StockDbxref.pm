@@ -21,11 +21,34 @@ __PACKAGE__->table("stock_dbxref");
 
 =head2 stock_dbxref_id
 
+  data_type: integer
+  default_value: nextval('stock_dbxref_stock_dbxref_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 stock_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =head2 dbxref_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 is_current
+
+  data_type: boolean
+  default_value: true
+  is_nullable: 0
+  size: 1
 
 The is_current boolean indicates whether the linked dbxref is the current -official- dbxref for the linked stock.
 
@@ -100,8 +123,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NZuyOPjNZG0swXtuNzpL5w
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ovoZ7saQJ1bM+8ty6edVSw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -24,11 +24,32 @@ __PACKAGE__->table("organism");
 
 =head2 organism_id
 
+  data_type: integer
+  default_value: nextval('organism_organism_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 abbreviation
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
 
 =head2 genus
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 0
+  size: 255
+
 =head2 species
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 0
+  size: 255
 
 A type of organism is always
 uniquely identified by genus and species. When mapping from the NCBI
@@ -40,7 +61,17 @@ pattern.
 
 =head2 common_name
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
+
 =head2 comment
+
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
 
 =cut
 
@@ -230,8 +261,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/vvWfwxt4wPIFEwojd/NPw
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jzKnEWsUHUzLFlaFpKO1mg
 
 use Carp;
 

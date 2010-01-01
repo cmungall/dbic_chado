@@ -24,39 +24,135 @@ __PACKAGE__->table("arraydesign");
 
 =head2 arraydesign_id
 
+  data_type: integer
+  default_value: nextval('arraydesign_arraydesign_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 manufacturer_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =head2 platformtype_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 substratetype_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
 
 =head2 protocol_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
+
 =head2 dbxref_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
 
 =head2 name
 
+  data_type: text
+  default_value: undef
+  is_nullable: 0
+  size: undef
+
 =head2 version
+
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
 
 =head2 description
 
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
+
 =head2 array_dimensions
+
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
 
 =head2 element_dimensions
 
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
+
 =head2 num_of_elements
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
 
 =head2 num_array_columns
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
+
 =head2 num_array_rows
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
 
 =head2 num_grid_columns
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
+
 =head2 num_grid_rows
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
 
 =head2 num_sub_columns
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
+
 =head2 num_sub_rows
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
 
 =cut
 
@@ -285,8 +381,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:D33daEkki70H7cpxQmcd+g
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:sG3XR8oTPQ4+jIAOHwSMYg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -21,15 +21,36 @@ __PACKAGE__->table("eimage");
 
 =head2 eimage_id
 
+  data_type: integer
+  default_value: nextval('eimage_eimage_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 eimage_data
+
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
 
 We expect images in eimage_data (e.g. JPEGs) to be uuencoded.
 
 =head2 eimage_type
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 0
+  size: 255
+
 Describes the type of data in eimage_data.
 
 =head2 image_uri
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
 
 =cut
 
@@ -84,8 +105,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:X4B1BAS+dqMCL2ETPpQHAg
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:LW57FA7HmWPIVYu+OUJu1A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -21,21 +21,68 @@ __PACKAGE__->table("featurerange");
 
 =head2 featurerange_id
 
+  data_type: integer
+  default_value: nextval('featurerange_featurerange_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 featuremap_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 featuremap_id is the id of the feature being mapped.
 
 =head2 feature_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 leftstartf_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 =head2 leftendf_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
+
 =head2 rightstartf_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
 
 =head2 rightendf_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 =head2 rangestr
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
 
 =cut
 
@@ -199,8 +246,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vvfTtxh/5kffYvoIHIKixw
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/Uz6hVp1K3UKM9aSnty2Lw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

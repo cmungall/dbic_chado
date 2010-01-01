@@ -21,19 +21,47 @@ __PACKAGE__->table("stockcollection");
 
 =head2 stockcollection_id
 
+  data_type: integer
+  default_value: nextval('stockcollection_stockcollection_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 type_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
 
 type_id is the collection type cv.
 
 =head2 contact_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
+
 contact_id links to the contact information for the collection.
 
 =head2 name
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
+
 name is the collection.
 
 =head2 uniquename
+
+  data_type: text
+  default_value: undef
+  is_nullable: 0
+  size: undef
 
 uniqename is the value of the collection cv.
 
@@ -145,8 +173,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tbd+EFBQsTZVMc3c3Wp5mQ
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:W84FSEw8bPdaxXvBKzpgmg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

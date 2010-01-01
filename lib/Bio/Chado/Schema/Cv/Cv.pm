@@ -24,13 +24,29 @@ __PACKAGE__->table("cv");
 
 =head2 cv_id
 
+  data_type: integer
+  default_value: nextval('cv_cv_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 name
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 0
+  size: 255
 
 The name of the ontology. This
 corresponds to the obo-format -namespace-. cv names uniquely identify
 the cv. In OBO file format, the cv.name is known as the namespace.
 
 =head2 definition
+
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
 
 A text description of the criteria for
 membership of this ontology.
@@ -97,8 +113,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JoaosmR3CEPzM9PYgymk5Q
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:MHq/64haXjNpR+HlZ9nPZQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

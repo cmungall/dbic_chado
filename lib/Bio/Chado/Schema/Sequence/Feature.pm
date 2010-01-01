@@ -27,7 +27,19 @@ __PACKAGE__->table("feature");
 
 =head2 feature_id
 
+  data_type: integer
+  default_value: nextval('feature_feature_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 dbxref_id
+
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 1
+  size: 4
 
 An optional primary public stable
 identifier for this feature. Secondary identifiers and external
@@ -35,15 +47,31 @@ dbxrefs go in the table feature_dbxref.
 
 =head2 organism_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 The organism to which this feature
 belongs. This column is mandatory.
 
 =head2 name
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
+
 The optional human-readable common name for
 a feature, for display purposes.
 
 =head2 uniquename
+
+  data_type: text
+  default_value: undef
+  is_nullable: 0
+  size: undef
 
 The unique name for a feature; may
 not be necessarily be particularly human-readable, although this is
@@ -51,6 +79,11 @@ preferred. This name must be unique for this type of feature within
 this organism.
 
 =head2 residues
+
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
 
 A sequence of alphabetic characters
 representing biological residues (nucleic acids, amino acids). This
@@ -66,6 +99,11 @@ faster.
 
 =head2 seqlen
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
+
 The length of the residue feature. See
 column:residues. This column is partially redundant with the residues
 column, and also with featureloc. This column is required because the
@@ -76,6 +114,11 @@ of the sequence is known.
 
 =head2 md5checksum
 
+  data_type: character
+  default_value: undef
+  is_nullable: 1
+  size: 32
+
 The 32-character checksum of the sequence,
 calculated using the MD5 algorithm. This is practically guaranteed to
 be unique for any feature. This column thus acts as a unique
@@ -83,11 +126,22 @@ identifier on the mathematical sequence.
 
 =head2 type_id
 
+  data_type: integer
+  default_value: undef
+  is_foreign_key: 1
+  is_nullable: 0
+  size: 4
+
 A required reference to a table:cvterm
 giving the feature type. This will typically be a Sequence Ontology
 identifier. This column is thus used to subclass the feature table.
 
 =head2 is_analysis
+
+  data_type: boolean
+  default_value: false
+  is_nullable: 0
+  size: 1
 
 Boolean indicating whether this
 feature is annotated or the result of an automated analysis. Analysis
@@ -100,6 +154,11 @@ multiple times in different analyses.
 
 =head2 is_obsolete
 
+  data_type: boolean
+  default_value: false
+  is_nullable: 0
+  size: 1
+
 Boolean indicating whether this
 feature has been obsoleted. Some chado instances may choose to simply
 remove the feature altogether, others may choose to keep an obsolete
@@ -107,12 +166,22 @@ row in the table.
 
 =head2 timeaccessioned
 
+  data_type: timestamp without time zone
+  default_value: now()
+  is_nullable: 0
+  size: 8
+
 For handling object
 accession or modification timestamps (as opposed to database auditing data,
 handled elsewhere). The expectation is that these fields would be
 available to software interacting with chado.
 
 =head2 timelastmodified
+
+  data_type: timestamp without time zone
+  default_value: now()
+  is_nullable: 0
+  size: 8
 
 For handling object
 accession or modification timestamps (as opposed to database auditing data,
@@ -654,8 +723,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:X4vq477xBLh8Dz4/6KEFWQ
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7Dl4A9u0Slezrxc0UdG+XA
 
 use Carp;
 

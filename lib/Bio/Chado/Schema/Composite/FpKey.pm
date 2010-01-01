@@ -21,9 +21,24 @@ __PACKAGE__->table("fp_key");
 
 =head2 feature_id
 
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+  size: 4
+
 =head2 pkey
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 1024
+
 =head2 value
+
+  data_type: text
+  default_value: undef
+  is_nullable: 1
+  size: undef
 
 =cut
 
@@ -47,8 +62,8 @@ __PACKAGE__->add_columns(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NQ/WErCwGn7KxUrSiAJrpQ
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dvZ6UshQrGu4MEnbOPfMIA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

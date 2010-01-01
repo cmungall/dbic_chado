@@ -27,13 +27,39 @@ __PACKAGE__->table("db");
 
 =head2 db_id
 
+  data_type: integer
+  default_value: nextval('db_db_id_seq'::regclass)
+  is_auto_increment: 1
+  is_nullable: 0
+  size: 4
+
 =head2 name
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 0
+  size: 255
 
 =head2 description
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
+
 =head2 urlprefix
 
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
+
 =head2 url
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 255
 
 =cut
 
@@ -96,8 +122,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:SoNslOHuCoGvqOM71BVjmQ
+# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:9PKFTcA18MZZzArHRjhmfw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
