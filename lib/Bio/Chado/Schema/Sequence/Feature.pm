@@ -746,8 +746,11 @@ __PACKAGE__->belongs_to
 
 =head2 dbxrefs_mm
 
-Relation to L<Bio::Chado::Schema::General::Dbxref: (i.e. dbxref table)
-via the C<feature_dbxrefs> table.
+Type: many_to_many
+
+Related object: L<Bio::Chado::Schema::General::Dbxref> (i.e. dbxref
+table) L<Bio::Chado::Schema::Sequence::FeatureDbxref> (feature_dbxref
+table)
 
 =cut
 
