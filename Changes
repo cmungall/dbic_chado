@@ -1,3 +1,13 @@
+Bio-Schema-Chado (0.05000)
+
+  * Added DBICSL-generated POD
+
+  * Turned off DBIC's cascade_delete and cascade_copy on all relations
+    (thanks to Siddhartha Basu for troubleshooting).  Things break if
+    these are on and you don't have every part of the schema installed.
+
+ -- Robert Buels <rmb32@cornell.edu>  Fri, 01 Jan 2010 13:24:03 -0800
+
 Bio-Schema-Chado (0.04300)
 
   * Corrected a rather dirty CPAN upload, Util.pod file was in the
