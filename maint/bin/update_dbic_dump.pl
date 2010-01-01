@@ -184,6 +184,7 @@ make_schema_at(
                  }, #< do not try to inflect to singular
 		 overwrite_modifications => 1,
 		 skip_load_external      => 1,
+		 naming                  => 'current',
 		 relationship_attrs      =>
 		 {
 		  all => { cascade_delete => 0, cascade_copy => 0, },
