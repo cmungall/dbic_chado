@@ -116,11 +116,25 @@ foreach my $src (@source_files_load_order) {
     }
 }
 
-# # connect to our db
+# connect to our db
 my $dbh = DBI->connect( $dsn, undef, undef, {RaiseError => 1} );
 
-# # drop all tables from the target database
-eval{ local $dbh->{Warn} = 0;  $dbh->do('DROP SCHEMA public CASCADE') };
+# drop all tables from the target database
+{
+    local $SIG{__WARN__} = sub {
+	warn @_
+	    unless $_[0] =~ /^NOTICE:\s+drop cascades to/
+    };
+
+    eval { $dbh->do("DROP SCHEMA $_ CASCADE") }
+	for qw(
+	       public
+	       gencode
+	       frange
+	       genetic_code
+	       so
+	      );
+};
 $dbh->do('CREATE SCHEMA public');
 $dbh->do('SET search_path=public');
 
