@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use FindBin;
 
+my $numtests = 3;
 use Test::More tests => 3;
 use Test::Exception;
 
@@ -12,7 +13,7 @@ use lib "$FindBin::RealBin/../lib";
 use DbicChadoTest;
 
 SKIP: {
-    my $schema = DbicChadoTest->schema_connect_or_skip(2);
+    my $schema = DbicChadoTest->schema_connect_or_skip(3);
     isa_ok( $schema, 'DBIx::Class::Schema' );
 
     my $sf = $schema->resultset('Sequence::Feature');
