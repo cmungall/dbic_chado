@@ -1,6 +1,7 @@
 ----
 presentation_topic: dbic_chado
-presentation_title: Bio::Chado::Schema, a standard ORM layer for Chado
+presentation_title: Bio::Chado::Schema
+presentation_subtitle: a standard Perl ORM layer for Chado
 presentation_place: San Diego, CA
 presentation_date: January 13-14, 2010
 ----
@@ -8,10 +9,14 @@ presentation_date: January 13-14, 2010
 
 * Object-relational mapping framework for Perl
 * is now the de-facto standard
-* very powerful features for:
-+** query building (the magic of chainable ResultSets)
-+** cross-database deployment (using |SQL::Translator| in the backend)
-+** testing with Fixtures
+* nice features
+
+----
+= What is DBIx::Class?
+
+* query building (the magic of chainable ResultSets)
+* cross-database deployment (using |SQL::Translator| in the backend)
+* lots and lots of plugins availabe (dates, testing, ...)
 
 see http://search.cpan.org/dist/DBIx-Class/lib/DBIx/Class/Manual.pod
 
@@ -20,9 +25,20 @@ see http://search.cpan.org/dist/DBIx-Class/lib/DBIx/Class/Manual.pod
 
 * a set of classes
 * encapsulate the underlying storage
-* providing a nice(r) API for working with the data
+* providing a nicer, maintainable API for working with the data
 
-== This isn't really middleware, as the term is usually used.
+This isn't really middleware, it's a code library.
+
+----
+= And therefore, Bio::Chado::Schema
+
+== Approx. 180 Perl classes
+* every table and view, every module
+* Chado docs mirrored in the POD
+
+http://search.cpan.org/dist/Bio-Chado-Schema
+
++  ( So why do we need this? )
 
 ----
 = Chado needs encapsulation
@@ -35,47 +51,53 @@ see http://search.cpan.org/dist/DBIx-Class/lib/DBIx/Class/Manual.pod
 ----
 = Chado needs encapsulation
 
-== Data model classes can help with:
-* complex queries
-+** storing, automating, and/or facilitating them
-+* steep learning curve
-+** codifying best practices
-** unified, high-level documentation
-** can help with database administration
-+* hard to get good performance
-+** encapsulation => performance optimizations where needed
-** helps create indexes and materialized views
+== complex queries
+* generating
+* storing
+* automating
 
 ----
-= What is BCS
+= Chado needs encapsulation
 
-== Approx. 180 Perl classes that mirror the Chado schema
-+* covers all tables in all modules
-+* includes full POD extracted from Chado itself
-
-http://search.cpan.org/dist/Bio-Chado-Schema
+== steep learning curve
+* codifying best practices
+* unified, high-level documentation
+* can help with database administration
 
 ----
-= BCS Usage: Selecting
+= Chado needs encapsulation
 
-* open the schema, lazily connecting
-  my $chado = Bio::Chado::Schema->connect( 'dbi:Pg:...', $user, $pass );
+== performance
+* encapsulation => performance optimizations where needed
+* first step for more data management
+** creative indexing
+** materialized views (with their own classes)
+
+----
+= BCS Usage
+
+* open the schema.  ( actual DB connection is deferred )
++  my $chado = Bio::Chado::Schema->connect( 'dbi:Pg:...', $user, $pass );
 
 +* get a ResultSet object representing a set of Rows
-  my $all_features = $chado->resultset('Sequence::Feature');
++  my $all_features = $chado->resultset('Sequence::Feature');
 
 +* a subset of those (another ResultSet)
-  my $other_feature = $all_features->search({ name => 'something' });
++  my $other_feature = $all_features->search({ name => 'something' });
 
-+* get a Row
-  my $some_feature = $all_features->find( 232432 );
++* get an actual data object
++  my $some_feature = $all_features->find( 232432 );
+  $other_feature->first;
+  # or search in list context returns all resulting rows (careful!)
+  my @other_features = $all_features->search({ name => 'something' });
 
 +* get its type cvterm
-  say $some_feature->type->name;
++  say $some_feature->type->name;
 
 ----
 = BCS Usage: Joined Select
 
+  # get features via the potato organism, also joining in the cvterms table
   my $potato_bacs =
        $chado->resultset('Organism::Organism')
              ->search({ species => 'Solanum tuberosum' })
@@ -87,6 +109,7 @@ http://search.cpan.org/dist/Bio-Chado-Schema
 ----
 = BCS Usage: Joined Select
 
+  # the equivalent bare SQL
   my $potato_bacs = $dbh->selectall_arrayref( <<EOS, undef, 'Solanum tuberosum', 'BAC_clone');
   SELECT features.feature_id
        , features.dbxref_id
@@ -117,7 +140,7 @@ http://search.cpan.org/dist/Bio-Chado-Schema
         ->create_related(  'cvterm',
                            { name => 'MyFakeTerm' });
 
-maps to
+makes the SQL:
 
   SELECT me.cv_id
        , me.name
@@ -127,7 +150,6 @@ maps to
 
   INSERT INTO cv ( name )
           VALUES ( ?    )
-
 
 ----
 = BCS Usage: Transactions
@@ -139,10 +161,36 @@ maps to
   });
 
 ----
+= The Real Advantages of DBIC
+
+* easier to manipulate and assemble queries
+* Don't Repeat Yourself
+
+----
+= The Real Advantages of DBIC
+
+* it's all objects.  you can delegate to them, pass them around, etc.
+* HOWEVER:
++** usually you don't want to subclass them
+** but, see |DBIx::Class::Manual::Cookbook|
+
+----
+= The Real Advantages of DBIC
+
+* complex joined queries (Chado queries) are very easy and compact
+
+----
+= The Real Advantages of DBIC
+
+* SQL syntax errors are much more difficult to make
+
+----
 = Using DBIC with your own tables
 
-* use DBIx::Class::Schema::Loader to dump a whole set
+* use |DBIx::Class::Schema::Loader| to dump a whole set
 * make your own definitions
+
+* your table: other_thing, foreign key feature_id to Chado feature table
 
   package My::DBIC:::Layer::OtherThing;
   use base 'DBIx::Class::Core';
@@ -168,17 +216,17 @@ maps to
 
 * make an accessor 'other_things' that ties your own DBIC class to BCS
 
-  Bio::Chado::Schema::Sequence::Feature->has_many(
++  Bio::Chado::Schema::Sequence::Feature->has_many(
     'other_things',
     'My::DBIC::Layer::OtherThing',
     { 'foreign.feature_id' => 'self.feature_id' },
   );
 
-* add it to the BCS schema dynamically
-  Bio::Chado::Schema->register_source('OtherThing', 'My::DBIC::Layer::OtherThing');
++* add it to the BCS schema dynamically
++  Bio::Chado::Schema->register_source('OtherThing', 'My::DBIC::Layer::OtherThing');
 
-* use it with the rest
-  $chado->resultset('Sequence::Feature')->other_things;
++* use it with the rest
++  $chado->resultset('Sequence::Feature')->other_things;
 
 ----
 = Making a composite schema
@@ -189,12 +237,16 @@ maps to
   $merged_schema_class->connect( ... );
 
   $chado->resultset('Sequence::Feature')->other_things;
+  $chado->resultset('OtherThing')->find(...)->feature;
+
+Note: merge() is new in BCS 0.6, releasing soon.
 	
 ----
 = Further Work
 
 == Still need to add in some DBIx::Class relationships:
 * more many_to_many relationships (must be added manually)
+
 == More useful things are needed:
 * automate more common querying and loading patterns
 * compatibility with BioPerl data objects
