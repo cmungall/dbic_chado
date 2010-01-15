@@ -1,0 +1,19 @@
+=head1 CHADO MODULE
+
+Companalysis - Augments sequence module with descriptions of computational
+        analyses and features resulting from those analyses
+
+=head1 CLASSES
+
+Below is a list of classes in this module of Chado.  Each of the
+classes below corresponds to a single Chado table or view.
+
+L<Bio::Chado::Schema::Companalysis::Analysis>
+
+L<Bio::Chado::Schema::Companalysis::Analysisfeature>
+
+L<Bio::Chado::Schema::Companalysis::Analysisfeatureprop>
+
+L<Bio::Chado::Schema::Companalysis::Analysisprop>
+
+=cut

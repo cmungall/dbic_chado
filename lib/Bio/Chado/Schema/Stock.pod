@@ -1,0 +1,34 @@
+=head1 CHADO MODULE
+
+Stock - For tracking stock collections
+
+=head1 CLASSES
+
+Below is a list of classes in this module of Chado.  Each of the
+classes below corresponds to a single Chado table or view.
+
+L<Bio::Chado::Schema::Stock::Stock>
+
+L<Bio::Chado::Schema::Stock::StockCvterm>
+
+L<Bio::Chado::Schema::Stock::StockDbxref>
+
+L<Bio::Chado::Schema::Stock::StockGenotype>
+
+L<Bio::Chado::Schema::Stock::StockPub>
+
+L<Bio::Chado::Schema::Stock::StockRelationship>
+
+L<Bio::Chado::Schema::Stock::StockRelationshipPub>
+
+L<Bio::Chado::Schema::Stock::Stockcollection>
+
+L<Bio::Chado::Schema::Stock::StockcollectionStock>
+
+L<Bio::Chado::Schema::Stock::Stockcollectionprop>
+
+L<Bio::Chado::Schema::Stock::Stockprop>
+
+L<Bio::Chado::Schema::Stock::StockpropPub>
+
+=cut

@@ -1,0 +1,16 @@
+=head1 CHADO MODULE
+
+Phenotype - Entity-attribute-value phenotypic character descriptions
+
+=head1 CLASSES
+
+Below is a list of classes in this module of Chado.  Each of the
+classes below corresponds to a single Chado table or view.
+
+L<Bio::Chado::Schema::Phenotype::FeaturePhenotype>
+
+L<Bio::Chado::Schema::Phenotype::Phenotype>
+
+L<Bio::Chado::Schema::Phenotype::PhenotypeCvterm>
+
+=cut

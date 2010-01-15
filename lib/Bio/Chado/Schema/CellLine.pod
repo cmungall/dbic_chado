@@ -1,0 +1,32 @@
+=head1 CHADO MODULE
+
+CellLine - For describing cell lines
+
+=head1 CLASSES
+
+Below is a list of classes in this module of Chado.  Each of the
+classes below corresponds to a single Chado table or view.
+
+L<Bio::Chado::Schema::CellLine::CellLine>
+
+L<Bio::Chado::Schema::CellLine::CellLineCvterm>
+
+L<Bio::Chado::Schema::CellLine::CellLineCvtermprop>
+
+L<Bio::Chado::Schema::CellLine::CellLineDbxref>
+
+L<Bio::Chado::Schema::CellLine::CellLineFeature>
+
+L<Bio::Chado::Schema::CellLine::CellLineLibrary>
+
+L<Bio::Chado::Schema::CellLine::CellLinePub>
+
+L<Bio::Chado::Schema::CellLine::CellLineRelationship>
+
+L<Bio::Chado::Schema::CellLine::CellLineSynonym>
+
+L<Bio::Chado::Schema::CellLine::CellLineprop>
+
+L<Bio::Chado::Schema::CellLine::CellLinepropPub>
+
+=cut

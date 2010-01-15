@@ -1,0 +1,26 @@
+=head1 CHADO MODULE
+
+Genetic - Genotypes and mutant alleles
+
+=head1 CLASSES
+
+Below is a list of classes in this module of Chado.  Each of the
+classes below corresponds to a single Chado table or view.
+
+L<Bio::Chado::Schema::Genetic::Environment>
+
+L<Bio::Chado::Schema::Genetic::EnvironmentCvterm>
+
+L<Bio::Chado::Schema::Genetic::FeatureGenotype>
+
+L<Bio::Chado::Schema::Genetic::Genotype>
+
+L<Bio::Chado::Schema::Genetic::Phendesc>
+
+L<Bio::Chado::Schema::Genetic::PhenotypeComparison>
+
+L<Bio::Chado::Schema::Genetic::PhenotypeComparisonCvterm>
+
+L<Bio::Chado::Schema::Genetic::Phenstatement>
+
+=cut

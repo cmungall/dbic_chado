@@ -1,0 +1,54 @@
+=head1 CHADO MODULE
+
+Sequence - Sequence and sequence features, their localization and properties
+
+=head1 CLASSES
+
+Below is a list of classes in this module of Chado.  Each of the
+classes below corresponds to a single Chado table or view.
+
+L<Bio::Chado::Schema::Sequence::Feature>
+
+L<Bio::Chado::Schema::Sequence::FeatureCvterm>
+
+L<Bio::Chado::Schema::Sequence::FeatureCvtermDbxref>
+
+L<Bio::Chado::Schema::Sequence::FeatureCvtermPub>
+
+L<Bio::Chado::Schema::Sequence::FeatureCvtermprop>
+
+L<Bio::Chado::Schema::Sequence::FeatureDbxref>
+
+L<Bio::Chado::Schema::Sequence::FeaturePub>
+
+L<Bio::Chado::Schema::Sequence::FeaturePubprop>
+
+L<Bio::Chado::Schema::Sequence::FeatureRelationship>
+
+L<Bio::Chado::Schema::Sequence::FeatureRelationshipPub>
+
+L<Bio::Chado::Schema::Sequence::FeatureRelationshipprop>
+
+L<Bio::Chado::Schema::Sequence::FeatureRelationshippropPub>
+
+L<Bio::Chado::Schema::Sequence::FeatureSynonym>
+
+L<Bio::Chado::Schema::Sequence::Featureloc>
+
+L<Bio::Chado::Schema::Sequence::FeaturelocPub>
+
+L<Bio::Chado::Schema::Sequence::Featureprop>
+
+L<Bio::Chado::Schema::Sequence::FeaturepropPub>
+
+L<Bio::Chado::Schema::Sequence::IntronCombinedView>
+
+L<Bio::Chado::Schema::Sequence::IntronlocView>
+
+L<Bio::Chado::Schema::Sequence::ProteinCodingGene>
+
+L<Bio::Chado::Schema::Sequence::Synonym>
+
+L<Bio::Chado::Schema::Sequence::TypeFeatureCount>
+
+=cut

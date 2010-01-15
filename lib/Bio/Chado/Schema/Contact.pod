@@ -1,0 +1,14 @@
+=head1 CHADO MODULE
+
+Contact - model persons, institutes, groups, organizations, etc
+
+=head1 CLASSES
+
+Below is a list of classes in this module of Chado.  Each of the
+classes below corresponds to a single Chado table or view.
+
+L<Bio::Chado::Schema::Contact::Contact>
+
+L<Bio::Chado::Schema::Contact::ContactRelationship>
+
+=cut

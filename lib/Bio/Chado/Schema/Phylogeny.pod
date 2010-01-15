@@ -1,0 +1,28 @@
+=head1 CHADO MODULE
+
+Phylogeny - For representing phylogenetic trees; the trees represent the
+        phylogeny of some some kind of sequence feature (mainly
+        proteins) or actual organism taxonomy trees
+
+=head1 CLASSES
+
+Below is a list of classes in this module of Chado.  Each of the
+classes below corresponds to a single Chado table or view.
+
+L<Bio::Chado::Schema::Phylogeny::Phylonode>
+
+L<Bio::Chado::Schema::Phylogeny::PhylonodeDbxref>
+
+L<Bio::Chado::Schema::Phylogeny::PhylonodeOrganism>
+
+L<Bio::Chado::Schema::Phylogeny::PhylonodePub>
+
+L<Bio::Chado::Schema::Phylogeny::PhylonodeRelationship>
+
+L<Bio::Chado::Schema::Phylogeny::Phylonodeprop>
+
+L<Bio::Chado::Schema::Phylogeny::Phylotree>
+
+L<Bio::Chado::Schema::Phylogeny::PhylotreePub>
+
+=cut

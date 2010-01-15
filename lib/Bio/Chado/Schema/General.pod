@@ -1,0 +1,20 @@
+=head1 CHADO MODULE
+
+General - General purpose tables, including dbxrefs
+
+=head1 CLASSES
+
+Below is a list of classes in this module of Chado.  Each of the
+classes below corresponds to a single Chado table or view.
+
+L<Bio::Chado::Schema::General::Db>
+
+L<Bio::Chado::Schema::General::DbDbxrefCount>
+
+L<Bio::Chado::Schema::General::Dbxref>
+
+L<Bio::Chado::Schema::General::Project>
+
+L<Bio::Chado::Schema::General::Tableinfo>
+
+=cut
