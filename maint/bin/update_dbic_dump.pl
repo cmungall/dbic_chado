@@ -163,25 +163,17 @@ foreach my $module ( @source_files_load_order ) {
         $db_object_module_membership{$new_obj}
             and die "sanity check failed, found '$new_obj' as a new object for a second time??!";
 
-        $db_object_module_membership{$new_obj} = $mod_moniker
+        $db_object_module_membership{$new_obj} = $mod_moniker;
+
     }
 }
 
 # do a make_schema_at, restricted to the new set of tables and views,
 #     dumping to Bio::Chado::Schema::ModuleName::ViewOrTableName
-
 make_schema_at(
                'Bio::Chado::Schema',
                { dump_directory => $dump_directory,
-                 moniker_map => sub {
-                     my $table = shift;
-                     my $table_moniker = join '', map ucfirst, split /[\W_]+/, $table;
-
-                     my $module_moniker = $db_object_module_membership{$table}
-                         or die "could not find module membership for '$table'";
-
-                     $module_moniker.'::'.$table_moniker;
-                 }, #< do not try to inflect to singular
+                 moniker_map => sub { table_moniker( shift, \%db_object_module_membership ) },
 		 overwrite_modifications => 1,
 		 skip_load_external      => 1,
 		 naming                  => 'current',
@@ -193,6 +185,33 @@ make_schema_at(
                [$dsn,undef,undef],
               );
 
+
+
+# and now generate the ModuleName.pod files, with per-module indexes
+# of tables
+generate_chado_submodule_pod( \%db_object_module_membership, $md->{module_descriptions}, $dump_directory );
+
+# takes a module id (the id= attributes in the module metadata xml file),
+# returns a string ModuleMoniker
+sub module_moniker {
+    return
+	join '',
+	map ucfirst,
+	split /[\W_]+/,
+	lc shift
+}
+
+# custom moniker-generation function does not try to inflect singular
+# table names to plural
+sub table_moniker {
+    my ( $table, $db_object_module_membership ) = @_;
+    my $table_moniker = join '', map ucfirst, split /[\W_]+/, $table;
+
+    my $module_moniker = $db_object_module_membership->{$table}
+	or die "could not find module membership for '$table'";
+
+    return $module_moniker.'::'.$table_moniker;
+}
 
 # given a dbh and a module source file record, load it into the given
 # dbh
@@ -266,10 +285,16 @@ sub parse_chado_module_metadata {
     my ($modules_dir) = $p->descendants(q"source[@type='dir']");
     $modules_dir &&= $modules_dir->att('path');
 
-    my %comp_to_modname;
+    my %module_descriptions;
+    my %comp_to_modname; #< hash of component name -> chado module id
     foreach my $module ($p->descendants('module')) {
         my $mod_id = $module->att('id')
             or die "<module> element with no id\n";
+
+	my $mod_description = $module->first_child('description')->text;
+	$mod_description =~ s/^\s*|\s*$//g;
+	$module_descriptions{module_moniker($mod_id)} = $mod_description;
+	
         $comp_to_modname{$mod_id} = $mod_id;
         $comp_to_modname{$_} = $mod_id
             foreach map $_->att('id'), $module->descendants('component');
@@ -281,7 +306,7 @@ sub parse_chado_module_metadata {
         $graph->add_vertex($mod_id);
 
         # extract all the dependency "to" ids and add graph edges for them
-        foreach my $dep_id ( map {$_->att('to') or die "no 'to' in dependency"}
+        foreach my $dep_id ( map { $_->att('to') or die "no 'to' in dependency" }
                              $module->descendants('dependency')
                            ) {
             my $dep_mod_id = $comp_to_modname{$dep_id};
@@ -294,9 +319,69 @@ sub parse_chado_module_metadata {
         }
     }
 
-    return { graph => $graph, twigs => \%module_twigs, modules_dir => $modules_dir };
+    return { graph => $graph,
+	     twigs => \%module_twigs,
+	     modules_dir => $modules_dir,
+	     module_descriptions => \%module_descriptions,
+           };
 }
 
+
+# args: $db_object_module_membership is a hashref of { table_name => chado_module },
+#       $module_root_dir is the string path to the dir we're dumping modules to
+# returns: nothing
+sub generate_chado_submodule_pod {
+    my ( $db_object_module_membership, $descriptions, $module_root ) = @_;
+
+    my %module_contents;
+    while( my ($table,$module) = each %$db_object_module_membership) {
+	push @{$module_contents{$module}},
+	    table_moniker( $table, $db_object_module_membership );
+    }
+    $_ = [ sort @$_ ] for values %module_contents; #< sort each of the table lists
+
+    while (my ($module,$tables) = each %module_contents ) {
+	_generate_chado_submodule_podfile( $module_root,
+					   {
+					       tables => $tables,
+					       module => $module,
+					       module_comment => $descriptions->{$module},
+					   }
+					  );
+    }
+}
+
+sub _generate_chado_submodule_podfile {
+    my ( $dump_dir, $info ) = @_;
+
+    my $file = dir( $dump_dir )
+	->subdir('Bio')
+	->subdir('Chado')
+        ->subdir('Schema')
+        ->file( "$info->{module}.pod" );
+
+    my $table_pod = join "\n\n", map {
+	"L<Bio::Chado::Schema::".$_.">"
+    } @{ $info->{tables} };
+
+    $info->{module_comment} &&= "- $info->{module_comment}";
+
+    no warnings 'uninitialized';
+    $file->openw->print(<<EOF)
+=head1 CHADO MODULE
+
+$info->{module} $info->{module_comment}
+
+=head1 CLASSES
+
+Below is a list of classes in this module of Chado.  Each of the
+classes below corresponds to a single Chado table or view.
+
+$table_pod
+
+=cut
+EOF
+}
 
 __END__
 
