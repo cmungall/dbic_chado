@@ -387,10 +387,13 @@ __END__
 
 =head1 NAME
 
-update_dbic_dump.pl - script to sync the DBIx::Class object layer with
-the current set of chado tables
+update_dbic_dump.pl - developer-only maintenance script to sync the
+DBIx::Class object layer with the latest upstream version of Chado
 
 =head1 DESCRIPTION
+
+B<NOTE:> this script is intended only for use by the
+Bio::Chado::Schema maintainers.
 
 This script basically:
 
