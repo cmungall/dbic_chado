@@ -25,7 +25,7 @@ Bio::Chado::Schema - standard DBIx::Class layer for the Chado database schema
 
   use Bio::Chado::Schema;
 
-  my $chado = Bio::Chado::Schema->connect($dsn,$user,$password);
+  my $chado = Bio::Chado::Schema->connect( $dsn, $user, $password );
 
   print "number of rows in feature table: ",
         $chado->resultset('Sequence::Feature')->count,
@@ -41,6 +41,18 @@ L<DBIx::Class::Schema::Loader> module.
 
 To learn how to use this DBIx::Class ORM layer, a good starting
 point is the L<DBIx::Class::Manual>.
+
+=head1 CHADO MODULES
+
+Chado is an open-source modular database schema for biological data.
+It is divided into several I<modules>, which are reflected in the
+namespace divisions of this ORM layer.
+
+=head2 Chado modules in this package:
+
+=start_generated_module_list
+
+=end_generated_module_list
 
 =head1 CONTRIBUTORS
 
