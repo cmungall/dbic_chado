@@ -1,3 +1,7 @@
+=head1 SCHEMA CLASS
+
+L<Bio::Chado::Schema> - root module of this package
+
 =head1 CHADO MODULE
 
 Map - Non-sequence maps: genetic, radiation hybrid, cytogenetic, etc

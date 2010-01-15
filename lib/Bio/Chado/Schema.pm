@@ -39,20 +39,49 @@ GMOD Chado database schema.  This layer is implemented with
 L<DBIx::Class>, generated with the help of the very fine
 L<DBIx::Class::Schema::Loader> module.
 
+Chado is an open-source modular database schema for biological data.
+It is divided into several notional "modules", which are reflected in the namespace organization of this package.  Note that modules in the Chado context refers to sets of tables, they are not modules in the Perl sense.
+
 To learn how to use this DBIx::Class ORM layer, a good starting
 point is the L<DBIx::Class::Manual>.
 
-=head1 CHADO MODULES
+=head1 CHADO MODULES COVERED BY THIS PACKAGE
 
-Chado is an open-source modular database schema for biological data.
-It is divided into several I<modules>, which are reflected in the
-namespace divisions of this ORM layer.
+=bcs_generated_module_list
 
-=head2 Chado modules in this package:
+L<Bio::Chado::Schema::CellLine>
 
-=start_generated_module_list
+L<Bio::Chado::Schema::Companalysis>
 
-=end_generated_module_list
+L<Bio::Chado::Schema::Composite>
+
+L<Bio::Chado::Schema::Contact>
+
+L<Bio::Chado::Schema::Cv>
+
+L<Bio::Chado::Schema::Expression>
+
+L<Bio::Chado::Schema::General>
+
+L<Bio::Chado::Schema::Genetic>
+
+L<Bio::Chado::Schema::Library>
+
+L<Bio::Chado::Schema::Mage>
+
+L<Bio::Chado::Schema::Map>
+
+L<Bio::Chado::Schema::Organism>
+
+L<Bio::Chado::Schema::Phenotype>
+
+L<Bio::Chado::Schema::Phylogeny>
+
+L<Bio::Chado::Schema::Pub>
+
+L<Bio::Chado::Schema::Sequence>
+
+L<Bio::Chado::Schema::Stock>
 
 =head1 CONTRIBUTORS
 

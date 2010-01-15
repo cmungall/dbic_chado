@@ -1,3 +1,7 @@
+=head1 SCHEMA CLASS
+
+L<Bio::Chado::Schema> - root module of this package
+
 =head1 CHADO MODULE
 
 Library - For describing molecular libraries

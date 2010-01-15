@@ -349,6 +349,20 @@ sub generate_chado_submodule_pod {
 					   }
 					  );
     }
+
+    # also replace the module list in the Schema.pm file
+    my $module_list = join "",
+	map {
+	    "L<Bio::Chado::Schema::".$_.">\n\n"
+	} sort keys %module_contents;
+
+    my $schema_pm = dir( $module_root )
+	->subdir('Bio')
+	->subdir('Chado')
+        ->file( "Schema.pm" );
+    my $schema_pm_contents = $schema_pm->slurp;
+    $schema_pm_contents =~ s/(?<=\=generated_module_list\n)([^=]+)(?=\n=)/"\n$module_list"/e;
+    $schema_pm->openw->print($schema_pm_contents);
 }
 
 sub _generate_chado_submodule_podfile {
@@ -368,6 +382,10 @@ sub _generate_chado_submodule_podfile {
 
     no warnings 'uninitialized';
     $file->openw->print(<<EOF)
+=head1 SCHEMA CLASS
+
+L<Bio::Chado::Schema> - root module of this package
+
 =head1 CHADO MODULE
 
 $info->{module} $info->{module_comment}
