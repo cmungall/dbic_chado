@@ -1,12 +1,15 @@
-=head1 SCHEMA CLASS
+=head1 NAME
 
-L<Bio::Chado::Schema> - root module of this package
+Bio::Chado::Schema::Phenotype - Entity-attribute-value phenotypic character descriptions
 
 =head1 CHADO MODULE
 
-Phenotype - Entity-attribute-value phenotypic character descriptions
+Classes in this namespace correspond to tables and views in the
+Chado Phenotype module.
 
 =head1 CLASSES
+
+These classes are part of the L<Bio::Chado::Schema> distribution.
 
 Below is a list of classes in this module of Chado.  Each of the
 classes below corresponds to a single Chado table or view.

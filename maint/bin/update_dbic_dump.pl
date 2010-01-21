@@ -156,7 +156,7 @@ foreach my $module ( @source_files_load_order ) {
         map "  $_\n",@new;
 
     # record their names in the hash of name => module name
-    my $mod_moniker = join '', map ucfirst, split /[\W_]+/, lc $module->[0];
+    my $mod_moniker = module_moniker( $module->[0] );
 
     foreach my $new_obj (@new) {
 
@@ -374,23 +374,30 @@ sub _generate_chado_submodule_podfile {
         ->subdir('Schema')
         ->file( "$info->{module}.pod" );
 
+    @{ $info->{tables} } or die "no tables in module $info->{module}??";
+
     my $table_pod = join "\n\n", map {
 	"L<Bio::Chado::Schema::".$_.">"
     } @{ $info->{tables} };
 
     $info->{module_comment} &&= "- $info->{module_comment}";
 
+    my ($mod_moniker) = split /::/, $info->{tables}->[0];
+
     no warnings 'uninitialized';
     $file->openw->print(<<EOF)
-=head1 SCHEMA CLASS
+=head1 NAME
 
-L<Bio::Chado::Schema> - root module of this package
+Bio::Chado::Schema::$mod_moniker $info->{module_comment}
 
 =head1 CHADO MODULE
 
-$info->{module} $info->{module_comment}
+Classes in this namespace correspond to tables and views in the
+Chado $info->{module} module.
 
 =head1 CLASSES
+
+These classes are part of the L<Bio::Chado::Schema> distribution.
 
 Below is a list of classes in this module of Chado.  Each of the
 classes below corresponds to a single Chado table or view.
