@@ -1685,4 +1685,54 @@ sub delete_secondary_dbxref {
     
 }
 
+=head2 find_or_create_cvterm
+
+ Usage: $self->find_or_create_cvterm($cvterm_name , { cv_name => 'my_cv_name' , db_name =>'my_db_name', dbxref_accession=> 'my accession' } );
+ Desc:  Check if a cvterm exists in the database for your cv, if not create a new one and the required related dbxref and db
+ Ret:   a Cvterm object
+ Args:  the name for your cvterm
+        %opts for : 
+          cv_name [optional. Default = 'null']
+          db_name [optional. Defalt = 'null']
+          dbxref_accession [optional. Default = 'null']
+          
+ Side Effects:
+ Example:
+
+=cut
+
+sub create_cvterm {
+    my ($self, $cvterm_name, $opts) = @_;
+    my $schema = $self->result_source->schema;
+    $opts ||= {};
+    $opts->{cv_name} = 'null'
+        unless defined $opts->{cv_name};
+    $opts->{db_name} = 'null'
+        unless defined $opts->{db_name};
+    $opts->{dbxref_accession} = 'autocreated:'.$cvterm_name
+        unless defined $opts->{dbxref_accession};
+    
+    my $cv =
+	$schema->resultset('Cv::Cv')
+	->find_or_create({ name => $opts->{cv_name} });
+    
+    my $cvterm = $cv->find_related('cvterms',
+				       { name => $cvterm_name }
+	);
+    
+    $cvterm ||= $schema->resultset('General::Db')
+	->find_or_create( { name => $opts->{db_name} } )
+	->find_or_create_related('dbxrefs',
+				 { accession => $opts->{dbxref_accession} },
+	)
+	->create_related('cvterms',
+			 { name => $cvterm_name,
+			   cv_id => $cv->cv_id(),
+			 }
+	);
+    return $cvterm;
+}
+
+
+
 1;
