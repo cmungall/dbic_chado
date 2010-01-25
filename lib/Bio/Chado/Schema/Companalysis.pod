@@ -1,7 +1,7 @@
 =head1 NAME
 
 Bio::Chado::Schema::Companalysis - Augments sequence module with descriptions of computational
-        analyses and features resulting from those analyses
+analyses and features resulting from those analyses
 
 =head1 CHADO MODULE
 

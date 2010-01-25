@@ -1,3 +1,9 @@
+Bio-Schema-Chado (0.05502)
+
+  * more POD tweaking to improve CPAN indexing
+
+ -- Robert Buels <rmb32@cornell.edu>  <INSERT RELEASE DATE>
+
 Bio-Schema-Chado (0.05501)
 
   * tweaked per-chado-module POD for better CPAN indexing

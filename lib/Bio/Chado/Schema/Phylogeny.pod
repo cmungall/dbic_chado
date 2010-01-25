@@ -1,8 +1,8 @@
 =head1 NAME
 
 Bio::Chado::Schema::Phylogeny - For representing phylogenetic trees; the trees represent the
-        phylogeny of some some kind of sequence feature (mainly
-        proteins) or actual organism taxonomy trees
+phylogeny of some some kind of sequence feature (mainly
+proteins) or actual organism taxonomy trees
 
 =head1 CHADO MODULE
 
