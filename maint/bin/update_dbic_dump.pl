@@ -385,39 +385,46 @@ sub _generate_chado_submodule_podfile {
     my ($mod_moniker) = split /::/, $info->{tables}->[0];
 
     no warnings 'uninitialized';
-    $file->openw->print(<<EOF)
-=head1 NAME
 
-Bio::Chado::Schema::$mod_moniker $info->{module_comment}
+    # keep the POD below indented by 2 spaces to hide it from the CPAN
+    # indexer
+    my $pod = <<EOF;
+  =head1 NAME
 
-=head1 CHADO MODULE
+  Bio::Chado::Schema::$mod_moniker $info->{module_comment}
 
-Classes in this namespace correspond to tables and views in the
-Chado $info->{module} module.
+  =head1 CHADO MODULE
 
-=head1 CLASSES
+  Classes in this namespace correspond to tables and views in the
+  Chado $info->{module} module.
 
-These classes are part of the L<Bio::Chado::Schema> distribution.
+  =head1 CLASSES
 
-Below is a list of classes in this module of Chado.  Each of the
-classes below corresponds to a single Chado table or view.
+  These classes are part of the L<Bio::Chado::Schema> distribution.
 
-$table_pod
+  Below is a list of classes in this module of Chado.  Each of the
+  classes below corresponds to a single Chado table or view.
 
-=cut
+  $table_pod
+
+  =cut
 EOF
+
+    $pod =~ s/^  //g;
+    $pod =~ s/(?<=\n) +//g;
+    $file->openw->print($pod);
 }
 
 __END__
 
 =head1 NAME
 
-update_dbic_dump.pl - developer-only maintenance script to sync the
+update_dbic_dump.pl - developer-only maintenance script to sync this
 DBIx::Class object layer with the latest upstream version of Chado
 
 =head1 DESCRIPTION
 
-B<NOTE:> this script is intended only for use by the
+B<NOTE:> this script is intended for use only by the
 Bio::Chado::Schema maintainers.
 
 This script basically:
