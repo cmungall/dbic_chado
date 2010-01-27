@@ -18,9 +18,10 @@ SKIP: {
 
     my $name = 'test cvterm_name';
     my $cvname = 'test cv_name';
-    my $cvterm = $cvterm_rs->create_with({ name => $name, cv => $cvname });
 
     $schema->txn_do(sub {
+	my $cvterm = $cvterm_rs->create_with({ name => $name, cv => $cvname });
+
         is( $cvterm->name, $name, 'cvterm_name test' );
         is( $cvterm->cv->name,
 	    $cvname,
@@ -31,5 +32,6 @@ SKIP: {
         is( $cvterm->dbxref->db->name,
 	    'null',
 	    'db name autocreated test' );
+	$schema->txn_rollback;
     });
 }
