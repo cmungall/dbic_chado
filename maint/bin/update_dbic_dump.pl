@@ -361,7 +361,7 @@ sub generate_chado_submodule_pod {
 	->subdir('Chado')
         ->file( "Schema.pm" );
     my $schema_pm_contents = $schema_pm->slurp;
-    $schema_pm_contents =~ s/(?<=\=generated_module_list\n)([^=]+)(?=\n=)/"\n$module_list"/e;
+    $schema_pm_contents =~ s/(?<=\=head1 CHADO MODULES COVERED BY THIS PACKAGE\n)([^=]+)(?=\n=)/"\n$module_list"/e;
     $schema_pm->openw->print($schema_pm_contents);
 }
 

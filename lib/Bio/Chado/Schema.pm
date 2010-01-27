@@ -47,8 +47,6 @@ point is the L<DBIx::Class::Manual>.
 
 =head1 CHADO MODULES COVERED BY THIS PACKAGE
 
-=bcs_generated_module_list
-
 L<Bio::Chado::Schema::CellLine>
 
 L<Bio::Chado::Schema::Companalysis>
@@ -82,6 +80,7 @@ L<Bio::Chado::Schema::Pub>
 L<Bio::Chado::Schema::Sequence>
 
 L<Bio::Chado::Schema::Stock>
+
 
 =head1 CONTRIBUTORS
 
