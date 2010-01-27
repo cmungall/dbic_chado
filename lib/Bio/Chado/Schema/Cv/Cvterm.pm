@@ -1697,7 +1697,7 @@ use Carp;
 
 =head2 create_with
 
- Usage: $schema->resultset('Cv::Cv')->create_with(
+ Usage: $schema->resultset('Cv::Cvterm')->create_with(
                   { name   => 'cvterm name',
                     cv     => $cv  || 'cv name',
                     db     => $db  || 'db name',
@@ -1770,7 +1770,7 @@ sub _find_dbxref {
 	$db = $schema->resultset('General::Db')
 	             ->find_or_create({ name => $db });
     }
-	
+
     #now find or create the dbxref from the db
     return $db->find_or_create_related('dbxrefs',
 				       { accession => $dbx },
