@@ -23,25 +23,25 @@ my $dbh= $schema->storage()->dbh();
 isa_ok( $schema, 'DBIx::Class::Schema' );
 
 
-my $last_cv_id= $schema->resultset('Cv::Cv')->get_column('cv_id')->max; 
-my $last_cvterm_id= $schema->resultset('Cv::Cvterm')->get_column('cvterm_id')->max; 
-my $last_db_id= $schema->resultset('General::Db')->get_column('db_id')->max; 
-my $last_dbxref_id= $schema->resultset('General::Dbxref')->get_column('dbxref_id')->max; 
+my $last_cv_id= $schema->resultset('Cv::Cv')->get_column('cv_id')->max;
+my $last_cvterm_id= $schema->resultset('Cv::Cvterm')->get_column('cvterm_id')->max;
+my $last_db_id= $schema->resultset('General::Db')->get_column('db_id')->max;
+my $last_dbxref_id= $schema->resultset('General::Dbxref')->get_column('dbxref_id')->max;
 
 eval {
     my $cvterm_res = $schema->resultset('Cv::Cvterm');
     isa_ok( $cvterm_res, 'DBIx::Class::ResultSet' );
-    
+
     #
     my $name = 'test cvterm_name';
     my $cvname = 'test cv_name';
     my $cvterm = $cvterm_res->new({})->find_or_create_cvterm($name, { cv_name => $cvname });
-    
+
     is($cvterm->name(), $name , 'cvterm_name test');
     is( ($cvterm)->find_related('cv', { key => 'cv_id' } )->get_column('name'), $cvname , 'cv_name test');
     is($cvterm->find_related('dbxref', { key =>'dbxref_id' } )->accession(), 'autocreated:' . $name , 'dbxref autocreated accession test');
     is($cvterm->find_related('dbxref', {key=> 'dbxref_id' } )->find_related('db', { key => 'db_id' } )->name(), 'null' , 'db name autocreated test');
-    
+
 };
 
 if ($@) {
