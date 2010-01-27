@@ -856,12 +856,56 @@ sub search_featureprops {
 }
 
 
-######### Bio::SeqI support ###########
+=head1 L<Bio::PrimarySeqI> METHODS
+
+The methods below are intended to provide some compatibility with
+BioPerl's L<Bio::PrimarySeqI> interface, so that a feature may be used
+as a sequence.  Note that L<Bio::PrimarySeqI> only provides
+identifier, accession, and sequence information, no subfeatures,
+ranges, or the like.
+
+Support for BioPerl's more complete L<Bio::SeqI> interface, which
+includes those things, is planned for a future release.
+
+=cut
+
 use base qw/ Bio::PrimarySeq /;
 
-sub seq {
-    shift()->residues;
+=head2 id, primary_id, display_id
+
+These are aliases for name(), which just returns the contents of the
+feature.name field
+
+=cut
+
+{ no warnings 'once';
+  *display_id  = \&name;
+  *id          = \&name;
+  *primary_id  = \&name;
 }
+
+=head2 seq
+
+  Alias for $feature->residues()
+
+=cut
+
+{ no warnings 'once';
+  *seq  = \&residues;
+}
+
+=head2 accession, accession_number
+
+  Usage: say $feature->accession_number
+  Desc : get an "<accession>.<version>"-style string.  gets this from
+         either the primary dbxref, or the first secondary_dbxref
+         found
+  Args : none
+  Ret : string of the form "accession.version" formed from the
+        accession and version fields of either the primary or
+        secondary dbxrefs
+
+=cut
 
 sub accession_number {
     my $self= shift;
@@ -877,13 +921,35 @@ sub accession_number {
     return $acc.$v;
 }
 
+{ no warnings 'once';
+  *accession = \&accession_number;
+}
+
+
+=head2 length
+
+No arguments, returns the seqlen(), or length( $feature->residues ) if
+that is not defined.
+
+=cut
+
 sub length {
     my $self = shift;
     my $l = $self->seqlen;
     return $l if defined $l;
-    return CORE::length( $self->get_column('residues')->length );
+    return CORE::length( $self->residues );
 }
 
+=head2 desc, description
+
+No arguments, returns the value of the first 'description' featureprop
+found for this feature.
+
+=cut
+
+{ no warnings 'once';
+  *description = \&desc;
+}
 sub desc {
     my $self = shift;
     my $desc_fp =
@@ -893,29 +959,18 @@ sub desc {
     return $desc_fp->value;
 }
 
+=head2 alphabet
 
-sub can_call_new { 0 }
+Not implemented. Throws an error if used.
 
-sub namespace {
-    shift()->type->cv->name;
-}
+=cut
 
 sub alphabet {
     shift()->throw_not_implemented()
 }
 
-
-# METHOD ALIASES
-{
-    no warnings 'once';
-
-    *accession   = \&accession_number;
-
-    *description = \&desc;
-
-    *display_id  = \&name;
-    *id          = \&name;
-    *primary_id  = \&name;
-}
+# signal to BioPerl that this sequence can't be cloned
+sub can_call_new { 0 }
 
 1;
+
