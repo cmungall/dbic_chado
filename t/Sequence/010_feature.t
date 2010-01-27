@@ -12,7 +12,7 @@ use lib "$FindBin::RealBin/../lib";
 use DbicChadoTest;
 
 SKIP: {
-    my $schema = DbicChadoTest->schema_connect_or_skip(4);
+    my $schema = DbicChadoTest->schema_connect_or_skip(7);
     isa_ok( $schema, 'DBIx::Class::Schema' );
 
     my $sf = $schema->resultset('Sequence::Feature');
