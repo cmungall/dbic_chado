@@ -1685,52 +1685,96 @@ sub delete_secondary_dbxref {
 
 }
 
-=head2 find_or_create_cvterm
 
- Usage: $self->find_or_create_cvterm($cvterm_name , { cv_name => 'my_cv_name' , db_name =>'my_db_name', dbxref_accession=> 'my accession' } );
- Desc:  Check if a cvterm exists in the database for your cv, if not create a new one and the required related dbxref and db
- Ret:   a Cvterm object
- Args:  the name for your cvterm
-        %opts for :
-          cv_name [optional. Default = 'null']
-          db_name [optional. Defalt = 'null']
-          dbxref_accession [optional. Default = 'null']
+############ CVTERM CUSTOM RESULTSET PACKAGE #############################
 
- Side Effects:
- Example:
+
+__PACKAGE__->resultset_class('Bio::Chado::Schema::Cv::Cvterm::ResultSet');
+package Bio::Chado::Schema::Cv::Cvterm::ResultSet;
+use base qw/ DBIx::Class::ResultSet /;
+
+use Carp;
+
+=head2 create_with
+
+ Usage: $schema->resultset('Cv::Cv')->create_with(
+                  { name   => 'cvterm name',
+                    cv     => $cv  || 'cv name',
+                    db     => $db  || 'db name',
+                    dbxref => $dbx || 'accession',
+                  });
+
+ Desc: convenience method to create a cvterm, linking it to the CV and
+       DB that you name or provide.  For any cv, db, or dbxref that
+       you call only by name, does a find_or_create() using that name.
+ Ret : a new Cvterm row
+ Args: hashref of:
+         { name   => 'cvterm name',
+           cv     => 'cv name' or L<Bio::Chado::Schema::Cv::Cvterm> row,
+           db     => 'db name' or L<Bio::Chado::Schema::General::Db> row,
+           dbxref => 'accession' or L<Bio::Chado::Schema::General::Dbxref> row,
+         }
 
 =cut
 
-sub create_cvterm {
-    my ($self, $cvterm_name, $opts) = @_;
+sub create_with {
+    my ($self, $opts) = @_;
+    $opts or croak 'must provide a hashref of values to create_with';
+    $opts->{name} or croak 'must provide a name for the new cvterm';
+
+    # cv and db default to 'null'
+    $opts->{cv} = 'null' unless defined $opts->{cv};
+    $opts->{db} = 'null' unless defined $opts->{db};
+
+    # dbxref defaults to autocreated:<cvterm_name>
+    $opts->{dbxref} = 'autocreated:'.$opts->{name}
+        unless defined $opts->{dbxref};
+
+    # if cv, dbxref, or db are row objects, make sure that they are
+    # actually stored in the db, since we need to make foreign key
+    # relationships to them
+    $_->insert_or_update
+	for grep ref, @{$opts}{qw| cv dbxref db |};
+
     my $schema = $self->result_source->schema;
-    $opts ||= {};
-    $opts->{cv_name} = 'null'
-        unless defined $opts->{cv_name};
-    $opts->{db_name} = 'null'
-        unless defined $opts->{db_name};
-    $opts->{dbxref_accession} = 'autocreated:'.$cvterm_name
-        unless defined $opts->{dbxref_accession};
 
-    my $cv =
-	$schema->resultset('Cv::Cv')
-	->find_or_create({ name => $opts->{cv_name} });
+    # use, find, or create the given cv
+    my $cv = ref $opts->{cv} ? $opts->{cv}
+	                     : $schema->resultset('Cv::Cv')
+				      ->find_or_create({ name => $opts->{cv} });
 
-    my $cvterm = $cv->find_related('cvterms',
-				       { name => $cvterm_name }
-	);
+    # return our cvterm if it exists already
+    if( my $cvterm = $cv->find_related( 'cvterms', { name => $opts->{name} }) ) {
+	return $cvterm;
+    }
 
-    $cvterm ||= $schema->resultset('General::Db')
-	->find_or_create( { name => $opts->{db_name} } )
-	->find_or_create_related('dbxrefs',
-				 { accession => $opts->{dbxref_accession} },
-	)
-	->create_related('cvterms',
-			 { name => $cvterm_name,
-			   cv_id => $cv->cv_id(),
-			 }
-	);
-    return $cvterm;
+    # now figure out which dbxref to use (creating the dbxref and db if necessary)
+    my $dbx = _find_dbxref( $schema, $opts->{dbxref}, $opts->{db} );
+
+    # and finally make a cvterm to go with the cv and dbxref we found
+    return $cv->create_related( 'cvterms',
+				{ name => $opts->{name},
+				  dbxref_id => $dbx->dbxref_id,
+			        }
+			      );
+}
+sub _find_dbxref {
+    my ( $schema, $dbx, $db ) = @_;
+
+    # if we have a dbxref object to begin with, use it
+    return $dbx if ref $dbx;
+
+    ### otherwise, need to find the db
+    unless( ref $db ) {
+	# convert db name string into object if necessary
+	$db = $schema->resultset('General::Db')
+	             ->find_or_create({ name => $db });
+    }
+	
+    #now find or create the dbxref from the db
+    return $db->find_or_create_related('dbxrefs',
+				       { accession => $dbx },
+				      );
 }
 
 
