@@ -1556,7 +1556,7 @@ sub add_synonym {
             my $def = $opts->{definition};
 
 
-	    my $synonym_type_cvterm= $synonym_cv->create_related('types',
+	    my $synonym_type_cvterm= $synonym_cv->create_related('cvterms',
 								 { name => $synonym_type,
 								   is_obsolete => 0,
 								   dbxref_id => $dbxref->dbxref_id,
