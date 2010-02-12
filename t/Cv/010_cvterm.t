@@ -13,7 +13,7 @@ use DbicChadoTest;
 use Bio::Chado::Schema;
 
 SKIP: {
-    my $schema = DbicChadoTest->schema_connect_or_skip(4);
+    my $schema = DbicChadoTest->schema_connect_or_skip( 13 );
     my $cvterm_rs = $schema->resultset('Cv::Cvterm');
 
     my $name = 'test cvterm_name';
