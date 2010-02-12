@@ -1446,6 +1446,21 @@ __PACKAGE__->has_many(
 
 use Carp;
 
+=head2 cvtermsynonyms
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Cv::Cvtermsynonym>
+
+=cut
+__PACKAGE__->has_many(
+  "cvtermsynonyms",
+  "Bio::Chado::Schema::Cv::Cvtermsynonym",
+  { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
 =head2 add_synonym
 
  Usage:        $self->add_synonym($synonym , { type => 'exact' , autocreate => 1} );
@@ -1548,8 +1563,10 @@ sub add_synonym {
 								   $def ? (definition => $def) : (),
 								 }
 		);
-	    $data->{type_id} = $synonym_type_cvterm->cv_id();
-        }
+	    $data->{type_id} = $synonym_type_cvterm->cvterm_id();
+        } else {
+	    $data->{type_id} = $existing_cvterm->cvterm_id();
+	}
     }
     my ($cvtermsynonym)= $self->search_related('featureprops',
 					       {type_id => $data->{type_id},
@@ -1608,11 +1625,8 @@ sub get_secondary_dbxrefs {
     my @list;
     my @s =  $self->search_related('cvterm_dbxrefs' , { is_for_definition => 0} );
     foreach (@s) {
-	my ($db_name, $accession)  = $schema->resultset("General::Dbxref")->search(
-	    { dbxref_id => $_->get_column('dbxref_id') },
-	    { join      => { 'db' => 'db_id' },
-	      +select   => [ 'db.name', 'dbxref.accession' ],
-	    } );
+	my $accession = $_->dbxref->accession;
+	my $db_name = $_->dbxref->db->name;
 	push @list, $db_name . ":" .  $accession;
     }
     return @list;
@@ -1632,10 +1646,11 @@ sub get_secondary_dbxrefs {
 
 sub add_secondary_dbxref {
     my ($self, $accession, $def)=@_;
-    $def = 0 unless $def == 1;
+    $def = 0 if !$def;
+
     my $schema = $self->result_source->schema;
     my ($db_name, $acc) = split (/:/, $accession);
-    if (!$db_name || $accession) { croak "Did not pass a legal accession! ($accession)" ; }
+    if (!$db_name || !$acc) { croak "Did not pass a legal accession! ($accession)" ; }
     my $db = $schema->resultset("General::Db")->find_or_create(
 	{ name => $db_name },
 	{ key => 'db_c1' }
@@ -1675,7 +1690,7 @@ sub delete_secondary_dbxref {
     my $accession=shift;
     my $schema = $self->result_source->schema;
     my ($db_name, $acc) = split (/:/, $accession);
-    if (!$db_name || $accession) { croak "Did not pass a legal accession! ($accession)" ; }
+    if (!$db_name || !$accession) { croak "Did not pass a legal accession! ($accession)" ; }
 
     my ($cvterm_dbxref) = $schema->resultset("General::Db")->search(
 	{ name => $db_name } )->
@@ -1744,7 +1759,11 @@ sub create_with {
 				      ->find_or_create({ name => $opts->{cv} });
 
     # return our cvterm if it exists already
-    if( my $cvterm = $cv->find_related( 'cvterms', { name => $opts->{name} }) ) {
+    if( my $cvterm = $cv->find_related( 'cvterms',
+					{
+					    name => $opts->{name},
+					    is_obsolete => '0',
+					}) ) {
 	return $cvterm;
     }
 
@@ -1756,7 +1775,7 @@ sub create_with {
 				{ name => $opts->{name},
 				  dbxref_id => $dbx->dbxref_id,
 			        }
-			      );
+	);
 }
 sub _find_dbxref {
     my ( $schema, $dbx, $db ) = @_;
