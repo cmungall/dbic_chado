@@ -8,10 +8,10 @@ use Bio::Chado::Schema;
 
 sub schema_connect {
     my ($class,%args) = @_;
-    my $test_dsn = $ENV{DBIC_CHADO_TEST_DSN};
+    my $test_dsn = $ENV{BCS_TEST_DSN};
 
     unless($test_dsn) {
-        diag "please supply DBIC_CHADO_TEST_DSN environment var to connect to the schema";
+        diag "please supply BCS_TEST_DSN environment var to connect to the schema";
         return;
     }
 
@@ -20,19 +20,8 @@ sub schema_connect {
 
 sub schema_connect_or_skip {
     shift->schema_connect
-        or skip "please supply DBIC_CHADO_TEST_DSN environment var to connect to the schema", shift;
+        or skip "please supply BCS_TEST_DSN environment variable to connect to the schema", shift;
 }
 
 1;
-
-
-
-
-
-
-
-
-
-
-
 
