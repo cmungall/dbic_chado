@@ -1446,8 +1446,6 @@ __PACKAGE__->has_many(
 
 use Carp;
 
-
-
 =head2 cvtermsynonyms
 
 Type: has_many
@@ -1461,6 +1459,7 @@ __PACKAGE__->has_many(
   { "foreign.cvterm_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
+
 
 =head2 add_synonym
 
@@ -1648,7 +1647,7 @@ sub get_secondary_dbxrefs {
 sub add_secondary_dbxref {
     my ($self, $accession, $def)=@_;
     $def = 0 if !$def;
-    
+
     my $schema = $self->result_source->schema;
     my ($db_name, $acc) = split (/:/, $accession);
     if (!$db_name || !$acc) { croak "Did not pass a legal accession! ($accession)" ; }
@@ -1760,17 +1759,17 @@ sub create_with {
 				      ->find_or_create({ name => $opts->{cv} });
 
     # return our cvterm if it exists already
-    if( my $cvterm = $cv->find_related( 'cvterms', 
-					{ 
+    if( my $cvterm = $cv->find_related( 'cvterms',
+					{
 					    name => $opts->{name},
 					    is_obsolete => '0',
 					}) ) {
 	return $cvterm;
     }
-    
+
     # now figure out which dbxref to use (creating the dbxref and db if necessary)
     my $dbx = _find_dbxref( $schema, $opts->{dbxref}, $opts->{db} );
-    
+
     # and finally make a cvterm to go with the cv and dbxref we found
     return $cv->create_related( 'cvterms',
 				{ name => $opts->{name},
