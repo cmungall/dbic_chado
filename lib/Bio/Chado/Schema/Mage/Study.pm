@@ -25,7 +25,6 @@ __PACKAGE__->table("study");
   default_value: nextval('study_study_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 contact_id
 
@@ -33,7 +32,6 @@ __PACKAGE__->table("study");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 pub_id
 
@@ -41,7 +39,6 @@ __PACKAGE__->table("study");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 dbxref_id
 
@@ -49,71 +46,54 @@ __PACKAGE__->table("study");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 name
 
   data_type: text
   default_value: undef
   is_nullable: 0
-  size: undef
 
 =head2 description
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =cut
 
 __PACKAGE__->add_columns(
   "study_id",
   {
-    data_type => "integer",
-    default_value => "nextval('study_study_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('study_study_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "contact_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "pub_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "dbxref_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "name",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 0,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 0 },
   "description",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("study_id");
 __PACKAGE__->add_unique_constraint("study_c1", ["name"]);
@@ -211,8 +191,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:PDr2/v3VpLieOl9cuujaFg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:J85KtmeNeX82CQL0bFVplw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Expression::ExpressionCvtermprop - Extensible properties for
+Bio::Chado::Schema::Expression::ExpressionCvtermprop
+
+=head1 DESCRIPTION
+
+Extensible properties for
 expression to cvterm associations. Examples: qualifiers.
 
 =cut
@@ -26,7 +30,6 @@ __PACKAGE__->table("expression_cvtermprop");
   default_value: nextval('expression_cvtermprop_expression_cvtermprop_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 expression_cvterm_id
 
@@ -34,7 +37,6 @@ __PACKAGE__->table("expression_cvtermprop");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 type_id
 
@@ -42,7 +44,6 @@ __PACKAGE__->table("expression_cvtermprop");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 The name of the
 property/slot is a cvterm. The meaning of the property is defined in
@@ -53,7 +54,6 @@ that cvterm. For example, cvterms may come from the FlyBase miscellaneous cv.
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 The value of the
 property, represented as text. Numeric values are converted to their
@@ -65,7 +65,6 @@ types, but is easier to query.
   data_type: integer
   default_value: 0
   is_nullable: 0
-  size: 4
 
 Property-Value
 ordering. Any expression_cvterm can have multiple values for any particular
@@ -78,37 +77,29 @@ the default 0 value should be used.
 __PACKAGE__->add_columns(
   "expression_cvtermprop_id",
   {
-    data_type => "integer",
-    default_value => "nextval('expression_cvtermprop_expression_cvtermprop_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('expression_cvtermprop_expression_cvtermprop_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "expression_cvterm_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "value",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "rank",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("expression_cvtermprop_id");
 __PACKAGE__->add_unique_constraint(
@@ -149,8 +140,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:iHCVzZm29WybTmQbWJ+buQ
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:A5TDmgQwcTjXlB+vp88E4w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

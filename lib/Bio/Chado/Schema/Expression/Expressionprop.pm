@@ -25,7 +25,6 @@ __PACKAGE__->table("expressionprop");
   default_value: nextval('expressionprop_expressionprop_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 expression_id
 
@@ -33,7 +32,6 @@ __PACKAGE__->table("expressionprop");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 type_id
 
@@ -41,58 +39,47 @@ __PACKAGE__->table("expressionprop");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 value
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =head2 rank
 
   data_type: integer
   default_value: 0
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "expressionprop_id",
   {
-    data_type => "integer",
-    default_value => "nextval('expressionprop_expressionprop_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('expressionprop_expressionprop_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "expression_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "value",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "rank",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("expressionprop_id");
 __PACKAGE__->add_unique_constraint("expressionprop_c1", ["expression_id", "type_id", "rank"]);
@@ -130,8 +117,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:cEMigAedYXvFGSrMPiKuPQ
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:bu+mNtfnJSzswDhPrbNcGQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

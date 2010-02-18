@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Mage::Treatment - A biomaterial may undergo multiple
+Bio::Chado::Schema::Mage::Treatment
+
+=head1 DESCRIPTION
+
+A biomaterial may undergo multiple
 treatments. Examples of treatments: apoxia, fluorophore and biotin labeling.
 
 =cut
@@ -26,14 +30,12 @@ __PACKAGE__->table("treatment");
   default_value: nextval('treatment_treatment_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 rank
 
   data_type: integer
   default_value: 0
   is_nullable: 0
-  size: 4
 
 =head2 biomaterial_id
 
@@ -41,7 +43,6 @@ __PACKAGE__->table("treatment");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 type_id
 
@@ -49,7 +50,6 @@ __PACKAGE__->table("treatment");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 protocol_id
 
@@ -57,59 +57,48 @@ __PACKAGE__->table("treatment");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 name
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =cut
 
 __PACKAGE__->add_columns(
   "treatment_id",
   {
-    data_type => "integer",
-    default_value => "nextval('treatment_treatment_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('treatment_treatment_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "rank",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
   "biomaterial_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "protocol_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "name",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("treatment_id");
 
@@ -176,8 +165,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FmbqknpT+D2AjdsBAubnyQ
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:R6yhh0Pbx4+/WDAvlLZzCw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

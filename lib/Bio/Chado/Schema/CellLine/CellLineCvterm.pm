@@ -25,7 +25,6 @@ __PACKAGE__->table("cell_line_cvterm");
   default_value: nextval('cell_line_cvterm_cell_line_cvterm_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 cell_line_id
 
@@ -33,7 +32,6 @@ __PACKAGE__->table("cell_line_cvterm");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 cvterm_id
 
@@ -41,7 +39,6 @@ __PACKAGE__->table("cell_line_cvterm");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 pub_id
 
@@ -49,52 +46,46 @@ __PACKAGE__->table("cell_line_cvterm");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 rank
 
   data_type: integer
   default_value: 0
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "cell_line_cvterm_id",
   {
-    data_type => "integer",
-    default_value => "nextval('cell_line_cvterm_cell_line_cvterm_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('cell_line_cvterm_cell_line_cvterm_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "cell_line_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "cvterm_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "pub_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "rank",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("cell_line_cvterm_id");
 __PACKAGE__->add_unique_constraint(
@@ -165,8 +156,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ozaAAXGAbOeGwuMvdCpYCg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:O/2leoAHWuIz62K/CbjHTw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

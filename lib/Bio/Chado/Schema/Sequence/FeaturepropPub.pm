@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Sequence::FeaturepropPub - Provenance. Any featureprop assignment can optionally be supported by a publication.
+Bio::Chado::Schema::Sequence::FeaturepropPub
+
+=head1 DESCRIPTION
+
+Provenance. Any featureprop assignment can optionally be supported by a publication.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("featureprop_pub");
   default_value: nextval('featureprop_pub_featureprop_pub_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 featureprop_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("featureprop_pub");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 pub_id
 
@@ -41,34 +43,30 @@ __PACKAGE__->table("featureprop_pub");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "featureprop_pub_id",
   {
-    data_type => "integer",
-    default_value => "nextval('featureprop_pub_featureprop_pub_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('featureprop_pub_featureprop_pub_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "featureprop_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "pub_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
 );
 __PACKAGE__->set_primary_key("featureprop_pub_id");
@@ -107,8 +105,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:gmnk6xV9NTG5fqbyj3ca/Q
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:9GYsbby84PrE1W9t9wCxkQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

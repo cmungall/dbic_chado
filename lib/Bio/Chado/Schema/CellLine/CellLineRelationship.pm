@@ -25,7 +25,6 @@ __PACKAGE__->table("cell_line_relationship");
   default_value: nextval('cell_line_relationship_cell_line_relationship_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 subject_id
 
@@ -33,7 +32,6 @@ __PACKAGE__->table("cell_line_relationship");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 object_id
 
@@ -41,7 +39,6 @@ __PACKAGE__->table("cell_line_relationship");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 type_id
 
@@ -49,42 +46,37 @@ __PACKAGE__->table("cell_line_relationship");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "cell_line_relationship_id",
   {
-    data_type => "integer",
-    default_value => "nextval('cell_line_relationship_cell_line_relationship_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('cell_line_relationship_cell_line_relationship_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "subject_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "object_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
 );
 __PACKAGE__->set_primary_key("cell_line_relationship_id");
@@ -141,8 +133,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:TaGjSx/IzCeJM4oeAEbsrg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:hI9swvLSth8LEgqyaujiVA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Sequence::FeatureRelationship - Features can be arranged in
+Bio::Chado::Schema::Sequence::FeatureRelationship
+
+=head1 DESCRIPTION
+
+Features can be arranged in
 graphs, e.g. "exon part_of transcript part_of gene"; If type is
 thought of as a verb, the each arc or edge makes a statement
 [Subject Verb Object]. The object can also be thought of as parent
@@ -33,7 +37,6 @@ __PACKAGE__->table("feature_relationship");
   default_value: nextval('feature_relationship_feature_relationship_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 subject_id
 
@@ -41,7 +44,6 @@ __PACKAGE__->table("feature_relationship");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 The subject of the subj-predicate-obj sentence. This is typically the subfeature.
 
@@ -51,7 +53,6 @@ The subject of the subj-predicate-obj sentence. This is typically the subfeature
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 The object of the subj-predicate-obj sentence. This is typically the container feature.
 
@@ -61,7 +62,6 @@ The object of the subj-predicate-obj sentence. This is typically the container f
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 Relationship type between subject and object. This is a cvterm, typically from the OBO relationship ontology, although other relationship types are allowed. The most common relationship type is OBO_REL:part_of. Valid relationship types are constrained by the Sequence Ontology.
 
@@ -70,7 +70,6 @@ Relationship type between subject and object. This is a cvterm, typically from t
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 Additional notes or comments.
 
@@ -79,7 +78,6 @@ Additional notes or comments.
   data_type: integer
   default_value: 0
   is_nullable: 0
-  size: 4
 
 The ordering of subject features with respect to the object feature may be important (for example, exon ordering on a transcript - not always derivable if you take trans spliced genes into consideration). Rank is used to order these; starts from zero.
 
@@ -88,45 +86,36 @@ The ordering of subject features with respect to the object feature may be impor
 __PACKAGE__->add_columns(
   "feature_relationship_id",
   {
-    data_type => "integer",
-    default_value => "nextval('feature_relationship_feature_relationship_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('feature_relationship_feature_relationship_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "subject_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "object_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "value",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "rank",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("feature_relationship_id");
 __PACKAGE__->add_unique_constraint(
@@ -216,8 +205,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VECPDIghPQSd6Z80n5WSMA
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:UZrAsYzyj6+SVupJirkhkA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

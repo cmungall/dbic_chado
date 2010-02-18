@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Cv::Cvtermsynonym - A cvterm actually represents a
+Bio::Chado::Schema::Cv::Cvtermsynonym
+
+=head1 DESCRIPTION
+
+A cvterm actually represents a
 distinct class or concept. A concept can be refered to by different
 phrases or names. In addition to the primary name (cvterm.name) there
 can be a number of alternative aliases or synonyms. For example, "T
@@ -29,7 +33,6 @@ __PACKAGE__->table("cvtermsynonym");
   default_value: nextval('cvtermsynonym_cvtermsynonym_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 cvterm_id
 
@@ -37,7 +40,6 @@ __PACKAGE__->table("cvtermsynonym");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 synonym
 
@@ -52,7 +54,6 @@ __PACKAGE__->table("cvtermsynonym");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 A synonym can be exact,
 narrower, or broader than.
@@ -62,19 +63,17 @@ narrower, or broader than.
 __PACKAGE__->add_columns(
   "cvtermsynonym_id",
   {
-    data_type => "integer",
-    default_value => "nextval('cvtermsynonym_cvtermsynonym_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('cvtermsynonym_cvtermsynonym_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "cvterm_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "synonym",
   {
@@ -85,11 +84,10 @@ __PACKAGE__->add_columns(
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
 );
 __PACKAGE__->set_primary_key("cvtermsynonym_id");
@@ -128,8 +126,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rPN9PNjMNzgFZ3LsGEXkAA
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:sWoPUw+RHehaRHp/p3K4Ng
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Mage::AssayBiomaterial - A biomaterial can be hybridized many times (technical replicates), or combined with other biomaterials in a single hybridization (for two-channel arrays).
+Bio::Chado::Schema::Mage::AssayBiomaterial
+
+=head1 DESCRIPTION
+
+A biomaterial can be hybridized many times (technical replicates), or combined with other biomaterials in a single hybridization (for two-channel arrays).
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("assay_biomaterial");
   default_value: nextval('assay_biomaterial_assay_biomaterial_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 assay_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("assay_biomaterial");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 biomaterial_id
 
@@ -41,7 +43,6 @@ __PACKAGE__->table("assay_biomaterial");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 channel_id
 
@@ -49,52 +50,46 @@ __PACKAGE__->table("assay_biomaterial");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 rank
 
   data_type: integer
   default_value: 0
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "assay_biomaterial_id",
   {
-    data_type => "integer",
-    default_value => "nextval('assay_biomaterial_assay_biomaterial_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('assay_biomaterial_assay_biomaterial_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "assay_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "biomaterial_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "channel_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "rank",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("assay_biomaterial_id");
 __PACKAGE__->add_unique_constraint(
@@ -150,8 +145,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:fJioIiUQVt4hkqNc8yRj8w
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:LtalwtoPJBPKz9evbr5qoA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

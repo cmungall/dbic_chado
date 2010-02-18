@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Phenotype::Phenotype - A phenotypic statement, or a single
+Bio::Chado::Schema::Phenotype::Phenotype
+
+=head1 DESCRIPTION
+
+A phenotypic statement, or a single
 atomic phenotypic observation, is a controlled sentence describing
 observable effects of non-wild type function. E.g. Obs=eye, attribute=color, cvalue=red.
 
@@ -27,14 +31,12 @@ __PACKAGE__->table("phenotype");
   default_value: nextval('phenotype_phenotype_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 uniquename
 
   data_type: text
   default_value: undef
   is_nullable: 0
-  size: undef
 
 =head2 observable_id
 
@@ -42,7 +44,6 @@ __PACKAGE__->table("phenotype");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 The entity: e.g. anatomy_part, biological_process.
 
@@ -52,7 +53,6 @@ The entity: e.g. anatomy_part, biological_process.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 Phenotypic attribute (quality, property, attribute, character) - drawn from PATO.
 
@@ -61,7 +61,6 @@ Phenotypic attribute (quality, property, attribute, character) - drawn from PATO
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 Value of attribute - unconstrained free text. Used only if cvalue_id is not appropriate.
 
@@ -71,7 +70,6 @@ Value of attribute - unconstrained free text. Used only if cvalue_id is not appr
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 Phenotype attribute value (state).
 
@@ -81,7 +79,6 @@ Phenotype attribute value (state).
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 Evidence type.
 
@@ -90,57 +87,42 @@ Evidence type.
 __PACKAGE__->add_columns(
   "phenotype_id",
   {
-    data_type => "integer",
-    default_value => "nextval('phenotype_phenotype_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('phenotype_phenotype_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "uniquename",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 0,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 0 },
   "observable_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "attr_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "value",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "cvalue_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "assay_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
 );
 __PACKAGE__->set_primary_key("phenotype_id");
@@ -223,7 +205,7 @@ __PACKAGE__->belongs_to(
   { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
 );
 
-=head2 phenotype_comparison_phenotype1_ids
+=head2 phenotype_comparison_phenotype1s
 
 Type: has_many
 
@@ -232,13 +214,13 @@ Related object: L<Bio::Chado::Schema::Genetic::PhenotypeComparison>
 =cut
 
 __PACKAGE__->has_many(
-  "phenotype_comparison_phenotype1_ids",
+  "phenotype_comparison_phenotype1s",
   "Bio::Chado::Schema::Genetic::PhenotypeComparison",
   { "foreign.phenotype1_id" => "self.phenotype_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 phenotype_comparison_phenotype2_ids
+=head2 phenotype_comparison_phenotype2s
 
 Type: has_many
 
@@ -247,7 +229,7 @@ Related object: L<Bio::Chado::Schema::Genetic::PhenotypeComparison>
 =cut
 
 __PACKAGE__->has_many(
-  "phenotype_comparison_phenotype2_ids",
+  "phenotype_comparison_phenotype2s",
   "Bio::Chado::Schema::Genetic::PhenotypeComparison",
   { "foreign.phenotype2_id" => "self.phenotype_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -284,8 +266,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:bECmSk/o+GQILL3diG5tMg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:XyxFqf5mSw45A1eUi6CYMQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

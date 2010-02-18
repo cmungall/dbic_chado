@@ -25,7 +25,6 @@ __PACKAGE__->table("studyprop_feature");
   default_value: nextval('studyprop_feature_studyprop_feature_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 studyprop_id
 
@@ -33,7 +32,6 @@ __PACKAGE__->table("studyprop_feature");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 feature_id
 
@@ -41,7 +39,6 @@ __PACKAGE__->table("studyprop_feature");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 type_id
 
@@ -49,42 +46,37 @@ __PACKAGE__->table("studyprop_feature");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "studyprop_feature_id",
   {
-    data_type => "integer",
-    default_value => "nextval('studyprop_feature_studyprop_feature_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('studyprop_feature_studyprop_feature_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "studyprop_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "feature_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
 );
 __PACKAGE__->set_primary_key("studyprop_feature_id");
@@ -141,8 +133,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ys51/YpJgp+yKevbt0B5eA
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8gAqokapU9BvCAFSaE22WA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

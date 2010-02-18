@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Genetic::PhenotypeComparison - Comparison of phenotypes e.g., genotype1/environment1/phenotype1 "non-suppressible" with respect to genotype2/environment2/phenotype2.
+Bio::Chado::Schema::Genetic::PhenotypeComparison
+
+=head1 DESCRIPTION
+
+Comparison of phenotypes e.g., genotype1/environment1/phenotype1 "non-suppressible" with respect to genotype2/environment2/phenotype2.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("phenotype_comparison");
   default_value: nextval('phenotype_comparison_phenotype_comparison_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 genotype1_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("phenotype_comparison");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 environment1_id
 
@@ -41,7 +43,6 @@ __PACKAGE__->table("phenotype_comparison");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 genotype2_id
 
@@ -49,7 +50,6 @@ __PACKAGE__->table("phenotype_comparison");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 environment2_id
 
@@ -57,7 +57,6 @@ __PACKAGE__->table("phenotype_comparison");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 phenotype1_id
 
@@ -65,7 +64,6 @@ __PACKAGE__->table("phenotype_comparison");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 phenotype2_id
 
@@ -73,7 +71,6 @@ __PACKAGE__->table("phenotype_comparison");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 pub_id
 
@@ -81,7 +78,6 @@ __PACKAGE__->table("phenotype_comparison");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 organism_id
 
@@ -89,82 +85,72 @@ __PACKAGE__->table("phenotype_comparison");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "phenotype_comparison_id",
   {
-    data_type => "integer",
-    default_value => "nextval('phenotype_comparison_phenotype_comparison_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('phenotype_comparison_phenotype_comparison_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "genotype1_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "environment1_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "genotype2_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "environment2_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "phenotype1_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "phenotype2_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "pub_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "organism_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
 );
 __PACKAGE__->set_primary_key("phenotype_comparison_id");
@@ -320,8 +306,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Vk/wb/XAba96rjjK9QrJgg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oxtOj+aeGgE53rRacraKOA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Mage::AcquisitionRelationship - Multiple monochrome images may be merged to form a multi-color image. Red-green images of 2-channel hybridizations are an example of this.
+Bio::Chado::Schema::Mage::AcquisitionRelationship
+
+=head1 DESCRIPTION
+
+Multiple monochrome images may be merged to form a multi-color image. Red-green images of 2-channel hybridizations are an example of this.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("acquisition_relationship");
   default_value: nextval('acquisition_relationship_acquisition_relationship_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 subject_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("acquisition_relationship");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 type_id
 
@@ -41,7 +43,6 @@ __PACKAGE__->table("acquisition_relationship");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 object_id
 
@@ -49,66 +50,54 @@ __PACKAGE__->table("acquisition_relationship");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 value
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =head2 rank
 
   data_type: integer
   default_value: 0
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "acquisition_relationship_id",
   {
-    data_type => "integer",
-    default_value => "nextval('acquisition_relationship_acquisition_relationship_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('acquisition_relationship_acquisition_relationship_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "subject_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "object_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "value",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "rank",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("acquisition_relationship_id");
 __PACKAGE__->add_unique_constraint(
@@ -164,8 +153,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:c0sr0vnRL3ZbZse5jUiwng
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:CcVgPWjwunKUGy4stB7qaA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

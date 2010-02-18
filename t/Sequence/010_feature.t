@@ -21,7 +21,7 @@ SKIP: {
     $schema->txn_do(sub{
 	# try a joined query through one of the longer has_many rels
 	lives_ok {
-	    $sf->search_related('feature_relationship_object_ids')->count;
+	    $sf->search_related('feature_relationship_objects')->count;
 	} 'join through a long has_many name does not die';
 
 	my $dbx = $schema->resultset('General::Db')

@@ -25,7 +25,6 @@ __PACKAGE__->table("feature_synonym");
   default_value: nextval('feature_synonym_feature_synonym_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 synonym_id
 
@@ -33,7 +32,6 @@ __PACKAGE__->table("feature_synonym");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 feature_id
 
@@ -41,7 +39,6 @@ __PACKAGE__->table("feature_synonym");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 pub_id
 
@@ -49,7 +46,6 @@ __PACKAGE__->table("feature_synonym");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 The pub_id link is for relating the usage of a given synonym to the publication in which it was used.
 
@@ -58,7 +54,6 @@ The pub_id link is for relating the usage of a given synonym to the publication 
   data_type: boolean
   default_value: false
   is_nullable: 0
-  size: 1
 
 The is_current boolean indicates whether the linked synonym is the  current -official- symbol for the linked feature.
 
@@ -67,7 +62,6 @@ The is_current boolean indicates whether the linked synonym is the  current -off
   data_type: boolean
   default_value: false
   is_nullable: 0
-  size: 1
 
 Typically a synonym exists so that somebody querying the db with an obsolete name can find the object theyre looking for (under its current name.  If the synonym has been used publicly and deliberately (e.g. in a paper), it may also be listed in reports as a synonym. If the synonym was not used deliberately (e.g. there was a typo which went public), then the is_internal boolean may be set to -true- so that it is known that the synonym is -internal- and should be queryable but should not be listed in reports as a valid synonym.
 
@@ -76,50 +70,36 @@ Typically a synonym exists so that somebody querying the db with an obsolete nam
 __PACKAGE__->add_columns(
   "feature_synonym_id",
   {
-    data_type => "integer",
-    default_value => "nextval('feature_synonym_feature_synonym_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('feature_synonym_feature_synonym_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "synonym_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "feature_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "pub_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "is_current",
-  {
-    data_type => "boolean",
-    default_value => "false",
-    is_nullable => 0,
-    size => 1,
-  },
+  { data_type => "boolean", default_value => \"false", is_nullable => 0 },
   "is_internal",
-  {
-    data_type => "boolean",
-    default_value => "false",
-    is_nullable => 0,
-    size => 1,
-  },
+  { data_type => "boolean", default_value => \"false", is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("feature_synonym_id");
 __PACKAGE__->add_unique_constraint("feature_synonym_c1", ["synonym_id", "feature_id", "pub_id"]);
@@ -172,8 +152,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:AXCC7NiMD6r/mwJ/XAVI2w
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rDakro4w6VbNYR9fIvgZIg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

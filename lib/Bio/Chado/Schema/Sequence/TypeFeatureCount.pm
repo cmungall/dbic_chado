@@ -31,7 +31,6 @@ __PACKAGE__->table("type_feature_count");
   data_type: bigint
   default_value: undef
   is_nullable: 1
-  size: 8
 
 =cut
 
@@ -44,12 +43,12 @@ __PACKAGE__->add_columns(
     size => 1024,
   },
   "num_features",
-  { data_type => "bigint", default_value => undef, is_nullable => 1, size => 8 },
+  { data_type => "bigint", default_value => undef, is_nullable => 1 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:eXSROrjt0YDIhWnotJ42NA
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:21:50
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1cb3kyn3XUJceIrdgS36Mg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

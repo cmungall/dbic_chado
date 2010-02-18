@@ -25,7 +25,6 @@ __PACKAGE__->table("phylotree");
   default_value: nextval('phylotree_phylotree_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 dbxref_id
 
@@ -33,7 +32,6 @@ __PACKAGE__->table("phylotree");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 name
 
@@ -48,7 +46,6 @@ __PACKAGE__->table("phylotree");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 Type: protein, nucleotide, taxonomy, for example. The type should be any SO type, or "taxonomy".
 
@@ -58,33 +55,29 @@ Type: protein, nucleotide, taxonomy, for example. The type should be any SO type
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 comment
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =cut
 
 __PACKAGE__->add_columns(
   "phylotree_id",
   {
-    data_type => "integer",
-    default_value => "nextval('phylotree_phylotree_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('phylotree_phylotree_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "dbxref_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "name",
   {
@@ -95,27 +88,20 @@ __PACKAGE__->add_columns(
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "analysis_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "comment",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("phylotree_id");
 
@@ -212,8 +198,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vVnWGpp8e1Tf9rvGb2pKtA
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Im7I7CzEzfqsGngd7lyTZQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

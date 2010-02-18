@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Stock::Stockcollection - The lab or stock center distributing the stocks in their collection.
+Bio::Chado::Schema::Stock::Stockcollection
+
+=head1 DESCRIPTION
+
+The lab or stock center distributing the stocks in their collection.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("stockcollection");
   default_value: nextval('stockcollection_stockcollection_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 type_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("stockcollection");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 type_id is the collection type cv.
 
@@ -43,7 +45,6 @@ type_id is the collection type cv.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 contact_id links to the contact information for the collection.
 
@@ -61,7 +62,6 @@ name is the collection.
   data_type: text
   default_value: undef
   is_nullable: 0
-  size: undef
 
 uniqename is the value of the collection cv.
 
@@ -70,27 +70,24 @@ uniqename is the value of the collection cv.
 __PACKAGE__->add_columns(
   "stockcollection_id",
   {
-    data_type => "integer",
-    default_value => "nextval('stockcollection_stockcollection_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('stockcollection_stockcollection_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "contact_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "name",
   {
@@ -100,12 +97,7 @@ __PACKAGE__->add_columns(
     size => 255,
   },
   "uniquename",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 0,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("stockcollection_id");
 __PACKAGE__->add_unique_constraint("stockcollection_c1", ["uniquename", "type_id"]);
@@ -173,8 +165,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:W84FSEw8bPdaxXvBKzpgmg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:RC0B3sbg5AiHCEWBXsEW+Q
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

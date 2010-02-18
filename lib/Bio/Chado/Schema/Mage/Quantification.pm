@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Mage::Quantification - Quantification is the transformation of an image acquisition to numeric data. This typically involves statistical procedures.
+Bio::Chado::Schema::Mage::Quantification
+
+=head1 DESCRIPTION
+
+Quantification is the transformation of an image acquisition to numeric data. This typically involves statistical procedures.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("quantification");
   default_value: nextval('quantification_quantification_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 acquisition_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("quantification");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 operator_id
 
@@ -41,7 +43,6 @@ __PACKAGE__->table("quantification");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 protocol_id
 
@@ -49,7 +50,6 @@ __PACKAGE__->table("quantification");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 analysis_id
 
@@ -57,93 +57,73 @@ __PACKAGE__->table("quantification");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 quantificationdate
 
   data_type: timestamp without time zone
   default_value: now()
   is_nullable: 1
-  size: 8
 
 =head2 name
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =head2 uri
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =cut
 
 __PACKAGE__->add_columns(
   "quantification_id",
   {
-    data_type => "integer",
-    default_value => "nextval('quantification_quantification_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('quantification_quantification_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "acquisition_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "operator_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "protocol_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "analysis_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "quantificationdate",
   {
-    data_type => "timestamp without time zone",
-    default_value => "now()",
-    is_nullable => 1,
-    size => 8,
+    data_type     => "timestamp without time zone",
+    default_value => \"now()",
+    is_nullable   => 1,
   },
   "name",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "uri",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("quantification_id");
 __PACKAGE__->add_unique_constraint("quantification_c1", ["name", "analysis_id"]);
@@ -240,7 +220,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 quantification_relationship_subject_ids
+=head2 quantification_relationship_subjects
 
 Type: has_many
 
@@ -249,13 +229,13 @@ Related object: L<Bio::Chado::Schema::Mage::QuantificationRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "quantification_relationship_subject_ids",
+  "quantification_relationship_subjects",
   "Bio::Chado::Schema::Mage::QuantificationRelationship",
   { "foreign.subject_id" => "self.quantification_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 quantification_relationship_object_ids
+=head2 quantification_relationship_objects
 
 Type: has_many
 
@@ -264,15 +244,15 @@ Related object: L<Bio::Chado::Schema::Mage::QuantificationRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "quantification_relationship_object_ids",
+  "quantification_relationship_objects",
   "Bio::Chado::Schema::Mage::QuantificationRelationship",
   { "foreign.object_id" => "self.quantification_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:90kWOXdclnSxYwQ1mdTVrQ
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:nLTKhoS9Zy7J1qVaCLEWcg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

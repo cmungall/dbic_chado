@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Mage::BiomaterialRelationship - Relate biomaterials to one another. This is a way to track a series of treatments or material splits/merges, for instance.
+Bio::Chado::Schema::Mage::BiomaterialRelationship
+
+=head1 DESCRIPTION
+
+Relate biomaterials to one another. This is a way to track a series of treatments or material splits/merges, for instance.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("biomaterial_relationship");
   default_value: nextval('biomaterial_relationship_biomaterial_relationship_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 subject_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("biomaterial_relationship");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 type_id
 
@@ -41,7 +43,6 @@ __PACKAGE__->table("biomaterial_relationship");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 object_id
 
@@ -49,42 +50,37 @@ __PACKAGE__->table("biomaterial_relationship");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "biomaterial_relationship_id",
   {
-    data_type => "integer",
-    default_value => "nextval('biomaterial_relationship_biomaterial_relationship_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('biomaterial_relationship_biomaterial_relationship_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "subject_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "object_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
 );
 __PACKAGE__->set_primary_key("biomaterial_relationship_id");
@@ -141,8 +137,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:s1J983LqBPv7i2p4ivVThA
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VhJUkc3lek7YyiCiKjGu/g
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

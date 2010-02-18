@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Sequence::Feature - A feature is a biological sequence or a
+Bio::Chado::Schema::Sequence::Feature
+
+=head1 DESCRIPTION
+
+A feature is a biological sequence or a
 section of a biological sequence, or a collection of such
 sections. Examples include genes, exons, transcripts, regulatory
 regions, polypeptides, protein domains, chromosome sequences, sequence
@@ -31,7 +35,6 @@ __PACKAGE__->table("feature");
   default_value: nextval('feature_feature_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 dbxref_id
 
@@ -39,7 +42,6 @@ __PACKAGE__->table("feature");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 An optional primary public stable
 identifier for this feature. Secondary identifiers and external
@@ -51,7 +53,6 @@ dbxrefs go in the table feature_dbxref.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 The organism to which this feature
 belongs. This column is mandatory.
@@ -71,7 +72,6 @@ a feature, for display purposes.
   data_type: text
   default_value: undef
   is_nullable: 0
-  size: undef
 
 The unique name for a feature; may
 not be necessarily be particularly human-readable, although this is
@@ -83,7 +83,6 @@ this organism.
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 A sequence of alphabetic characters
 representing biological residues (nucleic acids, amino acids). This
@@ -102,7 +101,6 @@ faster.
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 The length of the residue feature. See
 column:residues. This column is partially redundant with the residues
@@ -130,7 +128,6 @@ identifier on the mathematical sequence.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 A required reference to a table:cvterm
 giving the feature type. This will typically be a Sequence Ontology
@@ -141,7 +138,6 @@ identifier. This column is thus used to subclass the feature table.
   data_type: boolean
   default_value: false
   is_nullable: 0
-  size: 1
 
 Boolean indicating whether this
 feature is annotated or the result of an automated analysis. Analysis
@@ -157,7 +153,6 @@ multiple times in different analyses.
   data_type: boolean
   default_value: false
   is_nullable: 0
-  size: 1
 
 Boolean indicating whether this
 feature has been obsoleted. Some chado instances may choose to simply
@@ -169,7 +164,6 @@ row in the table.
   data_type: timestamp without time zone
   default_value: now()
   is_nullable: 0
-  size: 8
 
 For handling object
 accession or modification timestamps (as opposed to database auditing data,
@@ -181,7 +175,6 @@ available to software interacting with chado.
   data_type: timestamp without time zone
   default_value: now()
   is_nullable: 0
-  size: 8
 
 For handling object
 accession or modification timestamps (as opposed to database auditing data,
@@ -193,27 +186,24 @@ available to software interacting with chado.
 __PACKAGE__->add_columns(
   "feature_id",
   {
-    data_type => "integer",
-    default_value => "nextval('feature_feature_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('feature_feature_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "dbxref_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "organism_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "name",
   {
@@ -223,21 +213,11 @@ __PACKAGE__->add_columns(
     size => 255,
   },
   "uniquename",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 0,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 0 },
   "residues",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "seqlen",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "md5checksum",
   {
     data_type => "character",
@@ -247,39 +227,26 @@ __PACKAGE__->add_columns(
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "is_analysis",
-  {
-    data_type => "boolean",
-    default_value => "false",
-    is_nullable => 0,
-    size => 1,
-  },
+  { data_type => "boolean", default_value => \"false", is_nullable => 0 },
   "is_obsolete",
-  {
-    data_type => "boolean",
-    default_value => "false",
-    is_nullable => 0,
-    size => 1,
-  },
+  { data_type => "boolean", default_value => \"false", is_nullable => 0 },
   "timeaccessioned",
   {
-    data_type => "timestamp without time zone",
-    default_value => "now()",
-    is_nullable => 0,
-    size => 8,
+    data_type     => "timestamp without time zone",
+    default_value => \"now()",
+    is_nullable   => 0,
   },
   "timelastmodified",
   {
-    data_type => "timestamp without time zone",
-    default_value => "now()",
-    is_nullable => 0,
-    size => 8,
+    data_type     => "timestamp without time zone",
+    default_value => \"now()",
+    is_nullable   => 0,
   },
 );
 __PACKAGE__->set_primary_key("feature_id");
@@ -422,7 +389,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 feature_genotype_feature_ids
+=head2 feature_genotype_features
 
 Type: has_many
 
@@ -431,13 +398,13 @@ Related object: L<Bio::Chado::Schema::Genetic::FeatureGenotype>
 =cut
 
 __PACKAGE__->has_many(
-  "feature_genotype_feature_ids",
+  "feature_genotype_features",
   "Bio::Chado::Schema::Genetic::FeatureGenotype",
   { "foreign.feature_id" => "self.feature_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 feature_genotype_chromosome_ids
+=head2 feature_genotype_chromosomes
 
 Type: has_many
 
@@ -446,13 +413,13 @@ Related object: L<Bio::Chado::Schema::Genetic::FeatureGenotype>
 =cut
 
 __PACKAGE__->has_many(
-  "feature_genotype_chromosome_ids",
+  "feature_genotype_chromosomes",
   "Bio::Chado::Schema::Genetic::FeatureGenotype",
   { "foreign.chromosome_id" => "self.feature_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 featureloc_feature_ids
+=head2 featureloc_features
 
 Type: has_many
 
@@ -461,13 +428,13 @@ Related object: L<Bio::Chado::Schema::Sequence::Featureloc>
 =cut
 
 __PACKAGE__->has_many(
-  "featureloc_feature_ids",
+  "featureloc_features",
   "Bio::Chado::Schema::Sequence::Featureloc",
   { "foreign.feature_id" => "self.feature_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 featureloc_srcfeature_ids
+=head2 featureloc_srcfeatures
 
 Type: has_many
 
@@ -476,7 +443,7 @@ Related object: L<Bio::Chado::Schema::Sequence::Featureloc>
 =cut
 
 __PACKAGE__->has_many(
-  "featureloc_srcfeature_ids",
+  "featureloc_srcfeatures",
   "Bio::Chado::Schema::Sequence::Featureloc",
   { "foreign.srcfeature_id" => "self.feature_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -497,7 +464,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 featurepos_feature_ids
+=head2 featurepos_features
 
 Type: has_many
 
@@ -506,13 +473,13 @@ Related object: L<Bio::Chado::Schema::Map::Featurepos>
 =cut
 
 __PACKAGE__->has_many(
-  "featurepos_feature_ids",
+  "featurepos_features",
   "Bio::Chado::Schema::Map::Featurepos",
   { "foreign.feature_id" => "self.feature_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 featurepos_map_feature_ids
+=head2 featurepos_map_features
 
 Type: has_many
 
@@ -521,7 +488,7 @@ Related object: L<Bio::Chado::Schema::Map::Featurepos>
 =cut
 
 __PACKAGE__->has_many(
-  "featurepos_map_feature_ids",
+  "featurepos_map_features",
   "Bio::Chado::Schema::Map::Featurepos",
   { "foreign.map_feature_id" => "self.feature_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -557,7 +524,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 featurerange_leftendf_ids
+=head2 featurerange_leftendfs
 
 Type: has_many
 
@@ -566,13 +533,13 @@ Related object: L<Bio::Chado::Schema::Map::Featurerange>
 =cut
 
 __PACKAGE__->has_many(
-  "featurerange_leftendf_ids",
+  "featurerange_leftendfs",
   "Bio::Chado::Schema::Map::Featurerange",
   { "foreign.leftendf_id" => "self.feature_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 featurerange_rightstartf_ids
+=head2 featurerange_rightstartfs
 
 Type: has_many
 
@@ -581,13 +548,13 @@ Related object: L<Bio::Chado::Schema::Map::Featurerange>
 =cut
 
 __PACKAGE__->has_many(
-  "featurerange_rightstartf_ids",
+  "featurerange_rightstartfs",
   "Bio::Chado::Schema::Map::Featurerange",
   { "foreign.rightstartf_id" => "self.feature_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 featurerange_rightendf_ids
+=head2 featurerange_rightendfs
 
 Type: has_many
 
@@ -596,13 +563,13 @@ Related object: L<Bio::Chado::Schema::Map::Featurerange>
 =cut
 
 __PACKAGE__->has_many(
-  "featurerange_rightendf_ids",
+  "featurerange_rightendfs",
   "Bio::Chado::Schema::Map::Featurerange",
   { "foreign.rightendf_id" => "self.feature_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 featurerange_leftstartf_ids
+=head2 featurerange_leftstartfs
 
 Type: has_many
 
@@ -611,13 +578,13 @@ Related object: L<Bio::Chado::Schema::Map::Featurerange>
 =cut
 
 __PACKAGE__->has_many(
-  "featurerange_leftstartf_ids",
+  "featurerange_leftstartfs",
   "Bio::Chado::Schema::Map::Featurerange",
   { "foreign.leftstartf_id" => "self.feature_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 featurerange_feature_ids
+=head2 featurerange_features
 
 Type: has_many
 
@@ -626,13 +593,13 @@ Related object: L<Bio::Chado::Schema::Map::Featurerange>
 =cut
 
 __PACKAGE__->has_many(
-  "featurerange_feature_ids",
+  "featurerange_features",
   "Bio::Chado::Schema::Map::Featurerange",
   { "foreign.feature_id" => "self.feature_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 feature_relationship_subject_ids
+=head2 feature_relationship_subjects
 
 Type: has_many
 
@@ -641,13 +608,13 @@ Related object: L<Bio::Chado::Schema::Sequence::FeatureRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "feature_relationship_subject_ids",
+  "feature_relationship_subjects",
   "Bio::Chado::Schema::Sequence::FeatureRelationship",
   { "foreign.subject_id" => "self.feature_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 feature_relationship_object_ids
+=head2 feature_relationship_objects
 
 Type: has_many
 
@@ -656,7 +623,7 @@ Related object: L<Bio::Chado::Schema::Sequence::FeatureRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "feature_relationship_object_ids",
+  "feature_relationship_objects",
   "Bio::Chado::Schema::Sequence::FeatureRelationship",
   { "foreign.object_id" => "self.feature_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -723,8 +690,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7Dl4A9u0Slezrxc0UdG+XA
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/1ttUuAnvvSvMOsQsnUi1A
 
 use Carp;
 

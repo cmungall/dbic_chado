@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Mage::Arraydesign - General properties about an array.
+Bio::Chado::Schema::Mage::Arraydesign
+
+=head1 DESCRIPTION
+
+General properties about an array.
 An array is a template used to generate physical slides, etc.  It
 contains layout information, as well as global array properties, such
 as material (glass, nylon) and spot dimensions (in rows/columns).
@@ -28,7 +32,6 @@ __PACKAGE__->table("arraydesign");
   default_value: nextval('arraydesign_arraydesign_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 manufacturer_id
 
@@ -36,7 +39,6 @@ __PACKAGE__->table("arraydesign");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 platformtype_id
 
@@ -44,7 +46,6 @@ __PACKAGE__->table("arraydesign");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 substratetype_id
 
@@ -52,7 +53,6 @@ __PACKAGE__->table("arraydesign");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 protocol_id
 
@@ -60,7 +60,6 @@ __PACKAGE__->table("arraydesign");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 dbxref_id
 
@@ -68,192 +67,148 @@ __PACKAGE__->table("arraydesign");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 name
 
   data_type: text
   default_value: undef
   is_nullable: 0
-  size: undef
 
 =head2 version
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =head2 description
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =head2 array_dimensions
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =head2 element_dimensions
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =head2 num_of_elements
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 num_array_columns
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 num_array_rows
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 num_grid_columns
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 num_grid_rows
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 num_sub_columns
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 num_sub_rows
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "arraydesign_id",
   {
-    data_type => "integer",
-    default_value => "nextval('arraydesign_arraydesign_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('arraydesign_arraydesign_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "manufacturer_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "platformtype_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "substratetype_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "protocol_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "dbxref_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "name",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 0,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 0 },
   "version",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "description",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "array_dimensions",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "element_dimensions",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "num_of_elements",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "num_array_columns",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "num_array_rows",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "num_grid_columns",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "num_grid_rows",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "num_sub_columns",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "num_sub_rows",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("arraydesign_id");
 __PACKAGE__->add_unique_constraint("arraydesign_c1", ["name"]);
@@ -381,8 +336,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:sG3XR8oTPQ4+jIAOHwSMYg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:mUGpHI9qc81aisrsaBVKfw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

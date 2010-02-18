@@ -25,7 +25,6 @@ __PACKAGE__->table("tableinfo");
   default_value: nextval('tableinfo_tableinfo_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 name
 
@@ -46,46 +45,40 @@ __PACKAGE__->table("tableinfo");
   data_type: integer
   default_value: 0
   is_nullable: 0
-  size: 4
 
 =head2 view_on_table_id
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 superclass_table_id
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 is_updateable
 
   data_type: integer
   default_value: 1
   is_nullable: 0
-  size: 4
 
 =head2 modification_date
 
   data_type: date
   default_value: now()
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "tableinfo_id",
   {
-    data_type => "integer",
-    default_value => "nextval('tableinfo_tableinfo_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('tableinfo_tableinfo_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "name",
   {
@@ -102,15 +95,15 @@ __PACKAGE__->add_columns(
     size => 30,
   },
   "is_view",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
   "view_on_table_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "superclass_table_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "is_updateable",
-  { data_type => "integer", default_value => 1, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 1, is_nullable => 0 },
   "modification_date",
-  { data_type => "date", default_value => "now()", is_nullable => 0, size => 4 },
+  { data_type => "date", default_value => \"now()", is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("tableinfo_id");
 __PACKAGE__->add_unique_constraint("tableinfo_c1", ["name"]);
@@ -148,8 +141,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vokiLI6eAlqIBxQwly2m7w
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:J7rUmSjvQnDDcwdr/VzYUQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

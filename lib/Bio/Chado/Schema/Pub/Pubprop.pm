@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Pub::Pubprop - Property-value pairs for a pub. Follows standard chado pattern.
+Bio::Chado::Schema::Pub::Pubprop
+
+=head1 DESCRIPTION
+
+Property-value pairs for a pub. Follows standard chado pattern.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("pubprop");
   default_value: nextval('pubprop_pubprop_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 pub_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("pubprop");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 type_id
 
@@ -41,58 +43,47 @@ __PACKAGE__->table("pubprop");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 value
 
   data_type: text
   default_value: undef
   is_nullable: 0
-  size: undef
 
 =head2 rank
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "pubprop_id",
   {
-    data_type => "integer",
-    default_value => "nextval('pubprop_pubprop_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('pubprop_pubprop_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "pub_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "value",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 0,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 0 },
   "rank",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("pubprop_id");
 __PACKAGE__->add_unique_constraint("pubprop_c1", ["pub_id", "type_id", "rank"]);
@@ -130,8 +121,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:TYRIZnMImRWaQ7Ejbv0ehQ
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:GS1tTmrjTeTU6M2v+NtFXA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

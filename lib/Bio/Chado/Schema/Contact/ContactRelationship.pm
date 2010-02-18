@@ -25,7 +25,6 @@ __PACKAGE__->table("contact_relationship");
   default_value: nextval('contact_relationship_contact_relationship_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 type_id
 
@@ -33,7 +32,6 @@ __PACKAGE__->table("contact_relationship");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 Relationship type between subject and object. This is a cvterm, typically from the OBO relationship ontology, although other relationship types are allowed.
 
@@ -43,7 +41,6 @@ Relationship type between subject and object. This is a cvterm, typically from t
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 The subject of the subj-predicate-obj sentence. In a DAG, this corresponds to the child node.
 
@@ -53,7 +50,6 @@ The subject of the subj-predicate-obj sentence. In a DAG, this corresponds to th
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 The object of the subj-predicate-obj sentence. In a DAG, this corresponds to the parent node.
 
@@ -62,35 +58,31 @@ The object of the subj-predicate-obj sentence. In a DAG, this corresponds to the
 __PACKAGE__->add_columns(
   "contact_relationship_id",
   {
-    data_type => "integer",
-    default_value => "nextval('contact_relationship_contact_relationship_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('contact_relationship_contact_relationship_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "subject_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "object_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
 );
 __PACKAGE__->set_primary_key("contact_relationship_id");
@@ -147,8 +139,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:u8Bw2/PSw2NTfdcVa+ECZg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xYoR9DrUZSsRrbvK/8JkFw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

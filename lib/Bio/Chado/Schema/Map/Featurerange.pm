@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Map::Featurerange - In cases where the start and end of a mapped feature is a range, leftendf and rightstartf are populated. leftstartf_id, leftendf_id, rightstartf_id, rightendf_id are the ids of features with respect to which the feature is being mapped. These may be cytological bands.
+Bio::Chado::Schema::Map::Featurerange
+
+=head1 DESCRIPTION
+
+In cases where the start and end of a mapped feature is a range, leftendf and rightstartf are populated. leftstartf_id, leftendf_id, rightstartf_id, rightendf_id are the ids of features with respect to which the feature is being mapped. These may be cytological bands.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("featurerange");
   default_value: nextval('featurerange_featurerange_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 featuremap_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("featurerange");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 featuremap_id is the id of the feature being mapped.
 
@@ -43,7 +45,6 @@ featuremap_id is the id of the feature being mapped.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 leftstartf_id
 
@@ -51,7 +52,6 @@ featuremap_id is the id of the feature being mapped.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 leftendf_id
 
@@ -59,7 +59,6 @@ featuremap_id is the id of the feature being mapped.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 rightstartf_id
 
@@ -67,7 +66,6 @@ featuremap_id is the id of the feature being mapped.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 rightendf_id
 
@@ -75,7 +73,6 @@ featuremap_id is the id of the feature being mapped.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 rangestr
 
@@ -89,59 +86,52 @@ featuremap_id is the id of the feature being mapped.
 __PACKAGE__->add_columns(
   "featurerange_id",
   {
-    data_type => "integer",
-    default_value => "nextval('featurerange_featurerange_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('featurerange_featurerange_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "featuremap_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "feature_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "leftstartf_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "leftendf_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "rightstartf_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "rightendf_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "rangestr",
   {
@@ -246,8 +236,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/Uz6hVp1K3UKM9aSnty2Lw
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:2gKmdIqQlQsYEdcKDEfspg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

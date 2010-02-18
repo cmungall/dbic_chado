@@ -24,7 +24,6 @@ __PACKAGE__->table("fnr_type");
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 name
 
@@ -38,7 +37,6 @@ __PACKAGE__->table("fnr_type");
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 type
 
@@ -52,14 +50,12 @@ __PACKAGE__->table("fnr_type");
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =head2 seqlen
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 md5checksum
 
@@ -73,27 +69,24 @@ __PACKAGE__->table("fnr_type");
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 timeaccessioned
 
   data_type: timestamp without time zone
   default_value: undef
   is_nullable: 1
-  size: 8
 
 =head2 timelastmodified
 
   data_type: timestamp without time zone
   default_value: undef
   is_nullable: 1
-  size: 8
 
 =cut
 
 __PACKAGE__->add_columns(
   "feature_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "name",
   {
     data_type => "character varying",
@@ -102,7 +95,7 @@ __PACKAGE__->add_columns(
     size => 255,
   },
   "dbxref_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "type",
   {
     data_type => "character varying",
@@ -111,14 +104,9 @@ __PACKAGE__->add_columns(
     size => 1024,
   },
   "residues",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "seqlen",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "md5checksum",
   {
     data_type => "character",
@@ -127,26 +115,24 @@ __PACKAGE__->add_columns(
     size => 32,
   },
   "type_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "timeaccessioned",
   {
-    data_type => "timestamp without time zone",
+    data_type     => "timestamp without time zone",
     default_value => undef,
-    is_nullable => 1,
-    size => 8,
+    is_nullable   => 1,
   },
   "timelastmodified",
   {
-    data_type => "timestamp without time zone",
+    data_type     => "timestamp without time zone",
     default_value => undef,
-    is_nullable => 1,
-    size => 8,
+    is_nullable   => 1,
   },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:LAsiU77Q/SxDfTqNq6gKKA
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:21:50
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:coNRLqWjyWoM3ZFufiIDOA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

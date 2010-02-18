@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Composite::FeatureMeets - intervals have at least one
+Bio::Chado::Schema::Composite::FeatureMeets
+
+=head1 DESCRIPTION
+
+intervals have at least one
 interbase point in common (ie overlap OR abut). symmetric,reflexive
 
 =cut
@@ -25,27 +29,25 @@ __PACKAGE__->table("feature_meets");
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 object_id
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "subject_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "object_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:k/g7Pw824Y23MDrf9ZvJcQ
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:21:50
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:U7UsmcCTnjVeenUb5yClYA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

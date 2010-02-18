@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Stock::Stockprop - A stock can have any number of
+Bio::Chado::Schema::Stock::Stockprop
+
+=head1 DESCRIPTION
+
+A stock can have any number of
 slot-value property tags attached to it. This is an alternative to
 hardcoding a list of columns in the relational schema, and is
 completely extensible. There is a unique constraint, stockprop_c1, for
@@ -29,7 +33,6 @@ __PACKAGE__->table("stockprop");
   default_value: nextval('stockprop_stockprop_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 stock_id
 
@@ -37,7 +40,6 @@ __PACKAGE__->table("stockprop");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 type_id
 
@@ -45,58 +47,47 @@ __PACKAGE__->table("stockprop");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 value
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =head2 rank
 
   data_type: integer
   default_value: 0
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "stockprop_id",
   {
-    data_type => "integer",
-    default_value => "nextval('stockprop_stockprop_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('stockprop_stockprop_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "stock_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "value",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "rank",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("stockprop_id");
 __PACKAGE__->add_unique_constraint("stockprop_c1", ["stock_id", "type_id", "rank"]);
@@ -149,8 +140,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:U+ZAul8nEyzaJhNrwI4oYg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tQnXs4VjuH4otOVISRM/wA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

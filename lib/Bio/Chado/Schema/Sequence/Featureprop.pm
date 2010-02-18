@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Sequence::Featureprop - A feature can have any number of slot-value property tags attached to it. This is an alternative to hardcoding a list of columns in the relational schema, and is completely extensible.
+Bio::Chado::Schema::Sequence::Featureprop
+
+=head1 DESCRIPTION
+
+A feature can have any number of slot-value property tags attached to it. This is an alternative to hardcoding a list of columns in the relational schema, and is completely extensible.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("featureprop");
   default_value: nextval('featureprop_featureprop_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 feature_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("featureprop");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 type_id
 
@@ -41,7 +43,6 @@ __PACKAGE__->table("featureprop");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 The name of the
 property/slot is a cvterm. The meaning of the property is defined in
@@ -54,7 +55,6 @@ the types here come from the sequence feature property ontology.
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 The value of the property, represented as text. Numeric values are converted to their text representation. This is less efficient than using native database types, but is easier to query.
 
@@ -63,7 +63,6 @@ The value of the property, represented as text. Numeric values are converted to 
   data_type: integer
   default_value: 0
   is_nullable: 0
-  size: 4
 
 Property-Value ordering. Any
 feature can have multiple values for any particular property type -
@@ -76,37 +75,29 @@ default 0 value should be used
 __PACKAGE__->add_columns(
   "featureprop_id",
   {
-    data_type => "integer",
-    default_value => "nextval('featureprop_featureprop_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('featureprop_featureprop_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "feature_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "value",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "rank",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("featureprop_id");
 __PACKAGE__->add_unique_constraint("featureprop_c1", ["feature_id", "type_id", "rank"]);
@@ -159,8 +150,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:W4oYepJqfbak2SwUoy1qvg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tjxxfWlAJ1HECb2hy2XsnA
 
 =head1 ADDITIONAL RELATIONSHIPS
 

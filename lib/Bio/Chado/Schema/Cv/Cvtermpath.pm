@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Cv::Cvtermpath - The reflexive transitive closure of
+Bio::Chado::Schema::Cv::Cvtermpath
+
+=head1 DESCRIPTION
+
+The reflexive transitive closure of
 the cvterm_relationship relation.
 
 =cut
@@ -26,7 +30,6 @@ __PACKAGE__->table("cvtermpath");
   default_value: nextval('cvtermpath_cvtermpath_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 type_id
 
@@ -34,7 +37,6 @@ __PACKAGE__->table("cvtermpath");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 The relationship type that
 this is a closure over. If null, then this is a closure over ALL
@@ -48,7 +50,6 @@ AND the OBO_REL:is_a (subclass) relationship.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 object_id
 
@@ -56,7 +57,6 @@ AND the OBO_REL:is_a (subclass) relationship.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 cv_id
 
@@ -64,7 +64,6 @@ AND the OBO_REL:is_a (subclass) relationship.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 Closures will mostly be within
 one cv. If the closure of a relationship traverses a cv, then this
@@ -75,7 +74,6 @@ refers to the cv of the object_id cvterm.
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 The number of steps
 required to get from the subject cvterm to the object cvterm, counting
@@ -86,46 +84,41 @@ from zero (reflexive relationship).
 __PACKAGE__->add_columns(
   "cvtermpath_id",
   {
-    data_type => "integer",
-    default_value => "nextval('cvtermpath_cvtermpath_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('cvtermpath_cvtermpath_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "subject_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "object_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "cv_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "pathdistance",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("cvtermpath_id");
 __PACKAGE__->add_unique_constraint(
@@ -196,8 +189,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6ISyFcZj1n/akEpt/Bniew
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:i59cXXbeATknU5KiTMW4Sg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

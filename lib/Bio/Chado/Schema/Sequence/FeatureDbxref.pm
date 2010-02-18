@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Sequence::FeatureDbxref - Links a feature to dbxrefs. This is for secondary identifiers; primary identifiers should use feature.dbxref_id.
+Bio::Chado::Schema::Sequence::FeatureDbxref
+
+=head1 DESCRIPTION
+
+Links a feature to dbxrefs. This is for secondary identifiers; primary identifiers should use feature.dbxref_id.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("feature_dbxref");
   default_value: nextval('feature_dbxref_feature_dbxref_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 feature_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("feature_dbxref");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 dbxref_id
 
@@ -41,14 +43,12 @@ __PACKAGE__->table("feature_dbxref");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 is_current
 
   data_type: boolean
   default_value: true
   is_nullable: 0
-  size: 1
 
 True if this secondary dbxref is the most up to date accession in the corresponding db. Retired accessions should set this field to false
 
@@ -57,35 +57,27 @@ True if this secondary dbxref is the most up to date accession in the correspond
 __PACKAGE__->add_columns(
   "feature_dbxref_id",
   {
-    data_type => "integer",
-    default_value => "nextval('feature_dbxref_feature_dbxref_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('feature_dbxref_feature_dbxref_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "feature_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "dbxref_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "is_current",
-  {
-    data_type => "boolean",
-    default_value => "true",
-    is_nullable => 0,
-    size => 1,
-  },
+  { data_type => "boolean", default_value => \"true", is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("feature_dbxref_id");
 __PACKAGE__->add_unique_constraint("feature_dbxref_c1", ["feature_id", "dbxref_id"]);
@@ -123,8 +115,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YtePwju0kokFnK27tlzU+A
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WYq65k2JBKQXrDQYuITroA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

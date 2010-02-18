@@ -25,7 +25,6 @@ __PACKAGE__->table("stock_relationship");
   default_value: nextval('stock_relationship_stock_relationship_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 subject_id
 
@@ -33,7 +32,6 @@ __PACKAGE__->table("stock_relationship");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 stock_relationship.subject_id is the subject of the subj-predicate-obj sentence. This is typically the substock.
 
@@ -43,7 +41,6 @@ stock_relationship.subject_id is the subject of the subj-predicate-obj sentence.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 stock_relationship.object_id is the object of the subj-predicate-obj sentence. This is typically the container stock.
 
@@ -53,7 +50,6 @@ stock_relationship.object_id is the object of the subj-predicate-obj sentence. T
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 stock_relationship.type_id is relationship type between subject and object. This is a cvterm, typically from the OBO relationship ontology, although other relationship types are allowed.
 
@@ -62,7 +58,6 @@ stock_relationship.type_id is relationship type between subject and object. This
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 stock_relationship.value is for additional notes or comments.
 
@@ -71,7 +66,6 @@ stock_relationship.value is for additional notes or comments.
   data_type: integer
   default_value: 0
   is_nullable: 0
-  size: 4
 
 stock_relationship.rank is the ordering of subject stocks with respect to the object stock may be important where rank is used to order these; starts from zero.
 
@@ -80,45 +74,36 @@ stock_relationship.rank is the ordering of subject stocks with respect to the ob
 __PACKAGE__->add_columns(
   "stock_relationship_id",
   {
-    data_type => "integer",
-    default_value => "nextval('stock_relationship_stock_relationship_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('stock_relationship_stock_relationship_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "subject_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "object_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "value",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "rank",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("stock_relationship_id");
 __PACKAGE__->add_unique_constraint(
@@ -189,8 +174,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:HufNoF8yjLt4RecjVcXOAQ
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dia84A3y7JyFz1BCP1Et6A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

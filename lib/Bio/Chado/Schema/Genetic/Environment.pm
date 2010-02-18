@@ -25,47 +25,33 @@ __PACKAGE__->table("environment");
   default_value: nextval('environment_environment_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 uniquename
 
   data_type: text
   default_value: undef
   is_nullable: 0
-  size: undef
 
 =head2 description
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =cut
 
 __PACKAGE__->add_columns(
   "environment_id",
   {
-    data_type => "integer",
-    default_value => "nextval('environment_environment_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('environment_environment_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "uniquename",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 0,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 0 },
   "description",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("environment_id");
 __PACKAGE__->add_unique_constraint("environment_c1", ["uniquename"]);
@@ -102,7 +88,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 phenotype_comparison_environment2_ids
+=head2 phenotype_comparison_environment2s
 
 Type: has_many
 
@@ -111,13 +97,13 @@ Related object: L<Bio::Chado::Schema::Genetic::PhenotypeComparison>
 =cut
 
 __PACKAGE__->has_many(
-  "phenotype_comparison_environment2_ids",
+  "phenotype_comparison_environment2s",
   "Bio::Chado::Schema::Genetic::PhenotypeComparison",
   { "foreign.environment2_id" => "self.environment_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 phenotype_comparison_environment1_ids
+=head2 phenotype_comparison_environment1s
 
 Type: has_many
 
@@ -126,7 +112,7 @@ Related object: L<Bio::Chado::Schema::Genetic::PhenotypeComparison>
 =cut
 
 __PACKAGE__->has_many(
-  "phenotype_comparison_environment1_ids",
+  "phenotype_comparison_environment1s",
   "Bio::Chado::Schema::Genetic::PhenotypeComparison",
   { "foreign.environment1_id" => "self.environment_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -148,8 +134,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:yDT/H84fZZIirVvREzS5Rw
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4SxG/Vd4ZnFsvhmX6e65mA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

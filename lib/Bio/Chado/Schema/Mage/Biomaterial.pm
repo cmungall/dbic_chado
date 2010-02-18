@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Mage::Biomaterial - A biomaterial represents the MAGE concept of BioSource, BioSample, and LabeledExtract. It is essentially some biological material (tissue, cells, serum) that may have been processed. Processed biomaterials should be traceable back to raw biomaterials via the biomaterialrelationship table.
+Bio::Chado::Schema::Mage::Biomaterial
+
+=head1 DESCRIPTION
+
+A biomaterial represents the MAGE concept of BioSource, BioSample, and LabeledExtract. It is essentially some biological material (tissue, cells, serum) that may have been processed. Processed biomaterials should be traceable back to raw biomaterials via the biomaterialrelationship table.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("biomaterial");
   default_value: nextval('biomaterial_biomaterial_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 taxon_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("biomaterial");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 biosourceprovider_id
 
@@ -41,7 +43,6 @@ __PACKAGE__->table("biomaterial");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 dbxref_id
 
@@ -49,71 +50,54 @@ __PACKAGE__->table("biomaterial");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 name
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =head2 description
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =cut
 
 __PACKAGE__->add_columns(
   "biomaterial_id",
   {
-    data_type => "integer",
-    default_value => "nextval('biomaterial_biomaterial_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('biomaterial_biomaterial_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "taxon_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "biosourceprovider_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "dbxref_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "name",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "description",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("biomaterial_id");
 __PACKAGE__->add_unique_constraint("biomaterial_c1", ["name"]);
@@ -210,7 +194,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 biomaterial_relationship_subject_ids
+=head2 biomaterial_relationship_subjects
 
 Type: has_many
 
@@ -219,13 +203,13 @@ Related object: L<Bio::Chado::Schema::Mage::BiomaterialRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "biomaterial_relationship_subject_ids",
+  "biomaterial_relationship_subjects",
   "Bio::Chado::Schema::Mage::BiomaterialRelationship",
   { "foreign.subject_id" => "self.biomaterial_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 biomaterial_relationship_object_ids
+=head2 biomaterial_relationship_objects
 
 Type: has_many
 
@@ -234,7 +218,7 @@ Related object: L<Bio::Chado::Schema::Mage::BiomaterialRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "biomaterial_relationship_object_ids",
+  "biomaterial_relationship_objects",
   "Bio::Chado::Schema::Mage::BiomaterialRelationship",
   { "foreign.object_id" => "self.biomaterial_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -271,8 +255,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:cJUGoVjhIfaepvz5Whldnw
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FJVA80J5/LakdFGosL5gtA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

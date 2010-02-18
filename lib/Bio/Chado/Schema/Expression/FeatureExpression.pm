@@ -25,7 +25,6 @@ __PACKAGE__->table("feature_expression");
   default_value: nextval('feature_expression_feature_expression_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 expression_id
 
@@ -33,7 +32,6 @@ __PACKAGE__->table("feature_expression");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 feature_id
 
@@ -41,7 +39,6 @@ __PACKAGE__->table("feature_expression");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 pub_id
 
@@ -49,42 +46,37 @@ __PACKAGE__->table("feature_expression");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "feature_expression_id",
   {
-    data_type => "integer",
-    default_value => "nextval('feature_expression_feature_expression_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('feature_expression_feature_expression_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "expression_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "feature_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "pub_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
 );
 __PACKAGE__->set_primary_key("feature_expression_id");
@@ -156,8 +148,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:sSeAWKITqX4uxHh7XLBeAw
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:9BjBkbfJ/FzUO428L9ivZQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Companalysis::Analysis - An analysis is a particular type of a
+Bio::Chado::Schema::Companalysis::Analysis
+
+=head1 DESCRIPTION
+
+An analysis is a particular type of a
     computational analysis; it may be a blast of one sequence against
     another, or an all by all blast, or a different kind of analysis
     altogether. It is a single unit of computation.
@@ -28,7 +32,6 @@ __PACKAGE__->table("analysis");
   default_value: nextval('analysis_analysis_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 name
 
@@ -47,7 +50,6 @@ A way of grouping analyses. This
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =head2 program
 
@@ -97,7 +99,6 @@ Source name, e.g. cDNA, SwissProt.
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 This is an optional, permanent URL or URI for the source of the  analysis. The idea is that someone could recreate the analysis directly by going to this URI and fetching the source data (e.g. the blast database, or the training model).
 
@@ -106,18 +107,16 @@ This is an optional, permanent URL or URI for the source of the  analysis. The i
   data_type: timestamp without time zone
   default_value: now()
   is_nullable: 0
-  size: 8
 
 =cut
 
 __PACKAGE__->add_columns(
   "analysis_id",
   {
-    data_type => "integer",
-    default_value => "nextval('analysis_analysis_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('analysis_analysis_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "name",
   {
@@ -127,12 +126,7 @@ __PACKAGE__->add_columns(
     size => 255,
   },
   "description",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "program",
   {
     data_type => "character varying",
@@ -169,18 +163,12 @@ __PACKAGE__->add_columns(
     size => 255,
   },
   "sourceuri",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "timeexecuted",
   {
-    data_type => "timestamp without time zone",
-    default_value => "now()",
-    is_nullable => 0,
-    size => 8,
+    data_type     => "timestamp without time zone",
+    default_value => \"now()",
+    is_nullable   => 0,
   },
 );
 __PACKAGE__->set_primary_key("analysis_id");
@@ -249,8 +237,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:lXb3FwdGKv9O8HopmQELyw
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:a8h2Bvr6r+PyES6k2kTGsw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

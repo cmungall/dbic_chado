@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Pub::Pub - A documented provenance artefact - publications,
+Bio::Chado::Schema::Pub::Pub
+
+=head1 DESCRIPTION
+
+A documented provenance artefact - publications,
 documents, personal communication.
 
 =cut
@@ -26,14 +30,12 @@ __PACKAGE__->table("pub");
   default_value: nextval('pub_pub_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 title
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 Descriptive general heading.
 
@@ -42,7 +44,6 @@ Descriptive general heading.
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 Title of part if one of a series.
 
@@ -97,7 +98,6 @@ Page number range[s], e.g. 457--459, viii + 664pp, lv--lvii.
   data_type: text
   default_value: undef
   is_nullable: 0
-  size: undef
 
 =head2 type_id
 
@@ -105,7 +105,6 @@ Page number range[s], e.g. 457--459, viii + 664pp, lv--lvii.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 The type of the publication (book, journal, poem, graffiti, etc). Uses pub cv.
 
@@ -114,7 +113,6 @@ The type of the publication (book, journal, poem, graffiti, etc). Uses pub cv.
   data_type: boolean
   default_value: false
   is_nullable: 1
-  size: 1
 
 =head2 publisher
 
@@ -135,26 +133,15 @@ The type of the publication (book, journal, poem, graffiti, etc). Uses pub cv.
 __PACKAGE__->add_columns(
   "pub_id",
   {
-    data_type => "integer",
-    default_value => "nextval('pub_pub_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('pub_pub_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "title",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "volumetitle",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "volume",
   {
     data_type => "character varying",
@@ -198,27 +185,16 @@ __PACKAGE__->add_columns(
     size => 255,
   },
   "uniquename",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 0,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 0 },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "is_obsolete",
-  {
-    data_type => "boolean",
-    default_value => "false",
-    is_nullable => 1,
-    size => 1,
-  },
+  { data_type => "boolean", default_value => \"false", is_nullable => 1 },
   "publisher",
   {
     data_type => "character varying",
@@ -719,7 +695,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 pub_relationship_object_ids
+=head2 pub_relationship_objects
 
 Type: has_many
 
@@ -728,13 +704,13 @@ Related object: L<Bio::Chado::Schema::Pub::PubRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "pub_relationship_object_ids",
+  "pub_relationship_objects",
   "Bio::Chado::Schema::Pub::PubRelationship",
   { "foreign.object_id" => "self.pub_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 pub_relationship_subject_ids
+=head2 pub_relationship_subjects
 
 Type: has_many
 
@@ -743,7 +719,7 @@ Related object: L<Bio::Chado::Schema::Pub::PubRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "pub_relationship_subject_ids",
+  "pub_relationship_subjects",
   "Bio::Chado::Schema::Pub::PubRelationship",
   { "foreign.subject_id" => "self.pub_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -825,8 +801,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:j23vKwCiaJGbTypIcwuJhA
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:j9jesRswJ2xBYZgpUxtFmg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

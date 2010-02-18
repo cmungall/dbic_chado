@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Cv::Cvterm - A term, class, universal or type within an
+Bio::Chado::Schema::Cv::Cvterm
+
+=head1 DESCRIPTION
+
+A term, class, universal or type within an
 ontology or controlled vocabulary.  This table is also used for
 relations and properties. cvterms constitute nodes in the graph
 defined by the collection of cvterms and cvterm_relationships.
@@ -28,7 +32,6 @@ __PACKAGE__->table("cvterm");
   default_value: nextval('cvterm_cvterm_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 cv_id
 
@@ -36,7 +39,6 @@ __PACKAGE__->table("cvterm");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 The cv or ontology or namespace to which
 this cvterm belongs.
@@ -56,7 +58,6 @@ label for the cvterm. Uniquely identifies a cvterm within a cv.
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 A human-readable text
 definition.
@@ -67,7 +68,6 @@ definition.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 Primary identifier dbxref - The
 unique global OBO identifier for this cvterm.  Note that a cvterm may
@@ -78,7 +78,6 @@ have multiple secondary dbxrefs - see also table: cvterm_dbxref.
   data_type: integer
   default_value: 0
   is_nullable: 0
-  size: 4
 
 Boolean 0=false,1=true; see
 GO documentation for details of obsoletion. Note that two terms with
@@ -89,7 +88,6 @@ different primary dbxrefs may exist if one is obsolete.
   data_type: integer
   default_value: 0
   is_nullable: 0
-  size: 4
 
 Boolean
 0=false,1=true relations or relationship types (also known as Typedefs
@@ -103,19 +101,17 @@ the OBO Relations ontology, but are not exclusively drawn from there.
 __PACKAGE__->add_columns(
   "cvterm_id",
   {
-    data_type => "integer",
-    default_value => "nextval('cvterm_cvterm_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('cvterm_cvterm_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "cv_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "name",
   {
@@ -125,24 +121,18 @@ __PACKAGE__->add_columns(
     size => 1024,
   },
   "definition",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "dbxref_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "is_obsolete",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
   "is_relationshiptype",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("cvterm_id");
 __PACKAGE__->add_unique_constraint("cvterm_c2", ["dbxref_id"]);
@@ -210,7 +200,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 arraydesign_platformtype_ids
+=head2 arraydesign_platformtypes
 
 Type: has_many
 
@@ -219,13 +209,13 @@ Related object: L<Bio::Chado::Schema::Mage::Arraydesign>
 =cut
 
 __PACKAGE__->has_many(
-  "arraydesign_platformtype_ids",
+  "arraydesign_platformtypes",
   "Bio::Chado::Schema::Mage::Arraydesign",
   { "foreign.platformtype_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 arraydesign_substratetype_ids
+=head2 arraydesign_substratetypes
 
 Type: has_many
 
@@ -234,7 +224,7 @@ Related object: L<Bio::Chado::Schema::Mage::Arraydesign>
 =cut
 
 __PACKAGE__->has_many(
-  "arraydesign_substratetype_ids",
+  "arraydesign_substratetypes",
   "Bio::Chado::Schema::Mage::Arraydesign",
   { "foreign.substratetype_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -465,7 +455,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 cvtermpath_type_ids
+=head2 cvtermpath_types
 
 Type: has_many
 
@@ -474,13 +464,13 @@ Related object: L<Bio::Chado::Schema::Cv::Cvtermpath>
 =cut
 
 __PACKAGE__->has_many(
-  "cvtermpath_type_ids",
+  "cvtermpath_types",
   "Bio::Chado::Schema::Cv::Cvtermpath",
   { "foreign.type_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 cvtermpath_object_ids
+=head2 cvtermpath_objects
 
 Type: has_many
 
@@ -489,13 +479,13 @@ Related object: L<Bio::Chado::Schema::Cv::Cvtermpath>
 =cut
 
 __PACKAGE__->has_many(
-  "cvtermpath_object_ids",
+  "cvtermpath_objects",
   "Bio::Chado::Schema::Cv::Cvtermpath",
   { "foreign.object_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 cvtermpath_subject_ids
+=head2 cvtermpath_subjects
 
 Type: has_many
 
@@ -504,13 +494,13 @@ Related object: L<Bio::Chado::Schema::Cv::Cvtermpath>
 =cut
 
 __PACKAGE__->has_many(
-  "cvtermpath_subject_ids",
+  "cvtermpath_subjects",
   "Bio::Chado::Schema::Cv::Cvtermpath",
   { "foreign.subject_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 cvtermprop_type_ids
+=head2 cvtermprop_types
 
 Type: has_many
 
@@ -519,13 +509,13 @@ Related object: L<Bio::Chado::Schema::Cv::Cvtermprop>
 =cut
 
 __PACKAGE__->has_many(
-  "cvtermprop_type_ids",
+  "cvtermprop_types",
   "Bio::Chado::Schema::Cv::Cvtermprop",
   { "foreign.type_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 cvtermprop_cvterm_ids
+=head2 cvtermprop_cvterms
 
 Type: has_many
 
@@ -534,13 +524,13 @@ Related object: L<Bio::Chado::Schema::Cv::Cvtermprop>
 =cut
 
 __PACKAGE__->has_many(
-  "cvtermprop_cvterm_ids",
+  "cvtermprop_cvterms",
   "Bio::Chado::Schema::Cv::Cvtermprop",
   { "foreign.cvterm_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 cvterm_relationship_type_ids
+=head2 cvterm_relationship_types
 
 Type: has_many
 
@@ -549,13 +539,13 @@ Related object: L<Bio::Chado::Schema::Cv::CvtermRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "cvterm_relationship_type_ids",
+  "cvterm_relationship_types",
   "Bio::Chado::Schema::Cv::CvtermRelationship",
   { "foreign.type_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 cvterm_relationship_object_ids
+=head2 cvterm_relationship_objects
 
 Type: has_many
 
@@ -564,13 +554,13 @@ Related object: L<Bio::Chado::Schema::Cv::CvtermRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "cvterm_relationship_object_ids",
+  "cvterm_relationship_objects",
   "Bio::Chado::Schema::Cv::CvtermRelationship",
   { "foreign.object_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 cvterm_relationship_subject_ids
+=head2 cvterm_relationship_subjects
 
 Type: has_many
 
@@ -579,13 +569,13 @@ Related object: L<Bio::Chado::Schema::Cv::CvtermRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "cvterm_relationship_subject_ids",
+  "cvterm_relationship_subjects",
   "Bio::Chado::Schema::Cv::CvtermRelationship",
   { "foreign.subject_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 cvtermsynonym_type_ids
+=head2 cvtermsynonym_types
 
 Type: has_many
 
@@ -594,13 +584,13 @@ Related object: L<Bio::Chado::Schema::Cv::Cvtermsynonym>
 =cut
 
 __PACKAGE__->has_many(
-  "cvtermsynonym_type_ids",
+  "cvtermsynonym_types",
   "Bio::Chado::Schema::Cv::Cvtermsynonym",
   { "foreign.type_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 cvtermsynonym_cvterm_ids
+=head2 cvtermsynonym_cvterms
 
 Type: has_many
 
@@ -609,7 +599,7 @@ Related object: L<Bio::Chado::Schema::Cv::Cvtermsynonym>
 =cut
 
 __PACKAGE__->has_many(
-  "cvtermsynonym_cvterm_ids",
+  "cvtermsynonym_cvterms",
   "Bio::Chado::Schema::Cv::Cvtermsynonym",
   { "foreign.cvterm_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -690,7 +680,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 expression_cvterm_cvterm_ids
+=head2 expression_cvterm_cvterms
 
 Type: has_many
 
@@ -699,13 +689,13 @@ Related object: L<Bio::Chado::Schema::Expression::ExpressionCvterm>
 =cut
 
 __PACKAGE__->has_many(
-  "expression_cvterm_cvterm_ids",
+  "expression_cvterm_cvterms",
   "Bio::Chado::Schema::Expression::ExpressionCvterm",
   { "foreign.cvterm_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 expression_cvterm_cvterm_type_ids
+=head2 expression_cvterm_cvterm_types
 
 Type: has_many
 
@@ -714,7 +704,7 @@ Related object: L<Bio::Chado::Schema::Expression::ExpressionCvterm>
 =cut
 
 __PACKAGE__->has_many(
-  "expression_cvterm_cvterm_type_ids",
+  "expression_cvterm_cvterm_types",
   "Bio::Chado::Schema::Expression::ExpressionCvterm",
   { "foreign.cvterm_type_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -975,7 +965,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 phenotype_assay_ids
+=head2 phenotype_assays
 
 Type: has_many
 
@@ -984,13 +974,13 @@ Related object: L<Bio::Chado::Schema::Phenotype::Phenotype>
 =cut
 
 __PACKAGE__->has_many(
-  "phenotype_assay_ids",
+  "phenotype_assays",
   "Bio::Chado::Schema::Phenotype::Phenotype",
   { "foreign.assay_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 phenotype_attr_ids
+=head2 phenotype_attrs
 
 Type: has_many
 
@@ -999,13 +989,13 @@ Related object: L<Bio::Chado::Schema::Phenotype::Phenotype>
 =cut
 
 __PACKAGE__->has_many(
-  "phenotype_attr_ids",
+  "phenotype_attrs",
   "Bio::Chado::Schema::Phenotype::Phenotype",
   { "foreign.attr_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 phenotype_observable_ids
+=head2 phenotype_observables
 
 Type: has_many
 
@@ -1014,13 +1004,13 @@ Related object: L<Bio::Chado::Schema::Phenotype::Phenotype>
 =cut
 
 __PACKAGE__->has_many(
-  "phenotype_observable_ids",
+  "phenotype_observables",
   "Bio::Chado::Schema::Phenotype::Phenotype",
   { "foreign.observable_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 phenotype_cvalue_ids
+=head2 phenotype_cvalues
 
 Type: has_many
 
@@ -1029,7 +1019,7 @@ Related object: L<Bio::Chado::Schema::Phenotype::Phenotype>
 =cut
 
 __PACKAGE__->has_many(
-  "phenotype_cvalue_ids",
+  "phenotype_cvalues",
   "Bio::Chado::Schema::Phenotype::Phenotype",
   { "foreign.cvalue_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -1155,7 +1145,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 protocolparam_unittype_ids
+=head2 protocolparam_unittypes
 
 Type: has_many
 
@@ -1164,13 +1154,13 @@ Related object: L<Bio::Chado::Schema::Mage::Protocolparam>
 =cut
 
 __PACKAGE__->has_many(
-  "protocolparam_unittype_ids",
+  "protocolparam_unittypes",
   "Bio::Chado::Schema::Mage::Protocolparam",
   { "foreign.unittype_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 protocolparam_datatype_ids
+=head2 protocolparam_datatypes
 
 Type: has_many
 
@@ -1179,7 +1169,7 @@ Related object: L<Bio::Chado::Schema::Mage::Protocolparam>
 =cut
 
 __PACKAGE__->has_many(
-  "protocolparam_datatype_ids",
+  "protocolparam_datatypes",
   "Bio::Chado::Schema::Mage::Protocolparam",
   { "foreign.datatype_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -1441,8 +1431,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:SiJEcTZ53k7ehiNdp+zNcg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:DzBoQfD4V23UV9dzY/AUmQ
 
 use Carp;
 

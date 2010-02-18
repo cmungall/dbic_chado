@@ -25,7 +25,6 @@ __PACKAGE__->table("contact");
   default_value: nextval('contact_contact_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 type_id
 
@@ -33,7 +32,6 @@ __PACKAGE__->table("contact");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 What type of contact is this?  E.g. "person", "lab".
 
@@ -56,19 +54,17 @@ What type of contact is this?  E.g. "person", "lab".
 __PACKAGE__->add_columns(
   "contact_id",
   {
-    data_type => "integer",
-    default_value => "nextval('contact_contact_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('contact_contact_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "name",
   {
@@ -150,7 +146,7 @@ __PACKAGE__->belongs_to(
   { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
 );
 
-=head2 contact_relationship_object_ids
+=head2 contact_relationship_objects
 
 Type: has_many
 
@@ -159,13 +155,13 @@ Related object: L<Bio::Chado::Schema::Contact::ContactRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "contact_relationship_object_ids",
+  "contact_relationship_objects",
   "Bio::Chado::Schema::Contact::ContactRelationship",
   { "foreign.object_id" => "self.contact_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 contact_relationship_subject_ids
+=head2 contact_relationship_subjects
 
 Type: has_many
 
@@ -174,7 +170,7 @@ Related object: L<Bio::Chado::Schema::Contact::ContactRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "contact_relationship_subject_ids",
+  "contact_relationship_subjects",
   "Bio::Chado::Schema::Contact::ContactRelationship",
   { "foreign.subject_id" => "self.contact_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -226,8 +222,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ziEkJyKvClwYjPod05bRkg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1CBRD26ShmoWVofI6SQ9jA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

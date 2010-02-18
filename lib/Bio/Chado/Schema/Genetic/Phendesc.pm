@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Genetic::Phendesc - A summary of a _set_ of phenotypic statements for any one gcontext made in any one publication.
+Bio::Chado::Schema::Genetic::Phendesc
+
+=head1 DESCRIPTION
+
+A summary of a _set_ of phenotypic statements for any one gcontext made in any one publication.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("phendesc");
   default_value: nextval('phendesc_phendesc_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 genotype_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("phendesc");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 environment_id
 
@@ -41,14 +43,12 @@ __PACKAGE__->table("phendesc");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 description
 
   data_type: text
   default_value: undef
   is_nullable: 0
-  size: undef
 
 =head2 type_id
 
@@ -56,7 +56,6 @@ __PACKAGE__->table("phendesc");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 pub_id
 
@@ -64,57 +63,46 @@ __PACKAGE__->table("phendesc");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "phendesc_id",
   {
-    data_type => "integer",
-    default_value => "nextval('phendesc_phendesc_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('phendesc_phendesc_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "genotype_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "environment_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "description",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 0,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 0 },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "pub_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
 );
 __PACKAGE__->set_primary_key("phendesc_id");
@@ -186,8 +174,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:BNvjz89rGNJtdPfzjDsrtg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:p/FjhctIIDMPKRsgeen5rQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

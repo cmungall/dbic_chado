@@ -25,7 +25,6 @@ __PACKAGE__->table("cell_line");
   default_value: nextval('cell_line_cell_line_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 name
 
@@ -47,32 +46,28 @@ __PACKAGE__->table("cell_line");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 timeaccessioned
 
   data_type: timestamp without time zone
   default_value: now()
   is_nullable: 0
-  size: 8
 
 =head2 timelastmodified
 
   data_type: timestamp without time zone
   default_value: now()
   is_nullable: 0
-  size: 8
 
 =cut
 
 __PACKAGE__->add_columns(
   "cell_line_id",
   {
-    data_type => "integer",
-    default_value => "nextval('cell_line_cell_line_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('cell_line_cell_line_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "name",
   {
@@ -90,25 +85,22 @@ __PACKAGE__->add_columns(
   },
   "organism_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "timeaccessioned",
   {
-    data_type => "timestamp without time zone",
-    default_value => "now()",
-    is_nullable => 0,
-    size => 8,
+    data_type     => "timestamp without time zone",
+    default_value => \"now()",
+    is_nullable   => 0,
   },
   "timelastmodified",
   {
-    data_type => "timestamp without time zone",
-    default_value => "now()",
-    is_nullable => 0,
-    size => 8,
+    data_type     => "timestamp without time zone",
+    default_value => \"now()",
+    is_nullable   => 0,
   },
 );
 __PACKAGE__->set_primary_key("cell_line_id");
@@ -221,7 +213,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 cell_line_relationship_subject_ids
+=head2 cell_line_relationship_subjects
 
 Type: has_many
 
@@ -230,13 +222,13 @@ Related object: L<Bio::Chado::Schema::CellLine::CellLineRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "cell_line_relationship_subject_ids",
+  "cell_line_relationship_subjects",
   "Bio::Chado::Schema::CellLine::CellLineRelationship",
   { "foreign.subject_id" => "self.cell_line_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 cell_line_relationship_object_ids
+=head2 cell_line_relationship_objects
 
 Type: has_many
 
@@ -245,7 +237,7 @@ Related object: L<Bio::Chado::Schema::CellLine::CellLineRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "cell_line_relationship_object_ids",
+  "cell_line_relationship_objects",
   "Bio::Chado::Schema::CellLine::CellLineRelationship",
   { "foreign.object_id" => "self.cell_line_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -267,8 +259,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4a2/tVOvZkMJPzKfTdvHQA
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:CCUb6Bl8w/rnEp/43VipfA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

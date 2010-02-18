@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::General::Dbxref - A unique, global, public, stable identifier. Not necessarily an external reference - can reference data items inside the particular chado instance being used. Typically a row in a table can be uniquely identified with a primary identifier (called dbxref_id); a table may also have secondary identifiers (in a linking table <T>_dbxref). A dbxref is generally written as <DB>:<ACCESSION> or as <DB>:<ACCESSION>:<VERSION>.
+Bio::Chado::Schema::General::Dbxref
+
+=head1 DESCRIPTION
+
+A unique, global, public, stable identifier. Not necessarily an external reference - can reference data items inside the particular chado instance being used. Typically a row in a table can be uniquely identified with a primary identifier (called dbxref_id); a table may also have secondary identifiers (in a linking table <T>_dbxref). A dbxref is generally written as <DB>:<ACCESSION> or as <DB>:<ACCESSION>:<VERSION>.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("dbxref");
   default_value: nextval('dbxref_dbxref_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 db_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("dbxref");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 accession
 
@@ -47,7 +49,7 @@ The local part of the identifier. Guaranteed by the db authority to be unique fo
 =head2 version
 
   data_type: character varying
-  default_value: ''::character varying
+  default_value: (empty string)
   is_nullable: 0
   size: 255
 
@@ -56,26 +58,23 @@ The local part of the identifier. Guaranteed by the db authority to be unique fo
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =cut
 
 __PACKAGE__->add_columns(
   "dbxref_id",
   {
-    data_type => "integer",
-    default_value => "nextval('dbxref_dbxref_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('dbxref_dbxref_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "db_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "accession",
   {
@@ -87,17 +86,12 @@ __PACKAGE__->add_columns(
   "version",
   {
     data_type => "character varying",
-    default_value => "''::character varying",
+    default_value => "",
     is_nullable => 0,
     size => 255,
   },
   "description",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("dbxref_id");
 __PACKAGE__->add_unique_constraint("dbxref_c1", ["db_id", "accession", "version"]);
@@ -435,8 +429,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:3UWJmnN5GVZGhqxdFw/CMQ
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:G0B4CSfFmiZA3aBDkWyb4g
 
 
 =head1 MANY-TO-MANY RELATIONSHIPS

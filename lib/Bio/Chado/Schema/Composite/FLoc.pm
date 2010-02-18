@@ -24,7 +24,6 @@ __PACKAGE__->table("f_loc");
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 name
 
@@ -38,34 +37,30 @@ __PACKAGE__->table("f_loc");
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 nbeg
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 nend
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 strand
 
   data_type: smallint
   default_value: undef
   is_nullable: 1
-  size: 2
 
 =cut
 
 __PACKAGE__->add_columns(
   "feature_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "name",
   {
     data_type => "character varying",
@@ -74,23 +69,18 @@ __PACKAGE__->add_columns(
     size => 255,
   },
   "dbxref_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "nbeg",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "nend",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "strand",
-  {
-    data_type => "smallint",
-    default_value => undef,
-    is_nullable => 1,
-    size => 2,
-  },
+  { data_type => "smallint", default_value => undef, is_nullable => 1 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:EuryJ6UWlu781fx20f73jA
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:21:50
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:986ieWaN0oQpdtwLQelzig
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

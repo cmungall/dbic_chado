@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Composite::FeatureMeetsOnSameStrand - as feature_meets, but
+Bio::Chado::Schema::Composite::FeatureMeetsOnSameStrand
+
+=head1 DESCRIPTION
+
+as feature_meets, but
 featurelocs must be on the same strand. symmetric,reflexive
 
 =cut
@@ -25,27 +29,25 @@ __PACKAGE__->table("feature_meets_on_same_strand");
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 object_id
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "subject_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "object_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:trJWgh3jeTNCJORP2Z8faA
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:21:50
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:SMHSfLYsnONMd7rMidb16A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

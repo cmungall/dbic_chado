@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Sequence::FeatureCvterm - Associate a term from a cv with a feature, for example, GO annotation.
+Bio::Chado::Schema::Sequence::FeatureCvterm
+
+=head1 DESCRIPTION
+
+Associate a term from a cv with a feature, for example, GO annotation.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("feature_cvterm");
   default_value: nextval('feature_cvterm_feature_cvterm_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 feature_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("feature_cvterm");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 cvterm_id
 
@@ -41,7 +43,6 @@ __PACKAGE__->table("feature_cvterm");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 pub_id
 
@@ -49,7 +50,6 @@ __PACKAGE__->table("feature_cvterm");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 Provenance for the annotation. Each annotation should have a single primary publication (which may be of the appropriate type for computational analyses) where more details can be found. Additional provenance dbxrefs can be attached using feature_cvterm_dbxref.
 
@@ -58,7 +58,6 @@ Provenance for the annotation. Each annotation should have a single primary publ
   data_type: boolean
   default_value: false
   is_nullable: 0
-  size: 1
 
 If this is set to true, then this annotation is interpreted as a NEGATIVE annotation - i.e. the feature does NOT have the specified function, process, component, part, etc. See GO docs for more details.
 
@@ -67,52 +66,42 @@ If this is set to true, then this annotation is interpreted as a NEGATIVE annota
   data_type: integer
   default_value: 0
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "feature_cvterm_id",
   {
-    data_type => "integer",
-    default_value => "nextval('feature_cvterm_feature_cvterm_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('feature_cvterm_feature_cvterm_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "feature_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "cvterm_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "pub_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "is_not",
-  {
-    data_type => "boolean",
-    default_value => "false",
-    is_nullable => 0,
-    size => 1,
-  },
+  { data_type => "boolean", default_value => \"false", is_nullable => 0 },
   "rank",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("feature_cvterm_id");
 __PACKAGE__->add_unique_constraint(
@@ -213,8 +202,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:j5j44GdMI0dt2NZ8K8ma+Q
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5AlSlOgqeG7+2XelbDRmwg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

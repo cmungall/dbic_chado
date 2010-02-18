@@ -25,14 +25,12 @@ __PACKAGE__->table("eimage");
   default_value: nextval('eimage_eimage_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 eimage_data
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 We expect images in eimage_data (e.g. JPEGs) to be uuencoded.
 
@@ -57,19 +55,13 @@ Describes the type of data in eimage_data.
 __PACKAGE__->add_columns(
   "eimage_id",
   {
-    data_type => "integer",
-    default_value => "nextval('eimage_eimage_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('eimage_eimage_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "eimage_data",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "eimage_type",
   {
     data_type => "character varying",
@@ -105,8 +97,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:LW57FA7HmWPIVYu+OUJu1A
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:H9PTkq6ItTo5qq5VQLdJcw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

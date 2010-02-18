@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Phylogeny::PhylonodeDbxref - For example, for orthology, paralogy group identifiers; could also be used for NCBI taxonomy; for sequences, refer to phylonode_feature, feature associated dbxrefs.
+Bio::Chado::Schema::Phylogeny::PhylonodeDbxref
+
+=head1 DESCRIPTION
+
+For example, for orthology, paralogy group identifiers; could also be used for NCBI taxonomy; for sequences, refer to phylonode_feature, feature associated dbxrefs.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("phylonode_dbxref");
   default_value: nextval('phylonode_dbxref_phylonode_dbxref_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 phylonode_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("phylonode_dbxref");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 dbxref_id
 
@@ -41,34 +43,30 @@ __PACKAGE__->table("phylonode_dbxref");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "phylonode_dbxref_id",
   {
-    data_type => "integer",
-    default_value => "nextval('phylonode_dbxref_phylonode_dbxref_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('phylonode_dbxref_phylonode_dbxref_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "phylonode_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "dbxref_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
 );
 __PACKAGE__->set_primary_key("phylonode_dbxref_id");
@@ -110,8 +108,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:fi8CpT/GozHcQdcyZwnREg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qUpWAt70zgHr6pIdF8zTVw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

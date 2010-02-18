@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Composite::FeatureContains - subject intervals contains (or is
+Bio::Chado::Schema::Composite::FeatureContains
+
+=head1 DESCRIPTION
+
+subject intervals contains (or is
 same as) object interval. transitive,reflexive
 
 =cut
@@ -25,27 +29,25 @@ __PACKAGE__->table("feature_contains");
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 object_id
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "subject_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "object_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qWGvWgOzMOm9b73D4tqaaw
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:21:50
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:80w3wQqQE58upDedxBz60Q
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

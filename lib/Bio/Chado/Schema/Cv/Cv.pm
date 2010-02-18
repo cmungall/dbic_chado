@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Cv::Cv - A controlled vocabulary or ontology. A cv is
+Bio::Chado::Schema::Cv::Cv
+
+=head1 DESCRIPTION
+
+A controlled vocabulary or ontology. A cv is
 composed of cvterms (AKA terms, classes, types, universals - relations
 and properties are also stored in cvterm) and the relationships
 between them.
@@ -28,7 +32,6 @@ __PACKAGE__->table("cv");
   default_value: nextval('cv_cv_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 name
 
@@ -46,7 +49,6 @@ the cv. In OBO file format, the cv.name is known as the namespace.
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 A text description of the criteria for
 membership of this ontology.
@@ -56,11 +58,10 @@ membership of this ontology.
 __PACKAGE__->add_columns(
   "cv_id",
   {
-    data_type => "integer",
-    default_value => "nextval('cv_cv_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('cv_cv_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "name",
   {
@@ -70,12 +71,7 @@ __PACKAGE__->add_columns(
     size => 255,
   },
   "definition",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("cv_id");
 __PACKAGE__->add_unique_constraint("cv_c1", ["name"]);
@@ -113,8 +109,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:MHq/64haXjNpR+HlZ9nPZQ
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:z2Y4yaXwJ3dqxEi2oRRAjw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

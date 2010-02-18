@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Cv::CvtermDbxref - In addition to the primary
+Bio::Chado::Schema::Cv::CvtermDbxref
+
+=head1 DESCRIPTION
+
+In addition to the primary
 identifier (cvterm.dbxref_id) a cvterm can have zero or more secondary
 identifiers/dbxrefs, which may refer to records in external
 databases. The exact semantics of cvterm_dbxref are not fixed. For
@@ -39,7 +43,6 @@ __PACKAGE__->table("cvterm_dbxref");
   default_value: nextval('cvterm_dbxref_cvterm_dbxref_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 cvterm_id
 
@@ -47,7 +50,6 @@ __PACKAGE__->table("cvterm_dbxref");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 dbxref_id
 
@@ -55,14 +57,12 @@ __PACKAGE__->table("cvterm_dbxref");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 is_for_definition
 
   data_type: integer
   default_value: 0
   is_nullable: 0
-  size: 4
 
 A
 cvterm.definition should be supported by one or more references. If
@@ -74,30 +74,27 @@ it is a dbxref for provenance information for the definition.
 __PACKAGE__->add_columns(
   "cvterm_dbxref_id",
   {
-    data_type => "integer",
-    default_value => "nextval('cvterm_dbxref_cvterm_dbxref_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('cvterm_dbxref_cvterm_dbxref_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "cvterm_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "dbxref_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "is_for_definition",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("cvterm_dbxref_id");
 __PACKAGE__->add_unique_constraint("cvterm_dbxref_c1", ["cvterm_id", "dbxref_id"]);
@@ -135,8 +132,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8+6sNVaP8UiWuNgftAb9IA
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:409lMIKlZkLaIGV08o+MWQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

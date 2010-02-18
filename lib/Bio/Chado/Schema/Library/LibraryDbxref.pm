@@ -25,7 +25,6 @@ __PACKAGE__->table("library_dbxref");
   default_value: nextval('library_dbxref_library_dbxref_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 library_id
 
@@ -33,7 +32,6 @@ __PACKAGE__->table("library_dbxref");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 dbxref_id
 
@@ -41,49 +39,39 @@ __PACKAGE__->table("library_dbxref");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 is_current
 
   data_type: boolean
   default_value: true
   is_nullable: 0
-  size: 1
 
 =cut
 
 __PACKAGE__->add_columns(
   "library_dbxref_id",
   {
-    data_type => "integer",
-    default_value => "nextval('library_dbxref_library_dbxref_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('library_dbxref_library_dbxref_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "library_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "dbxref_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "is_current",
-  {
-    data_type => "boolean",
-    default_value => "true",
-    is_nullable => 0,
-    size => 1,
-  },
+  { data_type => "boolean", default_value => \"true", is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("library_dbxref_id");
 __PACKAGE__->add_unique_constraint("library_dbxref_c1", ["library_id", "dbxref_id"]);
@@ -121,8 +109,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:s3G82kW9KYg8XP+6oWui6w
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:kijQ0cPtf+Lxm17aYqVI7A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

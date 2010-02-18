@@ -25,14 +25,12 @@ __PACKAGE__->table("expression");
   default_value: nextval('expression_expression_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 uniquename
 
   data_type: text
   default_value: undef
   is_nullable: 0
-  size: undef
 
 =head2 md5checksum
 
@@ -46,26 +44,19 @@ __PACKAGE__->table("expression");
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =cut
 
 __PACKAGE__->add_columns(
   "expression_id",
   {
-    data_type => "integer",
-    default_value => "nextval('expression_expression_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('expression_expression_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "uniquename",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 0,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 0 },
   "md5checksum",
   {
     data_type => "character",
@@ -74,12 +65,7 @@ __PACKAGE__->add_columns(
     size => 32,
   },
   "description",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("expression_id");
 __PACKAGE__->add_unique_constraint("expression_c1", ["uniquename"]);
@@ -162,8 +148,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oK4i+19pj/eFIQwnHI4Ktw
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:k3oYZHDg7VCwOj9atY4VPQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

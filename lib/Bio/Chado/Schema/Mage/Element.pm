@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Mage::Element - Represents a feature of the array. This is typically a region of the array coated or bound to DNA.
+Bio::Chado::Schema::Mage::Element
+
+=head1 DESCRIPTION
+
+Represents a feature of the array. This is typically a region of the array coated or bound to DNA.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("element");
   default_value: nextval('element_element_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 feature_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("element");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 arraydesign_id
 
@@ -41,7 +43,6 @@ __PACKAGE__->table("element");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 type_id
 
@@ -49,7 +50,6 @@ __PACKAGE__->table("element");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 dbxref_id
 
@@ -57,50 +57,44 @@ __PACKAGE__->table("element");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "element_id",
   {
-    data_type => "integer",
-    default_value => "nextval('element_element_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('element_element_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "feature_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "arraydesign_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "dbxref_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
 );
 __PACKAGE__->set_primary_key("element_id");
@@ -168,7 +162,7 @@ __PACKAGE__->belongs_to(
   { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
 );
 
-=head2 element_relationship_object_ids
+=head2 element_relationship_objects
 
 Type: has_many
 
@@ -177,13 +171,13 @@ Related object: L<Bio::Chado::Schema::Mage::ElementRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "element_relationship_object_ids",
+  "element_relationship_objects",
   "Bio::Chado::Schema::Mage::ElementRelationship",
   { "foreign.object_id" => "self.element_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 element_relationship_subject_ids
+=head2 element_relationship_subjects
 
 Type: has_many
 
@@ -192,7 +186,7 @@ Related object: L<Bio::Chado::Schema::Mage::ElementRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "element_relationship_subject_ids",
+  "element_relationship_subjects",
   "Bio::Chado::Schema::Mage::ElementRelationship",
   { "foreign.subject_id" => "self.element_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -214,8 +208,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:INxcIMXVQsqyPY0ucJKdWw
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pKDjqDaS4Wo8Xf/QbQLPPA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

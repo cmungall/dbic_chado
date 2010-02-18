@@ -25,7 +25,6 @@ __PACKAGE__->table("phenotype_cvterm");
   default_value: nextval('phenotype_cvterm_phenotype_cvterm_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 phenotype_id
 
@@ -33,7 +32,6 @@ __PACKAGE__->table("phenotype_cvterm");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 cvterm_id
 
@@ -41,44 +39,39 @@ __PACKAGE__->table("phenotype_cvterm");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 rank
 
   data_type: integer
   default_value: 0
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "phenotype_cvterm_id",
   {
-    data_type => "integer",
-    default_value => "nextval('phenotype_cvterm_phenotype_cvterm_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('phenotype_cvterm_phenotype_cvterm_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "phenotype_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "cvterm_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "rank",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("phenotype_cvterm_id");
 __PACKAGE__->add_unique_constraint("phenotype_cvterm_c1", ["phenotype_id", "cvterm_id", "rank"]);
@@ -116,8 +109,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4ALNDIgsQeT1MuoKNeH3vQ
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:HsWmvWF+pgMwk4UPleuKsA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

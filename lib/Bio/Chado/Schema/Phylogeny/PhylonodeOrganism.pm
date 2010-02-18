@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Phylogeny::PhylonodeOrganism - This linking table should only be used for nodes in taxonomy trees; it provides a mapping between the node and an organism. One node can have zero or one organisms, one organism can have zero or more nodes (although typically it should only have one in the standard NCBI taxonomy tree).
+Bio::Chado::Schema::Phylogeny::PhylonodeOrganism
+
+=head1 DESCRIPTION
+
+This linking table should only be used for nodes in taxonomy trees; it provides a mapping between the node and an organism. One node can have zero or one organisms, one organism can have zero or more nodes (although typically it should only have one in the standard NCBI taxonomy tree).
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("phylonode_organism");
   default_value: nextval('phylonode_organism_phylonode_organism_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 phylonode_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("phylonode_organism");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 One phylonode cannot refer to >1 organism.
 
@@ -43,34 +45,30 @@ One phylonode cannot refer to >1 organism.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "phylonode_organism_id",
   {
-    data_type => "integer",
-    default_value => "nextval('phylonode_organism_phylonode_organism_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('phylonode_organism_phylonode_organism_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "phylonode_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "organism_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
 );
 __PACKAGE__->set_primary_key("phylonode_organism_id");
@@ -109,8 +107,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:nQz6pE636Orpg/yfMuRUNw
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oMUGeCRlutXSglJ3qHW8Ag
 
 # You can replace this text with custom content, and it will be preserved on regeneration
 1;

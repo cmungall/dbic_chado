@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Organism::Organism - The organismal taxonomic
+Bio::Chado::Schema::Organism::Organism
+
+=head1 DESCRIPTION
+
+The organismal taxonomic
 classification. Note that phylogenies are represented using the
 phylogeny module, and taxonomies can be represented using the cvterm
 module or the phylogeny module.
@@ -28,7 +32,6 @@ __PACKAGE__->table("organism");
   default_value: nextval('organism_organism_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 abbreviation
 
@@ -71,18 +74,16 @@ pattern.
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =cut
 
 __PACKAGE__->add_columns(
   "organism_id",
   {
-    data_type => "integer",
-    default_value => "nextval('organism_organism_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('organism_organism_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "abbreviation",
   {
@@ -113,12 +114,7 @@ __PACKAGE__->add_columns(
     size => 255,
   },
   "comment",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("organism_id");
 __PACKAGE__->add_unique_constraint("organism_c1", ["genus", "species"]);
@@ -261,8 +257,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jzKnEWsUHUzLFlaFpKO1mg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zaawavddVcC9I9u5OuqgGg
 
 use Carp;
 

@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Cv::CvPathCount - per-cv summary of number of
+Bio::Chado::Schema::Cv::CvPathCount
+
+=head1 DESCRIPTION
+
+per-cv summary of number of
 paths (cvtermpaths) broken down by relationship_type. num_paths is the
 total # of paths of the specified type in which the subject_id of the
 path is in the named cv. See also: cv_distinct_relations
@@ -48,7 +52,6 @@ __PACKAGE__->table("cv_path_count");
   data_type: bigint
   default_value: undef
   is_nullable: 1
-  size: 8
 
 =cut
 
@@ -75,12 +78,12 @@ __PACKAGE__->add_columns(
     size => 255,
   },
   "num_paths",
-  { data_type => "bigint", default_value => undef, is_nullable => 1, size => 8 },
+  { data_type => "bigint", default_value => undef, is_nullable => 1 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5WemJsSwbS2btz5Hv9Cyww
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:21:50
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+l5K0B7zxaefT16AYGWjcA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

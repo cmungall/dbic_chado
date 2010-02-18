@@ -25,7 +25,6 @@ __PACKAGE__->table("library_synonym");
   default_value: nextval('library_synonym_library_synonym_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 synonym_id
 
@@ -33,7 +32,6 @@ __PACKAGE__->table("library_synonym");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 library_id
 
@@ -41,7 +39,6 @@ __PACKAGE__->table("library_synonym");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 pub_id
 
@@ -49,7 +46,6 @@ __PACKAGE__->table("library_synonym");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 The pub_id link is for
 relating the usage of a given synonym to the publication in which it was used.
@@ -59,7 +55,6 @@ relating the usage of a given synonym to the publication in which it was used.
   data_type: boolean
   default_value: true
   is_nullable: 0
-  size: 1
 
 The is_current bit indicates whether the linked synonym is the current -official- symbol for the linked library.
 
@@ -68,7 +63,6 @@ The is_current bit indicates whether the linked synonym is the current -official
   data_type: boolean
   default_value: false
   is_nullable: 0
-  size: 1
 
 Typically a synonym
 exists so that somebody querying the database with an obsolete name
@@ -80,50 +74,36 @@ the synonym has been used publicly and deliberately (e.g. in a paper), it my als
 __PACKAGE__->add_columns(
   "library_synonym_id",
   {
-    data_type => "integer",
-    default_value => "nextval('library_synonym_library_synonym_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('library_synonym_library_synonym_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "synonym_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "library_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "pub_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "is_current",
-  {
-    data_type => "boolean",
-    default_value => "true",
-    is_nullable => 0,
-    size => 1,
-  },
+  { data_type => "boolean", default_value => \"true", is_nullable => 0 },
   "is_internal",
-  {
-    data_type => "boolean",
-    default_value => "false",
-    is_nullable => 0,
-    size => 1,
-  },
+  { data_type => "boolean", default_value => \"false", is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("library_synonym_id");
 __PACKAGE__->add_unique_constraint("library_synonym_c1", ["synonym_id", "library_id", "pub_id"]);
@@ -176,8 +156,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ctr2MIouTkSWpNoKxP2Y9w
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:LYXX0KEpzEZ5/b9TtorEXg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

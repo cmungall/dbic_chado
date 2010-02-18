@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Library::LibraryFeature - library_feature links a library to the clones which are contained in the library.  Examples of such linked features might be "cDNA_clone" or  "genomic_clone".
+Bio::Chado::Schema::Library::LibraryFeature
+
+=head1 DESCRIPTION
+
+library_feature links a library to the clones which are contained in the library.  Examples of such linked features might be "cDNA_clone" or  "genomic_clone".
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("library_feature");
   default_value: nextval('library_feature_library_feature_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 library_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("library_feature");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 feature_id
 
@@ -41,34 +43,30 @@ __PACKAGE__->table("library_feature");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "library_feature_id",
   {
-    data_type => "integer",
-    default_value => "nextval('library_feature_library_feature_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('library_feature_library_feature_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "library_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "feature_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
 );
 __PACKAGE__->set_primary_key("library_feature_id");
@@ -107,8 +105,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VQ1BISnngcjaP3U23p7zLw
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/jReHSp6LLLa9aWxq7yMkg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

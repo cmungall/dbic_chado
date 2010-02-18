@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Stock::StockGenotype - Simple table linking a stock to
+Bio::Chado::Schema::Stock::StockGenotype
+
+=head1 DESCRIPTION
+
+Simple table linking a stock to
 a genotype. Features with genotypes can be linked to stocks thru feature_genotype -> genotype -> stock_genotype -> stock.
 
 =cut
@@ -26,7 +30,6 @@ __PACKAGE__->table("stock_genotype");
   default_value: nextval('stock_genotype_stock_genotype_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 stock_id
 
@@ -34,7 +37,6 @@ __PACKAGE__->table("stock_genotype");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 genotype_id
 
@@ -42,34 +44,30 @@ __PACKAGE__->table("stock_genotype");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "stock_genotype_id",
   {
-    data_type => "integer",
-    default_value => "nextval('stock_genotype_stock_genotype_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('stock_genotype_stock_genotype_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "stock_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "genotype_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
 );
 __PACKAGE__->set_primary_key("stock_genotype_id");
@@ -108,8 +106,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NN+cKmaRq5anRIN3DVaqUQ
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:AEClo7RZ1CH3gISidKzzVg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

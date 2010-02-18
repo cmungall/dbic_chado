@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::General::Db - A database authority. Typical databases in
+Bio::Chado::Schema::General::Db
+
+=head1 DESCRIPTION
+
+A database authority. Typical databases in
 bioinformatics are FlyBase, GO, UniProt, NCBI, MGI, etc. The authority
 is generally known by this shortened form, which is unique within the
 bioinformatics and biomedical realm.  To Do - add support for URIs,
@@ -31,7 +35,6 @@ __PACKAGE__->table("db");
   default_value: nextval('db_db_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 name
 
@@ -66,11 +69,10 @@ __PACKAGE__->table("db");
 __PACKAGE__->add_columns(
   "db_id",
   {
-    data_type => "integer",
-    default_value => "nextval('db_db_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('db_db_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "name",
   {
@@ -122,8 +124,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:9PKFTcA18MZZzArHRjhmfw
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tj2FuBUH4CL9utHJRbyl/Q
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

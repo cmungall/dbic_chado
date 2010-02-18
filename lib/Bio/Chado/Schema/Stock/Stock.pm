@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Stock::Stock - Any stock can be globally identified by the
+Bio::Chado::Schema::Stock::Stock
+
+=head1 DESCRIPTION
+
+Any stock can be globally identified by the
 combination of organism, uniquename and stock type. A stock is the physical entities, either living or preserved, held by collections. Stocks belong to a collection; they have IDs, type, organism, description and may have a genotype.
 
 =cut
@@ -26,7 +30,6 @@ __PACKAGE__->table("stock");
   default_value: nextval('stock_stock_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 dbxref_id
 
@@ -34,7 +37,6 @@ __PACKAGE__->table("stock");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 The dbxref_id is an optional primary stable identifier for this stock. Secondary indentifiers and external dbxrefs go in table: stock_dbxref.
 
@@ -44,7 +46,6 @@ The dbxref_id is an optional primary stable identifier for this stock. Secondary
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 The organism_id is the organism to which the stock belongs. This column is mandatory.
 
@@ -62,14 +63,12 @@ The name is a human-readable local name for a stock.
   data_type: text
   default_value: undef
   is_nullable: 0
-  size: undef
 
 =head2 description
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 The description is the genetic description provided in the stock list.
 
@@ -79,7 +78,6 @@ The description is the genetic description provided in the stock list.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 The type_id foreign key links to a controlled vocabulary of stock types. The would include living stock, genomic DNA, preserved specimen. Secondary cvterms for stocks would go in stock_cvterm.
 
@@ -88,34 +86,30 @@ The type_id foreign key links to a controlled vocabulary of stock types. The wou
   data_type: boolean
   default_value: false
   is_nullable: 0
-  size: 1
 
 =cut
 
 __PACKAGE__->add_columns(
   "stock_id",
   {
-    data_type => "integer",
-    default_value => "nextval('stock_stock_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('stock_stock_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "dbxref_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "organism_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "name",
   {
@@ -125,34 +119,18 @@ __PACKAGE__->add_columns(
     size => 255,
   },
   "uniquename",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 0,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 0 },
   "description",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "is_obsolete",
-  {
-    data_type => "boolean",
-    default_value => "false",
-    is_nullable => 0,
-    size => 1,
-  },
+  { data_type => "boolean", default_value => \"false", is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("stock_id");
 __PACKAGE__->add_unique_constraint("stock_c1", ["organism_id", "uniquename", "type_id"]);
@@ -294,7 +272,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 stock_relationship_subject_ids
+=head2 stock_relationship_subjects
 
 Type: has_many
 
@@ -303,13 +281,13 @@ Related object: L<Bio::Chado::Schema::Stock::StockRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "stock_relationship_subject_ids",
+  "stock_relationship_subjects",
   "Bio::Chado::Schema::Stock::StockRelationship",
   { "foreign.subject_id" => "self.stock_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 stock_relationship_object_ids
+=head2 stock_relationship_objects
 
 Type: has_many
 
@@ -318,15 +296,15 @@ Related object: L<Bio::Chado::Schema::Stock::StockRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "stock_relationship_object_ids",
+  "stock_relationship_objects",
   "Bio::Chado::Schema::Stock::StockRelationship",
   { "foreign.object_id" => "self.stock_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:g4e6qipcuf/EoVbctHgjMQ
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:QmAdK7iJ1dER+bFiy/xTvg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

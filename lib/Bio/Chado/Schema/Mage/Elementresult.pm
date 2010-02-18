@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Mage::Elementresult - An element on an array produces a measurement when hybridized to a biomaterial (traceable through quantification_id). This is the base data from which tables that actually contain data inherit.
+Bio::Chado::Schema::Mage::Elementresult
+
+=head1 DESCRIPTION
+
+An element on an array produces a measurement when hybridized to a biomaterial (traceable through quantification_id). This is the base data from which tables that actually contain data inherit.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("elementresult");
   default_value: nextval('elementresult_elementresult_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 element_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("elementresult");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 quantification_id
 
@@ -41,48 +43,42 @@ __PACKAGE__->table("elementresult");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 signal
 
   data_type: double precision
   default_value: undef
   is_nullable: 0
-  size: 8
 
 =cut
 
 __PACKAGE__->add_columns(
   "elementresult_id",
   {
-    data_type => "integer",
-    default_value => "nextval('elementresult_elementresult_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('elementresult_elementresult_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "element_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "quantification_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "signal",
   {
-    data_type => "double precision",
+    data_type     => "double precision",
     default_value => undef,
-    is_nullable => 0,
-    size => 8,
+    is_nullable   => 0,
   },
 );
 __PACKAGE__->set_primary_key("elementresult_id");
@@ -120,7 +116,7 @@ __PACKAGE__->belongs_to(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 elementresult_relationship_subject_ids
+=head2 elementresult_relationship_subjects
 
 Type: has_many
 
@@ -129,13 +125,13 @@ Related object: L<Bio::Chado::Schema::Mage::ElementresultRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "elementresult_relationship_subject_ids",
+  "elementresult_relationship_subjects",
   "Bio::Chado::Schema::Mage::ElementresultRelationship",
   { "foreign.subject_id" => "self.elementresult_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 elementresult_relationship_object_ids
+=head2 elementresult_relationship_objects
 
 Type: has_many
 
@@ -144,15 +140,15 @@ Related object: L<Bio::Chado::Schema::Mage::ElementresultRelationship>
 =cut
 
 __PACKAGE__->has_many(
-  "elementresult_relationship_object_ids",
+  "elementresult_relationship_objects",
   "Bio::Chado::Schema::Mage::ElementresultRelationship",
   { "foreign.object_id" => "self.elementresult_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:hmHvs6roP6kW2plLHqFJzw
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:kozWlbVuRPkQ3lQ+CyoTRw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

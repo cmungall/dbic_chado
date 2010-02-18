@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Stock::StockDbxref - stock_dbxref links a stock to dbxrefs. This is for secondary identifiers; primary identifiers should use stock.dbxref_id.
+Bio::Chado::Schema::Stock::StockDbxref
+
+=head1 DESCRIPTION
+
+stock_dbxref links a stock to dbxrefs. This is for secondary identifiers; primary identifiers should use stock.dbxref_id.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("stock_dbxref");
   default_value: nextval('stock_dbxref_stock_dbxref_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 stock_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("stock_dbxref");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 dbxref_id
 
@@ -41,14 +43,12 @@ __PACKAGE__->table("stock_dbxref");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 is_current
 
   data_type: boolean
   default_value: true
   is_nullable: 0
-  size: 1
 
 The is_current boolean indicates whether the linked dbxref is the current -official- dbxref for the linked stock.
 
@@ -57,35 +57,27 @@ The is_current boolean indicates whether the linked dbxref is the current -offic
 __PACKAGE__->add_columns(
   "stock_dbxref_id",
   {
-    data_type => "integer",
-    default_value => "nextval('stock_dbxref_stock_dbxref_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('stock_dbxref_stock_dbxref_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "stock_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "dbxref_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "is_current",
-  {
-    data_type => "boolean",
-    default_value => "true",
-    is_nullable => 0,
-    size => 1,
-  },
+  { data_type => "boolean", default_value => \"true", is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("stock_dbxref_id");
 __PACKAGE__->add_unique_constraint("stock_dbxref_c1", ["stock_id", "dbxref_id"]);
@@ -123,8 +115,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ovoZ7saQJ1bM+8ty6edVSw
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:EHSNU8JIzqufT1jl7pePmg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

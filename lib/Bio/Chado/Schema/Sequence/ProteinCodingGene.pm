@@ -24,21 +24,18 @@ __PACKAGE__->table("protein_coding_gene");
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 dbxref_id
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 organism_id
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 name
 
@@ -52,21 +49,18 @@ __PACKAGE__->table("protein_coding_gene");
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =head2 residues
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =head2 seqlen
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 md5checksum
 
@@ -80,45 +74,40 @@ __PACKAGE__->table("protein_coding_gene");
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 is_analysis
 
   data_type: boolean
   default_value: undef
   is_nullable: 1
-  size: 1
 
 =head2 is_obsolete
 
   data_type: boolean
   default_value: undef
   is_nullable: 1
-  size: 1
 
 =head2 timeaccessioned
 
   data_type: timestamp without time zone
   default_value: undef
   is_nullable: 1
-  size: 8
 
 =head2 timelastmodified
 
   data_type: timestamp without time zone
   default_value: undef
   is_nullable: 1
-  size: 8
 
 =cut
 
 __PACKAGE__->add_columns(
   "feature_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "dbxref_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "organism_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "name",
   {
     data_type => "character varying",
@@ -127,21 +116,11 @@ __PACKAGE__->add_columns(
     size => 255,
   },
   "uniquename",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "residues",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "seqlen",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "md5checksum",
   {
     data_type => "character",
@@ -150,30 +129,28 @@ __PACKAGE__->add_columns(
     size => 32,
   },
   "type_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "is_analysis",
-  { data_type => "boolean", default_value => undef, is_nullable => 1, size => 1 },
+  { data_type => "boolean", default_value => undef, is_nullable => 1 },
   "is_obsolete",
-  { data_type => "boolean", default_value => undef, is_nullable => 1, size => 1 },
+  { data_type => "boolean", default_value => undef, is_nullable => 1 },
   "timeaccessioned",
   {
-    data_type => "timestamp without time zone",
+    data_type     => "timestamp without time zone",
     default_value => undef,
-    is_nullable => 1,
-    size => 8,
+    is_nullable   => 1,
   },
   "timelastmodified",
   {
-    data_type => "timestamp without time zone",
+    data_type     => "timestamp without time zone",
     default_value => undef,
-    is_nullable => 1,
-    size => 8,
+    is_nullable   => 1,
   },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:UDqNebikKrj1h8R7hs3olA
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:21:50
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:3vw1/tEhk2awogqj78ucaQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

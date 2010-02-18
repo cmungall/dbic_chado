@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Sequence::Synonym - A synonym for a feature. One feature can have multiple synonyms, and the same synonym can apply to multiple features.
+Bio::Chado::Schema::Sequence::Synonym
+
+=head1 DESCRIPTION
+
+A synonym for a feature. One feature can have multiple synonyms, and the same synonym can apply to multiple features.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("synonym");
   default_value: nextval('synonym_synonym_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 name
 
@@ -42,7 +45,6 @@ The synonym itself. Should be human-readable machine-searchable ascii text.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 Types would be symbol and fullname for now.
 
@@ -60,11 +62,10 @@ The fully specified synonym, with any non-ascii characters encoded in SGML.
 __PACKAGE__->add_columns(
   "synonym_id",
   {
-    data_type => "integer",
-    default_value => "nextval('synonym_synonym_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('synonym_synonym_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "name",
   {
@@ -75,11 +76,10 @@ __PACKAGE__->add_columns(
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "synonym_sgml",
   {
@@ -155,8 +155,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:RgAynDrufEy+N+tIEQPOmg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:CFsMzT+1euOdwu9g/x3bOQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

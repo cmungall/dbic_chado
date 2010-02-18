@@ -25,7 +25,6 @@ __PACKAGE__->table("project");
   default_value: nextval('project_project_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 name
 
@@ -46,11 +45,10 @@ __PACKAGE__->table("project");
 __PACKAGE__->add_columns(
   "project_id",
   {
-    data_type => "integer",
-    default_value => "nextval('project_project_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('project_project_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "name",
   {
@@ -88,8 +86,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ntjNFl7eiDcZ57YKZsHgfg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:yJ6+FEufl6hRkbArdKtKwA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

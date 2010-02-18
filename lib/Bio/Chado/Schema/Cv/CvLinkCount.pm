@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Cv::CvLinkCount - per-cv summary of number of
+Bio::Chado::Schema::Cv::CvLinkCount
+
+=head1 DESCRIPTION
+
+per-cv summary of number of
 links (cvterm_relationships) broken down by
 relationship_type. num_links is the total # of links of the specified
 type in which the subject_id of the link is in the named cv
@@ -48,7 +52,6 @@ __PACKAGE__->table("cv_link_count");
   data_type: bigint
   default_value: undef
   is_nullable: 1
-  size: 8
 
 =cut
 
@@ -75,12 +78,12 @@ __PACKAGE__->add_columns(
     size => 255,
   },
   "num_links",
-  { data_type => "bigint", default_value => undef, is_nullable => 1, size => 8 },
+  { data_type => "bigint", default_value => undef, is_nullable => 1 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:nAzGj1tDoGtsjTCUh61Zqg
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:21:50
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:bINfcQyf0PfRmAAxF3t5ag
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

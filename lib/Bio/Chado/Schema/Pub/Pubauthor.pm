@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Pub::Pubauthor - An author for a publication. Note the denormalisation (hence lack of _ in table name) - this is deliberate as it is in general too hard to assign IDs to authors.
+Bio::Chado::Schema::Pub::Pubauthor
+
+=head1 DESCRIPTION
+
+An author for a publication. Note the denormalisation (hence lack of _ in table name) - this is deliberate as it is in general too hard to assign IDs to authors.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("pubauthor");
   default_value: nextval('pubauthor_pubauthor_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 pub_id
 
@@ -33,14 +36,12 @@ __PACKAGE__->table("pubauthor");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 rank
 
   data_type: integer
   default_value: undef
   is_nullable: 0
-  size: 4
 
 Order of author in author list for this pub - order is important.
 
@@ -49,7 +50,6 @@ Order of author in author list for this pub - order is important.
   data_type: boolean
   default_value: false
   is_nullable: 1
-  size: 1
 
 Indicates whether the author is an editor for linked publication. Note: this is a boolean field but does not follow the normal chado convention for naming booleans.
 
@@ -83,29 +83,22 @@ Jr., Sr., etc
 __PACKAGE__->add_columns(
   "pubauthor_id",
   {
-    data_type => "integer",
-    default_value => "nextval('pubauthor_pubauthor_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('pubauthor_pubauthor_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "pub_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "rank",
-  { data_type => "integer", default_value => undef, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 0 },
   "editor",
-  {
-    data_type => "boolean",
-    default_value => "false",
-    is_nullable => 1,
-    size => 1,
-  },
+  { data_type => "boolean", default_value => \"false", is_nullable => 1 },
   "surname",
   {
     data_type => "character varying",
@@ -149,8 +142,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:e/lFdh4iV6jCIGKszXYHqw
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:BolvyMKXbjVIZxL7VPlcBg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

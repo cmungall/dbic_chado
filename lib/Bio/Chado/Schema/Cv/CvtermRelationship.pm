@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Cv::CvtermRelationship - A relationship linking two
+Bio::Chado::Schema::Cv::CvtermRelationship
+
+=head1 DESCRIPTION
+
+A relationship linking two
 cvterms. Each cvterm_relationship constitutes an edge in the graph
 defined by the collection of cvterms and cvterm_relationships. The
 meaning of the cvterm_relationship depends on the definition of the
@@ -32,7 +36,6 @@ __PACKAGE__->table("cvterm_relationship");
   default_value: nextval('cvterm_relationship_cvterm_relationship_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 type_id
 
@@ -40,7 +43,6 @@ __PACKAGE__->table("cvterm_relationship");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 The nature of the
 relationship between subject and object. Note that relations are also
@@ -53,7 +55,6 @@ ontology, although other relationship types are allowed.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 The subject of
 the subj-predicate-obj sentence. The cvterm_relationship is about the
@@ -65,7 +66,6 @@ subject. In a graph, this typically corresponds to the child node.
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 The object of the
 subj-predicate-obj sentence. The cvterm_relationship refers to the
@@ -76,35 +76,31 @@ object. In a graph, this typically corresponds to the parent node.
 __PACKAGE__->add_columns(
   "cvterm_relationship_id",
   {
-    data_type => "integer",
-    default_value => "nextval('cvterm_relationship_cvterm_relationship_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('cvterm_relationship_cvterm_relationship_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "type_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "subject_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "object_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
 );
 __PACKAGE__->set_primary_key("cvterm_relationship_id");
@@ -161,8 +157,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:71GtYWM+Xf09rlzqZFI29g
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:UkQwBCXS3Uzqp+H/HSpVtg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

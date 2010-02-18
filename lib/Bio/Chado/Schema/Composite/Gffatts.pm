@@ -24,14 +24,12 @@ __PACKAGE__->table("gffatts");
   data_type: integer
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 type
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =head2 attribute
 
@@ -44,14 +42,9 @@ __PACKAGE__->table("gffatts");
 
 __PACKAGE__->add_columns(
   "feature_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
   "type",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "attribute",
   {
     data_type => "character varying",
@@ -62,8 +55,8 @@ __PACKAGE__->add_columns(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:BCXb7R2DZ5NPMHWgRmWQvw
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:21:50
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:u0ScQnuIbyUghlMVUgjuDA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Stock::StockCvterm - stock_cvterm links a stock to cvterms. This is for secondary cvterms; primary cvterms should use stock.type_id.
+Bio::Chado::Schema::Stock::StockCvterm
+
+=head1 DESCRIPTION
+
+stock_cvterm links a stock to cvterms. This is for secondary cvterms; primary cvterms should use stock.type_id.
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("stock_cvterm");
   default_value: nextval('stock_cvterm_stock_cvterm_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 stock_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("stock_cvterm");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 cvterm_id
 
@@ -41,7 +43,6 @@ __PACKAGE__->table("stock_cvterm");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 pub_id
 
@@ -49,42 +50,37 @@ __PACKAGE__->table("stock_cvterm");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "stock_cvterm_id",
   {
-    data_type => "integer",
-    default_value => "nextval('stock_cvterm_stock_cvterm_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('stock_cvterm_stock_cvterm_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "stock_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "cvterm_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "pub_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
 );
 __PACKAGE__->set_primary_key("stock_cvterm_id");
@@ -138,8 +134,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rTPgPIhdHNXBM1Mlw28knQ
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xgYo40j8Jy7SCCx+MaJJnQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

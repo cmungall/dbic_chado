@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Mage::Assay - An assay consists of a physical instance of
+Bio::Chado::Schema::Mage::Assay
+
+=head1 DESCRIPTION
+
+An assay consists of a physical instance of
 an array, combined with the conditions used to create the array
 (protocols, technician information). The assay can be thought of as a hybridization.
 
@@ -27,7 +31,6 @@ __PACKAGE__->table("assay");
   default_value: nextval('assay_assay_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 arraydesign_id
 
@@ -35,7 +38,6 @@ __PACKAGE__->table("assay");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 protocol_id
 
@@ -43,28 +45,24 @@ __PACKAGE__->table("assay");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 assaydate
 
   data_type: timestamp without time zone
   default_value: now()
   is_nullable: 1
-  size: 8
 
 =head2 arrayidentifier
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =head2 arraybatchidentifier
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =head2 operator_id
 
@@ -72,7 +70,6 @@ __PACKAGE__->table("assay");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 dbxref_id
 
@@ -80,100 +77,71 @@ __PACKAGE__->table("assay");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 name
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =head2 description
 
   data_type: text
   default_value: undef
   is_nullable: 1
-  size: undef
 
 =cut
 
 __PACKAGE__->add_columns(
   "assay_id",
   {
-    data_type => "integer",
-    default_value => "nextval('assay_assay_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('assay_assay_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "arraydesign_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "protocol_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "assaydate",
   {
-    data_type => "timestamp without time zone",
-    default_value => "now()",
-    is_nullable => 1,
-    size => 8,
+    data_type     => "timestamp without time zone",
+    default_value => \"now()",
+    is_nullable   => 1,
   },
   "arrayidentifier",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "arraybatchidentifier",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "operator_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "dbxref_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "name",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
   "description",
-  {
-    data_type => "text",
-    default_value => undef,
-    is_nullable => 1,
-    size => undef,
-  },
+  { data_type => "text", default_value => undef, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("assay_id");
 __PACKAGE__->add_unique_constraint("assay_c1", ["name"]);
@@ -346,8 +314,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1imtPaUXHQHes/ueMzVSlQ
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6P3D3yhrA1/0yB2h0twHsQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

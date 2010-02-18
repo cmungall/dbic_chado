@@ -11,7 +11,11 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Mage::BiomaterialTreatment - Link biomaterials to treatments. Treatments have an order of operations (rank), and associated measurements (unittype_id, value).
+Bio::Chado::Schema::Mage::BiomaterialTreatment
+
+=head1 DESCRIPTION
+
+Link biomaterials to treatments. Treatments have an order of operations (rank), and associated measurements (unittype_id, value).
 
 =cut
 
@@ -25,7 +29,6 @@ __PACKAGE__->table("biomaterial_treatment");
   default_value: nextval('biomaterial_treatment_biomaterial_treatment_id_seq'::regclass)
   is_auto_increment: 1
   is_nullable: 0
-  size: 4
 
 =head2 biomaterial_id
 
@@ -33,7 +36,6 @@ __PACKAGE__->table("biomaterial_treatment");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 treatment_id
 
@@ -41,7 +43,6 @@ __PACKAGE__->table("biomaterial_treatment");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 0
-  size: 4
 
 =head2 unittype_id
 
@@ -49,61 +50,54 @@ __PACKAGE__->table("biomaterial_treatment");
   default_value: undef
   is_foreign_key: 1
   is_nullable: 1
-  size: 4
 
 =head2 value
 
   data_type: real
   default_value: undef
   is_nullable: 1
-  size: 4
 
 =head2 rank
 
   data_type: integer
   default_value: 0
   is_nullable: 0
-  size: 4
 
 =cut
 
 __PACKAGE__->add_columns(
   "biomaterial_treatment_id",
   {
-    data_type => "integer",
-    default_value => "nextval('biomaterial_treatment_biomaterial_treatment_id_seq'::regclass)",
+    data_type         => "integer",
+    default_value     => \"nextval('biomaterial_treatment_biomaterial_treatment_id_seq'::regclass)",
     is_auto_increment => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable       => 0,
   },
   "biomaterial_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "treatment_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 0,
-    size => 4,
+    is_nullable    => 0,
   },
   "unittype_id",
   {
-    data_type => "integer",
-    default_value => undef,
+    data_type      => "integer",
+    default_value  => undef,
     is_foreign_key => 1,
-    is_nullable => 1,
-    size => 4,
+    is_nullable    => 1,
   },
   "value",
-  { data_type => "real", default_value => undef, is_nullable => 1, size => 4 },
+  { data_type => "real", default_value => undef, is_nullable => 1 },
   "rank",
-  { data_type => "integer", default_value => 0, is_nullable => 0, size => 4 },
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("biomaterial_treatment_id");
 __PACKAGE__->add_unique_constraint(
@@ -159,8 +153,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FGoMLAn28pMIyqNUCn09MQ
+# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:uUwi6I7OCni/j8zY+Zkn1A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
