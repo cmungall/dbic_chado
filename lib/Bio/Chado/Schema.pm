@@ -14,7 +14,7 @@ __PACKAGE__->load_classes;
 # Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:GfcGc0XJeU/0mXXXgJb7FQ
 
-our $VERSION = '0.05701';
+our $VERSION = '0.05702';
 $VERSION = eval $VERSION;
 
 =head1 NAME
