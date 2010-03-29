@@ -1,3 +1,7 @@
+0.05703
+
+ * relaxed dependency on Carp 1.08
+
 0.05702
 
  * that upload was a bit TOO clean, was missing the Build.PL!

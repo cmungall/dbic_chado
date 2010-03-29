@@ -18,11 +18,11 @@ my $build = Module::Build->new(
 
         # right now, we have to depend on whole bioperl, like this
         'Bio::Root::Version' => '1.005002',
-
         # keep SPECIFIC bioperl dependencies here, for when bioperl
         # is in smaller, versioned chunks
         # 'Bio::PrimarySeq' => '1.5.2',
-        'Carp'        => '1.08',
+
+        'Carp'        => 0,
         'Carp::Clan'  => '6.00',
         'DBIx::Class' => '0.08111',
     },
