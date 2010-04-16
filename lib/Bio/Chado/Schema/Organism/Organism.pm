@@ -28,29 +28,26 @@ __PACKAGE__->table("organism");
 
 =head2 organism_id
 
-  data_type: integer
-  default_value: nextval('organism_organism_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'organism_organism_id_seq'
 
 =head2 abbreviation
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 1
   size: 255
 
 =head2 genus
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 0
   size: 255
 
 =head2 species
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 0
   size: 255
 
@@ -64,15 +61,13 @@ pattern.
 
 =head2 common_name
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 1
   size: 255
 
 =head2 comment
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 =cut
@@ -81,40 +76,20 @@ __PACKAGE__->add_columns(
   "organism_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('organism_organism_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "organism_organism_id_seq",
   },
   "abbreviation",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 1, size => 255 },
   "genus",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 0,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 0, size => 255 },
   "species",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 0,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 0, size => 255 },
   "common_name",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 1, size => 255 },
   "comment",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("organism_id");
 __PACKAGE__->add_unique_constraint("organism_c1", ["genus", "species"]);
@@ -257,8 +232,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zaawavddVcC9I9u5OuqgGg
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:q8OKsnJKuV6pH6Mqd3Ozxw
 
 use Carp;
 

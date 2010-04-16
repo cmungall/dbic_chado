@@ -28,22 +28,20 @@ __PACKAGE__->table("phylonode");
 
 =head2 phylonode_id
 
-  data_type: integer
-  default_value: nextval('phylonode_phylonode_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'phylonode_phylonode_id_seq'
 
 =head2 phylotree_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 parent_phylonode_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
@@ -51,20 +49,17 @@ Root phylonode can have null parent_phylonode_id value.
 
 =head2 left_idx
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 0
 
 =head2 right_idx
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 0
 
 =head2 type_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
@@ -72,8 +67,7 @@ Type: e.g. root, interior, leaf.
 
 =head2 feature_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
@@ -81,15 +75,13 @@ Phylonodes can have optional features attached to them e.g. a protein or nucleot
 
 =head2 label
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 1
   size: 255
 
 =head2 distance
 
-  data_type: double precision
-  default_value: undef
+  data_type: 'double precision'
   is_nullable: 1
 
 =cut
@@ -98,55 +90,26 @@ __PACKAGE__->add_columns(
   "phylonode_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('phylonode_phylonode_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "phylonode_phylonode_id_seq",
   },
   "phylotree_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "parent_phylonode_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "left_idx",
-  { data_type => "integer", default_value => undef, is_nullable => 0 },
+  { data_type => "integer", is_nullable => 0 },
   "right_idx",
-  { data_type => "integer", default_value => undef, is_nullable => 0 },
+  { data_type => "integer", is_nullable => 0 },
   "type_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "feature_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "label",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 1, size => 255 },
   "distance",
-  {
-    data_type     => "double precision",
-    default_value => undef,
-    is_nullable   => 1,
-  },
+  { data_type => "double precision", is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("phylonode_id");
 __PACKAGE__->add_unique_constraint("phylonode_phylotree_id_key1", ["phylotree_id", "right_idx"]);
@@ -166,7 +129,14 @@ __PACKAGE__->belongs_to(
   "feature",
   "Bio::Chado::Schema::Sequence::Feature",
   { feature_id => "feature_id" },
-  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    join_type      => "LEFT",
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 type
@@ -181,7 +151,14 @@ __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
-  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    join_type      => "LEFT",
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 parent_phylonode
@@ -196,7 +173,14 @@ __PACKAGE__->belongs_to(
   "parent_phylonode",
   "Bio::Chado::Schema::Phylogeny::Phylonode",
   { phylonode_id => "parent_phylonode_id" },
-  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    join_type      => "LEFT",
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 phylonodes
@@ -226,7 +210,13 @@ __PACKAGE__->belongs_to(
   "phylotree",
   "Bio::Chado::Schema::Phylogeny::Phylotree",
   { phylotree_id => "phylotree_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 phylonode_dbxrefs
@@ -320,8 +310,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dlJIV3qqS6eLHMybhKjUDw
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:GTZL/H9UZnPTZwLK5eX/xw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

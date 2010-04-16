@@ -21,21 +21,19 @@ __PACKAGE__->table("environment");
 
 =head2 environment_id
 
-  data_type: integer
-  default_value: nextval('environment_environment_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'environment_environment_id_seq'
 
 =head2 uniquename
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 0
 
 =head2 description
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 =cut
@@ -44,14 +42,14 @@ __PACKAGE__->add_columns(
   "environment_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('environment_environment_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "environment_environment_id_seq",
   },
   "uniquename",
-  { data_type => "text", default_value => undef, is_nullable => 0 },
+  { data_type => "text", is_nullable => 0 },
   "description",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("environment_id");
 __PACKAGE__->add_unique_constraint("environment_c1", ["uniquename"]);
@@ -134,8 +132,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4SxG/Vd4ZnFsvhmX6e65mA
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:HmGhZv7Wdg4gMkPB9cQKzg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

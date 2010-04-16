@@ -28,15 +28,14 @@ __PACKAGE__->table("cvterm");
 
 =head2 cvterm_id
 
-  data_type: integer
-  default_value: nextval('cvterm_cvterm_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'cvterm_cvterm_id_seq'
 
 =head2 cv_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -45,8 +44,7 @@ this cvterm belongs.
 
 =head2 name
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 0
   size: 1024
 
@@ -55,8 +53,7 @@ label for the cvterm. Uniquely identifies a cvterm within a cv.
 
 =head2 definition
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 A human-readable text
@@ -64,8 +61,7 @@ definition.
 
 =head2 dbxref_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -75,7 +71,7 @@ have multiple secondary dbxrefs - see also table: cvterm_dbxref.
 
 =head2 is_obsolete
 
-  data_type: integer
+  data_type: 'integer'
   default_value: 0
   is_nullable: 0
 
@@ -85,7 +81,7 @@ different primary dbxrefs may exist if one is obsolete.
 
 =head2 is_relationshiptype
 
-  data_type: integer
+  data_type: 'integer'
   default_value: 0
   is_nullable: 0
 
@@ -102,33 +98,18 @@ __PACKAGE__->add_columns(
   "cvterm_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('cvterm_cvterm_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "cvterm_cvterm_id_seq",
   },
   "cv_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "name",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 0,
-    size => 1024,
-  },
+  { data_type => "character varying", is_nullable => 0, size => 1024 },
   "definition",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
   "dbxref_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "is_obsolete",
   { data_type => "integer", default_value => 0, is_nullable => 0 },
   "is_relationshiptype",
@@ -422,7 +403,13 @@ __PACKAGE__->belongs_to(
   "cv",
   "Bio::Chado::Schema::Cv::Cv",
   { cv_id => "cv_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 dbxref
@@ -437,7 +424,13 @@ __PACKAGE__->belongs_to(
   "dbxref",
   "Bio::Chado::Schema::General::Dbxref",
   { dbxref_id => "dbxref_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 cvterm_dbxrefs
@@ -1431,8 +1424,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:DzBoQfD4V23UV9dzY/AUmQ
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:M5c9qBQOFJrZ3kDHJ9vCQg
 
 use Carp;
 

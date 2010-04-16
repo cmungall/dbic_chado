@@ -21,29 +21,26 @@ __PACKAGE__->table("feature_synonym");
 
 =head2 feature_synonym_id
 
-  data_type: integer
-  default_value: nextval('feature_synonym_feature_synonym_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'feature_synonym_feature_synonym_id_seq'
 
 =head2 synonym_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 feature_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 pub_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -51,7 +48,7 @@ The pub_id link is for relating the usage of a given synonym to the publication 
 
 =head2 is_current
 
-  data_type: boolean
+  data_type: 'boolean'
   default_value: false
   is_nullable: 0
 
@@ -59,7 +56,7 @@ The is_current boolean indicates whether the linked synonym is the  current -off
 
 =head2 is_internal
 
-  data_type: boolean
+  data_type: 'boolean'
   default_value: false
   is_nullable: 0
 
@@ -71,31 +68,16 @@ __PACKAGE__->add_columns(
   "feature_synonym_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('feature_synonym_feature_synonym_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "feature_synonym_feature_synonym_id_seq",
   },
   "synonym_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "feature_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "pub_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "is_current",
   { data_type => "boolean", default_value => \"false", is_nullable => 0 },
   "is_internal",
@@ -118,7 +100,13 @@ __PACKAGE__->belongs_to(
   "feature",
   "Bio::Chado::Schema::Sequence::Feature",
   { feature_id => "feature_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 pub
@@ -133,7 +121,13 @@ __PACKAGE__->belongs_to(
   "pub",
   "Bio::Chado::Schema::Pub::Pub",
   { pub_id => "pub_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 synonym
@@ -148,12 +142,18 @@ __PACKAGE__->belongs_to(
   "synonym",
   "Bio::Chado::Schema::Sequence::Synonym",
   { synonym_id => "synonym_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rDakro4w6VbNYR9fIvgZIg
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VHZcWgrjli8/l7DTuf7USQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

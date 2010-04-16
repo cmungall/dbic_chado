@@ -25,35 +25,32 @@ __PACKAGE__->table("assay_biomaterial");
 
 =head2 assay_biomaterial_id
 
-  data_type: integer
-  default_value: nextval('assay_biomaterial_assay_biomaterial_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'assay_biomaterial_assay_biomaterial_id_seq'
 
 =head2 assay_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 biomaterial_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 channel_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
 =head2 rank
 
-  data_type: integer
+  data_type: 'integer'
   default_value: 0
   is_nullable: 0
 
@@ -63,31 +60,16 @@ __PACKAGE__->add_columns(
   "assay_biomaterial_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('assay_biomaterial_assay_biomaterial_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "assay_biomaterial_assay_biomaterial_id_seq",
   },
   "assay_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "biomaterial_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "channel_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "rank",
   { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
@@ -111,7 +93,14 @@ __PACKAGE__->belongs_to(
   "channel",
   "Bio::Chado::Schema::Mage::Channel",
   { channel_id => "channel_id" },
-  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    join_type      => "LEFT",
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 biomaterial
@@ -126,7 +115,13 @@ __PACKAGE__->belongs_to(
   "biomaterial",
   "Bio::Chado::Schema::Mage::Biomaterial",
   { biomaterial_id => "biomaterial_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 assay
@@ -141,12 +136,18 @@ __PACKAGE__->belongs_to(
   "assay",
   "Bio::Chado::Schema::Mage::Assay",
   { assay_id => "assay_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:LtalwtoPJBPKz9evbr5qoA
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rY31rDP5M4Pw89g/vTtXQQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

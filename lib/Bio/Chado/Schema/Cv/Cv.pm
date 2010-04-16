@@ -28,15 +28,14 @@ __PACKAGE__->table("cv");
 
 =head2 cv_id
 
-  data_type: integer
-  default_value: nextval('cv_cv_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'cv_cv_id_seq'
 
 =head2 name
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 0
   size: 255
 
@@ -46,8 +45,7 @@ the cv. In OBO file format, the cv.name is known as the namespace.
 
 =head2 definition
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 A text description of the criteria for
@@ -59,19 +57,14 @@ __PACKAGE__->add_columns(
   "cv_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('cv_cv_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "cv_cv_id_seq",
   },
   "name",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 0,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 0, size => 255 },
   "definition",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("cv_id");
 __PACKAGE__->add_unique_constraint("cv_c1", ["name"]);
@@ -109,8 +102,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:z2Y4yaXwJ3dqxEi2oRRAjw
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YvSlAusvedCzyv7QvaUSEA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

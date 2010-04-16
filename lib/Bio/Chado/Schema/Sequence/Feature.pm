@@ -31,15 +31,14 @@ __PACKAGE__->table("feature");
 
 =head2 feature_id
 
-  data_type: integer
-  default_value: nextval('feature_feature_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'feature_feature_id_seq'
 
 =head2 dbxref_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
@@ -49,8 +48,7 @@ dbxrefs go in the table feature_dbxref.
 
 =head2 organism_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -59,8 +57,7 @@ belongs. This column is mandatory.
 
 =head2 name
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 1
   size: 255
 
@@ -69,8 +66,7 @@ a feature, for display purposes.
 
 =head2 uniquename
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 0
 
 The unique name for a feature; may
@@ -80,8 +76,7 @@ this organism.
 
 =head2 residues
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 A sequence of alphabetic characters
@@ -98,8 +93,7 @@ faster.
 
 =head2 seqlen
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 1
 
 The length of the residue feature. See
@@ -112,8 +106,7 @@ of the sequence is known.
 
 =head2 md5checksum
 
-  data_type: character
-  default_value: undef
+  data_type: 'character'
   is_nullable: 1
   size: 32
 
@@ -124,8 +117,7 @@ identifier on the mathematical sequence.
 
 =head2 type_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -135,7 +127,7 @@ identifier. This column is thus used to subclass the feature table.
 
 =head2 is_analysis
 
-  data_type: boolean
+  data_type: 'boolean'
   default_value: false
   is_nullable: 0
 
@@ -150,7 +142,7 @@ multiple times in different analyses.
 
 =head2 is_obsolete
 
-  data_type: boolean
+  data_type: 'boolean'
   default_value: false
   is_nullable: 0
 
@@ -161,7 +153,7 @@ row in the table.
 
 =head2 timeaccessioned
 
-  data_type: timestamp without time zone
+  data_type: 'timestamp without time zone'
   default_value: now()
   is_nullable: 0
 
@@ -172,7 +164,7 @@ available to software interacting with chado.
 
 =head2 timelastmodified
 
-  data_type: timestamp without time zone
+  data_type: 'timestamp without time zone'
   default_value: now()
   is_nullable: 0
 
@@ -187,51 +179,26 @@ __PACKAGE__->add_columns(
   "feature_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('feature_feature_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "feature_feature_id_seq",
   },
   "dbxref_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "organism_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "name",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 1, size => 255 },
   "uniquename",
-  { data_type => "text", default_value => undef, is_nullable => 0 },
+  { data_type => "text", is_nullable => 0 },
   "residues",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
   "seqlen",
-  { data_type => "integer", default_value => undef, is_nullable => 1 },
+  { data_type => "integer", is_nullable => 1 },
   "md5checksum",
-  {
-    data_type => "character",
-    default_value => undef,
-    is_nullable => 1,
-    size => 32,
-  },
+  { data_type => "character", is_nullable => 1, size => 32 },
   "type_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "is_analysis",
   { data_type => "boolean", default_value => \"false", is_nullable => 0 },
   "is_obsolete",
@@ -311,7 +278,13 @@ __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 dbxref
@@ -326,7 +299,14 @@ __PACKAGE__->belongs_to(
   "dbxref",
   "Bio::Chado::Schema::General::Dbxref",
   { dbxref_id => "dbxref_id" },
-  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    join_type      => "LEFT",
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 organism
@@ -341,7 +321,13 @@ __PACKAGE__->belongs_to(
   "organism",
   "Bio::Chado::Schema::Organism::Organism",
   { organism_id => "organism_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 feature_cvterms
@@ -464,7 +450,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 featurepos_features
+=head2 featurepos_feature
 
 Type: has_many
 
@@ -473,7 +459,7 @@ Related object: L<Bio::Chado::Schema::Map::Featurepos>
 =cut
 
 __PACKAGE__->has_many(
-  "featurepos_features",
+  "featurepos_feature",
   "Bio::Chado::Schema::Map::Featurepos",
   { "foreign.feature_id" => "self.feature_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -690,8 +676,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/1ttUuAnvvSvMOsQsnUi1A
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:G/WC+aIsbOtUjx5FV1iu3A
 
 use Carp;
 

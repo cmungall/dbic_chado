@@ -25,29 +25,26 @@ __PACKAGE__->table("elementresult");
 
 =head2 elementresult_id
 
-  data_type: integer
-  default_value: nextval('elementresult_elementresult_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'elementresult_elementresult_id_seq'
 
 =head2 element_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 quantification_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 signal
 
-  data_type: double precision
-  default_value: undef
+  data_type: 'double precision'
   is_nullable: 0
 
 =cut
@@ -56,30 +53,16 @@ __PACKAGE__->add_columns(
   "elementresult_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('elementresult_elementresult_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "elementresult_elementresult_id_seq",
   },
   "element_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "quantification_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "signal",
-  {
-    data_type     => "double precision",
-    default_value => undef,
-    is_nullable   => 0,
-  },
+  { data_type => "double precision", is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("elementresult_id");
 __PACKAGE__->add_unique_constraint("elementresult_c1", ["element_id", "quantification_id"]);
@@ -98,7 +81,13 @@ __PACKAGE__->belongs_to(
   "element",
   "Bio::Chado::Schema::Mage::Element",
   { element_id => "element_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 quantification
@@ -113,7 +102,13 @@ __PACKAGE__->belongs_to(
   "quantification",
   "Bio::Chado::Schema::Mage::Quantification",
   { quantification_id => "quantification_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 elementresult_relationship_subjects
@@ -147,8 +142,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:kozWlbVuRPkQ3lQ+CyoTRw
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZaZkTc2galwdEmECncsrYw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

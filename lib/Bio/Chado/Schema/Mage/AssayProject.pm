@@ -21,22 +21,20 @@ __PACKAGE__->table("assay_project");
 
 =head2 assay_project_id
 
-  data_type: integer
-  default_value: nextval('assay_project_assay_project_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'assay_project_assay_project_id_seq'
 
 =head2 assay_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 project_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -46,24 +44,14 @@ __PACKAGE__->add_columns(
   "assay_project_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('assay_project_assay_project_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "assay_project_assay_project_id_seq",
   },
   "assay_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "project_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("assay_project_id");
 __PACKAGE__->add_unique_constraint("assay_project_c1", ["assay_id", "project_id"]);
@@ -82,7 +70,13 @@ __PACKAGE__->belongs_to(
   "project",
   "Bio::Chado::Schema::General::Project",
   { project_id => "project_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 assay
@@ -97,12 +91,18 @@ __PACKAGE__->belongs_to(
   "assay",
   "Bio::Chado::Schema::Mage::Assay",
   { assay_id => "assay_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wqqw5aicSxew4IGUedxOUQ
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ICrXV92D2G/Uyf2dkF6uQQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

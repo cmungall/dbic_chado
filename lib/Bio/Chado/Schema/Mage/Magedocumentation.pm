@@ -21,35 +21,31 @@ __PACKAGE__->table("magedocumentation");
 
 =head2 magedocumentation_id
 
-  data_type: integer
-  default_value: nextval('magedocumentation_magedocumentation_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'magedocumentation_magedocumentation_id_seq'
 
 =head2 mageml_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 tableinfo_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 row_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 0
 
 =head2 mageidentifier
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 0
 
 =cut
@@ -58,28 +54,18 @@ __PACKAGE__->add_columns(
   "magedocumentation_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('magedocumentation_magedocumentation_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "magedocumentation_magedocumentation_id_seq",
   },
   "mageml_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "tableinfo_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "row_id",
-  { data_type => "integer", default_value => undef, is_nullable => 0 },
+  { data_type => "integer", is_nullable => 0 },
   "mageidentifier",
-  { data_type => "text", default_value => undef, is_nullable => 0 },
+  { data_type => "text", is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("magedocumentation_id");
 
@@ -97,7 +83,13 @@ __PACKAGE__->belongs_to(
   "tableinfo",
   "Bio::Chado::Schema::General::Tableinfo",
   { tableinfo_id => "tableinfo_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 mageml
@@ -112,12 +104,18 @@ __PACKAGE__->belongs_to(
   "mageml",
   "Bio::Chado::Schema::Mage::Mageml",
   { mageml_id => "mageml_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:W1HoQ+6T2EaFGahlnPRqAQ
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zA4DknysZqtZtbcXxbEybg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

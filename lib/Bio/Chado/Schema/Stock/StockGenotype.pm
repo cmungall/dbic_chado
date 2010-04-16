@@ -26,22 +26,20 @@ __PACKAGE__->table("stock_genotype");
 
 =head2 stock_genotype_id
 
-  data_type: integer
-  default_value: nextval('stock_genotype_stock_genotype_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'stock_genotype_stock_genotype_id_seq'
 
 =head2 stock_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 genotype_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -51,24 +49,14 @@ __PACKAGE__->add_columns(
   "stock_genotype_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('stock_genotype_stock_genotype_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "stock_genotype_stock_genotype_id_seq",
   },
   "stock_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "genotype_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("stock_genotype_id");
 __PACKAGE__->add_unique_constraint("stock_genotype_c1", ["stock_id", "genotype_id"]);
@@ -87,7 +75,13 @@ __PACKAGE__->belongs_to(
   "genotype",
   "Bio::Chado::Schema::Genetic::Genotype",
   { genotype_id => "genotype_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 stock
@@ -102,12 +96,18 @@ __PACKAGE__->belongs_to(
   "stock",
   "Bio::Chado::Schema::Stock::Stock",
   { stock_id => "stock_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:AEClo7RZ1CH3gISidKzzVg
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:E2UmG8Y+t+NbKr3JOqW+1w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
