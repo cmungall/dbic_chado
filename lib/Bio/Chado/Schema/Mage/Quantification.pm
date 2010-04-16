@@ -25,55 +25,49 @@ __PACKAGE__->table("quantification");
 
 =head2 quantification_id
 
-  data_type: integer
-  default_value: nextval('quantification_quantification_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'quantification_quantification_id_seq'
 
 =head2 acquisition_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 operator_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
 =head2 protocol_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
 =head2 analysis_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 quantificationdate
 
-  data_type: timestamp without time zone
+  data_type: 'timestamp without time zone'
   default_value: now()
   is_nullable: 1
 
 =head2 name
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 =head2 uri
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 =cut
@@ -82,38 +76,18 @@ __PACKAGE__->add_columns(
   "quantification_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('quantification_quantification_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "quantification_quantification_id_seq",
   },
   "acquisition_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "operator_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "protocol_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "analysis_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "quantificationdate",
   {
     data_type     => "timestamp without time zone",
@@ -121,9 +95,9 @@ __PACKAGE__->add_columns(
     is_nullable   => 1,
   },
   "name",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
   "uri",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("quantification_id");
 __PACKAGE__->add_unique_constraint("quantification_c1", ["name", "analysis_id"]);
@@ -157,7 +131,14 @@ __PACKAGE__->belongs_to(
   "operator",
   "Bio::Chado::Schema::Contact::Contact",
   { contact_id => "operator_id" },
-  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    join_type      => "LEFT",
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 analysis
@@ -172,7 +153,13 @@ __PACKAGE__->belongs_to(
   "analysis",
   "Bio::Chado::Schema::Companalysis::Analysis",
   { analysis_id => "analysis_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 protocol
@@ -187,7 +174,14 @@ __PACKAGE__->belongs_to(
   "protocol",
   "Bio::Chado::Schema::Mage::Protocol",
   { protocol_id => "protocol_id" },
-  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    join_type      => "LEFT",
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 acquisition
@@ -202,7 +196,13 @@ __PACKAGE__->belongs_to(
   "acquisition",
   "Bio::Chado::Schema::Mage::Acquisition",
   { acquisition_id => "acquisition_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 quantificationprops
@@ -251,8 +251,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:nLTKhoS9Zy7J1qVaCLEWcg
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/oOB+/axWW/a1N1HPk+vXw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

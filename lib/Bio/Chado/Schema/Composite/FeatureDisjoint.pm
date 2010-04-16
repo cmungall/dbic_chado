@@ -21,28 +21,26 @@ __PACKAGE__->table("feature_disjoint");
 
 =head2 subject_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 1
 
 =head2 object_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 1
 
 =cut
 
 __PACKAGE__->add_columns(
   "subject_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1 },
+  { data_type => "integer", is_nullable => 1 },
   "object_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1 },
+  { data_type => "integer", is_nullable => 1 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:21:50
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ShgRzImcVliyZngEJ8Ha4g
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1bEQj7Qz4x9oZe2K2HWLsQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

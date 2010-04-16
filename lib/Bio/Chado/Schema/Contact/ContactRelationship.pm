@@ -21,15 +21,14 @@ __PACKAGE__->table("contact_relationship");
 
 =head2 contact_relationship_id
 
-  data_type: integer
-  default_value: nextval('contact_relationship_contact_relationship_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'contact_relationship_contact_relationship_id_seq'
 
 =head2 type_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -37,8 +36,7 @@ Relationship type between subject and object. This is a cvterm, typically from t
 
 =head2 subject_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -46,8 +44,7 @@ The subject of the subj-predicate-obj sentence. In a DAG, this corresponds to th
 
 =head2 object_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -59,31 +56,16 @@ __PACKAGE__->add_columns(
   "contact_relationship_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('contact_relationship_contact_relationship_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "contact_relationship_contact_relationship_id_seq",
   },
   "type_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "subject_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "object_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("contact_relationship_id");
 __PACKAGE__->add_unique_constraint(
@@ -105,7 +87,13 @@ __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 object
@@ -120,7 +108,13 @@ __PACKAGE__->belongs_to(
   "object",
   "Bio::Chado::Schema::Contact::Contact",
   { contact_id => "object_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 subject
@@ -135,12 +129,18 @@ __PACKAGE__->belongs_to(
   "subject",
   "Bio::Chado::Schema::Contact::Contact",
   { contact_id => "subject_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xYoR9DrUZSsRrbvK/8JkFw
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ePCy6VIuvRZAZu3vQp/W+g
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

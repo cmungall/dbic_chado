@@ -26,15 +26,14 @@ __PACKAGE__->table("stock");
 
 =head2 stock_id
 
-  data_type: integer
-  default_value: nextval('stock_stock_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'stock_stock_id_seq'
 
 =head2 dbxref_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
@@ -42,8 +41,7 @@ The dbxref_id is an optional primary stable identifier for this stock. Secondary
 
 =head2 organism_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -51,8 +49,7 @@ The organism_id is the organism to which the stock belongs. This column is manda
 
 =head2 name
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 1
   size: 255
 
@@ -60,22 +57,19 @@ The name is a human-readable local name for a stock.
 
 =head2 uniquename
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 0
 
 =head2 description
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 The description is the genetic description provided in the stock list.
 
 =head2 type_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -83,7 +77,7 @@ The type_id foreign key links to a controlled vocabulary of stock types. The wou
 
 =head2 is_obsolete
 
-  data_type: boolean
+  data_type: 'boolean'
   default_value: false
   is_nullable: 0
 
@@ -93,42 +87,22 @@ __PACKAGE__->add_columns(
   "stock_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('stock_stock_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "stock_stock_id_seq",
   },
   "dbxref_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "organism_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "name",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 1, size => 255 },
   "uniquename",
-  { data_type => "text", default_value => undef, is_nullable => 0 },
+  { data_type => "text", is_nullable => 0 },
   "description",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
   "type_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "is_obsolete",
   { data_type => "boolean", default_value => \"false", is_nullable => 0 },
 );
@@ -149,7 +123,14 @@ __PACKAGE__->belongs_to(
   "dbxref",
   "Bio::Chado::Schema::General::Dbxref",
   { dbxref_id => "dbxref_id" },
-  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    join_type      => "LEFT",
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 type
@@ -164,7 +145,13 @@ __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 organism
@@ -179,7 +166,13 @@ __PACKAGE__->belongs_to(
   "organism",
   "Bio::Chado::Schema::Organism::Organism",
   { organism_id => "organism_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 stockcollection_stocks
@@ -303,8 +296,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:QmAdK7iJ1dER+bFiy/xTvg
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VOSaCw9R/QjDKyytA+nl4g
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

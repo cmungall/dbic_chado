@@ -21,35 +21,31 @@ __PACKAGE__->table("library");
 
 =head2 library_id
 
-  data_type: integer
-  default_value: nextval('library_library_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'library_library_id_seq'
 
 =head2 organism_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 name
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 1
   size: 255
 
 =head2 uniquename
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 0
 
 =head2 type_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -58,19 +54,19 @@ to a controlled vocabulary of library types. Examples of this would be: "cDNA_li
 
 =head2 is_obsolete
 
-  data_type: integer
+  data_type: 'integer'
   default_value: 0
   is_nullable: 0
 
 =head2 timeaccessioned
 
-  data_type: timestamp without time zone
+  data_type: 'timestamp without time zone'
   default_value: now()
   is_nullable: 0
 
 =head2 timelastmodified
 
-  data_type: timestamp without time zone
+  data_type: 'timestamp without time zone'
   default_value: now()
   is_nullable: 0
 
@@ -80,33 +76,18 @@ __PACKAGE__->add_columns(
   "library_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('library_library_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "library_library_id_seq",
   },
   "organism_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "name",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 1, size => 255 },
   "uniquename",
-  { data_type => "text", default_value => undef, is_nullable => 0 },
+  { data_type => "text", is_nullable => 0 },
   "type_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "is_obsolete",
   { data_type => "integer", default_value => 0, is_nullable => 0 },
   "timeaccessioned",
@@ -154,7 +135,13 @@ __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 organism
@@ -169,7 +156,13 @@ __PACKAGE__->belongs_to(
   "organism",
   "Bio::Chado::Schema::Organism::Organism",
   { organism_id => "organism_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 library_cvterms
@@ -263,8 +256,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:o2hA2AXByH5xKjlL3zZECA
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7uZNMlfl7h5YqXxPa8am8w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

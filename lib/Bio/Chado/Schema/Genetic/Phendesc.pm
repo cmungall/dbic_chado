@@ -25,42 +25,37 @@ __PACKAGE__->table("phendesc");
 
 =head2 phendesc_id
 
-  data_type: integer
-  default_value: nextval('phendesc_phendesc_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'phendesc_phendesc_id_seq'
 
 =head2 genotype_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 environment_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 description
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 0
 
 =head2 type_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 pub_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -70,40 +65,20 @@ __PACKAGE__->add_columns(
   "phendesc_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('phendesc_phendesc_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "phendesc_phendesc_id_seq",
   },
   "genotype_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "environment_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "description",
-  { data_type => "text", default_value => undef, is_nullable => 0 },
+  { data_type => "text", is_nullable => 0 },
   "type_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "pub_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("phendesc_id");
 __PACKAGE__->add_unique_constraint(
@@ -125,7 +100,13 @@ __PACKAGE__->belongs_to(
   "environment",
   "Bio::Chado::Schema::Genetic::Environment",
   { environment_id => "environment_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 genotype
@@ -140,7 +121,13 @@ __PACKAGE__->belongs_to(
   "genotype",
   "Bio::Chado::Schema::Genetic::Genotype",
   { genotype_id => "genotype_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 pub
@@ -155,7 +142,13 @@ __PACKAGE__->belongs_to(
   "pub",
   "Bio::Chado::Schema::Pub::Pub",
   { pub_id => "pub_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 type
@@ -170,12 +163,18 @@ __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:p/FjhctIIDMPKRsgeen5rQ
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WiXet1KYngRH+TaTQ+zmuA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

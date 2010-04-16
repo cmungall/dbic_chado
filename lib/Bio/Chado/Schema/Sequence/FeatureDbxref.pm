@@ -25,28 +25,26 @@ __PACKAGE__->table("feature_dbxref");
 
 =head2 feature_dbxref_id
 
-  data_type: integer
-  default_value: nextval('feature_dbxref_feature_dbxref_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'feature_dbxref_feature_dbxref_id_seq'
 
 =head2 feature_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 dbxref_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 is_current
 
-  data_type: boolean
+  data_type: 'boolean'
   default_value: true
   is_nullable: 0
 
@@ -58,24 +56,14 @@ __PACKAGE__->add_columns(
   "feature_dbxref_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('feature_dbxref_feature_dbxref_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "feature_dbxref_feature_dbxref_id_seq",
   },
   "feature_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "dbxref_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "is_current",
   { data_type => "boolean", default_value => \"true", is_nullable => 0 },
 );
@@ -96,7 +84,13 @@ __PACKAGE__->belongs_to(
   "feature",
   "Bio::Chado::Schema::Sequence::Feature",
   { feature_id => "feature_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 dbxref
@@ -111,12 +105,18 @@ __PACKAGE__->belongs_to(
   "dbxref",
   "Bio::Chado::Schema::General::Dbxref",
   { dbxref_id => "dbxref_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WYq65k2JBKQXrDQYuITroA
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:O0/d3CLYka4gR5AYmyxS4A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -21,29 +21,26 @@ __PACKAGE__->table("phylotree");
 
 =head2 phylotree_id
 
-  data_type: integer
-  default_value: nextval('phylotree_phylotree_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'phylotree_phylotree_id_seq'
 
 =head2 dbxref_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 name
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 1
   size: 255
 
 =head2 type_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
@@ -51,15 +48,13 @@ Type: protein, nucleotide, taxonomy, for example. The type should be any SO type
 
 =head2 analysis_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
 =head2 comment
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 =cut
@@ -68,40 +63,20 @@ __PACKAGE__->add_columns(
   "phylotree_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('phylotree_phylotree_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "phylotree_phylotree_id_seq",
   },
   "dbxref_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "name",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 1, size => 255 },
   "type_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "analysis_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "comment",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("phylotree_id");
 
@@ -149,7 +124,14 @@ __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
-  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    join_type      => "LEFT",
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 analysis
@@ -164,7 +146,14 @@ __PACKAGE__->belongs_to(
   "analysis",
   "Bio::Chado::Schema::Companalysis::Analysis",
   { analysis_id => "analysis_id" },
-  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    join_type      => "LEFT",
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 dbxref
@@ -179,7 +168,13 @@ __PACKAGE__->belongs_to(
   "dbxref",
   "Bio::Chado::Schema::General::Dbxref",
   { dbxref_id => "dbxref_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 phylotree_pubs
@@ -198,8 +193,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Im7I7CzEzfqsGngd7lyTZQ
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qRZl4BwYDw185R9VsiB3Dw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

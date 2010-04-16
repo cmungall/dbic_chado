@@ -21,52 +21,48 @@ __PACKAGE__->table("tableinfo");
 
 =head2 tableinfo_id
 
-  data_type: integer
-  default_value: nextval('tableinfo_tableinfo_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'tableinfo_tableinfo_id_seq'
 
 =head2 name
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 0
   size: 30
 
 =head2 primary_key_column
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 1
   size: 30
 
 =head2 is_view
 
-  data_type: integer
+  data_type: 'integer'
   default_value: 0
   is_nullable: 0
 
 =head2 view_on_table_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 1
 
 =head2 superclass_table_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 1
 
 =head2 is_updateable
 
-  data_type: integer
+  data_type: 'integer'
   default_value: 1
   is_nullable: 0
 
 =head2 modification_date
 
-  data_type: date
+  data_type: 'date'
   default_value: now()
   is_nullable: 0
 
@@ -76,30 +72,20 @@ __PACKAGE__->add_columns(
   "tableinfo_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('tableinfo_tableinfo_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "tableinfo_tableinfo_id_seq",
   },
   "name",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 0,
-    size => 30,
-  },
+  { data_type => "character varying", is_nullable => 0, size => 30 },
   "primary_key_column",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 30,
-  },
+  { data_type => "character varying", is_nullable => 1, size => 30 },
   "is_view",
   { data_type => "integer", default_value => 0, is_nullable => 0 },
   "view_on_table_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1 },
+  { data_type => "integer", is_nullable => 1 },
   "superclass_table_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1 },
+  { data_type => "integer", is_nullable => 1 },
   "is_updateable",
   { data_type => "integer", default_value => 1, is_nullable => 0 },
   "modification_date",
@@ -141,8 +127,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:J7rUmSjvQnDDcwdr/VzYUQ
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+hUyGGBes/hFrhjhSOOB8w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

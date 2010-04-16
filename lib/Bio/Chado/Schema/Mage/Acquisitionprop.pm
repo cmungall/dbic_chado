@@ -21,34 +21,31 @@ __PACKAGE__->table("acquisitionprop");
 
 =head2 acquisitionprop_id
 
-  data_type: integer
-  default_value: nextval('acquisitionprop_acquisitionprop_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'acquisitionprop_acquisitionprop_id_seq'
 
 =head2 acquisition_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 type_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 value
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 =head2 rank
 
-  data_type: integer
+  data_type: 'integer'
   default_value: 0
   is_nullable: 0
 
@@ -58,26 +55,16 @@ __PACKAGE__->add_columns(
   "acquisitionprop_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('acquisitionprop_acquisitionprop_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "acquisitionprop_acquisitionprop_id_seq",
   },
   "acquisition_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "type_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "value",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
   "rank",
   { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
@@ -98,7 +85,13 @@ __PACKAGE__->belongs_to(
   "acquisition",
   "Bio::Chado::Schema::Mage::Acquisition",
   { acquisition_id => "acquisition_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 type
@@ -113,12 +106,18 @@ __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:gPodwI3e0wpJAfVJsMKSTg
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zmbSCGdvwVW0aSHkIpUGFg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

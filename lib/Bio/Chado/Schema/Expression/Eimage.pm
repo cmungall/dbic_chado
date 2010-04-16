@@ -21,23 +21,21 @@ __PACKAGE__->table("eimage");
 
 =head2 eimage_id
 
-  data_type: integer
-  default_value: nextval('eimage_eimage_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'eimage_eimage_id_seq'
 
 =head2 eimage_data
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 We expect images in eimage_data (e.g. JPEGs) to be uuencoded.
 
 =head2 eimage_type
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 0
   size: 255
 
@@ -45,8 +43,7 @@ Describes the type of data in eimage_data.
 
 =head2 image_uri
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 1
   size: 255
 
@@ -56,26 +53,16 @@ __PACKAGE__->add_columns(
   "eimage_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('eimage_eimage_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "eimage_eimage_id_seq",
   },
   "eimage_data",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
   "eimage_type",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 0,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 0, size => 255 },
   "image_uri",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 1, size => 255 },
 );
 __PACKAGE__->set_primary_key("eimage_id");
 
@@ -97,8 +84,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:H9PTkq6ItTo5qq5VQLdJcw
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JU7YYZqYy3uJO5aa1fovgQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

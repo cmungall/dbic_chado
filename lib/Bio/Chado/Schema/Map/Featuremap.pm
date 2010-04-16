@@ -21,28 +21,25 @@ __PACKAGE__->table("featuremap");
 
 =head2 featuremap_id
 
-  data_type: integer
-  default_value: nextval('featuremap_featuremap_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'featuremap_featuremap_id_seq'
 
 =head2 name
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 1
   size: 255
 
 =head2 description
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 =head2 unittype_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
@@ -52,26 +49,16 @@ __PACKAGE__->add_columns(
   "featuremap_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('featuremap_featuremap_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "featuremap_featuremap_id_seq",
   },
   "name",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 1, size => 255 },
   "description",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
   "unittype_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("featuremap_id");
 __PACKAGE__->add_unique_constraint("featuremap_c1", ["name"]);
@@ -90,7 +77,14 @@ __PACKAGE__->belongs_to(
   "unittype",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "unittype_id" },
-  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    join_type      => "LEFT",
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 featuremap_pubs
@@ -108,7 +102,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 featurepo
+=head2 featurepos
 
 Type: has_many
 
@@ -117,7 +111,7 @@ Related object: L<Bio::Chado::Schema::Map::Featurepos>
 =cut
 
 __PACKAGE__->has_many(
-  "featurepo",
+  "featurepos",
   "Bio::Chado::Schema::Map::Featurepos",
   { "foreign.featuremap_id" => "self.featuremap_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -139,8 +133,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:TkJ4czI0DZFSCKhiaM5row
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+wt3iX2Yte10Frl3giTfnA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

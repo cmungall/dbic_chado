@@ -25,48 +25,43 @@ __PACKAGE__->table("acquisition");
 
 =head2 acquisition_id
 
-  data_type: integer
-  default_value: nextval('acquisition_acquisition_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'acquisition_acquisition_id_seq'
 
 =head2 assay_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 protocol_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
 =head2 channel_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
 =head2 acquisitiondate
 
-  data_type: timestamp without time zone
+  data_type: 'timestamp without time zone'
   default_value: now()
   is_nullable: 1
 
 =head2 name
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 =head2 uri
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 =cut
@@ -75,31 +70,16 @@ __PACKAGE__->add_columns(
   "acquisition_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('acquisition_acquisition_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "acquisition_acquisition_id_seq",
   },
   "assay_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "protocol_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "channel_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "acquisitiondate",
   {
     data_type     => "timestamp without time zone",
@@ -107,9 +87,9 @@ __PACKAGE__->add_columns(
     is_nullable   => 1,
   },
   "name",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
   "uri",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("acquisition_id");
 __PACKAGE__->add_unique_constraint("acquisition_c1", ["name"]);
@@ -128,7 +108,14 @@ __PACKAGE__->belongs_to(
   "protocol",
   "Bio::Chado::Schema::Mage::Protocol",
   { protocol_id => "protocol_id" },
-  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    join_type      => "LEFT",
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 assay
@@ -143,7 +130,13 @@ __PACKAGE__->belongs_to(
   "assay",
   "Bio::Chado::Schema::Mage::Assay",
   { assay_id => "assay_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 channel
@@ -158,7 +151,14 @@ __PACKAGE__->belongs_to(
   "channel",
   "Bio::Chado::Schema::Mage::Channel",
   { channel_id => "channel_id" },
-  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    join_type      => "LEFT",
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 acquisitionprops
@@ -222,8 +222,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1fmcYNOWjpGRJobCaVG2oQ
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rS4DeZuULP1QAfGGZQjTKw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -25,22 +25,20 @@ __PACKAGE__->table("feature_pub");
 
 =head2 feature_pub_id
 
-  data_type: integer
-  default_value: nextval('feature_pub_feature_pub_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'feature_pub_feature_pub_id_seq'
 
 =head2 feature_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 pub_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -50,24 +48,14 @@ __PACKAGE__->add_columns(
   "feature_pub_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('feature_pub_feature_pub_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "feature_pub_feature_pub_id_seq",
   },
   "feature_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "pub_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("feature_pub_id");
 __PACKAGE__->add_unique_constraint("feature_pub_c1", ["feature_id", "pub_id"]);
@@ -86,7 +74,13 @@ __PACKAGE__->belongs_to(
   "pub",
   "Bio::Chado::Schema::Pub::Pub",
   { pub_id => "pub_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 feature
@@ -101,7 +95,13 @@ __PACKAGE__->belongs_to(
   "feature",
   "Bio::Chado::Schema::Sequence::Feature",
   { feature_id => "feature_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 feature_pubprops
@@ -120,8 +120,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZKr5z2mgx8w4x3638RzLsw
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:KthMYCMOdrbyAt2nsxnuRQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

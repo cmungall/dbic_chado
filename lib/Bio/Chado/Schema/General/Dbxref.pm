@@ -25,22 +25,20 @@ __PACKAGE__->table("dbxref");
 
 =head2 dbxref_id
 
-  data_type: integer
-  default_value: nextval('dbxref_dbxref_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'dbxref_dbxref_id_seq'
 
 =head2 db_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 accession
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 0
   size: 255
 
@@ -48,15 +46,14 @@ The local part of the identifier. Guaranteed by the db authority to be unique fo
 
 =head2 version
 
-  data_type: character varying
+  data_type: 'character varying'
   default_value: (empty string)
   is_nullable: 0
   size: 255
 
 =head2 description
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 =cut
@@ -65,24 +62,14 @@ __PACKAGE__->add_columns(
   "dbxref_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('dbxref_dbxref_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "dbxref_dbxref_id_seq",
   },
   "db_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "accession",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 0,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 0, size => 255 },
   "version",
   {
     data_type => "character varying",
@@ -91,7 +78,7 @@ __PACKAGE__->add_columns(
     size => 255,
   },
   "description",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("dbxref_id");
 __PACKAGE__->add_unique_constraint("dbxref_c1", ["db_id", "accession", "version"]);
@@ -215,7 +202,13 @@ __PACKAGE__->belongs_to(
   "db",
   "Bio::Chado::Schema::General::Db",
   { db_id => "db_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 dbxrefprops
@@ -429,8 +422,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:G0B4CSfFmiZA3aBDkWyb4g
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:01dT800OT7AobiQXlOkCGw
 
 
 =head1 MANY-TO-MANY RELATIONSHIPS

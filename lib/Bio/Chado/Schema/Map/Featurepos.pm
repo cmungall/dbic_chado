@@ -21,30 +21,28 @@ __PACKAGE__->table("featurepos");
 
 =head2 featurepos_id
 
-  data_type: integer
-  default_value: nextval('featurepos_featurepos_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'featurepos_featurepos_id_seq'
 
 =head2 featuremap_id
 
-  data_type: integer
-  default_value: nextval('featurepos_featuremap_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_foreign_key: 1
   is_nullable: 0
+  sequence: 'featurepos_featuremap_id_seq'
 
 =head2 feature_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 map_feature_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -53,8 +51,7 @@ links to the feature (map) upon which the feature is being localized.
 
 =head2 mappos
 
-  data_type: double precision
-  default_value: undef
+  data_type: 'double precision'
   is_nullable: 0
 
 =cut
@@ -63,38 +60,24 @@ __PACKAGE__->add_columns(
   "featurepos_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('featurepos_featurepos_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "featurepos_featurepos_id_seq",
   },
   "featuremap_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('featurepos_featuremap_id_seq'::regclass)",
     is_auto_increment => 1,
     is_foreign_key    => 1,
     is_nullable       => 0,
+    sequence          => "featurepos_featuremap_id_seq",
   },
   "feature_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "map_feature_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "mappos",
-  {
-    data_type     => "double precision",
-    default_value => undef,
-    is_nullable   => 0,
-  },
+  { data_type => "double precision", is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("featurepos_id");
 
@@ -112,7 +95,13 @@ __PACKAGE__->belongs_to(
   "feature",
   "Bio::Chado::Schema::Sequence::Feature",
   { feature_id => "feature_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 map_feature
@@ -127,7 +116,13 @@ __PACKAGE__->belongs_to(
   "map_feature",
   "Bio::Chado::Schema::Sequence::Feature",
   { feature_id => "map_feature_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 featuremap
@@ -142,12 +137,18 @@ __PACKAGE__->belongs_to(
   "featuremap",
   "Bio::Chado::Schema::Map::Featuremap",
   { featuremap_id => "featuremap_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4xee8Gb94J0TBhfrK5O8Zg
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:3/lR2HPHQ8lZKGkuvjjDLQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

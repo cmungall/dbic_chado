@@ -21,35 +21,31 @@ __PACKAGE__->table("analysisfeatureprop");
 
 =head2 analysisfeatureprop_id
 
-  data_type: integer
-  default_value: nextval('analysisfeatureprop_analysisfeatureprop_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'analysisfeatureprop_analysisfeatureprop_id_seq'
 
 =head2 analysisfeature_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 type_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 value
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 =head2 rank
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 0
 
 =cut
@@ -58,28 +54,18 @@ __PACKAGE__->add_columns(
   "analysisfeatureprop_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('analysisfeatureprop_analysisfeatureprop_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "analysisfeatureprop_analysisfeatureprop_id_seq",
   },
   "analysisfeature_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "type_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "value",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
   "rank",
-  { data_type => "integer", default_value => undef, is_nullable => 0 },
+  { data_type => "integer", is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("analysisfeatureprop_id");
 __PACKAGE__->add_unique_constraint(
@@ -101,7 +87,13 @@ __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 analysisfeature
@@ -116,12 +108,18 @@ __PACKAGE__->belongs_to(
   "analysisfeature",
   "Bio::Chado::Schema::Companalysis::Analysisfeature",
   { analysisfeature_id => "analysisfeature_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rxWMrxVupbPKUBeJukS/5Q
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:emA0dkwkld58CAeYD6M3QA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -26,28 +26,26 @@ __PACKAGE__->table("feature_contains");
 
 =head2 subject_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 1
 
 =head2 object_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 1
 
 =cut
 
 __PACKAGE__->add_columns(
   "subject_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1 },
+  { data_type => "integer", is_nullable => 1 },
   "object_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1 },
+  { data_type => "integer", is_nullable => 1 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:21:50
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:80w3wQqQE58upDedxBz60Q
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:scFxU3GoaP+V5sGmiV/3ew
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

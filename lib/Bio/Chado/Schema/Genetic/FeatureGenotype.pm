@@ -21,29 +21,26 @@ __PACKAGE__->table("feature_genotype");
 
 =head2 feature_genotype_id
 
-  data_type: integer
-  default_value: nextval('feature_genotype_feature_genotype_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'feature_genotype_feature_genotype_id_seq'
 
 =head2 feature_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 genotype_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 chromosome_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
@@ -51,8 +48,7 @@ A feature of SO type "chromosome".
 
 =head2 rank
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 0
 
 rank can be used for
@@ -60,8 +56,7 @@ n-ploid organisms or to preserve order.
 
 =head2 cgroup
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 0
 
 Spatially distinguishable
@@ -71,8 +66,7 @@ groups, as they do not fall on a particular chromosome).
 
 =head2 cvterm_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -82,42 +76,22 @@ __PACKAGE__->add_columns(
   "feature_genotype_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('feature_genotype_feature_genotype_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "feature_genotype_feature_genotype_id_seq",
   },
   "feature_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "genotype_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "chromosome_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "rank",
-  { data_type => "integer", default_value => undef, is_nullable => 0 },
+  { data_type => "integer", is_nullable => 0 },
   "cgroup",
-  { data_type => "integer", default_value => undef, is_nullable => 0 },
+  { data_type => "integer", is_nullable => 0 },
   "cvterm_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("feature_genotype_id");
 __PACKAGE__->add_unique_constraint(
@@ -146,7 +120,13 @@ __PACKAGE__->belongs_to(
   "cvterm",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "cvterm_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 genotype
@@ -161,7 +141,13 @@ __PACKAGE__->belongs_to(
   "genotype",
   "Bio::Chado::Schema::Genetic::Genotype",
   { genotype_id => "genotype_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 feature
@@ -176,7 +162,13 @@ __PACKAGE__->belongs_to(
   "feature",
   "Bio::Chado::Schema::Sequence::Feature",
   { feature_id => "feature_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 chromosome
@@ -191,12 +183,19 @@ __PACKAGE__->belongs_to(
   "chromosome",
   "Bio::Chado::Schema::Sequence::Feature",
   { feature_id => "chromosome_id" },
-  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    join_type      => "LEFT",
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:HcqJn1IugKO6PJSxP1htIw
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rYv5f79L27aQ8morfbSBYQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

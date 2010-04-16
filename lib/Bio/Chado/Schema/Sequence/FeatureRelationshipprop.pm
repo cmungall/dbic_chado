@@ -30,22 +30,20 @@ __PACKAGE__->table("feature_relationshipprop");
 
 =head2 feature_relationshipprop_id
 
-  data_type: integer
-  default_value: nextval('feature_relationshipprop_feature_relationshipprop_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'feature_relationshipprop_feature_relationshipprop_id_seq'
 
 =head2 feature_relationship_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 type_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -56,8 +54,7 @@ feature_relationship property types.
 
 =head2 value
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 The value of the
@@ -67,7 +64,7 @@ types, but is easier to query.
 
 =head2 rank
 
-  data_type: integer
+  data_type: 'integer'
   default_value: 0
   is_nullable: 0
 
@@ -83,26 +80,16 @@ __PACKAGE__->add_columns(
   "feature_relationshipprop_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('feature_relationshipprop_feature_relationshipprop_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "feature_relationshipprop_feature_relationshipprop_id_seq",
   },
   "feature_relationship_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "type_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "value",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
   "rank",
   { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
@@ -126,7 +113,13 @@ __PACKAGE__->belongs_to(
   "feature_relationship",
   "Bio::Chado::Schema::Sequence::FeatureRelationship",
   { "feature_relationship_id" => "feature_relationship_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 type
@@ -141,7 +134,13 @@ __PACKAGE__->belongs_to(
   "type",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "type_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 feature_relationshipprop_pubs
@@ -162,8 +161,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FbAtUxJau6JCFkEwR5pu8Q
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:2FN1B9bFYMKmQmV4sHWuaQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

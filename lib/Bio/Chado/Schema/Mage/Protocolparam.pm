@@ -26,47 +26,42 @@ __PACKAGE__->table("protocolparam");
 
 =head2 protocolparam_id
 
-  data_type: integer
-  default_value: nextval('protocolparam_protocolparam_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'protocolparam_protocolparam_id_seq'
 
 =head2 protocol_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
 =head2 name
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 0
 
 =head2 datatype_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
 =head2 unittype_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
 =head2 value
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 =head2 rank
 
-  data_type: integer
+  data_type: 'integer'
   default_value: 0
   is_nullable: 0
 
@@ -76,35 +71,20 @@ __PACKAGE__->add_columns(
   "protocolparam_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('protocolparam_protocolparam_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "protocolparam_protocolparam_id_seq",
   },
   "protocol_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "name",
-  { data_type => "text", default_value => undef, is_nullable => 0 },
+  { data_type => "text", is_nullable => 0 },
   "datatype_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "unittype_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "value",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
   "rank",
   { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
@@ -124,7 +104,14 @@ __PACKAGE__->belongs_to(
   "unittype",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "unittype_id" },
-  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    join_type      => "LEFT",
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 protocol
@@ -139,7 +126,13 @@ __PACKAGE__->belongs_to(
   "protocol",
   "Bio::Chado::Schema::Mage::Protocol",
   { protocol_id => "protocol_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 datatype
@@ -154,12 +147,19 @@ __PACKAGE__->belongs_to(
   "datatype",
   "Bio::Chado::Schema::Cv::Cvterm",
   { cvterm_id => "datatype_id" },
-  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    join_type      => "LEFT",
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7U6m8ZuaUfbrjx++arenSg
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xbiUm/m9u0lm1awlqADtpQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

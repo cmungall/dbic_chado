@@ -43,15 +43,14 @@ __PACKAGE__->table("featureloc");
 
 =head2 featureloc_id
 
-  data_type: integer
-  default_value: nextval('featureloc_featureloc_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'featureloc_featureloc_id_seq'
 
 =head2 feature_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -59,8 +58,7 @@ The feature that is being located. Any feature can have zero or more featurelocs
 
 =head2 srcfeature_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
@@ -68,15 +66,14 @@ The source feature which this location is relative to. Every location is relativ
 
 =head2 fmin
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 1
 
 The leftmost/minimal boundary in the linear range represented by the featureloc. Sometimes (e.g. in Bioperl) this is called -start- although this is confusing because it does not necessarily represent the 5-prime coordinate. Important: This is space-based (interbase) coordinates, counting from zero. To convert this to the leftmost position in a base-oriented system (eg GFF, Bioperl), add 1 to fmin.
 
 =head2 is_fmin_partial
 
-  data_type: boolean
+  data_type: 'boolean'
   default_value: false
   is_nullable: 0
 
@@ -86,15 +83,14 @@ the leftmost part of the range is unknown/unbounded.
 
 =head2 fmax
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 1
 
 The rightmost/maximal boundary in the linear range represented by the featureloc. Sometimes (e.g. in bioperl) this is called -end- although this is confusing because it does not necessarily represent the 3-prime coordinate. Important: This is space-based (interbase) coordinates, counting from zero. No conversion is required to go from fmax to the rightmost coordinate in a base-oriented system that counts from 1 (e.g. GFF, Bioperl).
 
 =head2 is_fmax_partial
 
-  data_type: boolean
+  data_type: 'boolean'
   default_value: false
   is_nullable: 0
 
@@ -104,8 +100,7 @@ the rightmost part of the range is unknown/unbounded.
 
 =head2 strand
 
-  data_type: smallint
-  default_value: undef
+  data_type: 'smallint'
   is_nullable: 1
 
 The orientation/directionality of the
@@ -113,8 +108,7 @@ location. Should be 0, -1 or +1.
 
 =head2 phase
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 1
 
 Phase of translation with
@@ -125,8 +119,7 @@ spliceform (the same exon can appear in multiple spliceforms). This column is mo
 
 =head2 residue_info
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 Alternative residues,
@@ -141,7 +134,7 @@ most fields null, except for alternative residues.
 
 =head2 locgroup
 
-  data_type: integer
+  data_type: 'integer'
   default_value: 0
   is_nullable: 0
 
@@ -168,7 +161,7 @@ chromosome level) and two distinct ranks (for the two species).
 
 =head2 rank
 
-  data_type: integer
+  data_type: 'integer'
   default_value: 0
   is_nullable: 0
 
@@ -187,38 +180,28 @@ __PACKAGE__->add_columns(
   "featureloc_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('featureloc_featureloc_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "featureloc_featureloc_id_seq",
   },
   "feature_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "srcfeature_id",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "fmin",
-  { data_type => "integer", default_value => undef, is_nullable => 1 },
+  { data_type => "integer", is_nullable => 1 },
   "is_fmin_partial",
   { data_type => "boolean", default_value => \"false", is_nullable => 0 },
   "fmax",
-  { data_type => "integer", default_value => undef, is_nullable => 1 },
+  { data_type => "integer", is_nullable => 1 },
   "is_fmax_partial",
   { data_type => "boolean", default_value => \"false", is_nullable => 0 },
   "strand",
-  { data_type => "smallint", default_value => undef, is_nullable => 1 },
+  { data_type => "smallint", is_nullable => 1 },
   "phase",
-  { data_type => "integer", default_value => undef, is_nullable => 1 },
+  { data_type => "integer", is_nullable => 1 },
   "residue_info",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
   "locgroup",
   { data_type => "integer", default_value => 0, is_nullable => 0 },
   "rank",
@@ -241,7 +224,13 @@ __PACKAGE__->belongs_to(
   "feature",
   "Bio::Chado::Schema::Sequence::Feature",
   { feature_id => "feature_id" },
-  { cascade_copy => 0, cascade_delete => 0 },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 srcfeature
@@ -256,7 +245,14 @@ __PACKAGE__->belongs_to(
   "srcfeature",
   "Bio::Chado::Schema::Sequence::Feature",
   { feature_id => "srcfeature_id" },
-  { cascade_copy => 0, cascade_delete => 0, join_type => "LEFT" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    join_type      => "LEFT",
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
 );
 
 =head2 featureloc_pubs
@@ -275,8 +271,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:MXWn4+zjVLD63+33i+vEeA
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VED7G1XykKNri3GIOYY5NQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

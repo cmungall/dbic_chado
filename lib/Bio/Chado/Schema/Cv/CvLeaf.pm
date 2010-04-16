@@ -27,28 +27,26 @@ __PACKAGE__->table("cv_leaf");
 
 =head2 cv_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 1
 
 =head2 cvterm_id
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 1
 
 =cut
 
 __PACKAGE__->add_columns(
   "cv_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1 },
+  { data_type => "integer", is_nullable => 1 },
   "cvterm_id",
-  { data_type => "integer", default_value => undef, is_nullable => 1 },
+  { data_type => "integer", is_nullable => 1 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:21:50
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6sIfvhR5Pz4dtLcg3darfg
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1VCW73X/l+A4ncb5QuUosA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

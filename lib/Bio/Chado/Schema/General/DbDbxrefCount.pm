@@ -21,34 +21,27 @@ __PACKAGE__->table("db_dbxref_count");
 
 =head2 name
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 1
   size: 255
 
 =head2 num_dbxrefs
 
-  data_type: bigint
-  default_value: undef
+  data_type: 'bigint'
   is_nullable: 1
 
 =cut
 
 __PACKAGE__->add_columns(
   "name",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 1, size => 255 },
   "num_dbxrefs",
-  { data_type => "bigint", default_value => undef, is_nullable => 1 },
+  { data_type => "bigint", is_nullable => 1 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:21:50
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VzNaRUvQgnEAUyYvnhKFMA
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dKEiCT40hT8XyHQRR3lRmQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

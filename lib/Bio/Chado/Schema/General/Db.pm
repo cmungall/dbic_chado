@@ -31,36 +31,32 @@ __PACKAGE__->table("db");
 
 =head2 db_id
 
-  data_type: integer
-  default_value: nextval('db_db_id_seq'::regclass)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'db_db_id_seq'
 
 =head2 name
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 0
   size: 255
 
 =head2 description
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 1
   size: 255
 
 =head2 urlprefix
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 1
   size: 255
 
 =head2 url
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'character varying'
   is_nullable: 1
   size: 255
 
@@ -70,38 +66,18 @@ __PACKAGE__->add_columns(
   "db_id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('db_db_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "db_db_id_seq",
   },
   "name",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 0,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 0, size => 255 },
   "description",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 1, size => 255 },
   "urlprefix",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 1, size => 255 },
   "url",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 255,
-  },
+  { data_type => "character varying", is_nullable => 1, size => 255 },
 );
 __PACKAGE__->set_primary_key("db_id");
 __PACKAGE__->add_unique_constraint("db_c1", ["name"]);
@@ -124,8 +100,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05002 @ 2010-02-18 11:30:28
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tj2FuBUH4CL9utHJRbyl/Q
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FvRormtM5M28cnnB2+2gTA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
