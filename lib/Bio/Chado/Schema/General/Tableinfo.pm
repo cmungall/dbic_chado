@@ -63,7 +63,7 @@ __PACKAGE__->table("tableinfo");
 =head2 modification_date
 
   data_type: 'date'
-  default_value: now()
+  default_value: CURRENT_TIMESTAMP
   is_nullable: 0
 
 =cut
@@ -89,7 +89,11 @@ __PACKAGE__->add_columns(
   "is_updateable",
   { data_type => "integer", default_value => 1, is_nullable => 0 },
   "modification_date",
-  { data_type => "date", default_value => \"now()", is_nullable => 0 },
+  {
+    data_type     => "date",
+    default_value => \"CURRENT_TIMESTAMP",
+    is_nullable   => 0,
+  },
 );
 __PACKAGE__->set_primary_key("tableinfo_id");
 __PACKAGE__->add_unique_constraint("tableinfo_c1", ["name"]);
@@ -127,8 +131,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+hUyGGBes/hFrhjhSOOB8w
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 15:58:15
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/pID/SOFSmmUj8LnX1XYXw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

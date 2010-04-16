@@ -97,7 +97,7 @@ This is an optional, permanent URL or URI for the source of the  analysis. The i
 =head2 timeexecuted
 
   data_type: 'timestamp without time zone'
-  default_value: now()
+  default_value: CURRENT_TIMESTAMP
   is_nullable: 0
 
 =cut
@@ -129,7 +129,7 @@ __PACKAGE__->add_columns(
   "timeexecuted",
   {
     data_type     => "timestamp without time zone",
-    default_value => \"now()",
+    default_value => \"CURRENT_TIMESTAMP",
     is_nullable   => 0,
   },
 );
@@ -199,8 +199,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:GaLQh3Lf71VPf6OKcPWX2A
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 15:58:15
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Uk32TcCS6Gv2r7kCBMguoQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

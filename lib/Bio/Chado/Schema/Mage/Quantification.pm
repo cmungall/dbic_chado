@@ -57,7 +57,7 @@ __PACKAGE__->table("quantification");
 =head2 quantificationdate
 
   data_type: 'timestamp without time zone'
-  default_value: now()
+  default_value: CURRENT_TIMESTAMP
   is_nullable: 1
 
 =head2 name
@@ -91,7 +91,7 @@ __PACKAGE__->add_columns(
   "quantificationdate",
   {
     data_type     => "timestamp without time zone",
-    default_value => \"now()",
+    default_value => \"CURRENT_TIMESTAMP",
     is_nullable   => 1,
   },
   "name",
@@ -251,8 +251,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/oOB+/axWW/a1N1HPk+vXw
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 15:58:15
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jDJEaSYuVykj2YtyI/jdXA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

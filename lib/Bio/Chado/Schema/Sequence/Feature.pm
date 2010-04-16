@@ -154,7 +154,7 @@ row in the table.
 =head2 timeaccessioned
 
   data_type: 'timestamp without time zone'
-  default_value: now()
+  default_value: CURRENT_TIMESTAMP
   is_nullable: 0
 
 For handling object
@@ -165,7 +165,7 @@ available to software interacting with chado.
 =head2 timelastmodified
 
   data_type: 'timestamp without time zone'
-  default_value: now()
+  default_value: CURRENT_TIMESTAMP
   is_nullable: 0
 
 For handling object
@@ -206,13 +206,13 @@ __PACKAGE__->add_columns(
   "timeaccessioned",
   {
     data_type     => "timestamp without time zone",
-    default_value => \"now()",
+    default_value => \"CURRENT_TIMESTAMP",
     is_nullable   => 0,
   },
   "timelastmodified",
   {
     data_type     => "timestamp without time zone",
-    default_value => \"now()",
+    default_value => \"CURRENT_TIMESTAMP",
     is_nullable   => 0,
   },
 );
@@ -676,8 +676,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:G/WC+aIsbOtUjx5FV1iu3A
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 15:58:15
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:900i/O5aOeDozRRqlE9rCQ
 
 use Carp;
 
