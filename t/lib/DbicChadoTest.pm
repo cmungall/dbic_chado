@@ -1,4 +1,5 @@
-package DbicChadoTest;
+package #  hide from PAUSE
+    DbicChadoTest;
 use strict;
 use warnings;
 
