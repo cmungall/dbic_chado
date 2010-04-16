@@ -4,6 +4,7 @@ package # hide from PAUSE
 use strict;
 use warnings;
 use BCSTest::AuthorCheck;
+use BCSTest::Schema;
 
 =head1 NAME
 
@@ -153,10 +154,12 @@ sub populate_schema {
     my $self = shift;
     my $schema = shift;
 
+=head
     $schema->populate('Genre', [
       [qw/genreid name/],
       [qw/1        emo/],
     ]);
+=cut
 
 }
 
