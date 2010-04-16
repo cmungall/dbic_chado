@@ -4,7 +4,7 @@ package # hide from PAUSE
 use strict;
 use warnings;
 use BCSTest::AuthorCheck;
-use BCSTest::Schema;
+use Bio::Chado::Schema;
 
 =head1 NAME
 
@@ -57,7 +57,7 @@ sub _sqlite_dbfilename {
 sub _sqlite_dbname {
     my $self = shift;
     my %args = @_;
-    return $self->_sqlite_dbfilename if $args{sqlite_use_file} or $ENV{"BCS_SQLITE_USE_FILE"};
+    return $self->_sqlite_dbfilename; # if $args{sqlite_use_file} or $ENV{"BCS_SQLITE_USE_FILE"};
     return ":memory:";
 }
 
@@ -86,11 +86,11 @@ sub init_schema {
     my $schema;
 
     if ($args{compose_connection}) {
-      $schema = BCSTest::Schema->compose_connection(
+      $schema = Bio::Chado::Schema->compose_connection(
                   'BCSTest', $self->_database(%args)
                 );
     } else {
-      $schema = BCSTest::Schema->compose_namespace('BCSTest');
+      $schema = Bio::Chado::Schema->compose_namespace('BCSTest');
     }
     if( $args{storage_type}) {
       $schema->storage_type($args{storage_type});
@@ -125,19 +125,7 @@ sub deploy_schema {
     my $schema = shift;
     my $args = shift || {};
 
-    if ($ENV{"BCSTEST_SQLT_DEPLOY"}) { 
-        $schema->deploy($args);
-    } else {
-        open IN, "t/lib/sqlite.sql";
-        my $sql;
-        { local $/ = undef; $sql = <IN>; }
-        close IN;
-        for my $chunk ( split (/;\s*\n+/, $sql) ) {
-          if ( $chunk =~ / ^ (?! --\s* ) \S /xm ) {  # there is some real sql in the chunk - a non-space at the start of the string which is not a comment
-            $schema->storage->dbh_do(sub { $_[1]->do($chunk) }) or print "Error on SQL: $chunk\n";
-          }
-        }
-    }
+    $schema->deploy($args);
     return;
 }
 
