@@ -51,7 +51,7 @@ __PACKAGE__->table("acquisition");
 =head2 acquisitiondate
 
   data_type: 'timestamp without time zone'
-  default_value: now()
+  default_value: CURRENT_TIMESTAMP
   is_nullable: 1
 
 =head2 name
@@ -83,7 +83,7 @@ __PACKAGE__->add_columns(
   "acquisitiondate",
   {
     data_type     => "timestamp without time zone",
-    default_value => \"now()",
+    default_value => \"CURRENT_TIMESTAMP",
     is_nullable   => 1,
   },
   "name",
@@ -222,8 +222,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rS4DeZuULP1QAfGGZQjTKw
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 15:58:15
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:XAX5ZXwoY66OpqtbUAZHHA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

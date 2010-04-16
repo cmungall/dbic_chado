@@ -61,13 +61,13 @@ to a controlled vocabulary of library types. Examples of this would be: "cDNA_li
 =head2 timeaccessioned
 
   data_type: 'timestamp without time zone'
-  default_value: now()
+  default_value: CURRENT_TIMESTAMP
   is_nullable: 0
 
 =head2 timelastmodified
 
   data_type: 'timestamp without time zone'
-  default_value: now()
+  default_value: CURRENT_TIMESTAMP
   is_nullable: 0
 
 =cut
@@ -93,13 +93,13 @@ __PACKAGE__->add_columns(
   "timeaccessioned",
   {
     data_type     => "timestamp without time zone",
-    default_value => \"now()",
+    default_value => \"CURRENT_TIMESTAMP",
     is_nullable   => 0,
   },
   "timelastmodified",
   {
     data_type     => "timestamp without time zone",
-    default_value => \"now()",
+    default_value => \"CURRENT_TIMESTAMP",
     is_nullable   => 0,
   },
 );
@@ -256,8 +256,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7uZNMlfl7h5YqXxPa8am8w
+# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 15:58:15
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ivJpndXKs+5lbgBu7MSLew
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
