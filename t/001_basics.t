@@ -1,7 +1,6 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-use English;
 use FindBin;
 
 use Test::More tests => 2;
