@@ -15,6 +15,16 @@ isa_ok( $schema, 'DBIx::Class::Schema' );
 
 isa_ok( $schema->resultset('Organism::Organism'), 'DBIx::Class::ResultSet' );
 
-lives_ok {
-my $max_org_id = $schema->resultset('Organism::Organism')->get_column('organism_id')->max;
-} 'query into organism table lives';
+
+lives_ok(
+    sub {
+        $schema->resultset('Organism::Organism')
+                                ->find_or_create({
+                                    organism_id => 1,
+                                    genus       => 'Robus',
+                                    species     => 'buelsii',
+                                });
+        $schema->organism_id();
+    },
+    'query into organism table lives'
+);
