@@ -11,20 +11,16 @@ use lib "$FindBin::RealBin/lib";
 use BCSTest;
 
 my $schema = BCSTest->init_schema();
+
 isa_ok( $schema, 'DBIx::Class::Schema' );
 
 isa_ok( $schema->resultset('Organism::Organism'), 'DBIx::Class::ResultSet' );
 
-
 lives_ok(
     sub {
         $schema->resultset('Organism::Organism')
-                                ->create({
-                                    organism_id => 1,
-                                    genus       => 'Robus',
-                                    species     => 'buelsii',
-                                });
-        $schema->organism_id();
+            ->get_column('organism_id')
+            ->max()
     },
     'query into organism table lives'
 );

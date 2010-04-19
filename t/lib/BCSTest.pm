@@ -66,9 +66,9 @@ sub _database {
     my %args = @_;
     my $db_file = $self->_sqlite_dbname(%args);
 
-    warn "Removing $db_file";
-    unlink($db_file) if -e $db_file;
-    unlink($db_file . "-journal") if -e $db_file . "-journal";
+    #warn "Removing $db_file";
+    #unlink($db_file) if -e $db_file;
+    #unlink($db_file . "-journal") if -e $db_file . "-journal";
     mkdir("t/var") unless -d "t/var";
 
     my $dsn    = $ENV{"BCS_TEST_DSN"} || "dbi:SQLite:${db_file}";
@@ -93,23 +93,17 @@ sub init_schema {
     } else {
       $schema = Bio::Chado::Schema->compose_namespace('BCSTest');
     }
-    # Use an existing SQLite schema, if it exists
-    # TODO: add a method to ignore an already-existing SQLite db
-
-    return $schema if -e _sqlite_dbfilename();
 
     if( $args{storage_type}) {
       $schema->storage_type($args{storage_type});
     }
-    if ( !$args{no_connect} ) {
-      $schema = $schema->connect($self->_database(%args));
-      $schema->storage->on_connect_do(['PRAGMA synchronous = OFF'])
-       unless $self->has_custom_dsn;
-    }
-    if ( !$args{no_deploy} ) {
+
+    $schema = $schema->connect($self->_database(%args));
+    $schema->storage->on_connect_do(['PRAGMA synchronous = OFF']) unless $self->has_custom_dsn;
+
+    unless ( -e _sqlite_dbfilename() ) {
         __PACKAGE__->deploy_schema( $schema, $args{deploy_args} );
-        __PACKAGE__->populate_schema( $schema )
-         if( !$args{no_populate} );
+      #  __PACKAGE__->populate_schema( $schema );
     }
     return $schema;
 }
