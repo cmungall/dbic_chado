@@ -3,17 +3,10 @@ use strict;
 use warnings;
 use FindBin;
 
-use Test::More tests => 2;
+use Test::More tests => 1;
 use lib "$FindBin::RealBin/lib";
 use DbicChadoTest;
+use BCSTest;
 
-BEGIN {
-  use_ok(  'Bio::Chado::Schema'  )
-    or BAIL_OUT('could not include the module being tested');
-}
-
-SKIP: {
-    my $s = DbicChadoTest->schema_connect_or_skip(1);
-    isa_ok( $s, 'Bio::Chado::Schema' );
-
-}
+my $schema = BCSTest->init_schema();
+isa_ok( $schema, 'DBIx::Class::Schema' );
