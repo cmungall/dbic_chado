@@ -19,7 +19,7 @@ isa_ok( $schema->resultset('Organism::Organism'), 'DBIx::Class::ResultSet' );
 lives_ok(
     sub {
         $schema->resultset('Organism::Organism')
-                                ->find_or_create({
+                                ->create({
                                     organism_id => 1,
                                     genus       => 'Robus',
                                     species     => 'buelsii',
