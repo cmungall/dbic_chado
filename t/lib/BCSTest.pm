@@ -1,4 +1,4 @@
-package # hide from PAUSE 
+package # hide from PAUSE
     BCSTest;
 
 use strict;
@@ -66,6 +66,7 @@ sub _database {
     my %args = @_;
     my $db_file = $self->_sqlite_dbname(%args);
 
+    warn "Removing $db_file";
     unlink($db_file) if -e $db_file;
     unlink($db_file . "-journal") if -e $db_file . "-journal";
     mkdir("t/var") unless -d "t/var";
@@ -92,6 +93,11 @@ sub init_schema {
     } else {
       $schema = Bio::Chado::Schema->compose_namespace('BCSTest');
     }
+    # Use an existing SQLite schema, if it exists
+    # TODO: add a method to ignore an already-existing SQLite db
+
+    return $schema if -e _sqlite_dbfilename();
+
     if( $args{storage_type}) {
       $schema->storage_type($args{storage_type});
     }
