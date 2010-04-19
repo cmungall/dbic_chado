@@ -1,13 +1,11 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-use FindBin;
 
+use FindBin;
+use lib "$FindBin::RealBin/lib";
 use Test::More tests => 3;
 use Test::Exception;
-
-use Bio::Chado::Schema;
-use lib "$FindBin::RealBin/lib";
 use BCSTest;
 
 my $schema = BCSTest->init_schema();
