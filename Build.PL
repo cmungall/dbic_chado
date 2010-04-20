@@ -7,6 +7,7 @@ my $build = Module::Build->new(
     create_makefile_pl   => 'passthrough',
     recursive_test_files => 1,
     create_readme        => 1,
+    add_to_cleanup       => [ 'Bio-Chado-Schema-*', 't/var' ],
     create_license       => 1,
     meta_merge           => {
         resources =>
