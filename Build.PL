@@ -13,7 +13,11 @@ my $build = Module::Build->new(
         resources =>
           { repository => 'http://github.com/rbuels/Bio-Chado-Schema', },
     },
-    build_requires => { 'Test::Exception' => '0.27', },
+    build_requires => {
+        'DBD::SQLite'     => '1.14',
+        'Test::More'      => 0,
+        'Test::Exception' => '0.27',
+    },
     requires       => {
         'perl' => '5.8.0',
 
