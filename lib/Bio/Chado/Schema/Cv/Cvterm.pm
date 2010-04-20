@@ -1551,10 +1551,10 @@ sub add_synonym {
 	    $data->{type_id} = $existing_cvterm->cvterm_id();
 	}
     }
-    my ($cvtermsynonym)= $self->search_related('featureprops',
-					       {type_id => $data->{type_id},
-						value   => { 'ilike' , "$synonym" }
-					       });
+    my ($cvtermsynonym)= $self->search_related('featureprops', {
+                            type_id => $data->{type_id},
+                            value   => { 'like' , lc($synonym) }
+    });
 
     $cvtermsynonym= $self->create_related('cvtermsynonyms' , $data) if !$cvtermsynonym;
 
@@ -1579,13 +1579,13 @@ sub delete_synonym {
 
     my $schema = $self->result_source->schema;
 
-    $self->result_source->
-	schema->
-	resultset("Cv::Cvtermsynonym")
-	->search( { cvterm_id => $self->get_column('cvterm_id'),
-		    synonym   => { 'ilike' , "$synonym" }
-		  })
-	->delete();
+    $self->result_source
+         ->schema
+         ->resultset("Cv::Cvtermsynonym")
+         ->search( { cvterm_id => $self->get_column('cvterm_id'),
+            synonym   => { 'like' , lc($synonym) }
+        })
+        ->delete();
 }
 
 
