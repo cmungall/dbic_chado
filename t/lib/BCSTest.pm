@@ -83,6 +83,7 @@ sub _database {
 sub init_schema {
     my $self = shift;
     my %args = @_;
+    my $should_deploy = $ENV{"BCS_TEST_DSN"} ? 0 : 1 ;
 
     my $schema;
 
@@ -94,7 +95,7 @@ sub init_schema {
       $schema = Bio::Chado::Schema->compose_namespace('BCSTest');
     }
 
-    if( $args{storage_type}) {
+    if ($args{storage_type}) {
       $schema->storage_type($args{storage_type});
     }
 
@@ -102,7 +103,7 @@ sub init_schema {
     $schema->storage->on_connect_do(['PRAGMA synchronous = OFF']) unless $self->has_custom_dsn;
 
     unless ( -e _sqlite_dbfilename() ) {
-        __PACKAGE__->deploy_schema( $schema, $args{deploy_args} );
+        __PACKAGE__->deploy_schema( $schema, $args{deploy_args} ) if $should_deploy;
       #  __PACKAGE__->populate_schema( $schema );
     }
     return $schema;
