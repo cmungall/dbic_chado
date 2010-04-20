@@ -1,3 +1,10 @@
+0.05800
+
+ * Test suite can now deploy a Chado schema to a SQLite database
+   if BCS_TEST_DSN is not defined. This means that smokers can
+   now run these tests without setting up any databases.
+        -- leto
+
 0.05703
 
  * relaxed dependency on Carp 1.08
