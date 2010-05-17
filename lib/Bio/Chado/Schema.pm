@@ -233,15 +233,26 @@ sub create_properties {
 
 
         unless( $skip_creation ) {
-            # find highest rank for props of this type
-            my $max_rank= $self->search_related( $prop_relation_name,
-                                                 { type_id =>$data->{type_id} }
-                                               )->get_column('rank')->max;
-            $data->{rank} = defined $max_rank ? $max_rank + 1 : 0;
-
+            #if rank is defined
+	    if ($opts->{rank} && defined $opts->{rank} ) {
+		my ($existing_prop) = $self->search_related( $prop_relation_name,
+							  {type_id =>$data->{type_id},
+							   rank => $opts->{rank}
+							  });
+		croak "Property $existing_prop already exists with rank " . $opts->{rank} . ". cannot continue" if  defined $existing_prop;
+		$data->{rank} = $opts->{rank};
+		
+	    } else { 
+		# find highest rank for props of this type
+		my $max_rank= $self->search_related( $prop_relation_name,
+						     { type_id =>$data->{type_id} }
+		    )->get_column('rank')->max;
+		$data->{rank} = defined $max_rank ? $max_rank + 1 : 0;
+		
+	    }
 	    $props{$propname} = $self->create_related( $prop_relation_name,
 						       $data
-                                                     );
+		);
 	}
     }
     return \%props;
