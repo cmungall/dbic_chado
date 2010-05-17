@@ -1429,6 +1429,21 @@ __PACKAGE__->has_many(
 
 use Carp;
 
+=head2 cvtermprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Cv::Cvtermprop>
+
+=cut
+
+__PACKAGE__->has_many(
+  "cvtermprops",
+  "Bio::Chado::Schema::Cv::Cvtermprop",
+  { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 cvtermsynonyms
 
 Type: has_many
@@ -1457,7 +1472,7 @@ __PACKAGE__->has_many(
             autocreate => 0,
                (optional) boolean, if passed, automatically create cv,
                cvterm, and dbxref rows if one cannot be found for the
-               given featureprop name.  Default false.
+               given synonym name.  Default false.
 
             cv_name => cv.name to use for the given synonym type.
                        Defaults to 'synonym_type',
@@ -1551,12 +1566,12 @@ sub add_synonym {
 	    $data->{type_id} = $existing_cvterm->cvterm_id();
 	}
     }
-    my ($cvtermsynonym)= $self->search_related('featureprops', {
+    my ($cvtermsynonym)= $self->search_related('cvtermsynonyms', {
                             type_id => $data->{type_id},
-                            value   => { 'like' , lc($synonym) }
+                            synonym   => { 'ilike' , lc($synonym) }
     });
 
-    $cvtermsynonym= $self->create_related('cvtermsynonyms' , $data) if !$cvtermsynonym;
+    $cvtermsynonym= $self->create_related('cvtermsynonyms' , $data) unless defined $cvtermsynonym;
 
     return $cvtermsynonym;
 }
@@ -1681,6 +1696,59 @@ sub delete_secondary_dbxref {
 	search_related('cvterm_dbxrefs', { cvterm_id => $self->get_column('cvterm_id') } );
     if ($cvterm_dbxref) { $cvterm_dbxref->delete() ; }
 
+}
+
+
+=head2 create_cvtermprops
+
+  Usage: $set->create_cvtermprops({ baz => 2, foo => 'bar' });
+  Desc : convenience method to create cvterm properties using cvterms
+          from the ontology with the given name
+  Args : hashref of { propname => value, ...},
+         options hashref as:
+          {
+            autocreate => 0,
+               (optional) boolean, if passed, automatically create cv,
+               cvterm, and dbxref rows if one cannot be found for the
+               given cvtermprop name.  Default false.
+
+            cv_name => cv.name to use for the given cvtermprops.
+                       Defaults to 'cvterm_property',
+
+            db_name => db.name to use for autocreated dbxrefs,
+                       default 'null',
+
+            dbxref_accession_prefix => optional, default
+                                       'autocreated:',
+            definitions => optional hashref of:
+                { cvterm_name => definition,
+                }
+             to load into the cvterm table when autocreating cvterms
+             
+             rank => force numeric rank. Be careful not to pass ranks that already exist
+                     for the property type. The function will die in such case.
+
+             allow_duplicate_values => default false.
+                If true, allow duplicate instances of the same cvterm
+                and value in the properties of the cvterm.  Duplicate
+                values will have different ranks.
+          }
+  Ret  : hashref of { propname => new cvtermprop object }
+
+=cut
+
+sub create_cvtermprops {
+    my ($self, $props, $opts) = @_;
+    
+    # process opts
+    $opts->{cv_name} = 'cvterm_property'
+        unless defined $opts->{cv_name};
+    return Bio::Chado::Schema::Util->create_properties
+        ( properties => $props,
+          options    => $opts,
+          row        => $self,
+          prop_relation_name => 'cvtermprops',
+        );
 }
 
 
