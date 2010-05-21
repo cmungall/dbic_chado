@@ -33,7 +33,13 @@ $schema->txn_do(sub {
     is($cvtermsynonym->cvterm->name, $name, "synonym type test");
     is($cvtermsynonym->type->cv->name, 'synonym_type', "synonym cv name test");
     is($cvtermsynonym->type->dbxref->accession, $type, "synonym dbxref accession test");
+    
+    #try to store the same synonym - should pass since new synonyms are created after passing 
+    ##search_related with type_id and case-insensitive value 
 
+    my $existing_s = $cvterm->add_synonym($synonym, { synonym_type=>$type, autocreate=>1 });
+    
+    is($cvtermsynonym->cvtermsynonym_id() , $existing_s->cvtermsynonym_id(), "Existing synonym test");
     ##delete the synonym
     $cvterm->delete_synonym($synonym);
 
