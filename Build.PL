@@ -15,6 +15,7 @@ my $build = Module::Build->new(
     },
     build_requires => {
         'DBD::SQLite'     => '1.14',
+        'SQL::Translator' => '0.11005',
         'Test::More'      => 0,
         'Test::Exception' => '0.27',
     },
