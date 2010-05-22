@@ -1566,11 +1566,16 @@ sub add_synonym {
 	    $data->{type_id} = $existing_cvterm->cvterm_id();
 	}
     }
+    
     my ($cvtermsynonym)= $self->search_related('cvtermsynonyms', {
-                            type_id => $data->{type_id},
-                            synonym   => { 'ilike' , lc($synonym) }
-    });
+	type_id => $data->{type_id} })->
+	    search({ 'lower(synonym)'   => {like => lc($synonym) } } );
 
+#search({ 'lower(synonym)' => { like => 'blah'}})
+#my $rs = $c->model("DB::Dbentry")->$search({ 
+#'lower('.$key.')' => $q },
+
+#search({ \'lower(synonym)' => { like => 'blah'}})
     $cvtermsynonym= $self->create_related('cvtermsynonyms' , $data) unless defined $cvtermsynonym;
 
     return $cvtermsynonym;

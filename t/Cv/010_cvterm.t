@@ -5,7 +5,7 @@ use warnings;
 use FindBin;
 use lib "$FindBin::RealBin/../lib";
 
-use Test::More tests => 13;
+use Test::More tests => 14;
 use Test::Exception;
 use BCSTest;
 
@@ -62,6 +62,11 @@ $schema->txn_do(sub {
     is($cvterm_dbxref, undef, "deleted secondary dbxref test");
     is($cvterm->search_related('cvterm_dbxrefs' )->count , 0, "deleted cvterm_dbxref test");
 
-
+    #create new cvtermprop 
+    
+    
+    #$self->create_cvtermprops();
+    
+    #
     $schema->txn_rollback;
 });
