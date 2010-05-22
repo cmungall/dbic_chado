@@ -5,7 +5,7 @@ use warnings;
 use FindBin;
 use lib "$FindBin::RealBin/../lib";
 
-use Test::More tests => 14;
+use Test::More tests => 16;
 use Test::Exception;
 use BCSTest;
 
@@ -63,10 +63,16 @@ $schema->txn_do(sub {
     is($cvterm->search_related('cvterm_dbxrefs' )->count , 0, "deleted cvterm_dbxref test");
 
     #create new cvtermprop 
+    my $propname= "cvtermprop";
+    my $value="value 1";
+    my $rank=3;
     
     
-    #$self->create_cvtermprops();
+    my $href= $cvterm->create_cvtermprops({ $propname => $value} , { autocreate => 1, allow_multiple_values => 1 , rank => $rank } );
     
+    my $cvtermprop = $href->{$propname};
+    is($cvtermprop->value(), $value, "cvtermprop value test");
+    is($cvtermprop->rank() , $rank, "cvtermprop rank test");
     #
     $schema->txn_rollback;
 });
