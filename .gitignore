@@ -6,3 +6,4 @@ blib/*
 _build
 Build
 MYMETA.yml
+t/var/*

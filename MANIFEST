@@ -264,4 +264,3 @@ t/lib/BCSTest/Schema.pm
 t/lib/DbicChadoTest.pm
 t/lib/sqlite.sql
 t/Sequence/010_feature.t
-t/zzzz_cleanup.t
