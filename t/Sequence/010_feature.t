@@ -9,7 +9,6 @@ use Test::More tests => 6;
 use Test::Exception;
 use BCSTest;
 
-
 my $schema = BCSTest->init_schema();
 
 my $sf = $schema->resultset('Sequence::Feature');
@@ -69,6 +68,12 @@ $schema->txn_do(sub{
         is( $feature->$m1, $feature->$m2,
         "$m1() returns same thing as $m2()" );
     }
+
+    my @@hildren = $feature->child_features;
+    ok(@children,'child_features method exists');
+
+    my $parent   = $feature->parent_feature;
+    ok($parent,'parent_feature method exists');
 
     $schema->txn_rollback;
 });
