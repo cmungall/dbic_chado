@@ -5,7 +5,7 @@ use warnings;
 use FindBin;
 use lib "$FindBin::RealBin/../lib";
 
-use Test::More tests => 6;
+use Test::More tests => 8;
 use Test::Exception;
 use BCSTest;
 
@@ -69,10 +69,10 @@ $schema->txn_do(sub{
         "$m1() returns same thing as $m2()" );
     }
 
-    my @@hildren = $feature->child_features;
+    my @children = $feature->child_features;
     ok(@children,'child_features method exists');
 
-    my $parent   = $feature->parent_feature;
+    my $parent   = $feature->parent_features;
     ok($parent,'parent_feature method exists');
 
     $schema->txn_rollback;
