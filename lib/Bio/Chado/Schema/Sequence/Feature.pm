@@ -683,6 +683,31 @@ use Carp;
 
 =head1 ADDITIONAL RELATIONSHIPS
 
+=head2 parent_features
+
+Type: has_many
+
+Parent features a.k.a srcfeatures of the current feature. An alias for featureloc_srcfeatures.
+
+=cut
+
+{ no warnings 'once';
+  *parent_features  = \&featureloc_srcfeatures;
+}
+
+
+=head2 child_features
+
+Type: has_many
+
+Children features a.k.a subfeatures of the current feature. An alias for featureloc_features.
+
+=cut
+
+{ no warnings 'once';
+  *child_features  = \&featureloc_features;
+}
+
 =head2 primary_dbxref
 
 Alias for dbxref
