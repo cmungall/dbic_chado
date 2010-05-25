@@ -49,13 +49,16 @@ $schema->txn_do(sub{
 
     # find a feature with some sequence. might be the one we just
     # inserted.
-    my $feature =
-            $sf->search({ 'residues' => {'!=', undef},
-                    'seqlen'   => {'!=', undef},
-                },
-                { 'rows' => 1 },
-                )
-            ->single;
+    my $feature = $sf->search({
+                        'residues' => {'!=', undef},
+                        'seqlen'   => {'!=', undef},
+                    }, { 'rows' => 1 })->single;
+
+    $schema->resultset('Sequence::Feature')
+        ->find_or_create({
+        name => 'the fly',
+        featureloc_srcfeatures => $cvterm,
+    });
 
     # test some Bio::SeqI methods for it
     for (
