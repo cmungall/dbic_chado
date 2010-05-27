@@ -1,3 +1,8 @@
+0.05801
+ * New aliases on Sequence::Feature
+    child_features  -> featureloc_features
+    parent_features -> featureloc_srcfeatures
+
 0.05800
 
  * Test suite can now deploy a Chado schema to a SQLite database
