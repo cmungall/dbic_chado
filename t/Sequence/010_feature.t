@@ -19,7 +19,10 @@ $schema->txn_do(sub{
     lives_ok {
         $sf->search_related('feature_relationship_objects')->count;
     } 'join through a long has_many name does not die';
+    $schema->txn_rollback;
+});
 
+$schema->txn_do(sub{
     my $dbx = $schema->resultset('General::Db')
                 ->find_or_create({ name => 'test db' })
                 ->find_or_create_related('dbxrefs',
@@ -54,10 +57,13 @@ $schema->txn_do(sub{
                         'seqlen'   => {'!=', undef},
                     }, { 'rows' => 1 })->single;
 
-    $schema->resultset('Sequence::Feature')
+    $schema->resultset('Sequence::Featureloc')
         ->find_or_create({
-        name => 'the fly',
-        featureloc_srcfeatures => $cvterm,
+        srcfeature => $feature,
+        feature_id => 5,
+        rank       => 1,
+        fmin       => 42,
+        fmax       => 69,
     });
 
     # test some Bio::SeqI methods for it
