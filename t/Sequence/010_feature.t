@@ -78,11 +78,8 @@ $schema->txn_do(sub{
         "$m1() returns same thing as $m2()" );
     }
 
-    my @children = $feature->child_features;
-    ok(@children,'child_features method exists');
-
-    my $parent   = $feature->parent_features;
-    ok($parent,'parent_feature method exists');
+    can_ok($feature,'child_features');
+    can_ok($feature,'parent_features');
 
     $schema->txn_rollback;
 });
