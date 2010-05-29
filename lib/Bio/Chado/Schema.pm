@@ -239,7 +239,7 @@ sub create_properties {
 							  {type_id =>$data->{type_id},
 							   rank => $opts->{rank}
 							  });
-		croak "Property $existing_prop already exists with rank " . $opts->{rank} . ". cannot continue" if  defined $existing_prop;
+		warn "Property " .  $existing_prop->value() . "  already exists with rank " . $opts->{rank} . ". skipping! \n" if  defined $existing_prop;
 		$data->{rank} = $opts->{rank};
 		
 	    } else { 
@@ -250,7 +250,7 @@ sub create_properties {
 		$data->{rank} = defined $max_rank ? $max_rank + 1 : 0;
 		
 	    }
-	    $props{$propname} = $self->create_related( $prop_relation_name,
+	    $props{$propname} = $self->find_or_create_related( $prop_relation_name,
 						       $data
 		);
 	}
