@@ -4,7 +4,6 @@ my $build = Module::Build->new(
     dist_name            => 'Bio-Chado-Schema',
     dist_abstract        => 'standard DBIx::Class layer for the Chado schema',
     license              => 'perl',
-    create_makefile_pl   => 'passthrough',
     recursive_test_files => 1,
     create_readme        => 1,
     add_to_cleanup       => [ 'Bio-Chado-Schema-*', 't/var' ],
