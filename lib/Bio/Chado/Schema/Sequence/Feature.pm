@@ -687,7 +687,7 @@ use Carp;
 
 Type: has_many
 
-Parent features a.k.a srcfeatures of the current feature. An alias for featureloc_srcfeatures.
+Parent features.
 
 =cut
 
@@ -695,18 +695,30 @@ Parent features a.k.a srcfeatures of the current feature. An alias for featurelo
   *parent_features  = \&feature_relationship_objects;
 }
 
+__PACKAGE__->many_to_many
+    (
+     'parent_features',
+     'feature_relationship_subjects' => 'object',
+    );
+
 
 =head2 child_features
 
 Type: has_many
 
-Children features a.k.a subfeatures of the current feature. An alias for featureloc_features.
+Child features.
 
 =cut
 
 { no warnings 'once';
   *child_features  = \&feature_relationship_subjects;
 }
+
+__PACKAGE__->many_to_many
+    (
+     'child_features',
+     'feature_relationship_objects' => 'subject',
+    );
 
 =head2 primary_dbxref
 
