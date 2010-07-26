@@ -683,35 +683,6 @@ use Carp;
 
 =head1 ADDITIONAL RELATIONSHIPS
 
-=head2 parent_features
-
-Type: has_many
-
-Parent features. Uses Bio::Chado::Schema::Sequence::FeatureRelationship .
-
-=cut
-
-__PACKAGE__->many_to_many
-    (
-     'parent_features',
-     'feature_relationship_subjects' => 'object',
-    );
-
-
-=head2 child_features
-
-Type: has_many
-
-Child features.  Uses Bio::Chado::Schema::Sequence::FeatureRelationship .
-
-=cut
-
-__PACKAGE__->many_to_many
-    (
-     'child_features',
-     'feature_relationship_objects' => 'subject',
-    );
-
 =head2 primary_dbxref
 
 Alias for dbxref
@@ -725,6 +696,39 @@ __PACKAGE__->belongs_to
     );
 
 =head1 MANY-TO-MANY RELATIONSHIPS
+
+=head2 parent_features
+
+Type: many_to_many
+
+Returns a list of parent features.
+
+Related Object: Bio::Chado::Schema::Sequence::FeatureRelationship
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'parent_features',
+     'feature_relationship_subjects' => 'object',
+    );
+
+
+=head2 child_features
+
+Type: many_to_many
+
+Returns a list of child features.
+
+Related Object: Bio::Chado::Schema::Sequence::FeatureRelationship
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'child_features',
+     'feature_relationship_objects' => 'subject',
+    );
 
 =head2 dbxrefs_mm
 
