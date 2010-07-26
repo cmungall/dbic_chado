@@ -703,7 +703,7 @@ Type: many_to_many
 
 Returns a list of parent features.
 
-Related Object: Bio::Chado::Schema::Sequence::FeatureRelationship
+Related object: Bio::Chado::Schema::Sequence::Feature
 
 =cut
 
@@ -720,7 +720,7 @@ Type: many_to_many
 
 Returns a list of child features.
 
-Related Object: Bio::Chado::Schema::Sequence::FeatureRelationship
+Related object: Bio::Chado::Schema::Sequence::Feature
 
 =cut
 

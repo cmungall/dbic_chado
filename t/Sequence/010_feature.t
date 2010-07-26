@@ -5,7 +5,7 @@ use warnings;
 use FindBin;
 use lib "$FindBin::RealBin/../lib";
 
-use Test::More tests => 15;
+use Test::More tests => 16;
 use Test::Exception;
 use BCSTest;
 
@@ -58,9 +58,23 @@ $schema->txn_do(sub{
                     type       => $cvterm,
                     organism_id=> 4,
             });
+    my $stepchild = $schema->resultset('Sequence::Feature')
+            ->find_or_create({
+                    residues   => $test_seq,
+                    seqlen     => length( $test_seq ),
+                    name       => 'BCS_stepchild',
+                    uniquename => 'BCS_step',
+                    type       => $cvterm,
+                    organism_id=> 4,
+            });
+
+    lives_ok(sub {
+        $parent->add_to_child_features( $stepchild, { type => $stepchild->type })
+    }, 'add_to_child_features');
+
     $parent->create_related( 'feature_relationship_subjects', {
-            object_id => $parent->feature_id,
-            subject_id  => $child->feature_id,
+            object_id  => $parent->feature_id,
+            subject_id => $child->feature_id,
             type       => $parent->type,
     });
 
@@ -101,12 +115,12 @@ $schema->txn_do(sub{
     my (@children) = $parent->child_features;
     my (@parents)  = $child->parent_features;
 
-    is(scalar @children, 1, "the parent feature has one child feature");
+    is(scalar @children, 2, "the parent feature has two child features");
     is(scalar @parents, 1, "the child feature has one parent feature");
     isa_ok($children[0], 'Bio::Chado::Schema::Sequence::Feature');
     isa_ok($parents[0], 'Bio::Chado::Schema::Sequence::Feature');
 
-    is_deeply( [ map { $_->name } @children ], [ 'BCS_stuff_child' ], 'child feature_id is correct' );
+    is_deeply( [ map { $_->name } @children ], [ 'BCS_stepchild', 'BCS_stuff_child' ], 'child feature_id is correct' );
     is_deeply( [ map { $_->name } @parents ], [ 'BCS_stuff_parent' ], 'parent feature_id is correct' );
 
     $schema->txn_rollback;
