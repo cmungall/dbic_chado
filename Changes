@@ -1,3 +1,7 @@
+0.05801
+
+ * Fix bugs and add tests for child_features and parent_features on Sequence::Feature
+
 0.05800
  
  * New aliases on Sequence::Feature

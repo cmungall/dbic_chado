@@ -687,13 +687,9 @@ use Carp;
 
 Type: has_many
 
-Parent features.
+Parent features. Uses Bio::Chado::Schema::Sequence::FeatureRelationship .
 
 =cut
-
-{ no warnings 'once';
-  *parent_features  = \&feature_relationship_objects;
-}
 
 __PACKAGE__->many_to_many
     (
@@ -706,13 +702,9 @@ __PACKAGE__->many_to_many
 
 Type: has_many
 
-Child features.
+Child features.  Uses Bio::Chado::Schema::Sequence::FeatureRelationship .
 
 =cut
-
-{ no warnings 'once';
-  *child_features  = \&feature_relationship_subjects;
-}
 
 __PACKAGE__->many_to_many
     (
