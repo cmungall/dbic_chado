@@ -692,7 +692,7 @@ Parent features a.k.a srcfeatures of the current feature. An alias for featurelo
 =cut
 
 { no warnings 'once';
-  *parent_features  = \&featureloc_srcfeatures;
+  *parent_features  = \&feature_relationship_objects;
 }
 
 
@@ -705,7 +705,7 @@ Children features a.k.a subfeatures of the current feature. An alias for feature
 =cut
 
 { no warnings 'once';
-  *child_features  = \&featureloc_features;
+  *child_features  = \&feature_relationship_subjects;
 }
 
 =head2 primary_dbxref
