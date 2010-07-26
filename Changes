@@ -1,6 +1,10 @@
 0.05801
 
- * Fix bugs and add tests for child_features and parent_features on Sequence::Feature
+ * Fix bugs and add tests for child_features and parent_features on
+   Sequence::Feature
+ * Added parent_relationships and child_relationships rels to
+   Sequence::Feature as more intuitive aliases for
+   feature_relationship_*
 
 0.05800
  
