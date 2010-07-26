@@ -5,7 +5,7 @@ use warnings;
 use FindBin;
 use lib "$FindBin::RealBin/../lib";
 
-use Test::More tests => 19;
+use Test::More tests => 23;
 use Test::Exception;
 use BCSTest;
 
@@ -123,6 +123,14 @@ $schema->txn_do(sub{
     }
     can_ok($feature,'child_features');
     can_ok($feature,'parent_features');
+
+    can_ok($feature,'child_relationships');
+    can_ok($feature,'parent_relationships');
+
+    my (@children_rels) = $parent->child_relationships;
+    my (@parents_rels)  = $parent->parent_relationships;
+    isa_ok($children_rels[0], 'Bio::Chado::Schema::Sequence::FeatureRelationship');
+    isa_ok($parents_rels[0],  'Bio::Chado::Schema::Sequence::FeatureRelationship');
 
     isnt($parent->feature_id, $child->feature_id, 'child and parent are different');
     my (@children) = $parent->child_features;

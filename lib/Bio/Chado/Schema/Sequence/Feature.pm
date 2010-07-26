@@ -675,6 +675,33 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 parent_relationships
+
+Type: has_to_many
+
+Returns a list of parent relationships.
+
+Related object: Bio::Chado::Schema::Sequence::FeatureRelationship
+
+=cut
+
+{ no warnings 'once';
+  *parent_relationships  = \&feature_relationship_objects;
+}
+
+=head2 child_relationships
+
+Type: has_to_many
+
+Returns a list of child relationships.
+
+Related object: Bio::Chado::Schema::Sequence::FeatureRelationship
+
+=cut
+
+{ no warnings 'once';
+  *child_relationships  = \&feature_relationship_subjects;
+}
 
 # Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 15:58:15
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:900i/O5aOeDozRRqlE9rCQ
