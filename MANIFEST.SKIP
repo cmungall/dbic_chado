@@ -29,6 +29,7 @@
 \#$
 \b\.#
 \.bak$
+.*\.sw.?
 
 # avoid OS X finder files
 \.DS_Store$

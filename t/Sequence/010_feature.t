@@ -5,7 +5,7 @@ use warnings;
 use FindBin;
 use lib "$FindBin::RealBin/../lib";
 
-use Test::More tests => 10;
+use Test::More tests => 23;
 use Test::Exception;
 use BCSTest;
 
@@ -40,15 +40,57 @@ $schema->txn_do(sub{
                             );
 
     my $test_seq = 'ACTAGCATCATGCCGCTAGCTAATATGCTG';
-    $schema->resultset('Sequence::Feature')
+    my $grandpa = $schema->resultset('Sequence::Feature')
             ->find_or_create({
                     residues   => $test_seq,
                     seqlen     => length( $test_seq ),
-                    name       => 'BCS_stuff',
+                    name       => 'BCS_grandpa',
+                    uniquename => 'BCS_pappy',
+                    type       => $cvterm,
+                    organism_id=> 4,
+            });
+    my $parent = $schema->resultset('Sequence::Feature')
+            ->find_or_create({
+                    residues   => $test_seq,
+                    seqlen     => length( $test_seq ),
+                    name       => 'BCS_stuff_parent',
                     uniquename => 'BCS_foo',
                     type       => $cvterm,
                     organism_id=> 4,
             });
+    my $child = $schema->resultset('Sequence::Feature')
+            ->find_or_create({
+                    residues   => $test_seq,
+                    seqlen     => length( $test_seq ),
+                    name       => 'BCS_stuff_child',
+                    uniquename => 'BCS_foo2',
+                    type       => $cvterm,
+                    organism_id=> 4,
+            });
+    my $stepchild = $schema->resultset('Sequence::Feature')
+            ->find_or_create({
+                    residues   => $test_seq,
+                    seqlen     => length( $test_seq ),
+                    name       => 'BCS_stepchild',
+                    uniquename => 'BCS_step',
+                    type       => $cvterm,
+                    organism_id=> 4,
+            });
+
+    lives_ok(sub {
+        $parent->add_to_child_features( $stepchild, { type => $stepchild->type })
+    }, 'add_to_child_features');
+
+    lives_ok(sub {
+        $parent->add_to_parent_features( $grandpa, { type => $grandpa->type })
+    }, 'add_to_parent_features');
+
+    $parent->create_related( 'feature_relationship_subjects', {
+            object_id  => $parent->feature_id,
+            subject_id => $child->feature_id,
+            type       => $parent->type,
+    });
+
     $schema->resultset('Organism::Organism')
             ->find_or_create({ genus => 'test', species => 'testus' })
             ->create_related( 'features', {
@@ -64,16 +106,9 @@ $schema->txn_do(sub{
     my $feature = $sf->search({
                         'residues' => {'!=', undef},
                         'seqlen'   => {'!=', undef},
+                        'name'     => {'!=', 'BSC_stuff'},
                     }, { 'rows' => 1 })->single;
 
-    $schema->resultset('Sequence::Featureloc')
-        ->find_or_create({
-        srcfeature => $feature,
-        feature_id => $feature->feature_id,
-        rank       => 1,
-        fmin       => 42,
-        fmax       => 69,
-    });
 
     # test some Bio::SeqI methods for it
     for (
@@ -86,13 +121,34 @@ $schema->txn_do(sub{
         is( $feature->$m1, $feature->$m2,
         "$m1() returns same thing as $m2()" );
     }
-
     can_ok($feature,'child_features');
     can_ok($feature,'parent_features');
-    my (@children) = $feature->child_features;
-    my (@parents)  = $feature->parent_features;
-    is(scalar @children, 1, "the feature has one child feature");
-    is(scalar @parents, 1, "the feature has one parent feature");
+
+    can_ok($feature,'child_relationships');
+    can_ok($feature,'parent_relationships');
+
+    my (@children_rels) = $parent->child_relationships;
+    my (@parents_rels)  = $parent->parent_relationships;
+    isa_ok($children_rels[0], 'Bio::Chado::Schema::Sequence::FeatureRelationship');
+    isa_ok($parents_rels[0],  'Bio::Chado::Schema::Sequence::FeatureRelationship');
+
+    isnt($parent->feature_id, $child->feature_id, 'child and parent are different');
+    my (@children) = $parent->child_features;
+    my (@parents)  = $child->parent_features;
+
+    is(scalar @children, 2, "the parent feature has two child features");
+    is(scalar @parents, 1, "the child feature has one parent feature");
+
+    my (@grandparents) = $parent->parent_features;
+    my (@grandkids) = $child->child_features;
+    is(scalar @grandparents, 1, "the parent feature has one parent feature");
+    is(scalar @grandkids, 0, "the child feature has no child feature");
+
+    isa_ok($children[0], 'Bio::Chado::Schema::Sequence::Feature');
+    isa_ok($parents[0], 'Bio::Chado::Schema::Sequence::Feature');
+
+    is_deeply( [ map { $_->name } @children ], [ 'BCS_stepchild', 'BCS_stuff_child' ], 'child feature_id is correct' );
+    is_deeply( [ map { $_->name } @parents ], [ 'BCS_stuff_parent' ], 'parent feature_id is correct' );
 
     $schema->txn_rollback;
 });

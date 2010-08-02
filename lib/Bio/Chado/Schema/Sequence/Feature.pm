@@ -675,6 +675,33 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 parent_relationships
+
+Type: has_to_many
+
+Returns a list of parent relationships.
+
+Related object: Bio::Chado::Schema::Sequence::FeatureRelationship
+
+=cut
+
+{ no warnings 'once';
+  *parent_relationships  = \&feature_relationship_objects;
+}
+
+=head2 child_relationships
+
+Type: has_to_many
+
+Returns a list of child relationships.
+
+Related object: Bio::Chado::Schema::Sequence::FeatureRelationship
+
+=cut
+
+{ no warnings 'once';
+  *child_relationships  = \&feature_relationship_subjects;
+}
 
 # Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 15:58:15
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:900i/O5aOeDozRRqlE9rCQ
@@ -682,31 +709,6 @@ __PACKAGE__->has_many(
 use Carp;
 
 =head1 ADDITIONAL RELATIONSHIPS
-
-=head2 parent_features
-
-Type: has_many
-
-Parent features a.k.a srcfeatures of the current feature. An alias for featureloc_srcfeatures.
-
-=cut
-
-{ no warnings 'once';
-  *parent_features  = \&featureloc_srcfeatures;
-}
-
-
-=head2 child_features
-
-Type: has_many
-
-Children features a.k.a subfeatures of the current feature. An alias for featureloc_features.
-
-=cut
-
-{ no warnings 'once';
-  *child_features  = \&featureloc_features;
-}
 
 =head2 primary_dbxref
 
@@ -721,6 +723,39 @@ __PACKAGE__->belongs_to
     );
 
 =head1 MANY-TO-MANY RELATIONSHIPS
+
+=head2 parent_features
+
+Type: many_to_many
+
+Returns a list of parent features.
+
+Related object: Bio::Chado::Schema::Sequence::Feature
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'parent_features',
+     'feature_relationship_subjects' => 'object',
+    );
+
+
+=head2 child_features
+
+Type: many_to_many
+
+Returns a list of child features.
+
+Related object: Bio::Chado::Schema::Sequence::Feature
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'child_features',
+     'feature_relationship_objects' => 'subject',
+    );
 
 =head2 dbxrefs_mm
 

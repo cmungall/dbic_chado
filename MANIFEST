@@ -253,8 +253,11 @@ lib/Bio/Chado/Schema/Stock/StockPub.pm
 lib/Bio/Chado/Schema/Stock/StockRelationship.pm
 lib/Bio/Chado/Schema/Stock/StockRelationshipPub.pm
 lib/Bio/Chado/Schema/Util.pod
+LICENSE
 maint/bin/update_dbic_dump.pl
 MANIFEST			This list of files
+META.yml
+README
 t/001_basics.t
 t/010_organism.t
 t/Cv/010_cvterm.t
