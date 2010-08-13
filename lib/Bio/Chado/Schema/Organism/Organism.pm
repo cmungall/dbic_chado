@@ -235,6 +235,43 @@ __PACKAGE__->has_many(
 # Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:q8OKsnJKuV6pH6Mqd3Ozxw
 
+=head1 MANY-TO-MANY RELATIONSHIPS
+
+=head2 phylonodes
+
+Type: many_to_many
+
+Returns a list of phylonodes associated with this organism.
+
+Related object: L<Bio::Chado::Schema::Phylogeny::Phylonode>
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'phylonodes',
+     'phylonode_organisms' => 'phylonode',
+    );
+
+=head2 dbxrefs
+
+Type: many_to_many
+
+Returns a list of dbxrefs associated with the organism.
+
+Related object: L<Bio::Chado::Schema::General::Dbxref>
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'dbxrefs',
+     'organism_dbxrefs' => 'dbxref',
+    );
+
+
+=head1 ADDITIONAL METHODS
+
 use Carp;
 
 =head2 create_organismprops

@@ -1,3 +1,7 @@
+0.05900
+
+ * Added parents and children accessors for phylonodes.
+
 0.05801
 
  * Fix bugs and add tests for child_features and parent_features on
