@@ -32,7 +32,7 @@ __PACKAGE__->table("synonym");
 
 =head2 name
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 0
   size: 255
 
@@ -48,7 +48,7 @@ Types would be symbol and fullname for now.
 
 =head2 synonym_sgml
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 0
   size: 255
 
@@ -65,11 +65,11 @@ __PACKAGE__->add_columns(
     sequence          => "synonym_synonym_id_seq",
   },
   "name",
-  { data_type => "character varying", is_nullable => 0, size => 255 },
+  { data_type => "varchar", is_nullable => 0, size => 255 },
   "type_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "synonym_sgml",
-  { data_type => "character varying", is_nullable => 0, size => 255 },
+  { data_type => "varchar", is_nullable => 0, size => 255 },
 );
 __PACKAGE__->set_primary_key("synonym_id");
 __PACKAGE__->add_unique_constraint("synonym_c1", ["name", "type_id"]);
@@ -143,8 +143,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pF/PaUC144/og1HJvOKw2w
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YJErsQGSOVWhSkSfCGY4jA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

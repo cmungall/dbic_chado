@@ -26,7 +26,7 @@ __PACKAGE__->table("f_loc");
 
 =head2 name
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -56,7 +56,7 @@ __PACKAGE__->add_columns(
   "feature_id",
   { data_type => "integer", is_nullable => 1 },
   "name",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "dbxref_id",
   { data_type => "integer", is_nullable => 1 },
   "nbeg",
@@ -68,8 +68,8 @@ __PACKAGE__->add_columns(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0NQc0uNwDAYMVt0386mZ+Q
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:dbxGIAZ9SLZ4giHctwZscw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

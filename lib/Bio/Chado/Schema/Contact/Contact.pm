@@ -36,13 +36,13 @@ What type of contact is this?  E.g. "person", "lab".
 
 =head2 name
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 0
   size: 255
 
 =head2 description
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -59,9 +59,9 @@ __PACKAGE__->add_columns(
   "type_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "name",
-  { data_type => "character varying", is_nullable => 0, size => 255 },
+  { data_type => "varchar", is_nullable => 0, size => 255 },
   "description",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
 );
 __PACKAGE__->set_primary_key("contact_id");
 __PACKAGE__->add_unique_constraint("contact_c1", ["name"]);
@@ -165,6 +165,36 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 nd_experiment_contacts
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::NaturalDiversity::NdExperimentContact>
+
+=cut
+
+__PACKAGE__->has_many(
+  "nd_experiment_contacts",
+  "Bio::Chado::Schema::NaturalDiversity::NdExperimentContact",
+  { "foreign.contact_id" => "self.contact_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 project_contacts
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Project::ProjectContact>
+
+=cut
+
+__PACKAGE__->has_many(
+  "project_contacts",
+  "Bio::Chado::Schema::Project::ProjectContact",
+  { "foreign.contact_id" => "self.contact_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 quantifications
 
 Type: has_many
@@ -211,8 +241,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rNZn9DqT//cbHuhr30vppA
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:06gv7bmt2HKmaDlmPKI7/Q
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -57,7 +57,7 @@ belongs. This column is mandatory.
 
 =head2 name
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -106,7 +106,7 @@ of the sequence is known.
 
 =head2 md5checksum
 
-  data_type: 'character'
+  data_type: 'char'
   is_nullable: 1
   size: 32
 
@@ -153,9 +153,10 @@ row in the table.
 
 =head2 timeaccessioned
 
-  data_type: 'timestamp without time zone'
-  default_value: CURRENT_TIMESTAMP
+  data_type: 'timestamp'
+  default_value: current_timestamp
   is_nullable: 0
+  original: {default_value => \"now()"}
 
 For handling object
 accession or modification timestamps (as opposed to database auditing data,
@@ -164,9 +165,10 @@ available to software interacting with chado.
 
 =head2 timelastmodified
 
-  data_type: 'timestamp without time zone'
-  default_value: CURRENT_TIMESTAMP
+  data_type: 'timestamp'
+  default_value: current_timestamp
   is_nullable: 0
+  original: {default_value => \"now()"}
 
 For handling object
 accession or modification timestamps (as opposed to database auditing data,
@@ -188,7 +190,7 @@ __PACKAGE__->add_columns(
   "organism_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "name",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "uniquename",
   { data_type => "text", is_nullable => 0 },
   "residues",
@@ -196,7 +198,7 @@ __PACKAGE__->add_columns(
   "seqlen",
   { data_type => "integer", is_nullable => 1 },
   "md5checksum",
-  { data_type => "character", is_nullable => 1, size => 32 },
+  { data_type => "char", is_nullable => 1, size => 32 },
   "type_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "is_analysis",
@@ -205,15 +207,17 @@ __PACKAGE__->add_columns(
   { data_type => "boolean", default_value => \"false", is_nullable => 0 },
   "timeaccessioned",
   {
-    data_type     => "timestamp without time zone",
-    default_value => \"CURRENT_TIMESTAMP",
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
     is_nullable   => 0,
+    original      => { default_value => \"now()" },
   },
   "timelastmodified",
   {
-    data_type     => "timestamp without time zone",
-    default_value => \"CURRENT_TIMESTAMP",
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
     is_nullable   => 0,
+    original      => { default_value => \"now()" },
   },
 );
 __PACKAGE__->set_primary_key("feature_id");
@@ -675,6 +679,14 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1rnPsx4awJbpI2wm1doDlA
+
+use Carp;
+
+=head1 ADDITIONAL RELATIONSHIPS
+
 =head2 parent_relationships
 
 Type: has_to_many
@@ -703,12 +715,6 @@ Related object: Bio::Chado::Schema::Sequence::FeatureRelationship
   *child_relationships  = \&feature_relationship_subjects;
 }
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 15:58:15
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:900i/O5aOeDozRRqlE9rCQ
-
-use Carp;
-
-=head1 ADDITIONAL RELATIONSHIPS
 
 =head2 primary_dbxref
 
@@ -878,7 +884,8 @@ identifier, accession, and sequence information, no subfeatures,
 ranges, or the like.
 
 Support for BioPerl's more complete L<Bio::SeqI> interface, which
-includes those things, is planned for a future release.
+includes those things, still needs to be implemented.  If you are
+interested in helping with this, please contact GMOD!
 
 =cut
 

@@ -35,7 +35,7 @@ __PACKAGE__->table("analysis");
 
 =head2 name
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -51,7 +51,7 @@ A way of grouping analyses. This
 
 =head2 program
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 0
   size: 255
 
@@ -59,7 +59,7 @@ Program name, e.g. blastx, blastp, sim4, genscan.
 
 =head2 programversion
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 0
   size: 255
 
@@ -67,7 +67,7 @@ Version description, e.g. TBLASTX 2.0MP-WashU [09-Nov-2000].
 
 =head2 algorithm
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -75,7 +75,7 @@ Algorithm name, e.g. blast.
 
 =head2 sourcename
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -83,7 +83,7 @@ Source name, e.g. cDNA, SwissProt.
 
 =head2 sourceversion
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -96,9 +96,10 @@ This is an optional, permanent URL or URI for the source of the  analysis. The i
 
 =head2 timeexecuted
 
-  data_type: 'timestamp without time zone'
-  default_value: CURRENT_TIMESTAMP
+  data_type: 'timestamp'
+  default_value: current_timestamp
   is_nullable: 0
+  original: {default_value => \"now()"}
 
 =cut
 
@@ -111,26 +112,27 @@ __PACKAGE__->add_columns(
     sequence          => "analysis_analysis_id_seq",
   },
   "name",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "description",
   { data_type => "text", is_nullable => 1 },
   "program",
-  { data_type => "character varying", is_nullable => 0, size => 255 },
+  { data_type => "varchar", is_nullable => 0, size => 255 },
   "programversion",
-  { data_type => "character varying", is_nullable => 0, size => 255 },
+  { data_type => "varchar", is_nullable => 0, size => 255 },
   "algorithm",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "sourcename",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "sourceversion",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "sourceuri",
   { data_type => "text", is_nullable => 1 },
   "timeexecuted",
   {
-    data_type     => "timestamp without time zone",
-    default_value => \"CURRENT_TIMESTAMP",
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
     is_nullable   => 0,
+    original      => { default_value => \"now()" },
   },
 );
 __PACKAGE__->set_primary_key("analysis_id");
@@ -199,8 +201,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 15:58:15
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Uk32TcCS6Gv2r7kCBMguoQ
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YT9qC0zsA8eVNXlt/PtoXw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

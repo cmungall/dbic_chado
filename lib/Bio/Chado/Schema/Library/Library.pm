@@ -34,7 +34,7 @@ __PACKAGE__->table("library");
 
 =head2 name
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -60,15 +60,17 @@ to a controlled vocabulary of library types. Examples of this would be: "cDNA_li
 
 =head2 timeaccessioned
 
-  data_type: 'timestamp without time zone'
-  default_value: CURRENT_TIMESTAMP
+  data_type: 'timestamp'
+  default_value: current_timestamp
   is_nullable: 0
+  original: {default_value => \"now()"}
 
 =head2 timelastmodified
 
-  data_type: 'timestamp without time zone'
-  default_value: CURRENT_TIMESTAMP
+  data_type: 'timestamp'
+  default_value: current_timestamp
   is_nullable: 0
+  original: {default_value => \"now()"}
 
 =cut
 
@@ -83,7 +85,7 @@ __PACKAGE__->add_columns(
   "organism_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "name",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "uniquename",
   { data_type => "text", is_nullable => 0 },
   "type_id",
@@ -92,15 +94,17 @@ __PACKAGE__->add_columns(
   { data_type => "integer", default_value => 0, is_nullable => 0 },
   "timeaccessioned",
   {
-    data_type     => "timestamp without time zone",
-    default_value => \"CURRENT_TIMESTAMP",
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
     is_nullable   => 0,
+    original      => { default_value => \"now()" },
   },
   "timelastmodified",
   {
-    data_type     => "timestamp without time zone",
-    default_value => \"CURRENT_TIMESTAMP",
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
     is_nullable   => 0,
+    original      => { default_value => \"now()" },
   },
 );
 __PACKAGE__->set_primary_key("library_id");
@@ -256,8 +260,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 15:58:15
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ivJpndXKs+5lbgBu7MSLew
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/OylZiGTtXYr3rweD5UKPQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

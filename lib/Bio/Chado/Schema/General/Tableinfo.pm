@@ -28,13 +28,13 @@ __PACKAGE__->table("tableinfo");
 
 =head2 name
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 0
   size: 30
 
 =head2 primary_key_column
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 30
 
@@ -63,8 +63,9 @@ __PACKAGE__->table("tableinfo");
 =head2 modification_date
 
   data_type: 'date'
-  default_value: CURRENT_TIMESTAMP
+  default_value: current_timestamp
   is_nullable: 0
+  original: {default_value => \"now()"}
 
 =cut
 
@@ -77,9 +78,9 @@ __PACKAGE__->add_columns(
     sequence          => "tableinfo_tableinfo_id_seq",
   },
   "name",
-  { data_type => "character varying", is_nullable => 0, size => 30 },
+  { data_type => "varchar", is_nullable => 0, size => 30 },
   "primary_key_column",
-  { data_type => "character varying", is_nullable => 1, size => 30 },
+  { data_type => "varchar", is_nullable => 1, size => 30 },
   "is_view",
   { data_type => "integer", default_value => 0, is_nullable => 0 },
   "view_on_table_id",
@@ -91,8 +92,9 @@ __PACKAGE__->add_columns(
   "modification_date",
   {
     data_type     => "date",
-    default_value => \"CURRENT_TIMESTAMP",
+    default_value => \"current_timestamp",
     is_nullable   => 0,
+    original      => { default_value => \"now()" },
   },
 );
 __PACKAGE__->set_primary_key("tableinfo_id");
@@ -131,8 +133,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 15:58:15
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/pID/SOFSmmUj8LnX1XYXw
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0EOLyHeZBC5uBYw0qeqENQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

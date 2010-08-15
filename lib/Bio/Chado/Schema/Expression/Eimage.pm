@@ -35,7 +35,7 @@ We expect images in eimage_data (e.g. JPEGs) to be uuencoded.
 
 =head2 eimage_type
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 0
   size: 255
 
@@ -43,7 +43,7 @@ Describes the type of data in eimage_data.
 
 =head2 image_uri
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -60,9 +60,9 @@ __PACKAGE__->add_columns(
   "eimage_data",
   { data_type => "text", is_nullable => 1 },
   "eimage_type",
-  { data_type => "character varying", is_nullable => 0, size => 255 },
+  { data_type => "varchar", is_nullable => 0, size => 255 },
   "image_uri",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
 );
 __PACKAGE__->set_primary_key("eimage_id");
 
@@ -84,8 +84,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JU7YYZqYy3uJO5aa1fovgQ
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:2KekdzLeTd1X48rPHf7Elw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -38,7 +38,7 @@ __PACKAGE__->table("dbxref");
 
 =head2 accession
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 0
   size: 255
 
@@ -46,7 +46,7 @@ The local part of the identifier. Guaranteed by the db authority to be unique fo
 
 =head2 version
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   default_value: (empty string)
   is_nullable: 0
   size: 255
@@ -69,14 +69,9 @@ __PACKAGE__->add_columns(
   "db_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "accession",
-  { data_type => "character varying", is_nullable => 0, size => 255 },
+  { data_type => "varchar", is_nullable => 0, size => 255 },
   "version",
-  {
-    data_type => "character varying",
-    default_value => "",
-    is_nullable => 0,
-    size => 255,
-  },
+  { data_type => "varchar", default_value => "", is_nullable => 0, size => 255 },
   "description",
   { data_type => "text", is_nullable => 1 },
 );
@@ -301,6 +296,36 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 nd_experiment_dbxrefs
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::NaturalDiversity::NdExperimentDbxref>
+
+=cut
+
+__PACKAGE__->has_many(
+  "nd_experiment_dbxrefs",
+  "Bio::Chado::Schema::NaturalDiversity::NdExperimentDbxref",
+  { "foreign.dbxref_id" => "self.dbxref_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 nd_experiment_stock_dbxrefs
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::NaturalDiversity::NdExperimentStockDbxref>
+
+=cut
+
+__PACKAGE__->has_many(
+  "nd_experiment_stock_dbxrefs",
+  "Bio::Chado::Schema::NaturalDiversity::NdExperimentStockDbxref",
+  { "foreign.dbxref_id" => "self.dbxref_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 organism_dbxrefs
 
 Type: has_many
@@ -422,8 +447,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:01dT800OT7AobiQXlOkCGw
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZJLCc473+PTc1EIgOlcgGQ
 
 
 =head1 MANY-TO-MANY RELATIONSHIPS

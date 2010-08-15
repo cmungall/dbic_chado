@@ -35,19 +35,19 @@ __PACKAGE__->table("organism");
 
 =head2 abbreviation
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
 =head2 genus
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 0
   size: 255
 
 =head2 species
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 0
   size: 255
 
@@ -61,7 +61,7 @@ pattern.
 
 =head2 common_name
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -81,13 +81,13 @@ __PACKAGE__->add_columns(
     sequence          => "organism_organism_id_seq",
   },
   "abbreviation",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "genus",
-  { data_type => "character varying", is_nullable => 0, size => 255 },
+  { data_type => "varchar", is_nullable => 0, size => 255 },
   "species",
-  { data_type => "character varying", is_nullable => 0, size => 255 },
+  { data_type => "varchar", is_nullable => 0, size => 255 },
   "common_name",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "comment",
   { data_type => "text", is_nullable => 1 },
 );
@@ -232,8 +232,45 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:q8OKsnJKuV6pH6Mqd3Ozxw
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xuk7QNRmZZZy4a0/5jInJw
+
+=head1 MANY-TO-MANY RELATIONSHIPS
+
+=head2 phylonodes
+
+Type: many_to_many
+
+Returns a list of phylonodes associated with this organism.
+
+Related object: L<Bio::Chado::Schema::Phylogeny::Phylonode>
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'phylonodes',
+     'phylonode_organisms' => 'phylonode',
+    );
+
+=head2 dbxrefs
+
+Type: many_to_many
+
+Returns a list of dbxrefs associated with the organism.
+
+Related object: L<Bio::Chado::Schema::General::Dbxref>
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'dbxrefs',
+     'organism_dbxrefs' => 'dbxref',
+    );
+
+
+=head1 ADDITIONAL METHODS
 
 use Carp;
 

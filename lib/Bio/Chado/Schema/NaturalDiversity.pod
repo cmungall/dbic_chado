@@ -1,0 +1,58 @@
+=head1 NAME
+
+Bio::Chado::Schema::NaturalDiversity - Natural diversity module for dealing with populations, samples, genotypes,
+phenotypes and results of other assays.
+
+=head1 CHADO MODULE
+
+Classes in this namespace correspond to tables and views in the
+Chado NaturalDiversity module.
+
+=head1 CLASSES
+
+These classes are part of the L<Bio::Chado::Schema> distribution.
+
+Below is a list of classes in this module of Chado.  Each of the
+classes below corresponds to a single Chado table or view.
+
+L<Bio::Chado::Schema::NaturalDiversity::NdExperiment>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdExperimentContact>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdExperimentDbxref>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdExperimentGenotype>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdExperimentPhenotype>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdExperimentProject>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdExperimentProtocol>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdExperimentPub>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdExperimentStock>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdExperimentStockDbxref>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdExperimentStockprop>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdExperimentprop>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdGeolocation>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdGeolocationprop>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdProtocol>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdProtocolReagent>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdProtocolprop>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdReagent>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdReagentRelationship>
+
+L<Bio::Chado::Schema::NaturalDiversity::NdReagentprop>
+
+=cut
