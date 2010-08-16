@@ -12,35 +12,61 @@ use BCSTest;
 sub lr($$) {  left_idx => shift, right_idx => shift }
 
 my $schema = BCSTest->init_schema();
-my $phylonodes = $schema->resultset('Phylogeny::Phylonode');
+my $phylotree_rs  = $schema->resultset('Phylogeny::Phylotree');
+my $phylonodes_rs = $schema->resultset('Phylogeny::Phylonode');
+$phylonodes_rs->delete;
 
 $schema->txn_do(sub {
-    my $phylotree =
-        $schema->resultset('Phylogeny::Phylotree')
-               ->create({
-                   dbxref => {
-                       db => { name => 'null' },
-                       accession => 'FakeTree'
-                      },
-                   name => 'FakeTree',
-               });
 
-    my $root = $phylonodes->create({
-        phylotree => $phylotree,
-        lr 1 20,
+    my $test_tree =
+        [
+          1, 20,
+          [ 2, 19,
+            [ 3, 10,
+              [4,5],
+              [6,7],
+              [8,9],
+             ],
+            [ 11, 12 ],
+            [ 13, 18,
+              [ 14, 15 ],
+              [ 16, 17 ],
+             ],
+           ],
+         ];
+
+    my $phylotree = $phylotree_rs->create({
+        name   => 'FakeTree',
+        dbxref => {
+            db => { name => 'null' },
+            accession => 'FakeTree'
+           },
     });
 
-    my $level2 = $root->add_to_phylonodes({ lr 2 19 });
-
-    my (undef,$second_child) = $phylonodes->populate([
-        map +{ phylotree => $phylotree, parent_phylonode => $root,
-               left_idx => $_->[0], right_idx => $_->[1]
-             },
-        [
-
-       ]);
-
+    _load_tree( $phylotree, $test_tree );
 });
+
+is( $phylonodes_rs->count, 10, '10 phylonodes loaded' );
+
+my $whole_tree = $phylonodes_rs->search({},{ order_by => 'phylonode_id', rows => 1 })
+                               ->single
+                               ->all_children;
+
+is( $whole_tree->count, 9, 'all_children called on root phylonode gives all the phylonodes' );
+
+
+#################
+sub _load_tree {
+    my ( $tree, $data, $parent ) = @_;
+
+    my %new_node;
+    ( @new_node{'left_idx','right_idx'}, my @children ) = @$data;
+    $new_node{parent_phylonode_id} = $parent->phylonode_id if $parent;
+
+    my $child = $tree->add_to_phylonodes( \%new_node );
+
+    _load_tree( $tree, $_, $child ) for @children;
+}
 
 
 done_testing;
