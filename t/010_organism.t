@@ -38,4 +38,6 @@ like( $org->organism_id, qr/^\d+$/, 'inserted a new organism' );
 is( $org->dbxrefs->count, 0, 'got no dbxrefs' );
 is( $org->phylonodes->count, 0, 'got no phylonodes' );
 
+$org->delete;
+
 done_testing;
