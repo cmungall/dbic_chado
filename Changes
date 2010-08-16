@@ -1,6 +1,6 @@
 0.05900
 
- * Added parents and children accessors for phylonodes.
+ * Added DBIx::Class::Tree::NestedSet support to for Phylonodes.
 
 0.05801
 
