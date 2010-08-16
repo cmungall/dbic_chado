@@ -50,9 +50,11 @@ is( $phylonodes_rs->count, 10, '10 phylonodes loaded' );
 
 my $whole_tree = $phylonodes_rs->search({},{ order_by => 'phylonode_id', rows => 1 })
                                ->single
-                               ->all_children;
+                               ->descendants;
 
-is( $whole_tree->count, 9, 'all_children called on root phylonode gives all the phylonodes' );
+is( $whole_tree->count, 9,
+    'all_children called on root phylonode gives all the phylonodes below the root'
+   );
 
 
 #################

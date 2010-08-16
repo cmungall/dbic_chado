@@ -30,6 +30,7 @@ my $build = Module::Build->new(
         'Carp'        => 0,
         'Carp::Clan'  => '6.00',
         'DBIx::Class' => '0.08111',
+        'DBIx::Class::Tree::NestedSet' => '0.07',
     },
 );
 $build->create_build_script;
