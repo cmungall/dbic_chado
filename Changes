@@ -1,6 +1,7 @@
-0.05900
+0.06000
 
  * Added DBIx::Class::Tree::NestedSet support to for Phylonodes.
+ * Added Natural Diversity and Project module support.
 
 0.05801
 
