@@ -53,13 +53,13 @@ Indicates whether the author is an editor for linked publication. Note: this is 
 
 =head2 surname
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 0
   size: 100
 
 =head2 givennames
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 100
 
@@ -67,7 +67,7 @@ First name, initials
 
 =head2 suffix
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 100
 
@@ -90,11 +90,11 @@ __PACKAGE__->add_columns(
   "editor",
   { data_type => "boolean", default_value => \"false", is_nullable => 1 },
   "surname",
-  { data_type => "character varying", is_nullable => 0, size => 100 },
+  { data_type => "varchar", is_nullable => 0, size => 100 },
   "givennames",
-  { data_type => "character varying", is_nullable => 1, size => 100 },
+  { data_type => "varchar", is_nullable => 1, size => 100 },
   "suffix",
-  { data_type => "character varying", is_nullable => 1, size => 100 },
+  { data_type => "varchar", is_nullable => 1, size => 100 },
 );
 __PACKAGE__->set_primary_key("pubauthor_id");
 __PACKAGE__->add_unique_constraint("pubauthor_c1", ["pub_id", "rank"]);
@@ -123,8 +123,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:F5PHNqaXSzk0BIn5OHjAXw
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:TfKZW1xAzNaFCLc9Crirvg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

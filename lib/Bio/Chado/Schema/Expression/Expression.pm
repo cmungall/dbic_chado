@@ -33,7 +33,7 @@ __PACKAGE__->table("expression");
 
 =head2 md5checksum
 
-  data_type: 'character'
+  data_type: 'char'
   is_nullable: 1
   size: 32
 
@@ -55,7 +55,7 @@ __PACKAGE__->add_columns(
   "uniquename",
   { data_type => "text", is_nullable => 0 },
   "md5checksum",
-  { data_type => "character", is_nullable => 1, size => 32 },
+  { data_type => "char", is_nullable => 1, size => 32 },
   "description",
   { data_type => "text", is_nullable => 1 },
 );
@@ -140,8 +140,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:9rOEEushYQT3pWE9KLfqmg
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:gqG7utKODUjwkht6OOuFoQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -28,7 +28,7 @@ __PACKAGE__->table("featuremap");
 
 =head2 name
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -54,7 +54,7 @@ __PACKAGE__->add_columns(
     sequence          => "featuremap_featuremap_id_seq",
   },
   "name",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "description",
   { data_type => "text", is_nullable => 1 },
   "unittype_id",
@@ -133,8 +133,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+wt3iX2Yte10Frl3giTfnA
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:O1wSuW826HpRzmvclfxeJw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

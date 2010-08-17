@@ -20,8 +20,6 @@ L<Bio::Chado::Schema::General::DbDbxrefCount>
 
 L<Bio::Chado::Schema::General::Dbxref>
 
-L<Bio::Chado::Schema::General::Project>
-
 L<Bio::Chado::Schema::General::Tableinfo>
 
 =cut

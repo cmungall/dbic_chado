@@ -31,8 +31,9 @@ __PACKAGE__->table("gff3atts");
 
 =head2 attribute
 
-  data_type: 'character varying'
+  data_type: 'text'
   is_nullable: 1
+  original: {data_type => "varchar"}
 
 =cut
 
@@ -42,12 +43,16 @@ __PACKAGE__->add_columns(
   "type",
   { data_type => "text", is_nullable => 1 },
   "attribute",
-  { data_type => "character varying", is_nullable => 1 },
+  {
+    data_type   => "text",
+    is_nullable => 1,
+    original    => { data_type => "varchar" },
+  },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zQ2/G72siTurZ+l7W4XnHw
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JJEislDK6sjM9BCnejes/w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

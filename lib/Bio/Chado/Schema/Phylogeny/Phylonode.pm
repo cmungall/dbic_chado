@@ -75,7 +75,7 @@ Phylonodes can have optional features attached to them e.g. a protein or nucleot
 
 =head2 label
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -107,7 +107,7 @@ __PACKAGE__->add_columns(
   "feature_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "label",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "distance",
   { data_type => "double precision", is_nullable => 1 },
 );
@@ -310,8 +310,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:GTZL/H9UZnPTZwLK5eX/xw
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Enm9XCEB+9rBuKsK1F1d0A
 
 =head1 NESTEDSET OPERATIONS
 

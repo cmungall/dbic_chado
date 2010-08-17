@@ -69,11 +69,15 @@ L<Bio::Chado::Schema::Mage>
 
 L<Bio::Chado::Schema::Map>
 
+L<Bio::Chado::Schema::NaturalDiversity>
+
 L<Bio::Chado::Schema::Organism>
 
 L<Bio::Chado::Schema::Phenotype>
 
 L<Bio::Chado::Schema::Phylogeny>
+
+L<Bio::Chado::Schema::Project>
 
 L<Bio::Chado::Schema::Pub>
 

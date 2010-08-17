@@ -42,7 +42,7 @@ __PACKAGE__->table("cvtermsynonym");
 
 =head2 synonym
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 0
   size: 1024
 
@@ -68,7 +68,7 @@ __PACKAGE__->add_columns(
   "cvterm_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "synonym",
-  { data_type => "character varying", is_nullable => 0, size => 1024 },
+  { data_type => "varchar", is_nullable => 0, size => 1024 },
   "type_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
@@ -121,8 +121,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:rA+sUR6Oa1UOiRFhxEW7+Q
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ALkCRkJ9vK2LlRMVDxppKw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

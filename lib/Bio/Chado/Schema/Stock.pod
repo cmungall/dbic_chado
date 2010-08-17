@@ -26,6 +26,8 @@ L<Bio::Chado::Schema::Stock::StockPub>
 
 L<Bio::Chado::Schema::Stock::StockRelationship>
 
+L<Bio::Chado::Schema::Stock::StockRelationshipCvterm>
+
 L<Bio::Chado::Schema::Stock::StockRelationshipPub>
 
 L<Bio::Chado::Schema::Stock::Stockcollection>

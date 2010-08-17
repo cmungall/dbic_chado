@@ -119,6 +119,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 nd_experiment_phenotypes
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::NaturalDiversity::NdExperimentPhenotype>
+
+=cut
+
+__PACKAGE__->has_many(
+  "nd_experiment_phenotypes",
+  "Bio::Chado::Schema::NaturalDiversity::NdExperimentPhenotype",
+  { "foreign.phenotype_id" => "self.phenotype_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 assay
 
 Type: belongs_to
@@ -268,8 +283,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xGH+n0wFDPhVT51Y6kxUgA
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zxmEvQ27T0zCIZ3ioPlTgw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

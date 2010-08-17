@@ -47,13 +47,13 @@ Title of part if one of a series.
 
 =head2 volume
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
 =head2 series_name
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -61,19 +61,19 @@ Full name of (journal) series.
 
 =head2 issue
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
 =head2 pyear
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
 =head2 pages
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -81,7 +81,7 @@ Page number range[s], e.g. 457--459, viii + 664pp, lv--lvii.
 
 =head2 miniref
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -106,13 +106,13 @@ The type of the publication (book, journal, poem, graffiti, etc). Uses pub cv.
 
 =head2 publisher
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
 =head2 pubplace
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -131,17 +131,17 @@ __PACKAGE__->add_columns(
   "volumetitle",
   { data_type => "text", is_nullable => 1 },
   "volume",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "series_name",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "issue",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "pyear",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "pages",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "miniref",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "uniquename",
   { data_type => "text", is_nullable => 0 },
   "type_id",
@@ -149,9 +149,9 @@ __PACKAGE__->add_columns(
   "is_obsolete",
   { data_type => "boolean", default_value => \"false", is_nullable => 1 },
   "publisher",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "pubplace",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
 );
 __PACKAGE__->set_primary_key("pub_id");
 __PACKAGE__->add_unique_constraint("pub_c1", ["uniquename"]);
@@ -473,6 +473,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 nd_experiment_pubs
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::NaturalDiversity::NdExperimentPub>
+
+=cut
+
+__PACKAGE__->has_many(
+  "nd_experiment_pubs",
+  "Bio::Chado::Schema::NaturalDiversity::NdExperimentPub",
+  { "foreign.pub_id" => "self.pub_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 phendescs
 
 Type: has_many
@@ -559,6 +574,21 @@ Related object: L<Bio::Chado::Schema::Phylogeny::PhylotreePub>
 __PACKAGE__->has_many(
   "phylotree_pubs",
   "Bio::Chado::Schema::Phylogeny::PhylotreePub",
+  { "foreign.pub_id" => "self.pub_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 project_pubs
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Project::ProjectPub>
+
+=cut
+
+__PACKAGE__->has_many(
+  "project_pubs",
+  "Bio::Chado::Schema::Project::ProjectPub",
   { "foreign.pub_id" => "self.pub_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
@@ -719,6 +749,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 stock_relationship_cvterms
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Stock::StockRelationshipCvterm>
+
+=cut
+
+__PACKAGE__->has_many(
+  "stock_relationship_cvterms",
+  "Bio::Chado::Schema::Stock::StockRelationshipCvterm",
+  { "foreign.pub_id" => "self.pub_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 stock_relationship_pubs
 
 Type: has_many
@@ -750,8 +795,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Uy62/D7GiMjOsplsbacWXw
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:uhp5cphKIeJXfkyTo9X3FQ
 
 =head2 create_pubprops
 

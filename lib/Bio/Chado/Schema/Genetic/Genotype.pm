@@ -48,7 +48,7 @@ typically derived from the features making up the genotype.
 
 =head2 description
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -67,7 +67,7 @@ __PACKAGE__->add_columns(
   "uniquename",
   { data_type => "text", is_nullable => 0 },
   "description",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
 );
 __PACKAGE__->set_primary_key("genotype_id");
 __PACKAGE__->add_unique_constraint("genotype_c1", ["uniquename"]);
@@ -85,6 +85,21 @@ Related object: L<Bio::Chado::Schema::Genetic::FeatureGenotype>
 __PACKAGE__->has_many(
   "feature_genotypes",
   "Bio::Chado::Schema::Genetic::FeatureGenotype",
+  { "foreign.genotype_id" => "self.genotype_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 nd_experiment_genotypes
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::NaturalDiversity::NdExperimentGenotype>
+
+=cut
+
+__PACKAGE__->has_many(
+  "nd_experiment_genotypes",
+  "Bio::Chado::Schema::NaturalDiversity::NdExperimentGenotype",
   { "foreign.genotype_id" => "self.genotype_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
@@ -165,8 +180,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:2B9lshLGzHWyBgbCAsBTfQ
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/TjrozFzjptRGcbXXJZI6Q
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

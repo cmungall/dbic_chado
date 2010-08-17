@@ -36,7 +36,7 @@ __PACKAGE__->table("protein_coding_gene");
 
 =head2 name
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 1
   size: 255
 
@@ -57,7 +57,7 @@ __PACKAGE__->table("protein_coding_gene");
 
 =head2 md5checksum
 
-  data_type: 'character'
+  data_type: 'char'
   is_nullable: 1
   size: 32
 
@@ -78,12 +78,12 @@ __PACKAGE__->table("protein_coding_gene");
 
 =head2 timeaccessioned
 
-  data_type: 'timestamp without time zone'
+  data_type: 'timestamp'
   is_nullable: 1
 
 =head2 timelastmodified
 
-  data_type: 'timestamp without time zone'
+  data_type: 'timestamp'
   is_nullable: 1
 
 =cut
@@ -96,7 +96,7 @@ __PACKAGE__->add_columns(
   "organism_id",
   { data_type => "integer", is_nullable => 1 },
   "name",
-  { data_type => "character varying", is_nullable => 1, size => 255 },
+  { data_type => "varchar", is_nullable => 1, size => 255 },
   "uniquename",
   { data_type => "text", is_nullable => 1 },
   "residues",
@@ -104,7 +104,7 @@ __PACKAGE__->add_columns(
   "seqlen",
   { data_type => "integer", is_nullable => 1 },
   "md5checksum",
-  { data_type => "character", is_nullable => 1, size => 32 },
+  { data_type => "char", is_nullable => 1, size => 32 },
   "type_id",
   { data_type => "integer", is_nullable => 1 },
   "is_analysis",
@@ -112,14 +112,14 @@ __PACKAGE__->add_columns(
   "is_obsolete",
   { data_type => "boolean", is_nullable => 1 },
   "timeaccessioned",
-  { data_type => "timestamp without time zone", is_nullable => 1 },
+  { data_type => "timestamp", is_nullable => 1 },
   "timelastmodified",
-  { data_type => "timestamp without time zone", is_nullable => 1 },
+  { data_type => "timestamp", is_nullable => 1 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:yhiX5a5pf85Zqw9dgAgBdg
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/0llhIyKpSDA4/JPSMHwmQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

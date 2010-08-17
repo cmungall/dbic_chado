@@ -44,7 +44,7 @@ this cvterm belongs.
 
 =head2 name
 
-  data_type: 'character varying'
+  data_type: 'varchar'
   is_nullable: 0
   size: 1024
 
@@ -105,7 +105,7 @@ __PACKAGE__->add_columns(
   "cv_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "name",
-  { data_type => "character varying", is_nullable => 0, size => 1024 },
+  { data_type => "varchar", is_nullable => 0, size => 1024 },
   "definition",
   { data_type => "text", is_nullable => 1 },
   "dbxref_id",
@@ -928,6 +928,156 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 nd_experiments
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::NaturalDiversity::NdExperiment>
+
+=cut
+
+__PACKAGE__->has_many(
+  "nd_experiments",
+  "Bio::Chado::Schema::NaturalDiversity::NdExperiment",
+  { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 nd_experimentprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::NaturalDiversity::NdExperimentprop>
+
+=cut
+
+__PACKAGE__->has_many(
+  "nd_experimentprops",
+  "Bio::Chado::Schema::NaturalDiversity::NdExperimentprop",
+  { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 nd_experiment_stocks
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::NaturalDiversity::NdExperimentStock>
+
+=cut
+
+__PACKAGE__->has_many(
+  "nd_experiment_stocks",
+  "Bio::Chado::Schema::NaturalDiversity::NdExperimentStock",
+  { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 nd_experiment_stockprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::NaturalDiversity::NdExperimentStockprop>
+
+=cut
+
+__PACKAGE__->has_many(
+  "nd_experiment_stockprops",
+  "Bio::Chado::Schema::NaturalDiversity::NdExperimentStockprop",
+  { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 nd_geolocationprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::NaturalDiversity::NdGeolocationprop>
+
+=cut
+
+__PACKAGE__->has_many(
+  "nd_geolocationprops",
+  "Bio::Chado::Schema::NaturalDiversity::NdGeolocationprop",
+  { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 nd_protocolprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::NaturalDiversity::NdProtocolprop>
+
+=cut
+
+__PACKAGE__->has_many(
+  "nd_protocolprops",
+  "Bio::Chado::Schema::NaturalDiversity::NdProtocolprop",
+  { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 nd_protocol_reagents
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::NaturalDiversity::NdProtocolReagent>
+
+=cut
+
+__PACKAGE__->has_many(
+  "nd_protocol_reagents",
+  "Bio::Chado::Schema::NaturalDiversity::NdProtocolReagent",
+  { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 nd_reagents
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::NaturalDiversity::NdReagent>
+
+=cut
+
+__PACKAGE__->has_many(
+  "nd_reagents",
+  "Bio::Chado::Schema::NaturalDiversity::NdReagent",
+  { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 nd_reagentprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::NaturalDiversity::NdReagentprop>
+
+=cut
+
+__PACKAGE__->has_many(
+  "nd_reagentprops",
+  "Bio::Chado::Schema::NaturalDiversity::NdReagentprop",
+  { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 nd_reagent_relationships
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::NaturalDiversity::NdReagentRelationship>
+
+=cut
+
+__PACKAGE__->has_many(
+  "nd_reagent_relationships",
+  "Bio::Chado::Schema::NaturalDiversity::NdReagentRelationship",
+  { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 organismprops
 
 Type: has_many
@@ -1119,6 +1269,36 @@ Related object: L<Bio::Chado::Schema::Phylogeny::Phylotree>
 __PACKAGE__->has_many(
   "phylotrees",
   "Bio::Chado::Schema::Phylogeny::Phylotree",
+  { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 projectprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Project::Projectprop>
+
+=cut
+
+__PACKAGE__->has_many(
+  "projectprops",
+  "Bio::Chado::Schema::Project::Projectprop",
+  { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 project_relationships
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Project::ProjectRelationship>
+
+=cut
+
+__PACKAGE__->has_many(
+  "project_relationships",
+  "Bio::Chado::Schema::Project::ProjectRelationship",
   { "foreign.type_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
@@ -1333,6 +1513,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 stock_relationship_cvterms
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Stock::StockRelationshipCvterm>
+
+=cut
+
+__PACKAGE__->has_many(
+  "stock_relationship_cvterms",
+  "Bio::Chado::Schema::Stock::StockRelationshipCvterm",
+  { "foreign.cvterm_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 studydesignprops
 
 Type: has_many
@@ -1424,8 +1619,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:M5c9qBQOFJrZ3kDHJ9vCQg
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:M/Q3b7kl3CvW712+w2viFA
 
 use Carp;
 

@@ -62,13 +62,13 @@ __PACKAGE__->add_unique_constraint("assay_project_c1", ["assay_id", "project_id"
 
 Type: belongs_to
 
-Related object: L<Bio::Chado::Schema::General::Project>
+Related object: L<Bio::Chado::Schema::Project::Project>
 
 =cut
 
 __PACKAGE__->belongs_to(
   "project",
-  "Bio::Chado::Schema::General::Project",
+  "Bio::Chado::Schema::Project::Project",
   { project_id => "project_id" },
   {
     cascade_copy   => 0,
@@ -101,8 +101,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ICrXV92D2G/Uyf2dkF6uQQ
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:r/4ukUHwDttZObNINNJHDQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

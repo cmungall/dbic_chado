@@ -46,9 +46,10 @@ __PACKAGE__->table("assay");
 
 =head2 assaydate
 
-  data_type: 'timestamp without time zone'
-  default_value: CURRENT_TIMESTAMP
+  data_type: 'timestamp'
+  default_value: current_timestamp
   is_nullable: 1
+  original: {default_value => \"now()"}
 
 =head2 arrayidentifier
 
@@ -98,9 +99,10 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "assaydate",
   {
-    data_type     => "timestamp without time zone",
-    default_value => \"CURRENT_TIMESTAMP",
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
     is_nullable   => 1,
+    original      => { default_value => \"now()" },
   },
   "arrayidentifier",
   { data_type => "text", is_nullable => 1 },
@@ -312,8 +314,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 15:58:15
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:kZ02LWXwvxrMOY7uYXxdeA
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FEzIz5WqOsh/Rq3XcKN71g
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
