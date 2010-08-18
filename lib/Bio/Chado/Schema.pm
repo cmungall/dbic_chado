@@ -92,6 +92,8 @@ Aureliano Bombarely, <ab782@cornell.edu>
 
 Naama Menda, <nm249@cornell.edu>
 
+Jonathan Leto, <leto@cpan.org>
+
 =head1 AUTHOR
 
 Robert Buels, <rmb32@cornell.edu>
