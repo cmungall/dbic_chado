@@ -14,7 +14,7 @@ __PACKAGE__->load_classes;
 # Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:GfcGc0XJeU/0mXXXgJb7FQ
 
-our $VERSION = '0.05801';
+our $VERSION = '0.06001';
 $VERSION = eval $VERSION;
 
 =head1 NAME
@@ -91,6 +91,8 @@ L<Bio::Chado::Schema::Stock>
 Aureliano Bombarely, <ab782@cornell.edu>
 
 Naama Menda, <nm249@cornell.edu>
+
+Jonathan Leto, <leto@cpan.org>
 
 =head1 AUTHOR
 

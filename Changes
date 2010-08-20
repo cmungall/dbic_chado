@@ -1,3 +1,7 @@
+0.06001
+
+ * Corrected missing stuff in the manifest.
+
 0.06000
 
  * Added DBIx::Class::Tree::NestedSet support to for Phylonodes.
