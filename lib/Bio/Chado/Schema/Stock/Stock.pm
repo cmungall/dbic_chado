@@ -318,3 +318,56 @@ __PACKAGE__->has_many(
 
 # You can replace this text with custom content, and it will be preserved on regeneration
 1;
+
+
+=head2 create_stockprops
+
+  Usage: $set->create_stockprops({ baz => 2, foo => 'bar' });
+  Desc : convenience method to create stock properties using stocks
+          from the ontology with the given name
+  Args : hashref of { propname => value, ...},
+         options hashref as:
+          {
+            autocreate => 0,
+               (optional) boolean, if passed, automatically create cv,
+               stock, and dbxref rows if one cannot be found for the
+               given stockprop name.  Default false.
+
+            cv_name => cv.name to use for the given stockprops.
+                       Defaults to 'stock_property',
+
+            db_name => db.name to use for autocreated dbxrefs,
+                       default 'null',
+
+            dbxref_accession_prefix => optional, default
+                                       'autocreated:',
+            definitions => optional hashref of:
+                { stock_name => definition,
+                }
+             to load into the stock table when autocreating stocks
+             
+             rank => force numeric rank. Be careful not to pass ranks that already exist
+                     for the property type. The function will die in such case.
+
+             allow_duplicate_values => default false.
+                If true, allow duplicate instances of the same stock
+                and value in the properties of the stock.  Duplicate
+                values will have different ranks.
+          }
+  Ret  : hashref of { propname => new stockprop object }
+
+=cut
+
+sub create_stockprops {
+    my ($self, $props, $opts) = @_;
+    
+    # process opts
+    $opts->{cv_name} = 'stock_property'
+        unless defined $opts->{cv_name};
+    return Bio::Chado::Schema::Util->create_properties
+        ( properties => $props,
+          options    => $opts,
+          row        => $self,
+          prop_relation_name => 'stockprops',
+        );
+}
