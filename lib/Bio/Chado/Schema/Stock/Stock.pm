@@ -316,10 +316,6 @@ __PACKAGE__->has_many(
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:P/R2qsizqCc4FlZ6sk6+0g
 
 
-# You can replace this text with custom content, and it will be preserved on regeneration
-1;
-
-
 =head2 create_stockprops
 
   Usage: $set->create_stockprops({ baz => 2, foo => 'bar' });
@@ -345,7 +341,7 @@ __PACKAGE__->has_many(
                 { stock_name => definition,
                 }
              to load into the stock table when autocreating stocks
-             
+
              rank => force numeric rank. Be careful not to pass ranks that already exist
                      for the property type. The function will die in such case.
 
@@ -360,7 +356,7 @@ __PACKAGE__->has_many(
 
 sub create_stockprops {
     my ($self, $props, $opts) = @_;
-    
+
     # process opts
     $opts->{cv_name} = 'stock_property'
         unless defined $opts->{cv_name};
@@ -371,3 +367,8 @@ sub create_stockprops {
           prop_relation_name => 'stockprops',
         );
 }
+
+
+# You can replace this text with custom content, and it will be preserved on regeneration
+1;
+
