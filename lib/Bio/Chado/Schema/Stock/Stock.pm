@@ -330,7 +330,7 @@ __PACKAGE__->has_many(
           {
             autocreate => 0,
                (optional) boolean, if passed, automatically create cv,
-               stock, and dbxref rows if one cannot be found for the
+               cvterm, and dbxref rows if one cannot be found for the
                given stockprop name.  Default false.
 
             cv_name => cv.name to use for the given stockprops.
