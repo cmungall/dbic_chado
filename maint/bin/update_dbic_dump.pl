@@ -54,6 +54,9 @@ GetOptions(
 
 $dsn || pod2usage( -msg => 'must provide a --dsn for a suitable test database');
 
+#check that we can connect to our db
+DBI->connect( $dsn, undef, undef, {RaiseError => 1} );
+
 ## check out a new chado schema copy
 $chado_schema_checkout ||= check_out_fresh_chado( $chado_checkout_rev || 'HEAD' );
 -d $chado_schema_checkout or die "no such dir '$chado_schema_checkout'\n";
