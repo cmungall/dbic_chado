@@ -954,7 +954,7 @@ Related object: L<Bio::Chado::Schema::NaturalDiversity::NdExperimentprop>
 __PACKAGE__->has_many(
   "nd_experimentprops",
   "Bio::Chado::Schema::NaturalDiversity::NdExperimentprop",
-  { "foreign.cvterm_id" => "self.cvterm_id" },
+  { "foreign.type_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
@@ -984,7 +984,7 @@ Related object: L<Bio::Chado::Schema::NaturalDiversity::NdExperimentStockprop>
 __PACKAGE__->has_many(
   "nd_experiment_stockprops",
   "Bio::Chado::Schema::NaturalDiversity::NdExperimentStockprop",
-  { "foreign.cvterm_id" => "self.cvterm_id" },
+  { "foreign.type_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
@@ -999,7 +999,7 @@ Related object: L<Bio::Chado::Schema::NaturalDiversity::NdGeolocationprop>
 __PACKAGE__->has_many(
   "nd_geolocationprops",
   "Bio::Chado::Schema::NaturalDiversity::NdGeolocationprop",
-  { "foreign.cvterm_id" => "self.cvterm_id" },
+  { "foreign.type_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
@@ -1014,7 +1014,7 @@ Related object: L<Bio::Chado::Schema::NaturalDiversity::NdProtocolprop>
 __PACKAGE__->has_many(
   "nd_protocolprops",
   "Bio::Chado::Schema::NaturalDiversity::NdProtocolprop",
-  { "foreign.cvterm_id" => "self.cvterm_id" },
+  { "foreign.type_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
@@ -1059,7 +1059,7 @@ Related object: L<Bio::Chado::Schema::NaturalDiversity::NdReagentprop>
 __PACKAGE__->has_many(
   "nd_reagentprops",
   "Bio::Chado::Schema::NaturalDiversity::NdReagentprop",
-  { "foreign.cvterm_id" => "self.cvterm_id" },
+  { "foreign.type_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
@@ -1619,8 +1619,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:M/Q3b7kl3CvW712+w2viFA
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-30 12:25:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:th1FAemAF1QXci65ELYGlQ
 
 use Carp;
 

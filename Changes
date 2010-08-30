@@ -1,3 +1,9 @@
+0.06200
+
+ * removed erroneous duplicate General/Project.pm module
+ * Updated natdiv module from Chado upstream (fixed upstream by nmenda).
+ * Added create_stockprops method to stock module (nmenda).
+
 0.06001
 
  * Corrected missing stuff in the manifest.

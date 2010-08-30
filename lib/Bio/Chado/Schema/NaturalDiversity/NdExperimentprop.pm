@@ -32,7 +32,7 @@ __PACKAGE__->table("nd_experimentprop");
   is_foreign_key: 1
   is_nullable: 0
 
-=head2 cvterm_id
+=head2 type_id
 
   data_type: 'integer'
   is_foreign_key: 1
@@ -62,7 +62,7 @@ __PACKAGE__->add_columns(
   },
   "nd_experiment_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
-  "cvterm_id",
+  "type_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "value",
   { data_type => "varchar", is_nullable => 0, size => 255 },
@@ -72,12 +72,12 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("nd_experimentprop_id");
 __PACKAGE__->add_unique_constraint(
   "nd_experimentprop_c1",
-  ["nd_experiment_id", "cvterm_id", "rank"],
+  ["nd_experiment_id", "type_id", "rank"],
 );
 
 =head1 RELATIONS
 
-=head2 cvterm
+=head2 type
 
 Type: belongs_to
 
@@ -86,9 +86,9 @@ Related object: L<Bio::Chado::Schema::Cv::Cvterm>
 =cut
 
 __PACKAGE__->belongs_to(
-  "cvterm",
+  "type",
   "Bio::Chado::Schema::Cv::Cvterm",
-  { cvterm_id => "cvterm_id" },
+  { cvterm_id => "type_id" },
   {
     cascade_copy   => 0,
     cascade_delete => 0,
@@ -120,8 +120,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6q/dCya64cees4VDPh9C5Q
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-30 12:25:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZMM3+etFC3Zslkt+bp9YvQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

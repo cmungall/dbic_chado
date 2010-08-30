@@ -36,7 +36,7 @@ __PACKAGE__->table("nd_geolocationprop");
   is_foreign_key: 1
   is_nullable: 0
 
-=head2 cvterm_id
+=head2 type_id
 
   data_type: 'integer'
   is_foreign_key: 1
@@ -72,7 +72,7 @@ __PACKAGE__->add_columns(
   },
   "nd_geolocation_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
-  "cvterm_id",
+  "type_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "value",
   { data_type => "varchar", is_nullable => 1, size => 250 },
@@ -82,10 +82,31 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("nd_geolocationprop_id");
 __PACKAGE__->add_unique_constraint(
   "nd_geolocationprop_c1",
-  ["nd_geolocation_id", "cvterm_id", "rank"],
+  ["nd_geolocation_id", "type_id", "rank"],
 );
 
 =head1 RELATIONS
+
+=head2 type
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Cv::Cvterm>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
+);
 
 =head2 nd_geolocation
 
@@ -108,30 +129,9 @@ __PACKAGE__->belongs_to(
   },
 );
 
-=head2 cvterm
 
-Type: belongs_to
-
-Related object: L<Bio::Chado::Schema::Cv::Cvterm>
-
-=cut
-
-__PACKAGE__->belongs_to(
-  "cvterm",
-  "Bio::Chado::Schema::Cv::Cvterm",
-  { cvterm_id => "cvterm_id" },
-  {
-    cascade_copy   => 0,
-    cascade_delete => 0,
-    is_deferrable  => 1,
-    on_delete      => "CASCADE",
-    on_update      => "CASCADE",
-  },
-);
-
-
-# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:UVD3glHB3nrkHT22h2reVA
+# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-30 12:25:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WyFW4cQE8X7leR3qK1GwqQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
