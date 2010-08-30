@@ -319,6 +319,11 @@ Phylonodes support L<DBIx::Class::Tree::NestedSet> operations for
 working with this tree-structured data.  See
 L<DBIx::Class::Tree::NestedSet> for details.
 
+B<CAVEAT:> As of L<DBIx::Class::Tree::NestedSet> 0.07, an important caveat of
+these operations is that they cannot be chained with other resultsets.
+This shortcoming is being addressed at the level of L<DBIx::Class> and
+L<DBIx::Class::Tree::NestedSet> modules.
+
 =cut
 
 __PACKAGE__->load_components(qw( Tree::NestedSet ));
