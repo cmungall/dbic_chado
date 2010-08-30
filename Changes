@@ -1,5 +1,6 @@
 NEXT
 
+ * Updated natdiv module from Chado upstream (fixed upstream by nmenda).
  * Added create_stockprops method to stock module (nmenda).
 
 0.06001
