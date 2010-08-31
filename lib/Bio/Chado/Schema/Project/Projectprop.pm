@@ -32,7 +32,7 @@ __PACKAGE__->table("projectprop");
   is_foreign_key: 1
   is_nullable: 0
 
-=head2 cvterm_id
+=head2 type_id
 
   data_type: 'integer'
   is_foreign_key: 1
@@ -61,7 +61,7 @@ __PACKAGE__->add_columns(
   },
   "project_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
-  "cvterm_id",
+  "type_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "value",
   { data_type => "text", is_nullable => 1 },
@@ -69,7 +69,7 @@ __PACKAGE__->add_columns(
   { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("projectprop_id");
-__PACKAGE__->add_unique_constraint("projectprop_c1", ["project_id", "cvterm_id", "rank"]);
+__PACKAGE__->add_unique_constraint("projectprop_c1", ["project_id", "type_id", "rank"]);
 
 =head1 RELATIONS
 
@@ -105,7 +105,7 @@ Related object: L<Bio::Chado::Schema::Cv::Cvterm>
 __PACKAGE__->belongs_to(
   "cvterm",
   "Bio::Chado::Schema::Cv::Cvterm",
-  { cvterm_id => "cvterm_id" },
+  { cvterm_id => "type_id" },
   {
     cascade_copy   => 0,
     cascade_delete => 0,

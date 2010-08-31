@@ -1284,7 +1284,7 @@ Related object: L<Bio::Chado::Schema::Project::Projectprop>
 __PACKAGE__->has_many(
   "projectprops",
   "Bio::Chado::Schema::Project::Projectprop",
-  { "foreign.cvterm_id" => "self.cvterm_id" },
+  { "foreign.type_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
