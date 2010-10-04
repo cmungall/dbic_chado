@@ -1624,6 +1624,8 @@ __PACKAGE__->has_many(
 
 use Carp;
 
+=head1 ADDITIONAL RELATIONS
+
 =head2 cvtermprops
 
 Type: has_many
@@ -1653,6 +1655,8 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+
+=head1 ADDITIONAL METHODS
 
 =head2 add_synonym
 
