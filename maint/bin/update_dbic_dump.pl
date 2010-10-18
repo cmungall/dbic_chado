@@ -392,6 +392,8 @@ sub _generate_chado_submodule_podfile {
     # keep the POD below indented by 2 spaces to hide it from the CPAN
     # indexer
     my $pod = <<EOF;
+  package Bio::Chado::Schema::$mod_moniker;
+
   =head1 NAME
 
   Bio::Chado::Schema::$mod_moniker $info->{module_comment}
@@ -411,6 +413,8 @@ sub _generate_chado_submodule_podfile {
   $table_pod
 
   =cut
+
+  1;
 EOF
 
     $pod =~ s/^  //g;
