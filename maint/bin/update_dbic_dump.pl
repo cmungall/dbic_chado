@@ -19,7 +19,7 @@ use Getopt::Long;
 use Pod::Usage;
 
 use DBI;
-use DBIx::Class::Schema::Loader qw/ make_schema_at /;
+use DBIx::Class::Schema::Loader 0.07002 qw/ make_schema_at /;
 
 use XML::Twig;
 use Graph::Directed;
