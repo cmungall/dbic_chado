@@ -1,3 +1,8 @@
+{{NEXT}}
+
+ * converted build system to Dist::Zilla
+ * 
+
 0.06200
 
  * removed erroneous duplicate General/Project.pm module

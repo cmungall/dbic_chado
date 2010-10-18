@@ -14,9 +14,6 @@ __PACKAGE__->load_classes;
 # Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:GfcGc0XJeU/0mXXXgJb7FQ
 
-our $VERSION = '0.06200';
-$VERSION = eval $VERSION;
-
 =head1 NAME
 
 Bio::Chado::Schema - standard DBIx::Class layer for the Chado database schema
@@ -40,7 +37,10 @@ L<DBIx::Class>, generated with the help of the very fine
 L<DBIx::Class::Schema::Loader> module.
 
 Chado is an open-source modular database schema for biological data.
-It is divided into several notional "modules", which are reflected in the namespace organization of this package.  Note that modules in the Chado context refers to sets of tables, they are not modules in the Perl sense.
+It is divided into several notional "modules", which are reflected in
+the namespace organization of this package.  Note that modules in the
+Chado context refers to sets of tables, they are not modules in the
+Perl sense.
 
 To learn how to use this DBIx::Class ORM layer, a good starting
 point is the L<DBIx::Class::Manual>.
