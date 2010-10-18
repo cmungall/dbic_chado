@@ -1,3 +1,5 @@
+package Bio::Chado::Schema::Stock;
+
 =head1 NAME
 
 Bio::Chado::Schema::Stock - For tracking stock collections
@@ -41,3 +43,5 @@ L<Bio::Chado::Schema::Stock::Stockprop>
 L<Bio::Chado::Schema::Stock::StockpropPub>
 
 =cut
+
+1;
