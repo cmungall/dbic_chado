@@ -3,7 +3,6 @@ package # hide from PAUSE
 
 use strict;
 use warnings;
-use BCSTest::AuthorCheck;
 use Bio::Chado::Schema;
 
 =head1 NAME
