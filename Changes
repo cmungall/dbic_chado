@@ -2,6 +2,8 @@
 
  * converted build system to Dist::Zilla
  * applied nmenda's type_id corrections from chado trunk
+ * fix permission denied test failure caused by shipping a
+   t/var/BCS.db file by accident
 
 0.06200
 
