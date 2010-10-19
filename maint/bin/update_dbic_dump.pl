@@ -2,7 +2,6 @@
 use strict;
 use warnings;
 
-use English;
 use Carp;
 use FindBin;
 use File::Copy;
