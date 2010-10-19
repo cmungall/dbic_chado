@@ -16,7 +16,7 @@ __PACKAGE__->load_classes;
 
 =head1 NAME
 
-Bio::Chado::Schema - standard DBIx::Class layer for the Chado database schema
+Bio::Chado::Schema - A standard DBIx::Class layer for the Chado database schema.
 
 =head1 SYNOPSIS
 
