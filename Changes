@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+0.06300   2010-10-18 17:38:29 PST8PDT
+
  * converted build system to Dist::Zilla
  * applied nmenda's type_id corrections from chado trunk
  * fix permission denied test failure caused by shipping a
