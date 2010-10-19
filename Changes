@@ -1,7 +1,7 @@
 {{NEXT}}
 
  * converted build system to Dist::Zilla
- * 
+ * applied nmenda's type_id corrections from chado trunk
 
 0.06200
 

@@ -32,7 +32,7 @@ __PACKAGE__->table("projectprop");
   is_foreign_key: 1
   is_nullable: 0
 
-=head2 cvterm_id
+=head2 type_id
 
   data_type: 'integer'
   is_foreign_key: 1
@@ -61,7 +61,7 @@ __PACKAGE__->add_columns(
   },
   "project_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
-  "cvterm_id",
+  "type_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "value",
   { data_type => "text", is_nullable => 1 },
@@ -69,7 +69,7 @@ __PACKAGE__->add_columns(
   { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("projectprop_id");
-__PACKAGE__->add_unique_constraint("projectprop_c1", ["project_id", "cvterm_id", "rank"]);
+__PACKAGE__->add_unique_constraint("projectprop_c1", ["project_id", "type_id", "rank"]);
 
 =head1 RELATIONS
 
@@ -94,7 +94,7 @@ __PACKAGE__->belongs_to(
   },
 );
 
-=head2 cvterm
+=head2 type
 
 Type: belongs_to
 
@@ -103,9 +103,9 @@ Related object: L<Bio::Chado::Schema::Cv::Cvterm>
 =cut
 
 __PACKAGE__->belongs_to(
-  "cvterm",
+  "type",
   "Bio::Chado::Schema::Cv::Cvterm",
-  { cvterm_id => "cvterm_id" },
+  { cvterm_id => "type_id" },
   {
     cascade_copy   => 0,
     cascade_delete => 0,
@@ -116,8 +116,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7z3ASyK/LpuHedgNqpwKQw
+# Created by DBIx::Class::Schema::Loader v0.07002 @ 2010-10-18 16:56:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Z4pIZEJdOqthg42k9Bwenw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

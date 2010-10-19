@@ -1284,7 +1284,7 @@ Related object: L<Bio::Chado::Schema::Project::Projectprop>
 __PACKAGE__->has_many(
   "projectprops",
   "Bio::Chado::Schema::Project::Projectprop",
-  { "foreign.cvterm_id" => "self.cvterm_id" },
+  { "foreign.type_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
@@ -1619,8 +1619,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-30 12:25:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:th1FAemAF1QXci65ELYGlQ
+# Created by DBIx::Class::Schema::Loader v0.07002 @ 2010-10-18 16:56:35
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:9lV2IAUoU3Y+PRmcvBXVMA
 
 use Carp;
 
