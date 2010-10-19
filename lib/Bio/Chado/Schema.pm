@@ -228,8 +228,8 @@ sub create_properties {
         $data->{type_id} = $propterms{$propname}->cvterm_id;
 
 
-	# decide whether to skip creating this prop
-	my $skip_creation = $opts->{allow_duplicate_values}
+      # decide whether to skip creating this prop
+      my $skip_creation = $opts->{allow_duplicate_values}
             ? 0
             : $self->search_related( $prop_relation_name,
                                      { type_id => $data->{type_id},
@@ -240,26 +240,26 @@ sub create_properties {
 
         unless( $skip_creation ) {
             #if rank is defined
-	    if ($opts->{rank} && defined $opts->{rank} ) {
-		my ($existing_prop) = $self->search_related( $prop_relation_name,
-							  {type_id =>$data->{type_id},
-							   rank => $opts->{rank}
-							  });
-		warn "Property " .  $existing_prop->value() . "  already exists with rank " . $opts->{rank} . ". skipping! \n" if  defined $existing_prop;
-		$data->{rank} = $opts->{rank};
-		
-	    } else { 
-		# find highest rank for props of this type
-		my $max_rank= $self->search_related( $prop_relation_name,
-						     { type_id =>$data->{type_id} }
-		    )->get_column('rank')->max;
-		$data->{rank} = defined $max_rank ? $max_rank + 1 : 0;
-		
-	    }
-	    $props{$propname} = $self->find_or_create_related( $prop_relation_name,
-						       $data
-		);
-	}
+          if ($opts->{rank} && defined $opts->{rank} ) {
+            my ($existing_prop) = $self->search_related( $prop_relation_name,
+                                            {type_id =>$data->{type_id},
+                                             rank => $opts->{rank}
+                                            });
+            warn "Property " .  $existing_prop->value() . "  already exists with rank " . $opts->{rank} . ". skipping! \n" if  defined $existing_prop;
+            $data->{rank} = $opts->{rank};
+
+          } else {
+            # find highest rank for props of this type
+            my $max_rank= $self->search_related( $prop_relation_name,
+                                         { type_id =>$data->{type_id} }
+                )->get_column('rank')->max;
+            $data->{rank} = defined $max_rank ? $max_rank + 1 : 0;
+
+          }
+          $props{$propname} = $self->find_or_create_related( $prop_relation_name,
+                                           $data
+            );
+      }
     }
     return \%props;
 }

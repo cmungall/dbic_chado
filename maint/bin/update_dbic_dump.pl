@@ -120,18 +120,18 @@ my $dbh = DBI->connect( $dsn, undef, undef, {RaiseError => 1} );
 # drop all tables from the target database
 {
     local $SIG{__WARN__} = sub {
-	warn @_
-	    unless $_[0] =~ /^NOTICE:\s+drop cascades to/
+      warn @_
+          unless $_[0] =~ /^NOTICE:\s+drop cascades to/
     };
 
     eval { $dbh->do("DROP SCHEMA $_ CASCADE") }
-	for qw(
-	       public
-	       gencode
-	       frange
-	       genetic_code
-	       so
-	      );
+      for qw(
+             public
+             gencode
+             frange
+             genetic_code
+             so
+            );
 };
 $dbh->do('CREATE SCHEMA public');
 $dbh->do('SET search_path=public');
@@ -172,13 +172,13 @@ make_schema_at(
                'Bio::Chado::Schema',
                { dump_directory => $dump_directory,
                  moniker_map => sub { table_moniker( shift, \%db_object_module_membership ) },
-		 overwrite_modifications => 1,
-		 skip_load_external      => 1,
-		 naming                  => 'current',
-		 relationship_attrs      =>
-		 {
-		  all => { cascade_delete => 0, cascade_copy => 0, },
-		 },
+             overwrite_modifications => 1,
+             skip_load_external      => 1,
+             naming                  => 'current',
+             relationship_attrs      =>
+             {
+              all => { cascade_delete => 0, cascade_copy => 0, },
+             },
                },
                [$dsn,undef,undef],
               );
@@ -193,10 +193,10 @@ generate_chado_submodule_pod( \%db_object_module_membership, $md->{module_descri
 # returns a string ModuleMoniker
 sub module_moniker {
     return
-	join '',
-	map ucfirst,
-	split /[\W_]+/,
-	lc shift
+      join '',
+      map ucfirst,
+      split /[\W_]+/,
+      lc shift
 }
 
 # custom moniker-generation function does not try to inflect singular
@@ -206,7 +206,7 @@ sub table_moniker {
     my $table_moniker = join '', map ucfirst, split /[\W_]+/, $table;
 
     my $module_moniker = $db_object_module_membership->{$table}
-	or die "could not find module membership for '$table'";
+      or die "could not find module membership for '$table'";
 
     return $module_moniker.'::'.$table_moniker;
 }
@@ -289,10 +289,10 @@ sub parse_chado_module_metadata {
         my $mod_id = $module->att('id')
             or die "<module> element with no id\n";
 
-	my $mod_description = $module->first_child('description')->text;
-	$mod_description =~ s/^\s*|\s*$//g;
-	$module_descriptions{module_moniker($mod_id)} = $mod_description;
-	
+      my $mod_description = $module->first_child('description')->text;
+      $mod_description =~ s/^\s*|\s*$//g;
+      $module_descriptions{module_moniker($mod_id)} = $mod_description;
+
         $comp_to_modname{$mod_id} = $mod_id;
         $comp_to_modname{$_} = $mod_id
             foreach map $_->att('id'), $module->descendants('component');
@@ -318,9 +318,9 @@ sub parse_chado_module_metadata {
     }
 
     return { graph => $graph,
-	     twigs => \%module_twigs,
-	     modules_dir => $modules_dir,
-	     module_descriptions => \%module_descriptions,
+           twigs => \%module_twigs,
+           modules_dir => $modules_dir,
+           module_descriptions => \%module_descriptions,
            };
 }
 
@@ -333,30 +333,30 @@ sub generate_chado_submodule_pod {
 
     my %module_contents;
     while( my ($table,$module) = each %$db_object_module_membership) {
-	push @{$module_contents{$module}},
-	    table_moniker( $table, $db_object_module_membership );
+      push @{$module_contents{$module}},
+          table_moniker( $table, $db_object_module_membership );
     }
     $_ = [ sort @$_ ] for values %module_contents; #< sort each of the table lists
 
     while (my ($module,$tables) = each %module_contents ) {
-	_generate_chado_submodule_podfile( $module_root,
-					   {
-					       tables => $tables,
-					       module => $module,
-					       module_comment => $descriptions->{$module},
-					   }
-					  );
+      _generate_chado_submodule_podfile( $module_root,
+                                 {
+                                     tables => $tables,
+                                     module => $module,
+                                     module_comment => $descriptions->{$module},
+                                 }
+                                );
     }
 
     # also replace the module list in the Schema.pm file
     my $module_list = join "",
-	map {
-	    "L<Bio::Chado::Schema::".$_.">\n\n"
-	} sort keys %module_contents;
+      map {
+          "L<Bio::Chado::Schema::".$_.">\n\n"
+      } sort keys %module_contents;
 
     my $schema_pm = dir( $module_root )
-	->subdir('Bio')
-	->subdir('Chado')
+      ->subdir('Bio')
+      ->subdir('Chado')
         ->file( "Schema.pm" );
     my $schema_pm_contents = $schema_pm->slurp;
     $schema_pm_contents =~ s/(?<=\=head1 CHADO MODULES COVERED BY THIS PACKAGE\n)([^=]+)(?=\n=)/"\n$module_list"/e;
@@ -367,15 +367,15 @@ sub _generate_chado_submodule_podfile {
     my ( $dump_dir, $info ) = @_;
 
     my $file = dir( $dump_dir )
-	->subdir('Bio')
-	->subdir('Chado')
+      ->subdir('Bio')
+      ->subdir('Chado')
         ->subdir('Schema')
         ->file( "$info->{module}.pod" );
 
     @{ $info->{tables} } or die "no tables in module $info->{module}??";
 
     my $table_pod = join "\n\n", map {
-	"L<Bio::Chado::Schema::".$_.">"
+      "L<Bio::Chado::Schema::".$_.">"
     } @{ $info->{tables} };
 
     $info->{module_comment} &&= "- $info->{module_comment}";

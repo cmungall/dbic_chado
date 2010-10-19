@@ -33,12 +33,12 @@ $schema->txn_do(sub {
     is($cvtermsynonym->cvterm->name, $name, "synonym type test");
     is($cvtermsynonym->type->cv->name, 'synonym_type', "synonym cv name test");
     is($cvtermsynonym->type->dbxref->accession, $type, "synonym dbxref accession test");
-    
-    #try to store the same synonym - should pass since new synonyms are created after passing 
-    ##search_related with type_id and case-insensitive value 
+
+    #try to store the same synonym - should pass since new synonyms are created after passing
+    ##search_related with type_id and case-insensitive value
 
     my $existing_s = $cvterm->add_synonym($synonym, { synonym_type=>$type, autocreate=>1 });
-    
+
     is($cvtermsynonym->cvtermsynonym_id() , $existing_s->cvtermsynonym_id(), "Existing synonym test");
     ##delete the synonym
     $cvterm->delete_synonym($synonym);
@@ -51,25 +51,25 @@ $schema->txn_do(sub {
     $cvterm->add_secondary_dbxref($sec_db.":".$sec_acc);
 
     my ($cvterm_dbxref)= $cvterm->get_secondary_dbxrefs;
-    my ($re_db, $re_acc) = split(  ":" , $cvterm_dbxref); 
+    my ($re_db, $re_acc) = split(  ":" , $cvterm_dbxref);
     is($re_db, $sec_db, "secondary dbxref db name test");
     is($re_acc, $sec_acc, "secondary dbxref accession test");
 
     #and delete the secondary dbxref
-    $cvterm->delete_secondary_dbxref($sec_db.":".$sec_acc);	
+    $cvterm->delete_secondary_dbxref($sec_db.":".$sec_acc);
 
     ($cvterm_dbxref)= $cvterm->get_secondary_dbxrefs;
     is($cvterm_dbxref, undef, "deleted secondary dbxref test");
     is($cvterm->search_related('cvterm_dbxrefs' )->count , 0, "deleted cvterm_dbxref test");
 
-    #create new cvtermprop 
+    #create new cvtermprop
     my $propname= "cvtermprop";
     my $value="value 1";
     my $rank=3;
-    
-    
+
+
     my $href= $cvterm->create_cvtermprops({ $propname => $value} , { autocreate => 1, allow_multiple_values => 1 , rank => $rank } );
-    
+
     my $cvtermprop = $href->{$propname};
     is($cvtermprop->value(), $value, "cvtermprop value test");
     is($cvtermprop->rank() , $rank, "cvtermprop rank test");
