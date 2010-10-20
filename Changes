@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+0.06301   2010-10-19 17:49:41 PST8PDT
+
  * corrected missing DBIx::Class::Tree::NestedSet dep
 
 0.06300   2010-10-18 17:38:29 PST8PDT
