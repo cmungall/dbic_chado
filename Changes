@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+ * corrected homepage url in CPAN upload
+
 0.06301   2010-10-19 17:49:41 PST8PDT
 
  * corrected missing DBIx::Class::Tree::NestedSet dep
