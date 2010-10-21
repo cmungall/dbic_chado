@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+ * added naama's stock_dbxrefprop from upstream chado
+
 0.06302   2010-10-20 09:58:19 PST8PDT
 
  * corrected homepage url in CPAN upload

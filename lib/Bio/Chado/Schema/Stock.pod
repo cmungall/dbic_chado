@@ -22,6 +22,8 @@ L<Bio::Chado::Schema::Stock::StockCvterm>
 
 L<Bio::Chado::Schema::Stock::StockDbxref>
 
+L<Bio::Chado::Schema::Stock::StockDbxrefprop>
+
 L<Bio::Chado::Schema::Stock::StockGenotype>
 
 L<Bio::Chado::Schema::Stock::StockPub>
