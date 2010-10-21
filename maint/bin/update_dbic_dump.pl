@@ -220,7 +220,7 @@ sub load_sql {
     foreach my $f (@source_files) {
         warn "loading $f\n";
         open my $s, '<', $f or die "$! opening $f\n";
-        local $INPUT_RECORD_SEPARATOR;
+        local $/;
         my $sql = <$s>;
         local $dbh->{Warn} = 0;
         $dbh->do( $sql );
@@ -255,7 +255,7 @@ sub check_out_fresh_chado {
     my $chado_svn_path = 'https://gmod.svn.sourceforge.net/svnroot/gmod/schema/trunk/chado';
     my $tempdir = tempdir(dir(tmpdir(),'update-dbic-dump-XXXXXX')->stringify, CLEANUP => 1);
     system "cd $tempdir && svn export -r $chado_version $chado_svn_path/modules && svn export -r $chado_version $chado_svn_path/chado-module-metadata.xml";
-    $CHILD_ERROR and die "svn export failed";
+    $? and die "svn export failed";
 
     return "$tempdir";
 }
