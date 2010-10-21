@@ -14,12 +14,9 @@ __PACKAGE__->load_classes;
 # Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:GfcGc0XJeU/0mXXXgJb7FQ
 
-our $VERSION = '0.06200';
-$VERSION = eval $VERSION;
-
 =head1 NAME
 
-Bio::Chado::Schema - standard DBIx::Class layer for the Chado database schema
+Bio::Chado::Schema - A standard DBIx::Class layer for the Chado database schema.
 
 =head1 SYNOPSIS
 
@@ -40,7 +37,10 @@ L<DBIx::Class>, generated with the help of the very fine
 L<DBIx::Class::Schema::Loader> module.
 
 Chado is an open-source modular database schema for biological data.
-It is divided into several notional "modules", which are reflected in the namespace organization of this package.  Note that modules in the Chado context refers to sets of tables, they are not modules in the Perl sense.
+It is divided into several notional "modules", which are reflected in
+the namespace organization of this package.  Note that modules in the
+Chado context refers to sets of tables, they are not modules in the
+Perl sense.
 
 To learn how to use this DBIx::Class ORM layer, a good starting
 point is the L<DBIx::Class::Manual>.
@@ -228,8 +228,8 @@ sub create_properties {
         $data->{type_id} = $propterms{$propname}->cvterm_id;
 
 
-	# decide whether to skip creating this prop
-	my $skip_creation = $opts->{allow_duplicate_values}
+      # decide whether to skip creating this prop
+      my $skip_creation = $opts->{allow_duplicate_values}
             ? 0
             : $self->search_related( $prop_relation_name,
                                      { type_id => $data->{type_id},
@@ -240,26 +240,26 @@ sub create_properties {
 
         unless( $skip_creation ) {
             #if rank is defined
-	    if ($opts->{rank} && defined $opts->{rank} ) {
-		my ($existing_prop) = $self->search_related( $prop_relation_name,
-							  {type_id =>$data->{type_id},
-							   rank => $opts->{rank}
-							  });
-		warn "Property " .  $existing_prop->value() . "  already exists with rank " . $opts->{rank} . ". skipping! \n" if  defined $existing_prop;
-		$data->{rank} = $opts->{rank};
-		
-	    } else { 
-		# find highest rank for props of this type
-		my $max_rank= $self->search_related( $prop_relation_name,
-						     { type_id =>$data->{type_id} }
-		    )->get_column('rank')->max;
-		$data->{rank} = defined $max_rank ? $max_rank + 1 : 0;
-		
-	    }
-	    $props{$propname} = $self->find_or_create_related( $prop_relation_name,
-						       $data
-		);
-	}
+          if ($opts->{rank} && defined $opts->{rank} ) {
+            my ($existing_prop) = $self->search_related( $prop_relation_name,
+                                            {type_id =>$data->{type_id},
+                                             rank => $opts->{rank}
+                                            });
+            warn "Property " .  $existing_prop->value() . "  already exists with rank " . $opts->{rank} . ". skipping! \n" if  defined $existing_prop;
+            $data->{rank} = $opts->{rank};
+
+          } else {
+            # find highest rank for props of this type
+            my $max_rank= $self->search_related( $prop_relation_name,
+                                         { type_id =>$data->{type_id} }
+                )->get_column('rank')->max;
+            $data->{rank} = defined $max_rank ? $max_rank + 1 : 0;
+
+          }
+          $props{$propname} = $self->find_or_create_related( $prop_relation_name,
+                                           $data
+            );
+      }
     }
     return \%props;
 }

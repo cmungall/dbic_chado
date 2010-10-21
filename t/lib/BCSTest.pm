@@ -3,7 +3,6 @@ package # hide from PAUSE
 
 use strict;
 use warnings;
-use BCSTest::AuthorCheck;
 use Bio::Chado::Schema;
 
 =head1 NAME
@@ -15,7 +14,7 @@ BCSTest - Library to be used by Bio::Chado::Schema test scripts.
   use lib qw(t/lib);
   use BCSTest;
   use Test::More;
-  
+
   my $schema = BCSTest->init_schema();
 
 =head1 DESCRIPTION
@@ -35,13 +34,13 @@ This module provides the basic utilities to write tests against Bio::Chado::Sche
     },
   );
 
-This method removes the test SQLite database in t/var/DBIxClass.db 
+This method removes the test SQLite database in t/var/DBIxClass.db
 and then creates a new, empty database.
 
-This method will call deploy_schema() by default, unless the 
+This method will call deploy_schema() by default, unless the
 no_deploy flag is set.
 
-Also, by default, this method will call populate_schema() by 
+Also, by default, this method will call populate_schema() by
 default, unless the no_deploy or no_populate flags are set.
 
 =cut
@@ -113,10 +112,10 @@ sub init_schema {
 
   BCSTest->deploy_schema( $schema );
 
-This method does one of two things to the schema.  It can either call 
-the experimental $schema->deploy() if the BCSTEST_SQLT_DEPLOY environment 
-variable is set, otherwise the default is to read in the t/lib/sqlite.sql 
-file and execute the SQL within. Either way you end up with a fresh set 
+This method does one of two things to the schema.  It can either call
+the experimental $schema->deploy() if the BCSTEST_SQLT_DEPLOY environment
+variable is set, otherwise the default is to read in the t/lib/sqlite.sql
+file and execute the SQL within. Either way you end up with a fresh set
 of tables for testing.
 
 =cut
@@ -134,7 +133,7 @@ sub deploy_schema {
 
   BCSTest->populate_schema( $schema );
 
-After you deploy your schema you can use this method to populate 
+After you deploy your schema you can use this method to populate
 the tables with test data.
 
 =cut

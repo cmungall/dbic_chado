@@ -1,3 +1,24 @@
+{{$NEXT}}
+
+0.06400   2010-10-20 20:54:37 PST8PDT
+
+ * added naama's stock_dbxrefprop from upstream chado
+
+0.06302   2010-10-20 09:58:19 PST8PDT
+
+ * corrected homepage url in CPAN upload
+
+0.06301   2010-10-19 17:49:41 PST8PDT
+
+ * corrected missing DBIx::Class::Tree::NestedSet dep
+
+0.06300   2010-10-18 17:38:29 PST8PDT
+
+ * converted build system to Dist::Zilla
+ * applied nmenda's type_id corrections from chado trunk
+ * fix permission denied test failure caused by shipping a
+   t/var/BCS.db file by accident
+
 0.06200
 
  * removed erroneous duplicate General/Project.pm module
