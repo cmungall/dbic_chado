@@ -74,5 +74,24 @@ $schema->txn_do(sub {
     is($cvtermprop->value(), $value, "cvtermprop value test");
     is($cvtermprop->rank() , $rank, "cvtermprop rank test");
     #
+    
+    #add another term
+
+    # create cvterm_relationship 
+
+    # populate cvtermpath
+    
+    #find the root. For this we'll have to popoulate cvterm_relationship and cvtermpath 
+    #my $root_name ;
+    #my $root = $cvterm->get_root();
+    #is($root->name , $root_name , "cvterm get_root test");
+    
+    # find all children
+
+    # find all parents 
+
+    
     $schema->txn_rollback;
 });
+
+
