@@ -193,7 +193,7 @@ __PACKAGE__->has_many(
                 { cvterm_name => definition,
                 }
              to load into the cvterm table when autocreating cvterms
-             
+
              rank => force numeric rank. Be careful not to pass ranks that already exist
                      for the property type. The function will die in such case.
 
@@ -208,7 +208,7 @@ __PACKAGE__->has_many(
 
 sub create_projectprops {
     my ($self, $props, $opts) = @_;
-    
+
     # process opts
     $opts->{cv_name} = 'project_property'
         unless defined $opts->{cv_name};

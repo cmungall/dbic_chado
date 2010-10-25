@@ -1974,20 +1974,20 @@ sub create_cvtermprops {
 =head2 get_root
 
  Usage: $self->get_root
- Desc:  find the root cvterm 
+ Desc:  find the root cvterm
  Ret:   Cvterm object
- Args:  none 
- Side Effects: none 
+ Args:  none
+ Side Effects: none
  Example:
 
 =cut
 
 sub get_root {
     my $self=shift;
-    my $root = $self->search_related('cvtermpath_subjects' , {} , { 
+    my $root = $self->search_related('cvtermpath_subjects' , {} , {
 	order_by => { -desc => 'pathdistance'}, rows=>1})->single
 	    ->find_related('subject') ;
-    
+
     return $root;
 }
 
@@ -1995,7 +1995,7 @@ sub get_root {
 
  Usage: $self->children
  Desc:  find the direct children of the cvterm
- Ret:   L<Bio::Chado::Schema::Cv::CvtermRelationship> resultset of the fetched child terms (this can be used in your program to find the relationship type id of each child term) 
+ Ret:   L<Bio::Chado::Schema::Cv::CvtermRelationship> resultset of the fetched child terms (this can be used in your program to find the relationship type id of each child term)
   Args:  none
  Side Effects: none
  Example:
@@ -2006,7 +2006,7 @@ sub children {
     my $self = shift;
     my $children = $self->search_related('cvterm_relationship_subjects', {} );
     return $children;
-   
+
     #the same using cvtermpath
     #$children = $self->search_related('cvtermpath_objects' , {} , {
     #pathdistance => 1 ,  }
@@ -2016,9 +2016,9 @@ sub children {
 =head2 recursive_children
 
  Usage: $self->recursive_children
- Desc:   find all the descendants of the cvterm (children, children of children, and so on) 
+ Desc:   find all the descendants of the cvterm (children, children of children, and so on)
  Ret: L<Bio::Chado::Schema::Cv::Cvterm> resultset
- Args: none 
+ Args: none
  Side Effects: none
  Example:
 
@@ -2034,10 +2034,10 @@ sub recursive_children {
 =head2 parents
 
  Usage: my $self->parents
- Desc:  Find the direct parents of the cvterm 
- Ret:  L<Bio::Chado::Schema::Cv::CvtermRelationship> resultset of the parent terms   
- Args:  none 
- Side Effects: none 
+ Desc:  Find the direct parents of the cvterm
+ Ret:  L<Bio::Chado::Schema::Cv::CvtermRelationship> resultset of the parent terms
+ Args:  none
+ Side Effects: none
  Example:
 
 =cut
@@ -2051,10 +2051,10 @@ sub parents {
 
 =head2 recursive_parents
 
- Usage: $self->recursive_parents 
- Desc:   find all the ancestors of the cvterm (parents, parents of parents, and so on) 
+ Usage: $self->recursive_parents
+ Desc:   find all the ancestors of the cvterm (parents, parents of parents, and so on)
  Ret: L<Bio::Chado::Schema::Cv::Cvterm> resultset
- Args: none 
+ Args: none
  Side Effects: none
  Example:
 

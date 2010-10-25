@@ -240,7 +240,7 @@ __PACKAGE__->has_many(
 
 
 =head2 create_nd_experimentprops
-    
+
   Usage: $set->create_nd_experimentprops({ baz => 2, foo => 'bar' });
   Desc : convenience method to create experiment properties using cvterms
           from the ontology with the given name
