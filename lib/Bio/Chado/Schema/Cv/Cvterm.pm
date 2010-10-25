@@ -1971,22 +1971,28 @@ sub create_cvtermprops {
 }
 
 
-=head2 get_root
+=head2 root
 
- Usage: $self->get_root
+ Usage: $self->root
  Desc:  find the root cvterm
  Ret:   Cvterm object
  Args:  none
- Side Effects: none
- Example:
+
+NOTE: This method requires that your C<cvtermpath> table is populated.
 
 =cut
 
-sub get_root {
-    my $self=shift;
-    my $root = $self->search_related('cvtermpath_subjects' , {} , {
-      order_by => { -desc => 'pathdistance'}, rows=>1})->single
-          ->find_related('subject') ;
+sub root {
+    my $self = shift;
+    my $root = $self->search_related('cvtermpath_subjects',
+                                     {} ,
+                                     {
+                                       order_by => { -desc => 'pathdistance'},
+                                       rows     => 1,
+                                     }
+                                    )
+                    ->single
+                    ->find_related('subject');
 
     return $root;
 }
