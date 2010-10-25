@@ -63,12 +63,11 @@ $schema->txn_do(sub {
     is($cvterm->search_related('cvterm_dbxrefs' )->count , 0, "deleted cvterm_dbxref test");
 
     #create new cvtermprop
-    my $propname= "cvtermprop";
-    my $value="value 1";
-    my $rank=3;
+    my $propname = "cvtermprop";
+    my $value = "value 1";
+    my $rank = 3;
 
-
-    my $href= $cvterm->create_cvtermprops({ $propname => $value} , { autocreate => 1, allow_multiple_values => 1 , rank => $rank } );
+    my $href = $cvterm->create_cvtermprops({ $propname => $value} , { autocreate => 1, allow_multiple_values => 1 , rank => $rank } );
 
     my $cvtermprop = $href->{$propname};
     is($cvtermprop->value(), $value, "cvtermprop value test");

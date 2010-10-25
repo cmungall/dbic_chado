@@ -2001,40 +2001,46 @@ sub root {
 
  Usage: $self->children
  Desc:  find the direct children of the cvterm
- Ret:   L<Bio::Chado::Schema::Cv::CvtermRelationship> resultset of the fetched child terms (this can be used in your program to find the relationship type id of each child term)
-  Args:  none
- Side Effects: none
- Example:
+
+ Ret: L<Bio::Chado::Schema::Cv::CvtermRelationship> resultset of the
+      fetched child terms (this can be used in your program to find the
+       relationship type id of each child term)
+ Args:  none
 
 =cut
 
 sub children {
-    my $self = shift;
-    my $children = $self->search_related('cvterm_relationship_subjects', {} );
-    return $children;
-
-    #the same using cvtermpath
-    #$children = $self->search_related('cvtermpath_objects' , {} , {
-    #pathdistance => 1 ,  }
-    #);
+    shift->search_related('cvterm_relationship_subjects');
 }
+
+#the same using cvtermpath
+# return $self->search_related('cvtermpath_objects' , undef , {
+#pathdistance => 1 ,  }
+#);
 
 =head2 recursive_children
 
  Usage: $self->recursive_children
  Desc:   find all the descendants of the cvterm (children, children of children, and so on)
- Ret: L<Bio::Chado::Schema::Cv::Cvterm> resultset
+ Ret: a DBIC resultset of L<Bio::Chado::Schema::Cv::Cvterm>
  Args: none
  Side Effects: none
- Example:
+
+NOTE: This method requires that your C<cvtermpath> table is populated.
 
 =cut
 
 sub recursive_children {
     my $self = shift;
-    my $children = $self->search_related('cvtermpath_objects' , {} , {
-      pathdistance => { '<' =>  0 } , } )->search_related('object', {} );
-    return $children;
+    return
+        $self->search_related(
+            'cvtermpath_objects',
+            undef,
+            {
+                pathdistance => { '<' =>  0 },
+            }
+           )
+            ->search_related('object');
 }
 
 =head2 parents
@@ -2044,13 +2050,12 @@ sub recursive_children {
  Ret:  L<Bio::Chado::Schema::Cv::CvtermRelationship> resultset of the parent terms
  Args:  none
  Side Effects: none
- Example:
 
 =cut
 
 sub parents {
     my $self= shift;
-    my $parents = $self->search_related('cvterm_relationship_objects', {} );
+    my $parents = $self->search_related( 'cvterm_relationship_objects' );
     return $parents;
 }
 
@@ -2068,8 +2073,14 @@ sub parents {
 
 sub recursive_parents {
     my $self = shift;
-    my $parents = $self->search_related('cvtermpath_objects' , {} , {
-      pathdistance => { '>' =>  0 } , } )->search_related('subject', {} );
+    return
+       $self->search_related(
+           'cvtermpath_objects',
+           undef,
+           {
+               pathdistance => { '>' =>  0 } ,
+           }
+          )->search_related( 'subject' );
     return $parents;
 }
 
