@@ -1985,8 +1985,8 @@ sub create_cvtermprops {
 sub get_root {
     my $self=shift;
     my $root = $self->search_related('cvtermpath_subjects' , {} , {
-	order_by => { -desc => 'pathdistance'}, rows=>1})->single
-	    ->find_related('subject') ;
+      order_by => { -desc => 'pathdistance'}, rows=>1})->single
+          ->find_related('subject') ;
 
     return $root;
 }
@@ -2027,7 +2027,7 @@ sub children {
 sub recursive_children {
     my $self = shift;
     my $children = $self->search_related('cvtermpath_objects' , {} , {
-	pathdistance => { '<' =>  0 } , } )->search_related('object', {} );
+      pathdistance => { '<' =>  0 } , } )->search_related('object', {} );
     return $children;
 }
 
@@ -2063,7 +2063,7 @@ sub parents {
 sub recursive_parents {
     my $self = shift;
     my $parents = $self->search_related('cvtermpath_objects' , {} , {
-	pathdistance => { '>' =>  0 } , } )->search_related('subject', {} );
+      pathdistance => { '>' =>  0 } , } )->search_related('subject', {} );
     return $parents;
 }
 
