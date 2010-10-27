@@ -2081,7 +2081,6 @@ sub recursive_parents {
                pathdistance => { '>' =>  0 } ,
            }
           )->search_related( 'subject' );
-    return $parents;
 }
 
 ############ CVTERM CUSTOM RESULTSET PACKAGE #############################
