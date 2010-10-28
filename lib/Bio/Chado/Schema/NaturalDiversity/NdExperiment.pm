@@ -129,31 +129,31 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 nd_experiment_genotype
+=head2 nd_experiment_genotypes
 
-Type: might_have
+Type: has_many
 
 Related object: L<Bio::Chado::Schema::NaturalDiversity::NdExperimentGenotype>
 
 =cut
 
-__PACKAGE__->might_have(
-  "nd_experiment_genotype",
+__PACKAGE__->has_many(
+  "nd_experiment_genotypes",
   "Bio::Chado::Schema::NaturalDiversity::NdExperimentGenotype",
   { "foreign.nd_experiment_id" => "self.nd_experiment_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 nd_experiment_phenotype
+=head2 nd_experiment_phenotypes
 
-Type: might_have
+Type: has_many
 
 Related object: L<Bio::Chado::Schema::NaturalDiversity::NdExperimentPhenotype>
 
 =cut
 
-__PACKAGE__->might_have(
-  "nd_experiment_phenotype",
+__PACKAGE__->has_many(
+  "nd_experiment_phenotypes",
   "Bio::Chado::Schema::NaturalDiversity::NdExperimentPhenotype",
   { "foreign.nd_experiment_id" => "self.nd_experiment_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -235,8 +235,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:H4F2iw3eRmVfBOU+Ncb3Ew
+# Created by DBIx::Class::Schema::Loader v0.07002 @ 2010-10-28 03:52:24
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:2u5pTTWEf2F86gyZbHTrBg
 
 
 =head2 create_nd_experimentprops
