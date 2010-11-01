@@ -253,7 +253,7 @@ __PACKAGE__->has_many(
                given experimentprop name.  Default false.
 
             cv_name => cv.name to use for the given experimentprops.
-                       Defaults to 'stock_property',
+                       Defaults to 'nd_experiment_property',
 
             db_name => db.name to use for autocreated dbxrefs,
                        default 'null',
