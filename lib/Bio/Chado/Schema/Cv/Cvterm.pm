@@ -2038,7 +2038,6 @@ sub direct_children {
             } )->search_related('object');
 }
 
-
 #the same using cvtermpath
 # return $self->search_related('cvtermpath_objects' , undef , {
 #pathdistance => 1 ,  }

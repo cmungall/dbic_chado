@@ -112,34 +112,25 @@ $schema->txn_do(sub {
                                 } );
 
     # populate cvtermpath
-    $child_term->create_related('cvtermpath_subjects', {
-        object_id => $cvterm->cvterm_id,
-        type_id => $is_a->cvterm_id,
-        cv_id => $cvterm->cv_id,
-        pathdistance => 2 });
-
+ 
     $grandchild_term->create_related('cvtermpath_subjects', {
         object_id => $child_term->cvterm_id,
         type_id => $is_a->cvterm_id,
         cv_id => $cvterm->cv_id,
         pathdistance => 1 });
+    #########
     $grandchild_term->create_related('cvtermpath_subjects', {
         object_id => $cvterm->cvterm_id,
         type_id => $is_a->cvterm_id,
         cv_id => $cvterm->cv_id,
         pathdistance => 2 });
-
+    #########
     $child_term->create_related('cvtermpath_subjects', {
-        object_id => $cvterm->cvterm_id,
-        type_id => $is_a->cvterm_id,
-        cv_id => $cvterm->cv_id,
-        pathdistance => -1 });
-    $cvterm->create_related('cvtermpath_subjects', {
         object_id => $grandchild_term->cvterm_id,
         type_id => $is_a->cvterm_id,
         cv_id => $cvterm->cv_id,
-        pathdistance => -2 });
-
+        pathdistance => -1 });
+ 
     #find the root.
     my $root_name = $name;
     my $root = $grandchild_term->root();
@@ -147,20 +138,20 @@ $schema->txn_do(sub {
 
     #find  children
     my $children_rs = $cvterm->children;
-    my $child1 = $children_rs->next->find_related('subject', {});
+    my $child1 = $children_rs->first->find_related('subject', {});
     is ($child1->name , $child_name , 'cvterm find children test');
     # now using the cvtermpath
     my $direct_children = $cvterm->direct_children;
-    is ($direct_children->next->name , $child_name , 'cvterm direct_children test');
+    is ($direct_children->first->name , $child_name , 'cvterm direct_children test');
 
     # find  parents
     my $parents_rs = $child_term->parents;
-    my $parent1 = $parents_rs->next->find_related('object' , {} );
+    my $parent1 = $parents_rs->first->find_related('object' , {} );
     is ($parent1->name , $name, 'cvterm find  parents test');
 
      # now using the cvtermpath
-    my $direct_parents = $child_term->direct_parents;
-    is ($direct_parents->next->name , $name , 'cvterm direct_parents test');
+    my $direct_parents = $child_term->direct_parents->first;
+    is ($direct_parents->name , $name , 'cvterm direct_parents test');
 
 
     #find recursive children
