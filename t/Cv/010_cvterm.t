@@ -5,7 +5,7 @@ use warnings;
 use FindBin;
 use lib "$FindBin::RealBin/../lib";
 
-use Test::More tests => 16;
+use Test::More tests => 23;
 use Test::Exception;
 use BCSTest;
 
@@ -75,21 +75,103 @@ $schema->txn_do(sub {
     #
 
     #add another term
+    my $child_name = 'test child term';
+    my $child_term = $cvterm_rs->create_with({ name => $child_name, cv => $cvname });
+
+    my $is_a = $cvterm_rs->create_with( { name => 'IS_A' , cv => 'relationship'} );
+    $is_a->is_relationshiptype(1);
+    $is_a->update;
 
     # create cvterm_relationship
+    $cvterm->create_related('cvterm_relationship_objects', {
+        subject_id => $child_term->cvterm_id,
+        type_id => $is_a->cvterm_id,
+                            } );
 
     # populate cvtermpath
+    $child_term->create_related('cvtermpath_subjects', {
+        object_id => $cvterm->cvterm_id,
+        type_id => $is_a->cvterm_id,
+        cv_id => $cvterm->cv_id,
+        pathdistance => 1 });
 
-    #find the root. For this we'll have to popoulate cvterm_relationship and cvtermpath
-    #my $root_name ;
-    #my $root = $cvterm->get_root();
-    #is($root->name , $root_name , "cvterm get_root test");
+    $cvterm->create_related('cvtermpath_subjects' , {
+        object_id => $child_term->cvterm_id,
+        type_id => $is_a->cvterm_id,
+        cv_id => $cvterm->cv_id,
+        pathdistance => -1 } );
 
-    # find all children
+    #and add a child to the child term
+    my $grandchild_name = 'test grandchild term';
+    my $grandchild_term = $cvterm_rs->create_with({ name => $grandchild_name, cv => $cvname });
 
-    # find all parents
+    # create cvterm_relationship
+    $child_term->create_related('cvterm_relationship_objects', {
+        subject_id => $grandchild_term->cvterm_id,
+        type_id => $is_a->cvterm_id,
+                                } );
+
+    # populate cvtermpath
+    $child_term->create_related('cvtermpath_subjects', {
+        object_id => $cvterm->cvterm_id,
+        type_id => $is_a->cvterm_id,
+        cv_id => $cvterm->cv_id,
+        pathdistance => 2 });
+
+    $grandchild_term->create_related('cvtermpath_subjects', {
+        object_id => $child_term->cvterm_id,
+        type_id => $is_a->cvterm_id,
+        cv_id => $cvterm->cv_id,
+        pathdistance => 1 });
+    $grandchild_term->create_related('cvtermpath_subjects', {
+        object_id => $cvterm->cvterm_id,
+        type_id => $is_a->cvterm_id,
+        cv_id => $cvterm->cv_id,
+        pathdistance => 2 });
+
+    $child_term->create_related('cvtermpath_subjects', {
+        object_id => $cvterm->cvterm_id,
+        type_id => $is_a->cvterm_id,
+        cv_id => $cvterm->cv_id,
+        pathdistance => -1 });
+    $cvterm->create_related('cvtermpath_subjects', {
+        object_id => $grandchild_term->cvterm_id,
+        type_id => $is_a->cvterm_id,
+        cv_id => $cvterm->cv_id,
+        pathdistance => -2 });
+
+    #find the root.
+    my $root_name = $name;
+    my $root = $grandchild_term->root();
+    is($root->name , $root_name , "cvterm  find root test");
+
+    #find  children
+    my $children_rs = $cvterm->children;
+    my $child1 = $children_rs->next->find_related('subject', {});
+    is ($child1->name , $child_name , 'cvterm find children test');
+    # now using the cvtermpath
+    my $direct_children = $cvterm->direct_children;
+    is ($direct_children->next->name , $child_name , 'cvterm direct_children test');
+
+    # find  parents
+    my $parents_rs = $child_term->parents;
+    my $parent1 = $parents_rs->next->find_related('object' , {} );
+    is ($parent1->name , $name, 'cvterm find  parents test');
+
+     # now using the cvtermpath
+    my $direct_parents = $child_term->direct_parents;
+    is ($direct_parents->next->name , $name , 'cvterm direct_parents test');
 
 
+    #find recursive children
+    my @children = $cvterm->recursive_children->all;
+    foreach my $ch (@children) { print "child =" .  $ch->name . "\n"; }
+    is(scalar(@children) , 2, 'recursive_children test' );
+
+    #find recursive parents
+    my @parents = $grandchild_term->recursive_parents->all;
+    foreach my $p (@parents ) { print "parent = " . $p->name . "\n"; }
+    is(scalar(@parents) , 2, 'recursive_parents test');
     $schema->txn_rollback;
 });
 

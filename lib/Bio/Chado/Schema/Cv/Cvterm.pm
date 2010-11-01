@@ -1981,6 +1981,10 @@ sub create_cvtermprops {
 NOTE: This method requires that your C<cvtermpath> table is populated.
 
 =cut
+#SELECT distinct(cvtermpath.object_id 
+#                       FROM cvtermpath 
+#                       JOIN cvterm ON (cvtermpath.object_id = cvterm_id) 
+#                       WHERE cvtermpath.subject_id =? AND cvterm.is_obsolete=0 AND pathdistance>0
 
 sub root {
     my $self = shift;
@@ -1992,7 +1996,7 @@ sub root {
                                      }
                                     )
                     ->single
-                    ->find_related('subject');
+                    ->find_related('object' , {});
 
     return $root;
 }
@@ -2010,8 +2014,30 @@ sub root {
 =cut
 
 sub children {
-    shift->search_related('cvterm_relationship_subjects');
+    shift->search_related('cvterm_relationship_objects');
 }
+
+=head2 direct_children
+
+ Usage: $self->direct_children
+ Desc:  find only the direct children of your term
+ Ret:   L<Bio::Chado::Schema::Cv::Cvterm>
+ Args:  none
+ Side Effects: none
+ Example:
+
+=cut
+
+sub direct_children {
+    my $self = shift;
+    return
+        $self->search_related (
+            'cvtermpath_subjects',
+            {
+                pathdistance => { '<' =>  0 },
+            } )->search_related('object');
+}
+
 
 #the same using cvtermpath
 # return $self->search_related('cvtermpath_objects' , undef , {
@@ -2035,13 +2061,12 @@ sub recursive_children {
     return
         $self->search_related(
             'cvtermpath_objects',
-            undef,
             {
-                pathdistance => { '<' =>  0 },
+                pathdistance => { '>' =>  0 },
             }
-           )
-            ->search_related('object');
+        )->search_related('subject');
 }
+
 
 =head2 parents
 
@@ -2054,11 +2079,29 @@ sub recursive_children {
 =cut
 
 sub parents {
-    my $self= shift;
-    my $parents = $self->search_related( 'cvterm_relationship_objects' );
-    return $parents;
+    shift->search_related('cvterm_relationship_subjects');
 }
 
+=head2 direct_parents
+
+ Usage: $self->direct_parents
+ Desc:  get only the direct parents of the cvterm (from the cvtermpath)
+ Ret:   L<Bio::Chado::Schema::Cv::Cvterm>
+ Args:  none
+ Side Effects: none
+ Example:
+
+=cut
+
+sub direct_parents {
+    my $self = shift;
+    return
+        $self->search_related(
+            'cvtermpath_objects',
+            {
+                pathdistance => { '<' => 0 } ,
+            } )->search_related( 'subject');
+}
 
 =head2 recursive_parents
 
@@ -2074,13 +2117,11 @@ sub parents {
 sub recursive_parents {
     my $self = shift;
     return
-       $self->search_related(
-           'cvtermpath_objects',
-           undef,
-           {
-               pathdistance => { '>' =>  0 } ,
-           }
-          )->search_related( 'subject' );
+        $self->search_related(
+            'cvtermpath_subjects',
+            {
+                pathdistance => { '>' =>  0 } ,
+            } )->search_related( 'object');
 }
 
 ############ CVTERM CUSTOM RESULTSET PACKAGE #############################
