@@ -5,7 +5,7 @@ use warnings;
 use FindBin;
 use lib "$FindBin::RealBin/../lib";
 
-use Test::More tests => 23;
+use Test::More tests => 27;
 use Test::Exception;
 use BCSTest;
 
@@ -130,7 +130,7 @@ $schema->txn_do(sub {
         type_id => $is_a->cvterm_id,
         cv_id => $cvterm->cv_id,
         pathdistance => -1 });
- 
+
     #find the root.
     my $root_name = $name;
     my $root = $grandchild_term->root();
@@ -140,19 +140,22 @@ $schema->txn_do(sub {
     my $children_rs = $cvterm->children;
     my $child1 = $children_rs->first->find_related('subject', {});
     is ($child1->name , $child_name , 'cvterm find children test');
+    is(scalar($children_rs->all) , 1 , 'Number of children test');
+
     # now using the cvtermpath
     my $direct_children = $cvterm->direct_children;
     is ($direct_children->first->name , $child_name , 'cvterm direct_children test');
+    is(scalar($direct_children->all) , 1 , 'number of direct children');
 
     # find  parents
     my $parents_rs = $child_term->parents;
     my $parent1 = $parents_rs->first->find_related('object' , {} );
     is ($parent1->name , $name, 'cvterm find  parents test');
-
+    is(scalar($parents_rs->all) , 1, 'Number of parents');
      # now using the cvtermpath
-    my $direct_parents = $child_term->direct_parents->first;
-    is ($direct_parents->name , $name , 'cvterm direct_parents test');
-
+    my $direct_parents = $child_term->direct_parents;
+    is ($direct_parents->first->name , $name , 'cvterm direct_parents test');
+    is(scalar($direct_parents->all), 1, 'Number of direct parents');
 
     #find recursive children
     my @children = $cvterm->recursive_children->all;

@@ -1700,7 +1700,7 @@ __PACKAGE__->has_many(
              to load into the cvterm table when autocreating cvterms
           }
  Ret:          a Cvtermsynonym object
- Example:
+ 
 
 =cut
 
@@ -1803,8 +1803,7 @@ sub add_synonym {
   Ret:  nothing
  Args: $synonym
  Side Effects: Will delete all cvtermsynonyms with synonym=$synonym. Case insensitive
- Example:
-
+ 
 =cut
 
 sub delete_synonym {
@@ -1832,8 +1831,7 @@ sub delete_synonym {
  Ret:    a list of accessions (e.g. GO:0000123)
  Args:   none
  Side Effects: none
- Example:
-
+ 
 =cut
 
 sub get_secondary_dbxrefs {
@@ -1857,7 +1855,6 @@ sub get_secondary_dbxrefs {
  Ret:   a CvtermDbxref object
  Args:  an alternative id (i.e. "GO:0001234"). A second arg will store a is_for_definition=1 (default = 0)
  Side Effects: stores a new dbxref if accession is not found in dbxref table
- Example:
 
 =cut
 
@@ -1898,7 +1895,6 @@ sub add_secondary_dbxref {
  Ret:   nothing
  Args:  full accession (db_name:dbxref_accession e.g. PO:0001234)
  Side Effects:
- Example:
 
 =cut
 
@@ -1981,10 +1977,6 @@ sub create_cvtermprops {
 NOTE: This method requires that your C<cvtermpath> table is populated.
 
 =cut
-#SELECT distinct(cvtermpath.object_id 
-#                       FROM cvtermpath 
-#                       JOIN cvterm ON (cvtermpath.object_id = cvterm_id) 
-#                       WHERE cvtermpath.subject_id =? AND cvterm.is_obsolete=0 AND pathdistance>0
 
 sub root {
     my $self = shift;
@@ -2024,7 +2016,8 @@ sub children {
  Ret:   L<Bio::Chado::Schema::Cv::Cvterm>
  Args:  none
  Side Effects: none
- Example:
+ 
+NOTE: This method requires that your C<cvtermpath> table is populated.
 
 =cut
 
@@ -2088,7 +2081,8 @@ sub parents {
  Ret:   L<Bio::Chado::Schema::Cv::Cvterm>
  Args:  none
  Side Effects: none
- Example:
+
+NOTE: This method requires that your C<cvtermpath> table is populated.
 
 =cut
 
@@ -2109,7 +2103,8 @@ sub direct_parents {
  Ret: L<Bio::Chado::Schema::Cv::Cvterm> resultset
  Args: none
  Side Effects: none
- Example:
+ 
+NOTE: This method requires that your C<cvtermpath> table is populated.
 
 =cut
 
