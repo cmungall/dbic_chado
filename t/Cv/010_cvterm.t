@@ -112,7 +112,6 @@ $schema->txn_do(sub {
                                 } );
 
     # populate cvtermpath
- 
     $grandchild_term->create_related('cvtermpath_subjects', {
         object_id => $child_term->cvterm_id,
         type_id => $is_a->cvterm_id,
