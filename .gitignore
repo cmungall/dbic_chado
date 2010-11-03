@@ -2,5 +2,12 @@
 #*#
 .#*
 \.*sw[op]
-.build
+_build
 t/var/*
+blib/*
+^Build$
+^MANIFEST$
+META.yml
+MYMETA.yml
+Build
+MANIFEST.bak
