@@ -34,7 +34,7 @@ This module provides the basic utilities to write tests against Bio::Chado::Sche
     },
   );
 
-This method removes the test SQLite database in t/var/DBIxClass.db
+This method removes the test SQLite database in t/var/BCS.db
 and then creates a new, empty database.
 
 This method will call deploy_schema() by default, unless the
