@@ -1875,7 +1875,9 @@ sub add_secondary_dbxref {
       { name => $db_name },
       { key => 'db_c1' }
       );
-    my $dbxref = $db->find_or_create_related('dbxrefs', { accession => $acc } , { key => 'dbxref_c1' }, );
+    my $dbxref =
+         $db->search_related('dbxrefs', { accession => $acc })->first
+      || $db->create_related('dbxrefs', { accession => $acc });
 
     my $cvterm_dbxref = $schema->resultset("Cv::CvtermDbxref")->search(
       { dbxref_id => $dbxref->get_column('dbxref_id'),
