@@ -5,7 +5,6 @@ use FindBin;
 
 use Test::More tests => 1;
 use lib "$FindBin::RealBin/lib";
-use DbicChadoTest;
 use BCSTest;
 
 my $schema = BCSTest->init_schema();
