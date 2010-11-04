@@ -3,6 +3,9 @@
  * add convenience methods for creating stock_dbxrefprops,
    nd_experimentprops, projectprops, and geolocationprops
  * add methods for working with parent and child terms of cvterms
+ * Convert t/lib/BCSTest.pm to Bio::Chado::Schema::Test so other
+   CPAN modules can have test suites that use an
+   automagically-created SQLite db
 
 0.06400   2010-10-20 20:54:37 PST8PDT
 
