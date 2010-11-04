@@ -1870,7 +1870,7 @@ sub add_secondary_dbxref {
 
     my $schema = $self->result_source->schema;
     my ($db_name, $acc) = split (/:/, $accession);
-    if (!$db_name || !$acc) { croak "Did not pass a legal accession! ($accession)" ; }
+    if (!$db_name || !$acc) { croak "Accession must be of the form <DB>:<ACCESSION>.  You passed '$accession'" ; }
     my $db = $schema->resultset("General::Db")->find_or_create(
       { name => $db_name },
       { key => 'db_c1' }
