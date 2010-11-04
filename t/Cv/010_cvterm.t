@@ -7,10 +7,10 @@ use lib "$FindBin::RealBin/../lib";
 
 use Test::More tests => 27;
 use Test::Exception;
-use BCSTest;
+use Bio::Chado::Schema;
 
 
-my $schema = BCSTest->init_schema();
+my $schema = Bio::Chado::Schema::Test->init_schema();
 my $cvterm_rs = $schema->resultset('Cv::Cvterm');
 
 my $name = 'test cvterm_name';
