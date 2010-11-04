@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+ * Fix bug with Cvterm add_secondary_dbxref, only caught under
+   DBIx::Class >= 0.08124
  * add convenience methods for creating stock_dbxrefprops,
    nd_experimentprops, projectprops, and geolocationprops
  * add methods for working with parent and child terms of cvterms
