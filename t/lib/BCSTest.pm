@@ -26,10 +26,10 @@ This module provides the basic utilities to write tests against Bio::Chado::Sche
 =head2 init_schema
 
   my $schema = BCSTest->init_schema(
-    no_deploy=>1,
-    no_populate=>1,
-    storage_type=>'::DBI::Replicated',
-    storage_type_args=>{
+    deploy            => 1,
+    populate          => 1,
+    storage_type      => '::DBI::Replicated',
+    storage_type_args => {
       balancer_type=>'DBIx::Class::Storage::DBI::Replicated::Balancer::Random'
     },
   );
@@ -38,10 +38,10 @@ This method removes the test SQLite database in t/var/BCS.db
 and then creates a new, empty database.
 
 This method will call deploy_schema() by default, unless the
-no_deploy flag is set.
+deploy flag is set to 0.
 
-Also, by default, this method will call populate_schema() by
-default, unless the no_deploy or no_populate flags are set.
+This method will call populate_schema() if the populate argument
+is set to a true value.
 
 =cut
 
@@ -103,7 +103,7 @@ sub init_schema {
 
     unless ( -e _sqlite_dbfilename() ) {
         __PACKAGE__->deploy_schema( $schema, $args{deploy_args} ) if $should_deploy;
-      #  __PACKAGE__->populate_schema( $schema );
+        __PACKAGE__->populate_schema( $schema ) if $args{populate};
     }
     return $schema;
 }
