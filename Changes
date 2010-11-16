@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+0.07100   2010-11-16 12:28:17 PST8PDT
+
  * Fix bug with Cvterm add_secondary_dbxref, only caught under
    DBIx::Class >= 0.08124
  * add convenience methods for creating stock_dbxrefprops,
