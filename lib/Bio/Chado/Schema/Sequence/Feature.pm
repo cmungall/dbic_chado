@@ -932,13 +932,18 @@ operations on the featureprop's value.
 =cut
 
 sub subseq {
-    my ( $self, $start, $end ) = @_;
+    my $self = shift;
 
     # use the normal subseq if normal residues
     if( $self->residues ) {
         local $self->{seq} = $self->residues; #< stupid hack for Bio::PrimarySeq's subseq to work
-        return $self->SUPER::subseq( $start, $end );
+        return $self->SUPER::subseq( @_ );
     }
+
+    my ( $start, $end ) = @_;
+    croak "must provide start, end to subseq" unless $start;
+    croak "subseq() on large_residues only supports ( $start, $end ) calling style"
+        if ref $start || !$end;
 
     my $length = $end - $start + 1;
     return '' unless $length > 0;
@@ -957,6 +962,21 @@ sub subseq {
                 )
              ->get_column('mysubstring')
              ->single;
+}
+
+=head2 trunc
+
+Same as subseq above, but return a sequence object rather than a bare string.
+
+=cut
+
+sub trunc {
+    my $self = shift;
+
+    return Bio::PrimarySeq->new(
+        -id  => $self->name,
+        -seq => $self->subseq( @_ ),
+       );
 }
 
 

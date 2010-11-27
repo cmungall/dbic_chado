@@ -5,7 +5,7 @@ use warnings;
 use FindBin;
 use lib "$FindBin::RealBin/../lib";
 
-use Test::More tests => 25;
+use Test::More tests => 28;
 use Test::Exception;
 use Bio::Chado::Schema;
 
@@ -52,6 +52,7 @@ $schema->txn_do(sub{
             });
 
     is( $grandpa->subseq( 3, 5 ), 'TAG', 'subseq on regular residues works' );
+    is( $grandpa->trunc( 3, 5 )->seq, 'TAG', 'trunc on regular residues works' );
 
     my $parent = $schema->resultset('Sequence::Feature')
             ->find_or_create({
@@ -70,6 +71,8 @@ $schema->txn_do(sub{
        );
 
     is( $parent->subseq( 3, 5 ), 'TAG', 'subseq on large_residues prop works' );
+    is( $parent->trunc( 3, 5 )->seq, 'TAG', 'subseq on large_residues prop works' );
+    is( $parent->trunc( 3, 5 )->id, $parent->name, 'subseq on large_residues has proper name' );
 
     my $child = $schema->resultset('Sequence::Feature')
             ->find_or_create({
