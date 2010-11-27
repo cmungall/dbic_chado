@@ -5,7 +5,7 @@ use warnings;
 use FindBin;
 use lib "$FindBin::RealBin/../lib";
 
-use Test::More tests => 28;
+use Test::More tests => 29;
 use Test::Exception;
 use Bio::Chado::Schema;
 
@@ -165,6 +165,16 @@ $schema->txn_do(sub{
 
     is_deeply( [ map { $_->name } @children ], [ 'BCS_stepchild', 'BCS_stuff_child' ], 'child feature_id is correct' );
     is_deeply( [ map { $_->name } @parents ], [ 'BCS_stuff_parent' ], 'parent feature_id is correct' );
+
+    #test some featureloc stuff
+    my $featureloc = $schema->resultset('Sequence::Featureloc')
+           ->create({ srcfeature => $grandpa,
+                      feature    => $parent,
+                      fmin       => 20,
+                      fmax       => 28,
+                      strand     => 1,
+                  });
+    is( $featureloc->length, 8, 'got right featureloc length' );
 
     $schema->txn_rollback;
 });

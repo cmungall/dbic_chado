@@ -1,5 +1,6 @@
 {{$NEXT}}
 
+ * Add convenient featureloc length() method.
  * Add better support for large sequences: a subseq() method to
    Feature class with support for checking a 'large_residues'
    featureprop for sequence, and doing substring calls on that.
