@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+0.07300   2010-11-28 17:19:08 PST8PDT
+
  * Add convenient featureloc length() method.
  * Add better support for large sequences: a subseq() method to
    Feature class with support for checking a 'large_residues'
