@@ -286,6 +286,7 @@ Equal to C<fmax - fmin> (since coords are interbase).
 sub length {
     my $self = shift;
     no warnings 'uninitialized';
+    return undef unless defined($self->fmax) && defined($self->fmin);
     return $self->fmax - $self->fmin;
 }
 
