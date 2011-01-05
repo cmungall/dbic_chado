@@ -11,6 +11,8 @@ sets of tables, they are not modules in the Perl sense.
 
 Installation:
 
+If you are using a distribution tarball of Bio::Chado::Schema (such as from CPAN) :
+
     perl Build.PL
 
     ./Build installdeps
@@ -19,3 +21,10 @@ Installation:
 
     ./Build install
 
+If you are developer using the git repo, then Dist::Zilla needs to be used:
+
+    dzil build
+
+    dzil test
+
+    dzil install
