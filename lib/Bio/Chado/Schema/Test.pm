@@ -44,6 +44,12 @@ is set to a true value.
 
 =cut
 
+=head2 has_custom_dsn
+
+Returns true if the BCS_TEST_DSN environment variable is set.
+
+=cut
+
 sub has_custom_dsn {
     return $ENV{"BCS_TEST_DSN"} ? 1 : 0;
 }
