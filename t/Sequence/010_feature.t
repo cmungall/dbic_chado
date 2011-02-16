@@ -7,7 +7,7 @@ use lib "$FindBin::RealBin/../lib";
 
 use Test::More tests => 29;
 use Test::Exception;
-use Bio::Chado::Schema;
+use Bio::Chado::Schema::Test;
 
 my $schema = Bio::Chado::Schema::Test->init_schema();
 
