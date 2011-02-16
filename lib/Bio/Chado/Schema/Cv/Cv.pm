@@ -71,6 +71,21 @@ __PACKAGE__->add_unique_constraint("cv_c1", ["name"]);
 
 =head1 RELATIONS
 
+=head2 cvprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Cv::Cvprop>
+
+=cut
+
+__PACKAGE__->has_many(
+  "cvprops",
+  "Bio::Chado::Schema::Cv::Cvprop",
+  { "foreign.cv_id" => "self.cv_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 cvterms
 
 Type: has_many
@@ -102,8 +117,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07001 @ 2010-08-16 23:01:56
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6ihzWIsZHD5EcgtzIL/A9g
+# Created by DBIx::Class::Schema::Loader v0.07006 @ 2011-02-15 16:07:00
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zpMww/alTqEt45BrJZ6kEg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

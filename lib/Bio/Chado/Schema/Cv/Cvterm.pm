@@ -391,6 +391,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 cvprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Cv::Cvprop>
+
+=cut
+
+__PACKAGE__->has_many(
+  "cvprops",
+  "Bio::Chado::Schema::Cv::Cvprop",
+  { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 cv
 
 Type: belongs_to
@@ -508,7 +523,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 cvtermprop_cvterms
+=head2 cvtermprops
 
 Type: has_many
 
@@ -517,7 +532,7 @@ Related object: L<Bio::Chado::Schema::Cv::Cvtermprop>
 =cut
 
 __PACKAGE__->has_many(
-  "cvtermprop_cvterms",
+  "cvtermprops",
   "Bio::Chado::Schema::Cv::Cvtermprop",
   { "foreign.cvterm_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -583,7 +598,7 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 cvtermsynonym_cvterms
+=head2 cvtermsynonyms
 
 Type: has_many
 
@@ -592,7 +607,7 @@ Related object: L<Bio::Chado::Schema::Cv::Cvtermsynonym>
 =cut
 
 __PACKAGE__->has_many(
-  "cvtermsynonym_cvterms",
+  "cvtermsynonyms",
   "Bio::Chado::Schema::Cv::Cvtermsynonym",
   { "foreign.cvterm_id" => "self.cvterm_id" },
   { cascade_copy => 0, cascade_delete => 0 },
@@ -1634,8 +1649,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07002 @ 2010-10-20 20:21:15
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZwgLkapFSdRgv4E4ooXxZw
+# Created by DBIx::Class::Schema::Loader v0.07006 @ 2011-02-15 16:07:00
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+7waNqcJG6AuNftjx9h76g
 
 use Carp;
 

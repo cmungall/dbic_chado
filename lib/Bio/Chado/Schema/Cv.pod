@@ -34,6 +34,8 @@ L<Bio::Chado::Schema::Cv::CvPathCount>
 
 L<Bio::Chado::Schema::Cv::CvRoot>
 
+L<Bio::Chado::Schema::Cv::Cvprop>
+
 L<Bio::Chado::Schema::Cv::Cvterm>
 
 L<Bio::Chado::Schema::Cv::CvtermDbxref>
