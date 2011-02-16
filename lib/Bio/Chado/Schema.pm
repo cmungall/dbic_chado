@@ -8,7 +8,7 @@ use warnings;
 
 use base 'DBIx::Class::Schema';
 
-__PACKAGE__->load_classes;
+__PACKAGE__->load_namespaces;
 
 
 # Created by DBIx::Class::Schema::Loader v0.04999_12 @ 2010-01-01 13:09:35
