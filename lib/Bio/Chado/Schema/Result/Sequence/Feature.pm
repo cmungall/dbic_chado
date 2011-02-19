@@ -1040,7 +1040,7 @@ found for this feature.
 sub desc {
     my $self = shift;
     my $desc_fp =
-        $self->search_featureprops( 'description')
+        $self->search_featureprops({ name => ['description','Note','note'] })
              ->first;
     return unless $desc_fp;
     return $desc_fp->value;
