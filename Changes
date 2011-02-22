@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+0.08002   2011-02-22 11:17:13 America/Los_Angeles
+
  * Added support for new cvprop table.
  * Added plugin_add_relationship class method to Bio::Chado::Schema
    main class, which makes it possible to do BCS plugins: sets of
