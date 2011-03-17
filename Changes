@@ -1,5 +1,8 @@
 {{$NEXT}}
 
+ * add new class for stock_cvtermprop table, and new is_not and rank
+   columns for stock_cvterm
+
 0.08002   2011-02-22 11:17:13 America/Los_Angeles
 
  * Added support for new cvprop table.
