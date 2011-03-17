@@ -48,6 +48,18 @@ __PACKAGE__->table("stock_cvterm");
   is_foreign_key: 1
   is_nullable: 0
 
+=head2 is_not
+
+  data_type: 'boolean'
+  default_value: false
+  is_nullable: 0
+
+=head2 rank
+
+  data_type: 'integer'
+  default_value: 0
+  is_nullable: 0
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -64,9 +76,16 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "pub_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
+  "is_not",
+  { data_type => "boolean", default_value => \"false", is_nullable => 0 },
+  "rank",
+  { data_type => "integer", default_value => 0, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("stock_cvterm_id");
-__PACKAGE__->add_unique_constraint("stock_cvterm_c1", ["stock_id", "cvterm_id", "pub_id"]);
+__PACKAGE__->add_unique_constraint(
+  "stock_cvterm_c1",
+  ["stock_id", "cvterm_id", "pub_id", "rank"],
+);
 
 =head1 RELATIONS
 
@@ -133,9 +152,24 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 stock_cvtermprops
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-03-16 23:09:59
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YBEZYjID6RYWCisCPs8OOQ
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Result::Stock::StockCvtermprop>
+
+=cut
+
+__PACKAGE__->has_many(
+  "stock_cvtermprops",
+  "Bio::Chado::Schema::Result::Stock::StockCvtermprop",
+  { "foreign.stock_cvterm_id" => "self.stock_cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-03-16 23:14:45
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:lOiXJCZBCZBxj+MAZdMnQw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

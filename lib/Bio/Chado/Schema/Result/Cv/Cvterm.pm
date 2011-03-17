@@ -1498,6 +1498,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 stock_cvtermprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Result::Stock::StockCvtermprop>
+
+=cut
+
+__PACKAGE__->has_many(
+  "stock_cvtermprops",
+  "Bio::Chado::Schema::Result::Stock::StockCvtermprop",
+  { "foreign.type_id" => "self.cvterm_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 stock_dbxrefprops
 
 Type: has_many
@@ -1649,8 +1664,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-03-16 23:09:58
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:iMK/NE+cR4oQdeimRitWOA
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-03-16 23:14:45
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YH+JI3dtFVCrcEkXYthGRA
 
 use Carp;
 

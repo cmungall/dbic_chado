@@ -20,6 +20,8 @@ L<Bio::Chado::Schema::Result::Stock::Stock>
 
 L<Bio::Chado::Schema::Result::Stock::StockCvterm>
 
+L<Bio::Chado::Schema::Result::Stock::StockCvtermprop>
+
 L<Bio::Chado::Schema::Result::Stock::StockDbxref>
 
 L<Bio::Chado::Schema::Result::Stock::StockDbxrefprop>
