@@ -97,7 +97,7 @@ Related object: L<Bio::Chado::Schema::Result::Stock::StockRelationship>
 __PACKAGE__->belongs_to(
   "stock_relationship",
   "Bio::Chado::Schema::Result::Stock::StockRelationship",
-  { "stock_relationship_id" => "stock_relationship_id" },
+  { stock_relationship_id => "stock_relationship_id" },
   {
     cascade_copy   => 0,
     cascade_delete => 0,
@@ -108,8 +108,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5F8HVLcKJz6x1p+eAOKlgA
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-03-16 23:09:59
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZF13PkZILl5vVQX8kBtgHA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

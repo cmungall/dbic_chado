@@ -1649,8 +1649,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07006 @ 2011-02-15 16:07:00
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+7waNqcJG6AuNftjx9h76g
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-03-16 23:09:58
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:iMK/NE+cR4oQdeimRitWOA
 
 use Carp;
 

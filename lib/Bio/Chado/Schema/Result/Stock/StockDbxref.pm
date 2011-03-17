@@ -130,8 +130,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07002 @ 2010-10-20 20:21:16
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:inK7WMGbO8MNI+M2xYrRfw
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-03-16 23:09:59
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pxnrDZQWD/fcN3ciUtGbNA
 
 
 =head2 create_stock_dbxrefprops

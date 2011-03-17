@@ -92,7 +92,7 @@ Related object: L<Bio::Chado::Schema::Result::Expression::FeatureExpression>
 __PACKAGE__->belongs_to(
   "feature_expression",
   "Bio::Chado::Schema::Result::Expression::FeatureExpression",
-  { "feature_expression_id" => "feature_expression_id" },
+  { feature_expression_id => "feature_expression_id" },
   {
     cascade_copy   => 0,
     cascade_delete => 0,
@@ -124,8 +124,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.06001 @ 2010-04-16 14:33:36
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:SfHx5rVC5ZDy7wcyt8egbw
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-03-16 23:09:58
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0Cco2NYlCN/GJTciGSl4HQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
