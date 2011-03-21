@@ -767,6 +767,21 @@ __PACKAGE__->many_to_many
      'feature_relationship_objects' => 'subject',
     );
 
+=head2 synonyms
+
+Type: many_to_many
+
+Related object: L<Bio::Chado::Schema::Result::Sequence::Synonym>
+
+=cut
+
+__PACKAGE__->many_to_many
+    (
+     'synonyms',
+     'feature_synonyms' => 'synonym',
+    );
+
+
 =head2 dbxrefs_mm
 
 Type: many_to_many

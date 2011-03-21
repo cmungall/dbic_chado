@@ -5,7 +5,7 @@ use warnings;
 use FindBin;
 use lib "$FindBin::RealBin/../lib";
 
-use Test::More tests => 29;
+use Test::More tests => 30;
 use Test::Exception;
 use Bio::Chado::Schema::Test;
 
@@ -175,6 +175,10 @@ $schema->txn_do(sub{
                       strand     => 1,
                   });
     is( $featureloc->length, 8, 'got right featureloc length' );
+
+    # test the synonyms many-to-many
+
+    is( scalar( $feature->synonyms ), 0, 'synonyms mm rel works' );
 
     $schema->txn_rollback;
 });
