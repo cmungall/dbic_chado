@@ -734,7 +734,9 @@ __PACKAGE__->belongs_to
 
 Type: many_to_many
 
-Returns a list of parent features.
+Returns a list of parent features (i.e. features that are the
+B<object> of feature_relationship rows in which this feature is the
+B<subject>).
 
 Related object: Bio::Chado::Schema::Result::Sequence::Feature
 
@@ -751,7 +753,9 @@ __PACKAGE__->many_to_many
 
 Type: many_to_many
 
-Returns a list of child features.
+Returns a list of child features (i.e. features that are the
+B<subject> of feature_relationship rows in which this feature is the
+B<object>).
 
 Related object: Bio::Chado::Schema::Result::Sequence::Feature
 
