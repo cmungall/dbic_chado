@@ -29,6 +29,19 @@ sub create_properties {
     $opts->{dbxref_accession_prefix} = 'autocreated:'
         unless defined $opts->{dbxref_accession_prefix};
 
+    # cannot support literal-sql values (i.e. SQL function calls)
+    # without allow_duplicate_values being set
+    my $have_literal_sql = 0;
+    for my $propname ( keys %$props ) {
+        my $val = $props->{$propname}{value};
+        if( ref $val eq 'SCALAR' ) {
+            $have_literal_sql = 1;
+            unless( $opts->{allow_duplicate_values} ) {
+                croak "SQL-literal value '$$val' requested for '$propname' property, but allow_duplicate_values not set.  Cannot check for duplicates";
+            }
+        }
+    }
+
     my $schema = $self->result_source->schema;
 
     my $prop_cv = do {
@@ -100,15 +113,12 @@ sub create_properties {
     my %props;
     while( my ($propname,$propval) = each %$props ) {
 
-        my $data = ref $propval
-            ? {%$propval}
-            : { value => $propval };
-
+        my $data = $propval;
         $data->{type_id} = $propterms{$propname}->cvterm_id;
 
 
-      # decide whether to skip creating this prop
-      my $skip_creation = $opts->{allow_duplicate_values}
+        # decide whether to skip creating this prop
+        my $skip_creation = $opts->{allow_duplicate_values}
             ? 0
             : $self->search_related( $prop_relation_name,
                                      { type_id => $data->{type_id},
@@ -119,26 +129,38 @@ sub create_properties {
 
         unless( $skip_creation ) {
             #if rank is defined
-          if ($opts->{rank} && defined $opts->{rank} ) {
-            my ($existing_prop) = $self->search_related( $prop_relation_name,
-                                            {type_id =>$data->{type_id},
-                                             rank => $opts->{rank}
-                                            });
-            warn "Property " .  $existing_prop->value() . "  already exists with rank " . $opts->{rank} . ". skipping! \n" if  defined $existing_prop;
-            $data->{rank} = $opts->{rank};
+            if ($opts->{rank} && defined $opts->{rank} ) {
+                my ($existing_prop) = $self->search_related(
+                    $prop_relation_name,
+                    {
+                        type_id =>$data->{type_id},
+                        rank => $opts->{rank}
+                    }
+                  );
+                if( defined $existing_prop ) {
+                    warn "Property " .  $existing_prop->value() . "  already exists with rank " . $opts->{rank} . ". skipping! \n"
+                }
+                $data->{rank} = $opts->{rank};
+            } else {
+                # find highest rank for props of this type
+                my $max_rank= $self->search_related(
+                    $prop_relation_name,
+                    {
+                        type_id => $data->{type_id},
+                    }
+                 )->get_column('rank')
+                  ->max;
+                $data->{rank} = defined $max_rank ? $max_rank + 1 : 0;
+            }
+            $props{$propname} = $self->find_or_create_related(
+                $prop_relation_name,
+                $data
+             );
+        }
+    }
 
-          } else {
-            # find highest rank for props of this type
-            my $max_rank= $self->search_related( $prop_relation_name,
-                                         { type_id =>$data->{type_id} }
-                )->get_column('rank')->max;
-            $data->{rank} = defined $max_rank ? $max_rank + 1 : 0;
-
-          }
-          $props{$propname} = $self->find_or_create_related( $prop_relation_name,
-                                           $data
-            );
-      }
+    if( $have_literal_sql ) {
+        $_->discard_changes for values %props;
     }
     return \%props;
 }
@@ -146,6 +168,7 @@ sub create_properties {
 1;
 
 __END__
+
 =head1 NAME
 
 Bio::Chado::Schema::Util - utility functions shared by Bio::Chado::Schema objects

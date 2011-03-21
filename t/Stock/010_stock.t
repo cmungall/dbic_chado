@@ -5,7 +5,7 @@ use warnings;
 use FindBin;
 use lib "$FindBin::RealBin/../lib";
 
-use Test::More tests => 7;
+use Test::More tests => 8;
 use Test::Exception;
 use Bio::Chado::Schema::Test;
 
@@ -44,15 +44,18 @@ $schema->txn_do(sub {
     is($stockprop->value(), $value, "stockmprop value test");
     is($stockprop->rank() , $rank, "stockprop rank test");
     #
-    # create stockprop with a value a result of SQL function
+    # create stockprop with a literal-sql value
     $propname = "date stockmprop";
-    $value =  "\\" . "\'now()\'";
     $rank = 1;
 
-    $href = $stock->create_stockprops({ $propname =>  $value} , { autocreate => 1, allow_multiple_values => 1 , rank => $rank } );
+    throws_ok {
+        $href = $stock->create_stockprops({ $propname =>  \"'ack'"} , { autocreate => 1, allow_multiple_values => 1 , rank => $rank } );
+    } qr/allow_duplicate_values/, 'allow_duplicate_values required for prop setting with literal sql';
 
+    $href = $stock->create_stockprops({ $propname =>  \"'ack'"} , { autocreate => 1, allow_multiple_values => 1 , rank => $rank, allow_duplicate_values => 1 } )
+;
     $stockprop = $href->{$propname};
-    like($stockprop->value(), qr/^\d+\d$/, "stockmprop value test");
+    is($stockprop->value(), 'ack', "stockmprop value test");
     is($stockprop->rank() , $rank, "stockprop rank test");
 });
 

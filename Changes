@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+ * add support for literal sql in property values set using
+   create_*props helper functions
  * add 'features' many-to-many relation to the Synonym result class.
  * add 'synonyms' many-to-many relation to the Feature result class.
  * add new class for stock_cvtermprop table, and new is_not and rank
