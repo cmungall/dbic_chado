@@ -98,7 +98,7 @@ classes of the plugins, you need to use this method.
 
 Example: Bio::Chado::Schema::Result::MyApp::SpecialThing belongs_to
 the core BCS Organism::Organism, and you would like to be able to call
-C<$organism-&gt;myapp_specialthings> on organisms to get their
+C<$organism-E<gt>myapp_specialthings> on organisms to get their
 associated SpecialThings.
 
     package Bio::Chado::Schema::MyApp::Result::SpecialThing;
