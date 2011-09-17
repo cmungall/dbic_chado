@@ -961,11 +961,11 @@ sub subseq {
 
     my ( $start, $end ) = @_;
     croak "must provide start, end to subseq" unless $start;
-    croak "subseq() on large_residues only supports ( $start, $end ) calling style"
-        if ref $start || !$end;
+    croak "subseq() on large_residues only supports ( start, end ) calling style"
+        if ref $start || ! defined $end;
 
     my $length = $end - $start + 1;
-    return '' unless $length > 0;
+    return unless $length > 0;
 
     return
         $self->result_source
@@ -1043,6 +1043,7 @@ sub length {
     my $self = shift;
     my $l = $self->seqlen;
     return $l if defined $l;
+    no warnings 'uninitialized';
     return CORE::length( $self->residues );
 }
 
