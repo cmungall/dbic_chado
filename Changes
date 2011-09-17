@@ -1,5 +1,8 @@
 {{$NEXT}}
 
+ * fix inconsistencies in behavior for features with null residues
+   and/or seqlens
+
 0.08100   2011-03-21 16:01:00 America/Los_Angeles
 
  * add support for literal sql in property values set using
