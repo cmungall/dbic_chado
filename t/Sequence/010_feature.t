@@ -5,7 +5,7 @@ use warnings;
 use FindBin;
 use lib "$FindBin::RealBin/../lib";
 
-use Test::More tests => 30;
+use Test::More tests => 33;
 use Test::Exception;
 use Test::Warn;
 use Bio::Chado::Schema::Test;
