@@ -1,5 +1,15 @@
 {{$NEXT}}
 
+ * update for Chado 1.2, including:
+    + add classes for new Chado 1.2 tables chadoprop (Cv::Chadoprop)
+      genotypeprop (Genetic::Genotypeprop)
+    + adds type to nd_protocol (NaturalDiversity::NdProtocol)
+    + adds name column to phenotype table (Phenotype::Phenotype)
+    + corrects misspelled name of stock_relationship_id column
+      accessor for stock_relationship_cvterm
+      (Stock::StockRelationshipCvterm), adds stock_relationship DBIC
+      relation
+
 0.08200   2011-09-19 09:35:03 America/Los_Angeles
 
  * fix inconsistencies in behavior for features with null residues
