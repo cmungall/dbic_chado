@@ -37,6 +37,11 @@ __PACKAGE__->table("phenotype");
   data_type: 'text'
   is_nullable: 0
 
+=head2 name
+
+  data_type: 'text'
+  is_nullable: 1
+
 =head2 observable_id
 
   data_type: 'integer'
@@ -88,6 +93,8 @@ __PACKAGE__->add_columns(
   },
   "uniquename",
   { data_type => "text", is_nullable => 0 },
+  "name",
+  { data_type => "text", is_nullable => 1 },
   "observable_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "attr_id",
@@ -283,8 +290,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-03-16 23:09:59
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:BQ6KZODWf4Lkio/RVuwL0Q
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-09-22 08:45:24
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WhxmoFzwiRTKA7hbPNHxSQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -52,6 +52,12 @@ typically derived from the features making up the genotype.
   is_nullable: 1
   size: 255
 
+=head2 type_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 0
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -68,6 +74,8 @@ __PACKAGE__->add_columns(
   { data_type => "text", is_nullable => 0 },
   "description",
   { data_type => "varchar", is_nullable => 1, size => 255 },
+  "type_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("genotype_id");
 __PACKAGE__->add_unique_constraint("genotype_c1", ["uniquename"]);
@@ -85,6 +93,42 @@ Related object: L<Bio::Chado::Schema::Result::Genetic::FeatureGenotype>
 __PACKAGE__->has_many(
   "feature_genotypes",
   "Bio::Chado::Schema::Result::Genetic::FeatureGenotype",
+  { "foreign.genotype_id" => "self.genotype_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 type
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Result::Cv::Cvterm>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Result::Cv::Cvterm",
+  { cvterm_id => "type_id" },
+  {
+    cascade_copy   => 0,
+    cascade_delete => 0,
+    is_deferrable  => 1,
+    on_delete      => "CASCADE",
+    on_update      => "CASCADE",
+  },
+);
+
+=head2 genotypeprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Result::Genetic::Genotypeprop>
+
+=cut
+
+__PACKAGE__->has_many(
+  "genotypeprops",
+  "Bio::Chado::Schema::Result::Genetic::Genotypeprop",
   { "foreign.genotype_id" => "self.genotype_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
@@ -180,8 +224,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-03-16 23:09:59
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/wNzdpdru6dAlQZA59Jrhw
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-09-22 08:45:24
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pl/UQ6kAn7WVHaoTZUrPWg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
