@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+0.09000   2011-09-22 09:27:36 America/Los_Angeles
+
  * update for Chado 1.2, including:
     + add classes for new Chado 1.2 tables chadoprop (Cv::Chadoprop)
       genotypeprop (Genetic::Genotypeprop)
