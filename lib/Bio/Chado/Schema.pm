@@ -44,6 +44,8 @@ the namespace organization of this package.  Note that modules in the
 Chado context refers to sets of tables, they are not modules in the
 Perl sense.
 
+=head1 GETTING STARTED
+
 To learn how to use this DBIx::Class ORM layer, a good starting
 point is the L<DBIx::Class::Manual>.
 
@@ -87,6 +89,22 @@ L<Bio::Chado::Schema::Sequence>
 
 L<Bio::Chado::Schema::Stock>
 
+=head1 CHADO VERSIONS
+
+Basically, BCS has always followed the SVN HEAD of Chado, since it's
+on a much faster release cycle than Chado itself.
+
+Most users will not experience incompatibilities using the most recent
+versions of Bio::Chado::Schema with older Chado installations.
+However, if you encounter problems using Bio::Chado::Schema with an
+older Chado schema, you may want to try downgrading to an earlier
+version of Bio::Chado::Schema.  The following rough equivalencies hold
+between BCS and Chado versions:
+
+  Chado 1.2   --  BCS 0.09000
+  Chado 1.11  --  BCS 0.05801
+  Chado 1.1   --  BCS 0.05801
+  older       --  BCS 0.03100
 
 =head1 CLASS METHODS
 
