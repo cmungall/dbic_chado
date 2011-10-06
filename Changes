@@ -1,5 +1,8 @@
 {{$NEXT}}
 
+ * added to_range to Featureloc class that makes a Bio::Range object
+   for that location.
+
 0.09000   2011-09-22 09:27:36 America/Los_Angeles
 
  * update for Chado 1.2, including:

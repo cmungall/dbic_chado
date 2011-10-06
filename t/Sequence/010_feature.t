@@ -5,7 +5,7 @@ use warnings;
 use FindBin;
 use lib "$FindBin::RealBin/../lib";
 
-use Test::More tests => 33;
+use Test::More tests => 36;
 use Test::Exception;
 use Test::Warn;
 use Bio::Chado::Schema::Test;
@@ -176,6 +176,10 @@ $schema->txn_do(sub{
                       strand     => 1,
                   });
     is( $featureloc->length, 8, 'got right featureloc length' );
+
+    is( $featureloc->to_range->start,  21, 'featureloc to_range start' );
+    is( $featureloc->to_range->end,    28, 'featureloc to_range end' );
+    is( $featureloc->to_range->strand,  1, 'featureloc to_range strand' );
 
     # test the synonyms many-to-many
 
