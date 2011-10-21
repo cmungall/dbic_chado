@@ -14,6 +14,7 @@ __PACKAGE__->load_namespaces;
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-03-16 23:09:58
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JJ2AbsZoAN4cnM4vrYOxKA
 
+use Carp::Clan qr/^Bio::Chado::Schema/;
 use Bio::Chado::Schema::Util;
 
 =head1 NAME
@@ -105,6 +106,47 @@ between BCS and Chado versions:
   Chado 1.11  --  BCS 0.05801
   Chado 1.1   --  BCS 0.05801
   older       --  BCS 0.03100
+
+=head1 SCHEMA OBJECT METHODS
+
+=head2 get_cvterm( "$cv_name:$cvterm_name" ) OR get_cvterm( $cv_name, $cvterm_name )
+
+Convenience method to for finding single cvterms based on the text
+name of the CV and the term.  The cvterm objects found with this
+method are cached in the schema object itself.  Thus, you only use
+this function in the (relatively common) scenario in which you just
+need convenient access to a handful of different cvterms.
+
+=cut
+
+sub get_cvterm {
+    my ( $self, $cv_name, $term_name ) = @_;
+
+    croak "must provide at least one argument!" unless @_ > 1;
+
+    unless( $term_name ) {
+        ($cv_name, $term_name) = split /:/, $cv_name, 2;
+    }
+
+    return $self->{_bio_chado_schema_cvterm_cache}{$cv_name}{$term_name} ||=
+        $self->resultset('Cv::Cv')
+             ->search({ 'me.name' => $cv_name })
+             ->search_related('cvterms', { 'cvterms.name' => $term_name })
+             ->single;
+}
+
+=head2 get_cvterm_or_die
+
+Same as get_cvterm above, but dies with a "not found" message if the
+cvterm is not found.  This is convenient when you don't want to be
+bothered with checking the return value of C<get_cvterm>, which for me
+is most of the time.
+
+=cut
+
+sub get_cvterm_or_die {
+    shift->get_cvterm( @_ ) or croak "cvterm @_ not found";
+}
 
 =head1 CLASS METHODS
 
