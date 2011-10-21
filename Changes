@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+ * added get_cvterm and get_cvterm_or_die convenience methods directly
+   to the schema object, since cvterms are so pervasive in chado
  * added to_range to Featureloc class that makes a Bio::Range object
    for that location.
 
