@@ -1,5 +1,9 @@
 {{$NEXT}}
 
+ * implemented alphabet() function for Feature rows using as a silly
+   heuristic that works in many cases.  alphabet() is needed by things
+   like revcom() in newer versions of BioPerl.
+
 0.09010   2011-10-24 11:25:25 America/Los_Angeles
 
  * added get_cvterm and get_cvterm_or_die convenience methods directly

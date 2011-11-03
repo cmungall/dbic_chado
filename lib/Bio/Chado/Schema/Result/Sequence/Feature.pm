@@ -1068,12 +1068,17 @@ sub desc {
 
 =head2 alphabet
 
-Not implemented. Throws an error if used.
+Returns "protein" if the feature's type name is "polypeptide".
+Otherwise, returns "dna".  This is not very correct, but works in most
+of the use cases we've seen so far.
 
 =cut
 
 sub alphabet {
-    shift()->throw_not_implemented()
+    # yes, this is pretty lame. should traverse up the relationships
+    # using cvtermpath or cvterm_relationship.  patches welcome.
+    my $type_name = shift->type->name;
+    return $type_name eq 'polypeptide' ? 'protein' : 'dna';
 }
 
 # signal to BioPerl that this sequence can't be cloned

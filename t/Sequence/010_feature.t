@@ -5,7 +5,7 @@ use warnings;
 use FindBin;
 use lib "$FindBin::RealBin/../lib";
 
-use Test::More tests => 36;
+use Test::More tests => 37;
 use Test::Exception;
 use Test::Warn;
 use Bio::Chado::Schema::Test;
@@ -71,6 +71,7 @@ $schema->txn_do(sub{
         },
        );
 
+    is( $parent->alphabet, 'dna', 'got right alphabet' );
     is( $parent->subseq( 3, 5 ), 'TAG', 'subseq on large_residues prop works' );
     is( $parent->trunc( 3, 5 )->seq, 'TAG', 'subseq on large_residues prop works' );
     is( $parent->trunc( 3, 5 )->id, $parent->name, 'subseq on large_residues has proper name' );
