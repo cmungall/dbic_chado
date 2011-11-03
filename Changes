@@ -1,5 +1,9 @@
 {{$NEXT}}
 
+0.09030   2011-11-03 14:58:58 America/Los_Angeles
+
+ * fix some issues with repeated sections in the POD
+
 0.09020   2011-11-02 17:30:03 America/Los_Angeles
 
  * implemented alphabet() function for Feature rows using as a silly
