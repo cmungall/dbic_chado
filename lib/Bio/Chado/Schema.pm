@@ -192,6 +192,14 @@ associated SpecialThings.
     }
 }
 
+sub DESTROY {
+    my $self = shift;
+
+    # need to delete our cvterm cache to avoid memory leaks
+    delete $self->{_bio_chado_schema_cvterm_cache};
+    $self->SUPER::DESTROY( @_ );
+}
+
 =head1 AUTHOR
 
 Robert Buels, <rmb32@cornell.edu>
