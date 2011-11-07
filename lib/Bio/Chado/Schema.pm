@@ -90,6 +90,7 @@ L<Bio::Chado::Schema::Sequence>
 
 L<Bio::Chado::Schema::Stock>
 
+
 =head1 CHADO VERSIONS
 
 Basically, BCS has always followed the SVN HEAD of Chado, since it's

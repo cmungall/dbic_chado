@@ -274,6 +274,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 phenotypeprops
+
+Type: has_many
+
+Related object: L<Bio::Chado::Schema::Result::Phenotype::Phenotypeprop>
+
+=cut
+
+__PACKAGE__->has_many(
+  "phenotypeprops",
+  "Bio::Chado::Schema::Result::Phenotype::Phenotypeprop",
+  { "foreign.phenotype_id" => "self.phenotype_id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 phenstatements
 
 Type: has_many
@@ -290,8 +305,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-09-22 08:45:24
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WhxmoFzwiRTKA7hbPNHxSQ
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-11-07 13:19:16
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Doe95PQkanrP5pONEXNZ0w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

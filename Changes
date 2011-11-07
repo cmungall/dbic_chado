@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+ * add support for phenotypeprop table from Chado svn r25232
+
 0.09040   2011-11-04 09:31:11 America/Los_Angeles
 
  * fix a memory-leak bug present in 0.9010 through 0.9030
