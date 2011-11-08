@@ -198,7 +198,7 @@ sub DESTROY {
 
     # need to delete our cvterm cache to avoid memory leaks
     delete $self->{_bio_chado_schema_cvterm_cache};
-    $self->SUPER::DESTROY( @_ );
+    $self->SUPER::DESTROY( @_ ) if $self->can( 'SUPER::DESTROY' );
 }
 
 =head1 AUTHOR
