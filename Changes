@@ -1,5 +1,14 @@
 {{$NEXT}}
 
+0.10010   2011-11-08 16:39:15 America/New_York
+
+ * fix (in cleanup) errors related to schema object DESTROY function
+   on some versions of DBIC
+ * added create_phenotypeprop function (naama)
+ * fix filenames of Chado-module-level POD files.  For instance,
+   Bio::Chado::Schema::Result::Sequence POD is now rightly in
+   lib/Bio/Chado/Schema/Result/Sequence.pod
+
 0.10000   2011-11-07 13:22:41 America/Los_Angeles
 
  * add support for phenotypeprop table from Chado svn r25232
