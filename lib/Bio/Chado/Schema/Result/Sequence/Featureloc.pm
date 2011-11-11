@@ -289,6 +289,8 @@ sub length {
     return $self->fmax - $self->fmin;
 }
 
+=head1 ADDITIONAL METHODS
+
 =head2 to_range
 
 Make a L<Bio::Range> object containing the information in this
