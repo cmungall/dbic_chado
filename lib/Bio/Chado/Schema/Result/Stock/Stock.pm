@@ -369,6 +369,40 @@ sub create_stockprops {
 }
 
 
+
+############ STOCK CUSTOM RESULTSET PACKAGE #############################
+
+
+__PACKAGE__->resultset_class('Bio::Chado::Schema::Result::Stock::Stock::ResultSet');
+package Bio::Chado::Schema::Result::Stock::Stock::ResultSet;
+use base qw/ DBIx::Class::ResultSet /;
+
+use Carp;
+
+sub stock_project_phenotypes {
+    my $self = shift;
+    my $stock = shift;
+
+    my %phenotypes;    
+    my $project_rs = $stock->search_related('nd_experiment_stocks')
+	->search_related('nd_experiment')
+	->search_related('nd_experiment_projects')
+	->search_related('project' , {} , { distinct =>1 } );
+
+    while (my $project = $project_rs->next) {
+	my $experiment_rs = $stock->search_related('nd_experiment_stocks')
+	    ->search_related('nd_experiment' ,
+			     { 'project.project_id' => $project->project_id },
+			     { prefetch => { 'nd_experiment_projects' => 'project' } },
+	    );
+	$phenotypes{ $project->description }->{project} = $project;
+	my $nd_exp_phen_rs =  $experiment_rs->search_related('nd_experiment_phenotypes');         
+	my $phenotype_rs = $nd_exp_phen_rs->search_related('phenotype') if $nd_exp_phen_rs;
+	$phenotypes{ $project->description }->{phenotypes} = $phenotype_rs;
+    }
+    return \%phenotypes;
+}
+
 # You can replace this text with custom content, and it will be preserved on regeneration
 1;
 
