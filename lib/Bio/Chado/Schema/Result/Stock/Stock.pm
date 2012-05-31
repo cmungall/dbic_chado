@@ -379,6 +379,67 @@ use base qw/ DBIx::Class::ResultSet /;
 
 use Carp;
 
+                                                                                                                                    
+=head2 stock_phenotypes_rs
+   Usage: $schema->resultset("Stock::Stock")->stock_phenotypes_rs($stock_rs);
+   Desc:  retrieve a resultset for stock(s) with phenotyping experiments with the following values mapped to [column name]
+          stock_id [stock_id]
+          phenotype.value [value]
+          observable.name [observable] (the cvterm name for the phenotype.observable field)
+          observable_cvterm_id [observable_id]
+          observable.definition [definition]
+          unit_name (from phenotype_cvterm) 
+          cv_name (the cv_name for the phenotype_cvterm)
+          type_name (the cvterm name for the phenotype_cvterm)
+          method_name (a phenotypeprop value)
+          dbxref.accession [accession] of the observable cvterm
+          db.name of the observable cvterm [db_name] (useful for constructing the ontology ID of the observable)
+          project.description [project_description] (useful for grouping phenotype values by projects)
+   Args:  a L<Bio::Chado::Schema::Result::Stock::Stock>  resultset
+   Ret:   a resultset with the above columns. Access the data with e.g. $rs->get_column('stock_id') 
+=cut                 
+
+sub stock_phenotypes_rs {
+    my $self = shift;
+    my $stock = shift;
+   
+    my $rs = $stock->search( 
+	{ 
+	    'observable.name' => { '!=', undef } ,
+	} , {
+	    join => [ 
+		{ nd_experiment_stocks => { 
+		    nd_experiment => { 
+			nd_experiment_phenotypes => {
+			    phenotype  => { 
+				observable        => { dbxref   => 'db' },
+				phenotypeprops    => 'type',
+				phenotype_cvterms => { cvterm =>  'cv' } 
+			    }
+			},
+			nd_experiment_projects => 'project',
+		    }
+		  }
+		} , 
+		],
+	    select    => [ qw/  stock_id phenotype.value observable.name observable.cvterm_id observable.definition phenotypeprops.value type.name dbxref.accession db.name  project.description  cv.name cvterm.name   / ],
+	    as        => [ qw/ stock_id value observable observable_id definition method_name type_name  accession db_name project_description cv_name unit_name / ],
+	    distinct  => 1,
+	    order_by  => [ 'project.description' , 'observable.name' ],
+	} );
+    return $rs;
+}
+
+
+=head2 stock_project_phenotypes
+   Usage: $schema->resultset("Stock::Stock")->stock_project_phenotypes($stock_rs);
+   Desc:  retrieve a list of phenotype resultsets by project name
+   Args:  a L<Bio::Chado::Schema::Result::Stock::Stock> object or a stock resultset
+   Ret:   hashref key = project descriptions, values = hash ref of 
+          {phenotypes} = phenotype resultset
+          {project}   =  L<Bio::Chado::Schema::Result::Project::Project> object
+=cut
+
 sub stock_project_phenotypes {
     my $self = shift;
     my $stock = shift;
