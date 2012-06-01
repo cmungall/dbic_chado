@@ -369,7 +369,6 @@ sub create_stockprops {
 }
 
 
-
 ############ STOCK CUSTOM RESULTSET PACKAGE #############################
 
 
@@ -381,7 +380,7 @@ use Carp;
 
                                                                                                                                     
 =head2 stock_phenotypes_rs
-   Usage: $schema->resultset("Stock::Stock")->stock_phenotypes_rs($stock_rs);
+   Usage: $schema->resultset("Stock::Stock")->stock_phenotypes_rs($stock_rs, $schema);
    Desc:  retrieve a resultset for stock(s) with phenotyping experiments with the following values mapped to [column name]
           stock_id [stock_id]
           phenotype.value [value]
@@ -395,17 +394,20 @@ use Carp;
           dbxref.accession [accession] of the observable cvterm
           db.name of the observable cvterm [db_name] (useful for constructing the ontology ID of the observable)
           project.description [project_description] (useful for grouping phenotype values by projects)
-   Args:  a L<Bio::Chado::Schema::Result::Stock::Stock>  resultset
+   Args:  a L<Bio::Chado::Schema::Result::Stock::Stock>  resultset and a BCS schema object
    Ret:   a resultset with the above columns. Access the data with e.g. $rs->get_column('stock_id') 
 =cut                 
 
 sub stock_phenotypes_rs {
     my $self = shift;
     my $stock = shift;
-   
-    my $rs = $stock->search( 
-	{ 
+    my $schema = shift;
+
+    #my $rs = $stock->search_rs( 
+        my $rs = $schema->resultset("Stock::Stock")->search_rs(
+	    { 
 	    'observable.name' => { '!=', undef } ,
+	    'me.stock_id'     => { '-in' => $stock->get_column('stock_id')->as_query },                                
 	} , {
 	    join => [ 
 		{ nd_experiment_stocks => { 
@@ -415,10 +417,10 @@ sub stock_phenotypes_rs {
 				observable        => { dbxref   => 'db' },
 				phenotypeprops    => 'type',
 				phenotype_cvterms => { cvterm =>  'cv' } 
-			    }
+			    },
 			},
 			nd_experiment_projects => 'project',
-		    }
+		    },
 		  }
 		} , 
 		],
@@ -426,7 +428,7 @@ sub stock_phenotypes_rs {
 	    as        => [ qw/ stock_id value observable observable_id definition method_name type_name  accession db_name project_description cv_name unit_name / ],
 	    distinct  => 1,
 	    order_by  => [ 'project.description' , 'observable.name' ],
-	} );
+	}  );
     return $rs;
 }
 
