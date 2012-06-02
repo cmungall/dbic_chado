@@ -380,7 +380,7 @@ use Carp;
 
                                                                                                                                     
 =head2 stock_phenotypes_rs
-   Usage: $schema->resultset("Stock::Stock")->stock_phenotypes_rs($stock_rs, $schema);
+   Usage: $schema->resultset("Stock::Stock")->stock_phenotypes_rs($stock_rs);
    Desc:  retrieve a resultset for stock(s) with phenotyping experiments with the following values mapped to [column name]
           stock_id [stock_id]
           phenotype.value [value]
@@ -394,18 +394,16 @@ use Carp;
           dbxref.accession [accession] of the observable cvterm
           db.name of the observable cvterm [db_name] (useful for constructing the ontology ID of the observable)
           project.description [project_description] (useful for grouping phenotype values by projects)
-   Args:  a L<Bio::Chado::Schema::Result::Stock::Stock>  resultset and a BCS schema object
+   Args:  a L<Bio::Chado::Schema::Result::Stock::Stock>  resultset
    Ret:   a resultset with the above columns. Access the data with e.g. $rs->get_column('stock_id') 
 =cut                 
 
 sub stock_phenotypes_rs {
     my $self = shift;
     my $stock = shift;
-    my $schema = shift;
 
-    #my $rs = $stock->search_rs( 
-        my $rs = $schema->resultset("Stock::Stock")->search_rs(
-	    { 
+    my $rs = $stock->result_source->schema->resultset("Stock::Stock")->search_rs(
+	{ 
 	    'observable.name' => { '!=', undef } ,
 	    'me.stock_id'     => { '-in' => $stock->get_column('stock_id')->as_query },                                
 	} , {
