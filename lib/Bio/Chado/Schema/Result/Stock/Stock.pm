@@ -378,7 +378,7 @@ use base qw/ DBIx::Class::ResultSet /;
 
 use Carp;
 
-                                                                                                                                    
+
 =head2 stock_phenotypes_rs
    Usage: $schema->resultset("Stock::Stock")->stock_phenotypes_rs($stock_rs);
    Desc:  retrieve a resultset for stock(s) with phenotyping experiments with the following values mapped to [column name]
@@ -395,32 +395,32 @@ use Carp;
           db.name of the observable cvterm [db_name] (useful for constructing the ontology ID of the observable)
           project.description [project_description] (useful for grouping phenotype values by projects)
    Args:  a L<Bio::Chado::Schema::Result::Stock::Stock>  resultset
-   Ret:   a resultset with the above columns. Access the data with e.g. $rs->get_column('stock_id') 
-=cut                 
+   Ret:   a resultset with the above columns. Access the data with e.g. $rs->get_column('stock_id')
+=cut
 
 sub stock_phenotypes_rs {
     my $self = shift;
     my $stock = shift;
 
     my $rs = $stock->result_source->schema->resultset("Stock::Stock")->search_rs(
-	{ 
+	{
 	    'observable.name' => { '!=', undef } ,
-	    'me.stock_id'     => { '-in' => $stock->get_column('stock_id')->as_query },                                
+	    'me.stock_id'     => { '-in' => $stock->get_column('stock_id')->as_query },
 	} , {
-	    join => [ 
-		{ nd_experiment_stocks => { 
-		    nd_experiment => { 
+	    join => [
+		{ nd_experiment_stocks => {
+		    nd_experiment => {
 			nd_experiment_phenotypes => {
-			    phenotype  => { 
+			    phenotype  => {
 				observable        => { dbxref   => 'db' },
 				phenotypeprops    => 'type',
-				phenotype_cvterms => { cvterm =>  'cv' } 
+				phenotype_cvterms => { cvterm =>  'cv' }
 			    },
 			},
 			nd_experiment_projects => 'project',
 		    },
 		  }
-		} , 
+		} ,
 		],
 	    select    => [ qw/  stock_id phenotype.value observable.name observable.cvterm_id observable.definition phenotypeprops.value type.name dbxref.accession db.name  project.description  cv.name cvterm.name   / ],
 	    as        => [ qw/ stock_id value observable observable_id definition method_name type_name  accession db_name project_description cv_name unit_name / ],
@@ -430,7 +430,55 @@ sub stock_phenotypes_rs {
     return $rs;
 }
 
+##################
 
+
+=head2 stock_genotypes_rs
+   Usage: $schema->resultset("Stock::Stock")->stock_genotypes_rs($stock_rs);
+   Desc:  retrieve a resultset for stock(s) with genotyping experiments with the following values mapped to [column name]
+          stock_id [stock_id]
+          genotype.name [name]
+          genotype.uniquname [uniquename]
+          genotype.description [description]
+          genotype.type.name [type_name] (the cvterm name for the genotype type)
+          propvalue [propvalue] (a genotypeprop value)
+
+   Args:  a L<Bio::Chado::Schema::Result::Stock::Stock>  resultset
+   Ret:   a resultset with the above columns. Access the data with e.g. $rs->get_column('stock_id')
+=cut
+
+sub stock_genotypes_rs {
+    my $self = shift;
+    my $stock = shift;
+
+    my $rs = $stock->result_source->schema->resultset("Stock::Stock")->search_rs(
+	{
+	    'genotype.uniquename' => { '!=', undef } ,
+	    'me.stock_id'     => { '-in' => $stock->get_column('stock_id')->as_query },
+	} , {
+	    join => [
+		{ nd_experiment_stocks => {
+		    nd_experiment => {
+			nd_experiment_genotypes => {
+			    genotype  => {
+                                genotypeprops    => 'type',
+                            },
+                            'type',
+			},
+                    },
+		  }
+		} ,
+		],
+	    select    => [ qw/  stock_id genotype.name genotype.uniquename genotype.description type.name genotypeprops.value   / ],
+	    as        => [ qw/ stock_id name uniquename description type_name propvalue / ],
+	    distinct  => 1,
+	    order_by  => [],
+	}  );
+    return $rs;
+}
+
+
+###############
 =head2 stock_project_phenotypes
    Usage: $schema->resultset("Stock::Stock")->stock_project_phenotypes($stock_rs);
    Desc:  retrieve a list of phenotype resultsets by project name
@@ -444,7 +492,7 @@ sub stock_project_phenotypes {
     my $self = shift;
     my $stock = shift;
 
-    my %phenotypes;    
+    my %phenotypes;
     my $project_rs = $stock->search_related('nd_experiment_stocks')
 	->search_related('nd_experiment')
 	->search_related('nd_experiment_projects')
@@ -457,7 +505,7 @@ sub stock_project_phenotypes {
 			     { prefetch => { 'nd_experiment_projects' => 'project' } },
 	    );
 	$phenotypes{ $project->description }->{project} = $project;
-	my $nd_exp_phen_rs =  $experiment_rs->search_related('nd_experiment_phenotypes');         
+	my $nd_exp_phen_rs =  $experiment_rs->search_related('nd_experiment_phenotypes');
 	my $phenotype_rs = $nd_exp_phen_rs->search_related('phenotype') if $nd_exp_phen_rs;
 	$phenotypes{ $project->description }->{phenotypes} = $phenotype_rs;
     }
