@@ -401,11 +401,11 @@ use Carp;
 sub stock_phenotypes_rs {
     my $self = shift;
     my $stock = shift;
-
+    print STDERR "******^^^^^looking at stock_rs " . ref($stock) . " \n";
     my $rs = $stock->result_source->schema->resultset("Stock::Stock")->search_rs(
 	{
 	    'observable.name' => { '!=', undef } ,
-	    'me.stock_id'     => { '-in' => $stock->get_column('stock_id')->as_query },
+	    'me.stock_id'     => {  '-in' => $stock->get_column('stock_id')->as_query },
 	} , {
 	    join => [
 		{ nd_experiment_stocks => {
@@ -430,6 +430,34 @@ sub stock_phenotypes_rs {
     return $rs;
 }
 
+=head2 recursive_phenotypes_rs
+    Usage: $schema->resultset("Stock::Stock")->recursive_phenotypes_rs($stock_rs, \@results)
+    Desc: Retrieve recursively phenotypes of stock objects and their subjects
+    Args: Stock resultSet and an arrayref with the results
+    Ret: listref of stock_phenotypes_rs (see function stock_phenotypes_rs for columns fetched)
+=cut    
+
+sub recursive_phenotypes_rs {
+    my $self = shift ; 
+    my $stock_rs = shift;
+    my $results = shift; 
+
+    my $rs = $self->stock_phenotypes_rs($stock_rs);
+    push @$results, $rs ;
+    #my $subjects = $stock_rs->search_related('stock_relationship_objects')->search_related('subject');
+    my $subjects = $stock_rs->result_source->schema->resultset("Stock::Stock")->search(
+	{
+	    'me.stock_id' => { '-in' => [ map { $_->subject_id }  $stock_rs->search_related('stock_relationship_objects')->all ] }
+	} );
+  
+    print STDERR "************recursive_phenotyeps_rs looking at stock_rs " . ref($stock_rs) . " and subjects " . ref($subjects) . "  \n\n";
+    if ($subjects->count ) { 
+	$self->recursive_phenotypes_rs($subjects, $results);
+    }
+    return $results;
+}
+
+#####
 ##################
 
 
