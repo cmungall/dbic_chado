@@ -401,7 +401,6 @@ use Carp;
 sub stock_phenotypes_rs {
     my $self = shift;
     my $stock = shift;
-    print STDERR "******^^^^^looking at stock_rs " . ref($stock) . " \n";
     my $rs = $stock->result_source->schema->resultset("Stock::Stock")->search_rs(
 	{
 	    'observable.name' => { '!=', undef } ,
@@ -450,7 +449,6 @@ sub recursive_phenotypes_rs {
 	    'me.stock_id' => { '-in' => [ map { $_->subject_id }  $stock_rs->search_related('stock_relationship_objects')->all ] }
 	} );
   
-    print STDERR "************recursive_phenotyeps_rs looking at stock_rs " . ref($stock_rs) . " and subjects " . ref($subjects) . "  \n\n";
     if ($subjects->count ) { 
 	$self->recursive_phenotypes_rs($subjects, $results);
     }
