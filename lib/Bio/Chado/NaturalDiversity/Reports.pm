@@ -99,6 +99,7 @@ sub phenotypes_by_trait {
         while ( my $r =  $rs->next )  {
             my $observable = $r->get_column('observable');
             next if !$observable;
+            no warnings 'uninitialized';
             if ($cvterm_name eq $observable) { $replicate ++ ; } else { $replicate = 1 ; }
             $cvterm_name = $observable;
             my $accession = $r->get_column('accession');

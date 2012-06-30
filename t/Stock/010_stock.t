@@ -8,6 +8,7 @@ use lib "$FindBin::RealBin/../lib";
 use Test::More ;
 use Test::Exception;
 use Bio::Chado::Schema::Test;
+use  Bio::Chado::NaturalDiversity::Reports;
 
 my $schema = Bio::Chado::Schema::Test->init_schema();
 
@@ -125,7 +126,7 @@ $schema->txn_do( sub {
         my $r = $stock_phenotype_rs->next;
 
         is($r->get_column('stock_id') , $stock->stock_id, "stock_id test");
-        is($r->get_column('value'), $phen_value, "phenotye value test");
+        is($r->get_column('value'), $phen_value, "phenotpye value test");
         is($r->get_column('observable'),  $obs_name, "observable cvterm name test");
         is($r->get_column('observable_id'),  $observable->cvterm_id, "observable cvterm id test");
         is($r->get_column('unit_name'),  $unit_name, "unit name test");
@@ -135,10 +136,46 @@ $schema->txn_do( sub {
 
         # test the recursive function
         #create first some stock relationships
+        my $parent_stock =  $stock_rs->create( {
+            name => "parent of $name",
+            uniquename => "parent of $uniquename",
+            type_id => $cvterm->cvterm_id #a test stock
+                                               } );
+        my $parent_of = $cvterm_rs->create_with(
+            { name   => 'parent_of' });
+        $parent_stock->find_or_create_related('stock_relationship_objects', {
+	    type_id => $parent_of->cvterm_id,
+	    subject_id => $stock->stock_id,
+                                              } );
+        my $grandparent_stock = $stock_rs->create( {
+            name => "grandparent of $name",
+            uniquename => "grandparent of $uniquename",
+            type_id => $cvterm->cvterm_id
+                                                   } );
+        $grandparent_stock->find_or_create_related('stock_relationship_objects', {
+	    type_id => $parent_of->cvterm_id,
+	    subject_id => $parent_stock->stock_id,
+                                                   } );
+        my $test_stock_rs = $stock_rs->search( { stock_id => $grandparent_stock->stock_id } ) ;
+        my $results = $schema->resultset("Stock::Stock")->recursive_phenotypes_rs($test_stock_rs, []);
+        ok(scalar(@$results) > 0 , "Got recursive phenotypes test");
+        foreach my $phen_rs (@$results) {
+            while (my $phen =  $phen_rs->next) {
+                is($phen->get_column('stock_id') , $stock->stock_id, "stock_id test");
+                is($phen->get_column('value'), $phen_value, "phenotpye value test");
+                is($phen->get_column('observable'),  $obs_name, "observable cvterm name test");
+                is($phen->get_column('observable_id'),  $observable->cvterm_id, "observable cvterm id test");
+                is($phen->get_column('unit_name'),  $unit_name, "unit name test");
+                is($phen->get_column('accession'),  $obs_dbxref_acc, "dbxref accession test");
+                is($phen->get_column('db_name'),  $obs_db_name, "db name test");
+                is($phen->get_column('project_description'),  $project_name, "project description test");
+            }
+        }
+        $results = $schema->resultset("Stock::Stock")->recursive_phenotypes_rs($test_stock_rs, []);
+        my $report = Bio::Chado::NaturalDiversity::Reports->new;
+        my $d = $report->phenotypes_by_trait($results);
+        like($d, qr/$obs_name/, 'NaturalDiversity::Reports phenotypes_by_trait test');
 
-        my $results = $schema->resultset("Stock::Stock")->recursive_phenotypes_rs($stock_rs, []);
-
-        
         done_testing;
     } );
 

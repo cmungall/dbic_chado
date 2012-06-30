@@ -443,7 +443,6 @@ sub recursive_phenotypes_rs {
 
     my $rs = $self->stock_phenotypes_rs($stock_rs);
     push @$results, $rs ;
-    #my $subjects = $stock_rs->search_related('stock_relationship_objects')->search_related('subject');
     my $subjects = $stock_rs->result_source->schema->resultset("Stock::Stock")->search(
 	{
 	    'me.stock_id' => { '-in' => [ map { $_->subject_id }  $stock_rs->search_related('stock_relationship_objects')->all ] }
