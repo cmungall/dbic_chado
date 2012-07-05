@@ -425,8 +425,8 @@ sub stock_phenotypes_rs {
                   }
                 } ,
                 ],
-            select    => [ qw/  me.stock_id phenotype.value observable.name observable.cvterm_id observable.definition phenotypeprops.value type.name dbxref.accession db.name  project.description  cv.name cvterm.name   / ],
-            as        => [ qw/ stock_id value observable observable_id definition method_name type_name  accession db_name project_description cv_name unit_name / ],
+            select    => [ qw/  me.stock_id me.uniquename phenotype.value observable.name observable.cvterm_id observable.definition phenotypeprops.value type.name dbxref.accession db.name  project.description  cv.name cvterm.name   / ],
+            as        => [ qw/ stock_id uniquename value observable observable_id definition method_name type_name  accession db_name project_description cv_name unit_name / ],
             distinct  => 1,
             order_by  => [ 'project.description' , 'observable.name' ],
         }  );
@@ -499,7 +499,7 @@ sub stock_genotypes_rs {
                   }
                 } ,
                 ],
-            select    => [ qw/  stock_id genotype.name genotype.uniquename genotype.description type.name genotypeprops.value   / ],
+            select    => [ qw/  me.stock_id genotype.name genotype.uniquename genotype.description type.name genotypeprops.value   / ],
             as        => [ qw/ stock_id name uniquename description type_name propvalue / ],
             distinct  => 1,
             order_by  => [],
