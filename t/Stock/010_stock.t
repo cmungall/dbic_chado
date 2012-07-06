@@ -144,8 +144,8 @@ $schema->txn_do( sub {
         my $parent_of = $cvterm_rs->create_with(
             { name   => 'parent_of' });
         $parent_stock->find_or_create_related('stock_relationship_objects', {
-	    type_id => $parent_of->cvterm_id,
-	    subject_id => $stock->stock_id,
+            type_id => $parent_of->cvterm_id,
+            subject_id => $stock->stock_id,
                                               } );
         my $grandparent_stock = $stock_rs->create( {
             name => "grandparent of $name",
@@ -153,8 +153,8 @@ $schema->txn_do( sub {
             type_id => $cvterm->cvterm_id
                                                    } );
         $grandparent_stock->find_or_create_related('stock_relationship_objects', {
-	    type_id => $parent_of->cvterm_id,
-	    subject_id => $parent_stock->stock_id,
+            type_id => $parent_of->cvterm_id,
+            subject_id => $parent_stock->stock_id,
                                                    } );
         my $test_stock_rs = $stock_rs->search( { stock_id => $grandparent_stock->stock_id } ) ;
         my $results = $schema->resultset("Stock::Stock")->recursive_phenotypes_rs($test_stock_rs, []);
