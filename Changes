@@ -1,5 +1,14 @@
 {{$NEXT}}
 
+0.20000   2012-07-06 15:04:34 America/New_York
+
+ * added Bio::Chado::NaturalDiversity::Reports, which has some canned
+   reporting functions for working with natural diversity data (nmenda)
+ * added greate_genotypeprops to Genetic::Genotype (nmenda)
+ * added stock_phenotypes_rs, recursive_phenotypes_rs,
+   stock_genotypes_rs, and stock_project_phenotypes to Stock::Stock
+   (nmenda)
+
 0.10010   2011-11-08 16:39:15 America/New_York
 
  * fix (in cleanup) errors related to schema object DESTROY function
