@@ -379,7 +379,10 @@ use base qw/ DBIx::Class::ResultSet /;
 use Carp;
 
 
+=head1 ADDITIONAL METHODS
+
 =head2 stock_phenotypes_rs
+
    Usage: $schema->resultset("Stock::Stock")->stock_phenotypes_rs($stock_rs);
    Desc:  retrieve a resultset for stock(s) with phenotyping experiments with the following values mapped to [column name]
           stock_id [stock_id]
@@ -387,7 +390,7 @@ use Carp;
           observable.name [observable] (the cvterm name for the phenotype.observable field)
           observable_cvterm_id [observable_id]
           observable.definition [definition]
-          unit_name (from phenotype_cvterm) 
+          unit_name (from phenotype_cvterm)
           cv_name (the cv_name for the phenotype_cvterm)
           type_name (the cvterm name for the phenotype_cvterm)
           method_name (a phenotypeprop value)
@@ -396,6 +399,7 @@ use Carp;
           project.description [project_description] (useful for grouping phenotype values by projects)
    Args:  a L<Bio::Chado::Schema::Result::Stock::Stock>  resultset
    Ret:   a resultset with the above columns. Access the data with e.g. $rs->get_column('stock_id')
+
 =cut
 
 sub stock_phenotypes_rs {
@@ -430,16 +434,18 @@ sub stock_phenotypes_rs {
 }
 
 =head2 recursive_phenotypes_rs
+
     Usage: $schema->resultset("Stock::Stock")->recursive_phenotypes_rs($stock_rs, \@results)
     Desc: Retrieve recursively phenotypes of stock objects and their subjects
     Args: Stock resultSet and an arrayref with the results
     Ret: listref of stock_phenotypes_rs (see function stock_phenotypes_rs for columns fetched)
-=cut    
+
+=cut
 
 sub recursive_phenotypes_rs {
-    my $self = shift ; 
+    my $self = shift ;
     my $stock_rs = shift;
-    my $results = shift; 
+    my $results = shift;
 
     my $rs = $self->stock_phenotypes_rs($stock_rs);
     push @$results, $rs ;
@@ -447,20 +453,18 @@ sub recursive_phenotypes_rs {
 	{
 	    'me.stock_id' => { '-in' => [ map { $_->subject_id }  $stock_rs->search_related('stock_relationship_objects')->all ] }
 	} );
-  
-    if ($subjects->count ) { 
+
+    if ($subjects->count ) {
 	$self->recursive_phenotypes_rs($subjects, $results);
     }
     return $results;
 }
 
-#####
-##################
-
-
 =head2 stock_genotypes_rs
+
    Usage: $schema->resultset("Stock::Stock")->stock_genotypes_rs($stock_rs);
-   Desc:  retrieve a resultset for stock(s) with genotyping experiments with the following values mapped to [column name]
+   Desc:  retrieve a resultset for stock(s) with genotyping experiments
+          with the following values mapped to [column name]
           stock_id [stock_id]
           genotype.name [name]
           genotype.uniquname [uniquename]
@@ -468,8 +472,9 @@ sub recursive_phenotypes_rs {
           genotype.type.name [type_name] (the cvterm name for the genotype type)
           propvalue [propvalue] (a genotypeprop value)
 
-   Args:  a L<Bio::Chado::Schema::Result::Stock::Stock>  resultset
+   Args:  a L<Bio::Chado::Schema::Result::Stock::Stock> resultset
    Ret:   a resultset with the above columns. Access the data with e.g. $rs->get_column('stock_id')
+
 =cut
 
 sub stock_genotypes_rs {
@@ -503,14 +508,15 @@ sub stock_genotypes_rs {
 }
 
 
-###############
 =head2 stock_project_phenotypes
+
    Usage: $schema->resultset("Stock::Stock")->stock_project_phenotypes($stock_rs);
    Desc:  retrieve a list of phenotype resultsets by project name
    Args:  a L<Bio::Chado::Schema::Result::Stock::Stock> object or a stock resultset
-   Ret:   hashref key = project descriptions, values = hash ref of 
+   Ret:   hashref key = project descriptions, values = hash ref of
           {phenotypes} = phenotype resultset
           {project}   =  L<Bio::Chado::Schema::Result::Project::Project> object
+
 =cut
 
 sub stock_project_phenotypes {
@@ -537,6 +543,5 @@ sub stock_project_phenotypes {
     return \%phenotypes;
 }
 
-# You can replace this text with custom content, and it will be preserved on regeneration
 1;
 
