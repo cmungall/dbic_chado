@@ -2,96 +2,71 @@ package Bio::Chado::NaturalDiversity::Reports;
 
 =head1 NAME
 
-    Bio::Chado::NaturalDiversity::Reports
+Bio::Chado::NaturalDiversity::Reports
 
 =head1 SYNOPSIS
 
- use Bio::Chado::NaturalDiversity::Reports
+  use Bio::Chado::NaturalDiversity::Reports
 
-    my $sreport = Bio::Chado::NaturalDiversity::Reports->new;
- my $data = $sreport->phenotypes_by_trait($phenotypes);
+  my $sreport = Bio::Chado::NaturalDiversity::Reports->new;
+  my $data = $sreport->phenotypes_by_trait($phenotypes);
 
 =head1 DESCRIPTION
 
- A collection of functions for formatting Chado stock related data in different data structures
- which can be useful for passing to different programs and software.
- Because the Chado stock table is the key for storing samples subjected to genotyping and
- phenotyping experiments, it interacts with several other Chado modules, such as
- NaturalDiversity for storing the experiment data,
- Project for storing the metadata about the experiments,
- Phenotype for the phenotyping values
- Genotype for the genotyping values.
+A collection of functions for formatting Chado stock related data in
+different data structures which can be useful for passing to different
+programs and software.  Because the Chado stock table is the key for
+storing samples subjected to genotyping and phenotyping experiments,
+it interacts with several other Chado modules, such as
+NaturalDiversity for storing the experiment data, Project for storing
+the metadata about the experiments, Phenotype for the phenotyping
+values Genotype for the genotyping values.
 
- This module generates several reports for easier access to such data.
+This module generates several reports for easier access to such data.
 
- Note that all data reports heavily rely on the Natural Diversity schema.
- The results in each report may differ based on how the experiment data is stored in the databse. There is no one correct way of loading phenotyping and genotyping data in this module,
-  However there are some examples for 'best practice' in the GMOD Wiki (http://gmod.org/wiki/Chado_Natural_Diversity_Module)
+Note that all data reports heavily rely on the Natural Diversity
+schema.  The results in each report may differ based on how the
+experiment data is stored in the databse.
 
+There is no one correct way
+of loading phenotyping and genotyping data in this module, however
+there are some examples for 'best practice' in the GMOD Wiki
+(http://gmod.org/wiki/Chado_Natural_Diversity_Module)
 
-
-=head1 AUTHOR
-
-Naama Menda <nm249@cornell.edu>
-
-
-=head1 COPYRIGHT AND LICENCE
-
-Copyright 2012 Boyce Thompson Institute for Plant Research
-
-Copyright 2012 Sol Genomics Network (solgenomics.net)
-
-This program is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself.
+=head1 METHODS
 
 =cut
 
-use Modern::Perl;
-use Bio::Chado::Schema;
-
-
+use strict;
+use warnings;
 
 =head2 new
 
- Usage: my $nd_report = Bio::Chado::NaturalDiversity::Reports->new()
- Desc:
- Ret:
- Args:
- Side Effects:
- Example:
+Make a new Reports object.
 
 =cut
 
-
 sub new {
-    my $class = shift;
-    my $self = bless( {} , $class);
-
-    return $self;
+    bless {}, shift;
 }
-
 
 =head2 phenotypes_by_trait
 
   Usage: $self->phenotypes_by_trait($phenotype_rs , { %args } )
-    Desc:  generate a report of phenotype values by trait name/accession
-    Ret:   arrayref of tab delimited data
-    Args:  a listref of L<Bio::Chado::Schema::Result::Phenotype::Phenotype> ResultSets
-        [optional] list of args to filter the report. Currently supported args are
+  Desc:  generate a report of phenotype values by trait name/accession
+  Args:  an arrayref of L<Bio::Chado::Schema::Result::Phenotype::Phenotype> ResultSets
+         [optional] list of args to filter the report. Currently supported args are
 
- Side Effects: none
-    Example:
+  Ret:   arrayref of tab delimited data
 
 =cut
 
 sub phenotypes_by_trait {
     my $self = shift;
     my $phenotypes = shift;
-    #my %args = shift;
-    #############
-    ##
+
     my $phen_hashref; #hashref of hashes for the phenotype data
-    ##
+
     my %cvterms ; #hash for unique cvterms
     my $replicate = 1;
     my $cvterm_name;
