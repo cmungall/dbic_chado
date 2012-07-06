@@ -254,11 +254,4 @@ Robert Buels, <rmb32@cornell.edu>
 
 Naama Menda, <naama.menda@gmail.com>
 
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2009 Boyce Thompson Institute for Plant Research
-
-This program is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
-
 =cut

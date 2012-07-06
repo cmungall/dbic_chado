@@ -462,19 +462,4 @@ This script basically:
        optional path to existing chado checkout to use.  if passed,
        will not check out a new copy from SVN.
 
-=head1 MAINTAINER
-
-Robert Buels, E<lt>rmb32@cornell.eduE<gt>
-
-=head1 AUTHOR
-
-Robert Buels, E<lt>rmb32@cornell.eduE<gt>
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2009 Boyce Thompson Institute for Plant Research
-
-This program is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
-
 =cut

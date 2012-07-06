@@ -207,18 +207,11 @@ Robert Buels, <rmb32@cornell.edu>
 
 =head1 CONTRIBUTORS
 
-Aureliano Bombarely, <ab782@cornell.edu>
-
 Naama Menda, <nm249@cornell.edu>
 
+Aureliano Bombarely, <ab782@cornell.edu>
+
 Jonathan "Duke" Leto, <jonathan@leto.net>
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2009 Boyce Thompson Institute for Plant Research
-
-This program is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
 
 =cut
 
