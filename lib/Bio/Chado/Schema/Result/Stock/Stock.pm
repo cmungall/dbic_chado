@@ -406,30 +406,30 @@ sub stock_phenotypes_rs {
     my $self = shift;
     my $stock = shift;
     my $rs = $stock->result_source->schema->resultset("Stock::Stock")->search_rs(
-	{
-	    'observable.name' => { '!=', undef } ,
-	    'me.stock_id'     => {  '-in' => $stock->get_column('stock_id')->as_query },
-	} , {
-	    join => [
-		{ nd_experiment_stocks => {
-		    nd_experiment => {
-			nd_experiment_phenotypes => {
-			    phenotype  => {
-				observable        => { dbxref   => 'db' },
-				phenotypeprops    => 'type',
-				phenotype_cvterms => { cvterm =>  'cv' }
-			    },
-			},
-			nd_experiment_projects => 'project',
-		    },
-		  }
-		} ,
-		],
-	    select    => [ qw/  me.stock_id phenotype.value observable.name observable.cvterm_id observable.definition phenotypeprops.value type.name dbxref.accession db.name  project.description  cv.name cvterm.name   / ],
-	    as        => [ qw/ stock_id value observable observable_id definition method_name type_name  accession db_name project_description cv_name unit_name / ],
-	    distinct  => 1,
-	    order_by  => [ 'project.description' , 'observable.name' ],
-	}  );
+        {
+            'observable.name' => { '!=', undef } ,
+            'me.stock_id'     => {  '-in' => $stock->get_column('stock_id')->as_query },
+        } , {
+            join => [
+                { nd_experiment_stocks => {
+                    nd_experiment => {
+                        nd_experiment_phenotypes => {
+                            phenotype  => {
+                                observable        => { dbxref   => 'db' },
+                                phenotypeprops    => 'type',
+                                phenotype_cvterms => { cvterm =>  'cv' }
+                            },
+                        },
+                        nd_experiment_projects => 'project',
+                    },
+                  }
+                } ,
+                ],
+            select    => [ qw/  me.stock_id phenotype.value observable.name observable.cvterm_id observable.definition phenotypeprops.value type.name dbxref.accession db.name  project.description  cv.name cvterm.name   / ],
+            as        => [ qw/ stock_id value observable observable_id definition method_name type_name  accession db_name project_description cv_name unit_name / ],
+            distinct  => 1,
+            order_by  => [ 'project.description' , 'observable.name' ],
+        }  );
     return $rs;
 }
 
@@ -450,12 +450,12 @@ sub recursive_phenotypes_rs {
     my $rs = $self->stock_phenotypes_rs($stock_rs);
     push @$results, $rs ;
     my $subjects = $stock_rs->result_source->schema->resultset("Stock::Stock")->search(
-	{
-	    'me.stock_id' => { '-in' => [ map { $_->subject_id }  $stock_rs->search_related('stock_relationship_objects')->all ] }
-	} );
+        {
+            'me.stock_id' => { '-in' => [ map { $_->subject_id }  $stock_rs->search_related('stock_relationship_objects')->all ] }
+        } );
 
     if ($subjects->count ) {
-	$self->recursive_phenotypes_rs($subjects, $results);
+        $self->recursive_phenotypes_rs($subjects, $results);
     }
     return $results;
 }
@@ -482,28 +482,28 @@ sub stock_genotypes_rs {
     my $stock = shift;
 
     my $rs = $stock->result_source->schema->resultset("Stock::Stock")->search_rs(
-	{
-	    'genotype.uniquename' => { '!=', undef } ,
-	    'me.stock_id'     => { '-in' => $stock->get_column('stock_id')->as_query },
-	} , {
-	    join => [
-		{ nd_experiment_stocks => {
-		    nd_experiment => {
-			nd_experiment_genotypes => {
-			    genotype  => {
+        {
+            'genotype.uniquename' => { '!=', undef } ,
+            'me.stock_id'     => { '-in' => $stock->get_column('stock_id')->as_query },
+        } , {
+            join => [
+                { nd_experiment_stocks => {
+                    nd_experiment => {
+                        nd_experiment_genotypes => {
+                            genotype  => {
                                 genotypeprops    => 'type',
                             },
                             'type',
-			},
+                        },
                     },
-		  }
-		} ,
-		],
-	    select    => [ qw/  stock_id genotype.name genotype.uniquename genotype.description type.name genotypeprops.value   / ],
-	    as        => [ qw/ stock_id name uniquename description type_name propvalue / ],
-	    distinct  => 1,
-	    order_by  => [],
-	}  );
+                  }
+                } ,
+                ],
+            select    => [ qw/  stock_id genotype.name genotype.uniquename genotype.description type.name genotypeprops.value   / ],
+            as        => [ qw/ stock_id name uniquename description type_name propvalue / ],
+            distinct  => 1,
+            order_by  => [],
+        }  );
     return $rs;
 }
 
@@ -525,20 +525,20 @@ sub stock_project_phenotypes {
 
     my %phenotypes;
     my $project_rs = $stock->search_related('nd_experiment_stocks')
-	->search_related('nd_experiment')
-	->search_related('nd_experiment_projects')
-	->search_related('project' , {} , { distinct =>1 } );
+        ->search_related('nd_experiment')
+        ->search_related('nd_experiment_projects')
+        ->search_related('project' , {} , { distinct =>1 } );
 
     while (my $project = $project_rs->next) {
-	my $experiment_rs = $stock->search_related('nd_experiment_stocks')
-	    ->search_related('nd_experiment' ,
-			     { 'project.project_id' => $project->project_id },
-			     { prefetch => { 'nd_experiment_projects' => 'project' } },
-	    );
-	$phenotypes{ $project->description }->{project} = $project;
-	my $nd_exp_phen_rs =  $experiment_rs->search_related('nd_experiment_phenotypes');
-	my $phenotype_rs = $nd_exp_phen_rs->search_related('phenotype') if $nd_exp_phen_rs;
-	$phenotypes{ $project->description }->{phenotypes} = $phenotype_rs;
+        my $experiment_rs = $stock->search_related('nd_experiment_stocks')
+            ->search_related('nd_experiment' ,
+                             { 'project.project_id' => $project->project_id },
+                             { prefetch => { 'nd_experiment_projects' => 'project' } },
+            );
+        $phenotypes{ $project->description }->{project} = $project;
+        my $nd_exp_phen_rs =  $experiment_rs->search_related('nd_experiment_phenotypes');
+        my $phenotype_rs = $nd_exp_phen_rs->search_related('phenotype') if $nd_exp_phen_rs;
+        $phenotypes{ $project->description }->{phenotypes} = $phenotype_rs;
     }
     return \%phenotypes;
 }
