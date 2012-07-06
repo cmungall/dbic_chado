@@ -11,7 +11,7 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Result::Project::ProjectContact - Linking project(s) to contact(s)
+Bio::Chado::Schema::Result::Project::ProjectContact - Linking table for associating projects and contacts.
 
 =cut
 
@@ -101,8 +101,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-03-16 23:09:59
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:J3YmqM29T25HDKbk7dEJJQ
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2012-07-06 11:44:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YB1GZ0y1aOcXf5xRM0ueGg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

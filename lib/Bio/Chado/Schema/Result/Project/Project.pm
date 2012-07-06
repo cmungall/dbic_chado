@@ -11,7 +11,7 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Result::Project::Project
+Bio::Chado::Schema::Result::Project::Project - Standard Chado flexible property table for projects.
 
 =cut
 
@@ -164,8 +164,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-03-16 23:09:59
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Jjxb5riOuJ7j4FstJjThDw
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2012-07-06 11:44:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Xm+QPuYjkvnrESy2qIgGaA
 
 
 =head2 create_projectprops

@@ -11,7 +11,12 @@ use base 'DBIx::Class::Core';
 
 =head1 NAME
 
-Bio::Chado::Schema::Result::Project::ProjectRelationship - A project can be composed of several smaller scale projects
+Bio::Chado::Schema::Result::Project::ProjectRelationship
+
+=head1 DESCRIPTION
+
+Linking table for relating projects to each other.  For example, a
+given project could be composed of several smaller subprojects
 
 =cut
 
@@ -44,7 +49,7 @@ __PACKAGE__->table("project_relationship");
   is_foreign_key: 1
   is_nullable: 0
 
-The type of relationship being stated, such as "is part of".
+The cvterm type of the relationship being stated, such as "part of".
 
 =cut
 
@@ -135,8 +140,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-03-16 23:09:59
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:fvaJzLnp89x2vuTZHEtGJQ
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2012-07-06 11:44:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:srUsY6kGrK8qbGBQccUr0Q
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
