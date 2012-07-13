@@ -85,11 +85,12 @@ sub phenotypes_by_trait {
             $phen_hashref->{$hash_key}{accession} = $db_name . ":" . $accession ;
             $phen_hashref->{$hash_key}{$observable} = $r->get_column('value');
             $phen_hashref->{$hash_key}{stock_id} = $r->get_column('stock_id');
+	    $phen_hashref->{$hash_key}{stock_name} = $r->get_column('uniquename');
             $cvterms{$observable} =  $db_name . ":" . $accession ;
         }
     }
     my @data;
-    my $d = "uniquename\tstock_id\t";
+    my $d = "uniquename\tstock_id\tstock_name\t";
     foreach my $term_name (sort { $cvterms{$a} cmp $cvterms{$b} } keys %cvterms )  {# sort ontology terms
         my $ontology_id = $cvterms{$term_name};
         $d .=   $ontology_id . "|" . $term_name . "\t" ;
@@ -98,7 +99,7 @@ sub phenotypes_by_trait {
         #print the unique key (row header)
         # print some more columns with metadata
         # print the value by cvterm name
-        $d .=  "\n" . $key . "\t"  . $phen_hashref->{$key}{stock_id} .  "\t"  ;
+        $d .=  "\n" . $key . "\t"  . $phen_hashref->{$key}{stock_id} .  "\t" . $phen_hashref->{$key}{stock_name} ;
         foreach my $term_name ( sort { $cvterms{$a} cmp $cvterms{$b} } keys %cvterms ) {
             $d .=  $phen_hashref->{$key}{$term_name} . "\t" ;
         }
