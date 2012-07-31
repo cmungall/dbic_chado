@@ -99,9 +99,9 @@ sub phenotypes_by_trait {
         #print the unique key (row header)
         # print some more columns with metadata
         # print the value by cvterm name
-        $d .= "\n" . $key . "\t" . $phen_hashref->{$key}{stock_id} . "\t" . $phen_hashref->{$key}{stock_name} . "\t" ;
-        foreach my $term_name ( sort { $cvterms{$a} cmp $cvterms{$b} } keys %cvterms ) {
-            $d .=  $phen_hashref->{$key}{$term_name} . "\t" ;
+        $d .= "\n" . $key . "\t" . $phen_hashref->{$key}{stock_id} . "\t" . $phen_hashref->{$key}{stock_name};
+        foreach my $term_name ( sort { $cvterms{$a} cmp $cvterms{$b} } keys %cvterms ) {           
+            $d .= "\t" . $phen_hashref->{$key}{$term_name};
         }
     }
     return $d;
