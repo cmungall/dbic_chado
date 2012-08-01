@@ -2,7 +2,7 @@ package Bio::Chado::Schema::Result::Composite;
 
 =head1 NAME
 
-Bio::Chado::Schema::Result::Composite - A collection of bridge codes that have multiple dependancies
+Bio::Chado::Schema::Result::Composite - A collection of bridge codes that have multiple dependencies
 so they don't happily go where is most obvious
 
 =head1 CHADO MODULE
