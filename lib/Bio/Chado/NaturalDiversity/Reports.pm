@@ -2,7 +2,8 @@ package Bio::Chado::NaturalDiversity::Reports;
 
 =head1 NAME
 
-Bio::Chado::NaturalDiversity::Reports
+Bio::Chado::NaturalDiversity::Reports - Collection of functions for
+formatting reports from Chado natural diversity tables.
 
 =head1 SYNOPSIS
 
