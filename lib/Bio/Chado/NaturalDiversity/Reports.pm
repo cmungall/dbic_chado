@@ -91,19 +91,21 @@ sub phenotypes_by_trait {
         }
     }
     my @data;
-    my $d = "uniquename\tstock_id\tstock_name\t";
+    my $d = "uniquename\tstock_id\tstock_name";
     foreach my $term_name (sort { $cvterms{$a} cmp $cvterms{$b} } keys %cvterms )  {# sort ontology terms
         my $ontology_id = $cvterms{$term_name};
-        $d .=   $ontology_id . "|" . $term_name . "\t" ;
+        $d .=  "\t" . $ontology_id . "|" . $term_name;
     }
+    $d .= "\n";
     foreach my $key ( sort keys %$phen_hashref ) {
         #print the unique key (row header)
         # print some more columns with metadata
         # print the value by cvterm name
-        $d .= "\n" . $key . "\t" . $phen_hashref->{$key}{stock_id} . "\t" . $phen_hashref->{$key}{stock_name};
+        $d .= $key . "\t" . $phen_hashref->{$key}{stock_id} . "\t" . $phen_hashref->{$key}{stock_name};
         foreach my $term_name ( sort { $cvterms{$a} cmp $cvterms{$b} } keys %cvterms ) {           
             $d .= "\t" . $phen_hashref->{$key}{$term_name};
         }
+        $d .= "\n";
     }
     return $d;
 }
