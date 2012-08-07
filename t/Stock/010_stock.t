@@ -178,12 +178,13 @@ $schema->txn_do( sub {
        
         # phenotype dataset formatting
         my @d_rows       = split(/\n/, $d);
-        my @headers      = split(/\t/, @d_rows[0]);
-        my @data_columns = split(/\t/, @d_rows[1]);
+        my @headers      = split(/\t/, $d_rows[0]);
+        my @data_columns = split(/\t/, $d_rows[1]);
         
-        ok(@d_rows[0] =~ /uniquename\tstock_id\tstock_name\t/, 'pheno dataset - uniquename\tstock_name\tstock_id\t formatting');
-        ok(@d_rows[0] =~ /\w+\n$/, 'pheno dataset - header row has no delimiter(s) before the new line character');
-        ok(@d_rows[1] =~ /[\d+\w+]\n$/, 'pheno dataset - data rows have no delimiter(s) before the new line character');
+        ok($d, 'there is some data in the phenotype dataset or at least headers');
+        ok($d_rows[0] =~ /uniquename\tstock_id\tstock_name/, 'pheno dataset - uniquename\tstock_id\tstock_name\t formatting');
+        ok($d =~ /\w+\n/, 'pheno dataset - header row has no delimiter(s) before the new line character');
+        ok($d =~ /\d+\n/, 'pheno dataset - data rows have no delimiter(s) before the new line character');
         ok(scalar(@headers) == scalar(@data_columns), 'pheno dataset - headers match data columns');    
 
         done_testing;
