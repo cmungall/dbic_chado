@@ -397,6 +397,7 @@ use Carp;
           dbxref.accession [accession] of the observable cvterm
           db.name of the observable cvterm [db_name] (useful for constructing the ontology ID of the observable)
           project.description [project_description] (useful for grouping phenotype values by projects)
+          project_id [project_id]
    Args:  a L<Bio::Chado::Schema::Result::Stock::Stock>  resultset
    Ret:   a resultset with the above columns. Access the data with e.g. $rs->get_column('stock_id')
 
@@ -425,8 +426,8 @@ sub stock_phenotypes_rs {
                   }
                 } ,
                 ],
-            select    => [ qw/  me.stock_id me.uniquename phenotype.value observable.name observable.cvterm_id observable.definition phenotypeprops.value type.name dbxref.accession db.name  project.description  cv.name cvterm.name   / ],
-            as        => [ qw/ stock_id uniquename value observable observable_id definition method_name type_name  accession db_name project_description cv_name unit_name / ],
+            select    => [ qw/  me.stock_id me.uniquename phenotype.value observable.name observable.cvterm_id observable.definition phenotypeprops.value type.name dbxref.accession db.name  project.description  project.project_id  cv.name cvterm.name   / ],
+            as        => [ qw/ stock_id uniquename value observable observable_id definition method_name type_name  accession db_name project_description project_id  cv_name unit_name / ],
             distinct  => 1,
             order_by  => [ 'project.description' , 'observable.name' ],
         }  );
@@ -508,22 +509,23 @@ sub stock_genotypes_rs {
 }
 
 
-=head2 stock_project_phenotypes
+=head2 stock_projects
 
-   Usage: $schema->resultset("Stock::Stock")->stock_project_phenotypes($stock_rs);
-   Desc:  retrieve a list of phenotype resultsets by project name
+   Usage: $schema->resultset("Stock::Stock")->stock_projects($stock_rs);
+   Desc:  retrieve a list of phenotype and genotype resultsets by project name
    Args:  a L<Bio::Chado::Schema::Result::Stock::Stock> object or a stock resultset
-   Ret:   hashref key = project descriptions, values = hash ref of
+   Ret:   hashref key = project_id, values = hash ref of
           {phenotypes} = phenotype resultset
+          {genotypes}  = genotype resultset
           {project}   =  L<Bio::Chado::Schema::Result::Project::Project> object
 
 =cut
 
-sub stock_project_phenotypes {
+sub stock_projects {
     my $self = shift;
     my $stock = shift;
 
-    my %phenotypes;
+    my %p;
     my $project_rs = $stock->search_related('nd_experiment_stocks')
         ->search_related('nd_experiment')
         ->search_related('nd_experiment_projects')
@@ -535,13 +537,45 @@ sub stock_project_phenotypes {
                              { 'project.project_id' => $project->project_id },
                              { prefetch => { 'nd_experiment_projects' => 'project' } },
             );
-        $phenotypes{ $project->description }->{project} = $project;
+        $p{ $project->project_id }->{project} = $project;
         my $nd_exp_phen_rs =  $experiment_rs->search_related('nd_experiment_phenotypes');
         my $phenotype_rs = $nd_exp_phen_rs->search_related('phenotype') if $nd_exp_phen_rs;
-        $phenotypes{ $project->description }->{phenotypes} = $phenotype_rs;
+        $p{ $project->project_id }->{phenotypes} = $phenotype_rs;
+
+        my $nd_exp_gen_rs = $experiment_rs->search_related('nd_experiment_genotypes');
+        my $genotype_rs = $nd_exp_gen_rs->search_related('genotype') if $nd_exp_gen_rs;
+        $p{ $project->project_id }->{genotypes} = $genotype_rs;
     }
-    return \%phenotypes;
+    return \%p;
 }
+
+=head2 stock_recursive_projects
+
+    Usage: $schema->resultset("Stock::Stock")->stock_recursive_projects($stock_rs, \@results)
+    Desc: Retrieve recursively projects of stock objects and their subjects
+    Args: Stock resultSet and an arrayref with the results
+    Ret: listref of hashrefs  (see function stock_projects for hash keys and values)
+
+=cut
+
+sub stock_recursive_projects {
+    my $self = shift ;
+    my $stock_rs = shift;
+    my $results = shift;
+
+    my $p = $self->stock_projects($stock_rs);
+    push @$results, $p ;
+    my $subjects = $stock_rs->result_source->schema->resultset("Stock::Stock")->search(
+        {
+            'me.stock_id' => { '-in' => [ map { $_->subject_id }  $stock_rs->search_related('stock_relationship_objects')->all ] }
+        } );
+
+    if ($subjects->count ) {
+        $self->recursive_projects_rs($subjects, $results);
+    }
+    return $results;
+}
+
 
 1;
 
