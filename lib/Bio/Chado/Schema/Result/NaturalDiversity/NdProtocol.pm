@@ -44,6 +44,13 @@ The protocol name.
   is_foreign_key: 1
   is_nullable: 0
 
+=head2 description
+
+  data_type: 'varchar'
+  default_value: null
+  is_nullable: 1
+  size: 255
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -58,7 +65,16 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_nullable => 0, size => 255 },
   "type_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
+  "description",
+  {
+    data_type     => "varchar",
+    default_value => \"null",
+    is_nullable   => 1,
+    size          => 255,
+  },
+
 );
+
 __PACKAGE__->set_primary_key("nd_protocol_id");
 __PACKAGE__->add_unique_constraint("nd_protocol_name_key", ["name"]);
 
