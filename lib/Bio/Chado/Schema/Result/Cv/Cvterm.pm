@@ -1927,7 +1927,7 @@ sub delete_synonym {
          ->schema
          ->resultset("Cv::Cvtermsynonym")
          ->search( { cvterm_id => $self->get_column('cvterm_id'),
-            synonym   => { 'like' , lc($synonym) }
+            synonym   => { 'ilike' , $synonym }
         })
         ->delete();
 }
