@@ -38,6 +38,24 @@ __PACKAGE__->table("project");
   is_nullable: 0
   size: 255
 
+=head2 create_date
+
+    data_type: 'timestamp'
+    default_value: current_timestamp
+    is_nullable: 1
+    original: {default_value => \"now()"}
+
+
+=head2 type_id
+
+    data_type: 'bigint'
+    is_foreign_key: 1
+    is_nullable: 1
+
+  An optional cvterm_id that specifies what type of project this record is.  Prior to 1.4, project type was set with an projectprop.
+
+  =cut
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -52,7 +70,17 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_nullable => 0, size => 255 },
   "description",
   { data_type => "varchar", is_nullable => 0, size => 255 },
+  "create_date",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 1,
+    original      => { default_value => \"now()" },
+  },
+  "type_id",
+  { data_type => "bigint", is_foreign_key => 1, is_nullable => 1 },
 );
+
 __PACKAGE__->set_primary_key("project_id");
 __PACKAGE__->add_unique_constraint("project_c1", ["name"]);
 
@@ -163,6 +191,25 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 type
+
+Type: belongs_to
+
+Related object: L<Bio::Chado::Schema::Result::Cvterm>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "type",
+  "Bio::Chado::Schema::Result::Cvterm",
+  { cvterm_id => "type_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "SET NULL",
+    on_update     => "NO ACTION",
+  },
+);
 
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2012-07-06 11:44:28
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Xm+QPuYjkvnrESy2qIgGaA
