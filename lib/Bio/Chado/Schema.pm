@@ -1,3 +1,4 @@
+use utf8;
 package Bio::Chado::Schema;
 
 # Created by DBIx::Class::Schema::Loader
@@ -11,8 +12,8 @@ use base 'DBIx::Class::Schema';
 __PACKAGE__->load_namespaces;
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-03-16 23:09:58
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JJ2AbsZoAN4cnM4vrYOxKA
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2022-02-11 17:09:49
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:3aWZqjpa21ARu8iTXMWEAA
 
 use Carp::Clan qr/^Bio::Chado::Schema/;
 use Bio::Chado::Schema::Util;
